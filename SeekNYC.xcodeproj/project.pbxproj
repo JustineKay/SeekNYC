@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
+		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
+		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
+		6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79681BF68D05004A7756 /* SeekNYC.xcdatamodeld */; };
+		6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B796B1BF68D05004A7756 /* Assets.xcassets */; };
+		6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */; };
+		6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */; };
+		6B9B79871BF68D6B004A7756 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79791BF68D6B004A7756 /* LoginViewController.m */; };
+		6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */; };
+		6B9B79891BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797D1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m */; };
+		6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */; };
+		6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */; };
+		6B9B798C1BF68D6B004A7756 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79831BF68D6B004A7756 /* SignUpViewController.m */; };
+		6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */; };
+		6B9B798F1BF68DBB004A7756 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B798E1BF68DBB004A7756 /* MapKit.framework */; };
+		6B9B79911BF68DC5004A7756 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B79901BF68DC5004A7756 /* CoreLocation.framework */; };
+		6B9B799E1BF68F66004A7756 /* Path+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79931BF68F66004A7756 /* Path+CoreDataProperties.m */; };
+		6B9B799F1BF68F66004A7756 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79951BF68F66004A7756 /* Path.m */; };
+		6B9B79A01BF68F66004A7756 /* Location+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79971BF68F66004A7756 /* Location+CoreDataProperties.m */; };
+		6B9B79A11BF68F66004A7756 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79991BF68F66004A7756 /* Location.m */; };
+		6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */; };
+		6B9B79A31BF68F66004A7756 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B799D1BF68F66004A7756 /* User.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6B9B79601BF68D05004A7756 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6B9B79661BF68D05004A7756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6B9B79691BF68D05004A7756 /* SeekNYC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SeekNYC.xcdatamodel; sourceTree = "<group>"; };
+		6B9B796B1BF68D05004A7756 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B9B796E1BF68D05004A7756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6B9B79701BF68D05004A7756 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPathRenderer.h; sourceTree = "<group>"; };
+		6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPathRenderer.m; sourceTree = "<group>"; };
+		6B9B79781BF68D6B004A7756 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6B9B79791BF68D6B004A7756 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapFullCoverageOverlay.h; sourceTree = "<group>"; };
+		6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapFullCoverageOverlay.m; sourceTree = "<group>"; };
+		6B9B797C1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapGrayOverlayRenderer.h; sourceTree = "<group>"; };
+		6B9B797D1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapGrayOverlayRenderer.m; sourceTree = "<group>"; };
+		6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYCMapViewController.h; sourceTree = "<group>"; };
+		6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYCMapViewController.m; sourceTree = "<group>"; };
+		6B9B79801BF68D6B004A7756 /* OtherUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileViewController.h; sourceTree = "<group>"; };
+		6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileViewController.m; sourceTree = "<group>"; };
+		6B9B79821BF68D6B004A7756 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		6B9B79831BF68D6B004A7756 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
+		6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
+		6B9B798E1BF68DBB004A7756 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6B9B79901BF68DC5004A7756 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6B9B79921BF68F66004A7756 /* Path+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Path+CoreDataProperties.h"; sourceTree = "<group>"; };
+		6B9B79931BF68F66004A7756 /* Path+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Path+CoreDataProperties.m"; sourceTree = "<group>"; };
+		6B9B79941BF68F66004A7756 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
+		6B9B79951BF68F66004A7756 /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
+		6B9B79961BF68F66004A7756 /* Location+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CoreDataProperties.h"; sourceTree = "<group>"; };
+		6B9B79971BF68F66004A7756 /* Location+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CoreDataProperties.m"; sourceTree = "<group>"; };
+		6B9B79981BF68F66004A7756 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		6B9B79991BF68F66004A7756 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		6B9B799A1BF68F66004A7756 /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
+		6B9B799C1BF68F66004A7756 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		6B9B799D1BF68F66004A7756 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6B9B79561BF68D05004A7756 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B9B79911BF68DC5004A7756 /* CoreLocation.framework in Frameworks */,
+				6B9B798F1BF68DBB004A7756 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6B9B79501BF68D05004A7756 = {
+			isa = PBXGroup;
+			children = (
+				6B9B79901BF68DC5004A7756 /* CoreLocation.framework */,
+				6B9B798E1BF68DBB004A7756 /* MapKit.framework */,
+				6B9B795B1BF68D05004A7756 /* SeekNYC */,
+				6B9B795A1BF68D05004A7756 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6B9B795A1BF68D05004A7756 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6B9B79591BF68D05004A7756 /* SeekNYC.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6B9B795B1BF68D05004A7756 /* SeekNYC */ = {
+			isa = PBXGroup;
+			children = (
+				6B9B795F1BF68D05004A7756 /* AppDelegate.h */,
+				6B9B79601BF68D05004A7756 /* AppDelegate.m */,
+				6B9B79921BF68F66004A7756 /* Path+CoreDataProperties.h */,
+				6B9B79931BF68F66004A7756 /* Path+CoreDataProperties.m */,
+				6B9B79941BF68F66004A7756 /* Path.h */,
+				6B9B79951BF68F66004A7756 /* Path.m */,
+				6B9B79961BF68F66004A7756 /* Location+CoreDataProperties.h */,
+				6B9B79971BF68F66004A7756 /* Location+CoreDataProperties.m */,
+				6B9B79981BF68F66004A7756 /* Location.h */,
+				6B9B79991BF68F66004A7756 /* Location.m */,
+				6B9B799A1BF68F66004A7756 /* User+CoreDataProperties.h */,
+				6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */,
+				6B9B799C1BF68F66004A7756 /* User.h */,
+				6B9B799D1BF68F66004A7756 /* User.m */,
+				6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */,
+				6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */,
+				6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */,
+				6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */,
+				6B9B797C1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.h */,
+				6B9B797D1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m */,
+				6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */,
+				6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */,
+				6B9B79781BF68D6B004A7756 /* LoginViewController.h */,
+				6B9B79791BF68D6B004A7756 /* LoginViewController.m */,
+				6B9B79821BF68D6B004A7756 /* SignUpViewController.h */,
+				6B9B79831BF68D6B004A7756 /* SignUpViewController.m */,
+				6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */,
+				6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */,
+				6B9B79801BF68D6B004A7756 /* OtherUserProfileViewController.h */,
+				6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */,
+				6B9B79651BF68D05004A7756 /* Main.storyboard */,
+				6B9B796B1BF68D05004A7756 /* Assets.xcassets */,
+				6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */,
+				6B9B79701BF68D05004A7756 /* Info.plist */,
+				6B9B79681BF68D05004A7756 /* SeekNYC.xcdatamodeld */,
+				6B9B795C1BF68D05004A7756 /* Supporting Files */,
+			);
+			path = SeekNYC;
+			sourceTree = "<group>";
+		};
+		6B9B795C1BF68D05004A7756 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6B9B795D1BF68D05004A7756 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6B9B79581BF68D05004A7756 /* SeekNYC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B9B79731BF68D05004A7756 /* Build configuration list for PBXNativeTarget "SeekNYC" */;
+			buildPhases = (
+				6B9B79551BF68D05004A7756 /* Sources */,
+				6B9B79561BF68D05004A7756 /* Frameworks */,
+				6B9B79571BF68D05004A7756 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeekNYC;
+			productName = SeekNYC;
+			productReference = 6B9B79591BF68D05004A7756 /* SeekNYC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6B9B79511BF68D05004A7756 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Justine Kay";
+				TargetAttributes = {
+					6B9B79581BF68D05004A7756 = {
+						CreatedOnToolsVersion = 7.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 6B9B79541BF68D05004A7756 /* Build configuration list for PBXProject "SeekNYC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6B9B79501BF68D05004A7756;
+			productRefGroup = 6B9B795A1BF68D05004A7756 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6B9B79581BF68D05004A7756 /* SeekNYC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6B9B79571BF68D05004A7756 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */,
+				6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */,
+				6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6B9B79551BF68D05004A7756 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B9B799F1BF68F66004A7756 /* Path.m in Sources */,
+				6B9B79A11BF68F66004A7756 /* Location.m in Sources */,
+				6B9B799E1BF68F66004A7756 /* Path+CoreDataProperties.m in Sources */,
+				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
+				6B9B79A31BF68F66004A7756 /* User.m in Sources */,
+				6B9B79891BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m in Sources */,
+				6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */,
+				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
+				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
+				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
+				6B9B798C1BF68D6B004A7756 /* SignUpViewController.m in Sources */,
+				6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */,
+				6B9B79A01BF68F66004A7756 /* Location+CoreDataProperties.m in Sources */,
+				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
+				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
+				6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */,
+				6B9B79871BF68D6B004A7756 /* LoginViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6B9B79651BF68D05004A7756 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9B79661BF68D05004A7756 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9B796E1BF68D05004A7756 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6B9B79711BF68D05004A7756 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6B9B79721BF68D05004A7756 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6B9B79741BF68D05004A7756 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SeekNYC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.justinekay.SeekNYC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6B9B79751BF68D05004A7756 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SeekNYC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.justinekay.SeekNYC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B9B79541BF68D05004A7756 /* Build configuration list for PBXProject "SeekNYC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B9B79711BF68D05004A7756 /* Debug */,
+				6B9B79721BF68D05004A7756 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B9B79731BF68D05004A7756 /* Build configuration list for PBXNativeTarget "SeekNYC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B9B79741BF68D05004A7756 /* Debug */,
+				6B9B79751BF68D05004A7756 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6B9B79681BF68D05004A7756 /* SeekNYC.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6B9B79691BF68D05004A7756 /* SeekNYC.xcdatamodel */,
+			);
+			currentVersion = 6B9B79691BF68D05004A7756 /* SeekNYC.xcdatamodel */;
+			path = SeekNYC.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6B9B79511BF68D05004A7756 /* Project object */;
+}
