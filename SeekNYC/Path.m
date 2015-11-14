@@ -7,9 +7,25 @@
 //
 
 #import "Path.h"
+#import "Location.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation Path
 
-// Insert code here to add functionality to your managed object subclass
+-(NSArray *)locationsAsCLLocation{
+    
+    NSMutableArray *pathLocations = [[NSMutableArray alloc] init];
+    
+    for (Location *location in self.locations) {
+        
+        CLLocationDegrees lat = [location.latitude doubleValue];
+        CLLocationDegrees lng = [location.longitude doubleValue];
+        CLLocation *loco = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        
+        [pathLocations addObject:loco];
+    }
+    
+    return pathLocations;
+}
 
 @end
