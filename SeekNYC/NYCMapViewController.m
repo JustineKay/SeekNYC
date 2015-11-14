@@ -97,16 +97,17 @@
         //BOOL isAccurate = newLocation.horizontalAccuracy < 20;
         //BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
         
-        if (self.locations.count > 0) {
+        [self.locations addObject:newLocation];
+        
+        if (self.locations.count > 1) {
             
             // update distance
             self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
             
             //drop polyline ***************************
-            //[self.mapView addOverlay:[self polyLine]];
+            [self.mapView addOverlay:[self polyLine]];
         }
         
-            [self.locations addObject:newLocation];
     }
 }
 
@@ -234,7 +235,7 @@
         
         MKMapGrayOverlayRenderer *fullOverlayView = [[MKMapGrayOverlayRenderer alloc] initWithOverlay:overlay];
         
-        fullOverlayView.overlayAlpha = 0.85;
+        fullOverlayView.overlayAlpha = 0.90;
         
         return fullOverlayView;
     }
@@ -244,14 +245,19 @@
 
 - (MKPolyline *)polyLine {
     
-    CLLocationCoordinate2D coords[self.locations.count];
+    NSInteger sourceIndex = self.locations.count - 1;
+    NSInteger destinationIndex = self.locations.count - 2;
     
-    for (int i = 0; i < self.locations.count; i++) {
-        Location *location = [self.locations objectAtIndex:i];
-        coords[i] = CLLocationCoordinate2DMake(location.latitude.doubleValue, location.longitude.doubleValue);
+    NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
+    
+    CLLocationCoordinate2D coords[newLocations.count];
+    
+    for (int i = 0; i < newLocations.count; i++) {
+        CLLocation *location = [newLocations objectAtIndex:i];
+        coords[i] = location.coordinate;
     }
     
-    return [MKPolyline polylineWithCoordinates:coords count:self.locations.count];
+    return [MKPolyline polylineWithCoordinates:coords count:newLocations.count];
 }
 
 

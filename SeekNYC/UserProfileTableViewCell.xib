@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="740" id="buc-aK-Bmf">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserProfileCell" rowHeight="740" id="buc-aK-Bmf" customClass="UserProfileTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="540" height="740"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="buc-aK-Bmf" id="yoc-pZ-geE">
@@ -52,14 +52,14 @@
                         <color key="textColor" red="0.76417773962020874" green="0.18088284134864807" blue="0.080890454351902008" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWW-H6-2tI">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWW-H6-2tI">
                         <rect key="frame" x="300" y="98" width="64" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAR-5s-Lt1">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAR-5s-Lt1">
                         <rect key="frame" x="424" y="97" width="67" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
@@ -113,6 +113,15 @@
                 </variation>
             </tableViewCellContentView>
             <animations/>
+            <connections>
+                <outlet property="followersCountLabel" destination="NSv-KW-bVl" id="xs0-xs-uok"/>
+                <outlet property="followersLabel" destination="oWW-H6-2tI" id="v2s-4a-6ic"/>
+                <outlet property="followingCountLabel" destination="9ME-Zo-ePn" id="xrA-FW-gfh"/>
+                <outlet property="followingLabel" destination="TAR-5s-Lt1" id="Tgr-WB-3eI"/>
+                <outlet property="nameLabel" destination="Z4m-6e-ISF" id="hwd-jK-WHl"/>
+                <outlet property="profileView" destination="o89-4O-23o" id="Qvs-Ca-8ge"/>
+                <outlet property="userOriginLabel" destination="gOQ-vy-1Gd" id="2y7-om-hVD"/>
+            </connections>
             <point key="canvasLocation" x="1172" y="392"/>
         </tableViewCell>
         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FSw-K2-gm7">

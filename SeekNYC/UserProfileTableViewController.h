@@ -1,5 +1,5 @@
 //
-//  UserProfileTableViewCell.h
+//  UserProfileTableViewController.h
 //  SeekNYC
 //
 //  Created by Felicia Weathers on 11/14/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserProfileTableViewCell : UITableViewCell
+@interface UserProfileTableViewController : UITableViewController
 
 @end
