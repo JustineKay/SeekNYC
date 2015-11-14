@@ -1,0 +1,10 @@
+PODS:
+  - CircleProgressBar (0.21)
+
+DEPENDENCIES:
+  - CircleProgressBar (~> 0.21)
+
+SPEC CHECKSUMS:
+  CircleProgressBar: 4ce12ddcdc5673cc9f0fb83f6ec7b2a53ecb28df
+
+COCOAPODS: 0.38.2
