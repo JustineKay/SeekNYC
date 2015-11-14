@@ -16,10 +16,18 @@
 #import "ClearOverlayPathRenderer.h"
 #import "MKMapGrayOverlayRenderer.h"
 #import "MKMapFullCoverageOverlay.h"
+#import "AppDelegate.h"
 
 @class Path;
 
-@interface NYCMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface NYCMapViewController ()
+<
+CLLocationManagerDelegate,
+MKMapViewDelegate,
+NSFetchedResultsControllerDelegate
+>
+
+@property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -33,8 +41,8 @@
 
 @property (nonatomic) CLLocationManager *locationManager;
 
-@property (nonatomic) Path *userPath;
 @property (nonatomic) NSMutableArray *locations;
+@property (nonatomic) NSArray *userPaths;
 @property (nonatomic) float distance;
 @property (nonatomic) int seconds;
 
@@ -52,24 +60,19 @@
     self.trackPathButton.hidden = NO;
     self.stopTrackingPathButton.hidden = YES;
     
-    [self loadNYCMap];
-    
 }
 
-//- (void)setPath:(Path *)userPath {
-//    
-//    if (self.userPath != userPath) {
-//        self.userPath = userPath;
-//        
-//        [self loadNYCMap];
-//    }
-//}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    [self loadNYCMap];
+    [self loadUserPaths];
+}
 
 - (void)loadNYCMap {
     
     self.mapView.showsUserLocation = YES;
     self.mapView.showsPointsOfInterest = YES;
-    self.mapView.showsCompass = YES;
     self.mapView.mapType = MKMapTypeHybrid;
     
     CLLocationCoordinate2D centerCoord = CLLocationCoordinate2DMake(40.7127, -74.0059);
@@ -81,10 +84,44 @@
     MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
     [self.mapView addOverlay: fullOverlay];
     
-    //If self.userPath.locations != nil then lay down the existing polyline
-    //[self.mapView addOverlay:[self polyLine]];
-    
     [self.mapView setRegion: NYRegion animated: YES];
+}
+
+- (void)loadUserPaths{
+    
+    if (self.managedObjectContext != nil) {
+        
+        //Create an instance of NSFetchRequest with an entity name
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
+        
+        //create a sort descriptor
+        NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+        
+        //set the sort descriptors on the fetchRequest
+        fetchRequest.sortDescriptors = @[sort];
+        
+        //create a fetchedResultsController with a fetchRequest and a managedObjectContext
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        
+        self.fetchedResultsController.delegate = self;
+        
+        [self.fetchedResultsController performFetch:nil];
+        
+        if (self.fetchedResultsController.fetchedObjects != nil) {
+            
+            self.userPaths = self.fetchedResultsController.fetchedObjects;
+            
+            for (Path *path in self.userPaths) {
+                
+                NSOrderedSet *pathLocations = path.locations;
+                
+                [self.mapView addOverlay:[self polyLineWithLocations:pathLocations.array]];
+            }
+            
+        }
+
+    }
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -104,8 +141,13 @@
             // update distance
             self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
             
+            NSInteger sourceIndex = self.locations.count - 1;
+            NSInteger destinationIndex = self.locations.count - 2;
+            
+            NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
+            
             //drop polyline ***************************
-            [self.mapView addOverlay:[self polyLine]];
+            [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
         }
         
     }
@@ -172,20 +214,23 @@
     self.stopTrackingPathButton.hidden = YES;
     self.trackPathButton.hidden = NO;
     
+    self.locations = nil;
+    
     [self.locationManager stopUpdatingLocation];
     
+    [self savePath];
 }
 
 
 
 - (void)savePath {
     
-    Path *newPath = [NSEntityDescription insertNewObjectForEntityForName:@"Path"
+    Path *path = [NSEntityDescription insertNewObjectForEntityForName:@"Path"
                                                 inManagedObjectContext:self.managedObjectContext];
     
-    newPath.distance = [NSNumber numberWithFloat:self.distance];
-    newPath.duration = [NSNumber numberWithInt:self.seconds];
-    newPath.timestamp = [NSDate date];
+    path.distance = [NSNumber numberWithFloat:self.distance];
+    path.duration = [NSNumber numberWithInt:self.seconds];
+    path.timestamp = [NSDate date];
     
     NSMutableArray *locationArray = [NSMutableArray array];
     for (CLLocation *location in self.locations) {
@@ -198,21 +243,13 @@
         [locationArray addObject:locationObject];
     }
     
-    newPath.locations = [NSOrderedSet orderedSetWithArray:locationArray];
-    
-    if (self.userPath == nil) {
-        
-        self.userPath = newPath;
-    
-    }else {
-    
-        [self.userPath addLocations: newPath.locations];
-    
-    }
+    path.locations = [NSOrderedSet orderedSetWithArray:locationArray];
     
     // Save the context.
     NSError *error = nil;
+    
     if (![self.managedObjectContext save:&error]) {
+        
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -243,21 +280,16 @@
     return nil;
 }
 
-- (MKPolyline *)polyLine {
+- (MKPolyline *)polyLineWithLocations: (NSArray *)locations {
     
-    NSInteger sourceIndex = self.locations.count - 1;
-    NSInteger destinationIndex = self.locations.count - 2;
+    CLLocationCoordinate2D coords[locations.count];
     
-    NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
-    
-    CLLocationCoordinate2D coords[newLocations.count];
-    
-    for (int i = 0; i < newLocations.count; i++) {
-        CLLocation *location = [newLocations objectAtIndex:i];
+    for (int i = 0; i < locations.count; i++) {
+        CLLocation *location = [locations objectAtIndex:i];
         coords[i] = location.coordinate;
     }
     
-    return [MKPolyline polylineWithCoordinates:coords count:newLocations.count];
+    return [MKPolyline polylineWithCoordinates:coords count:locations.count];
 }
 
 
