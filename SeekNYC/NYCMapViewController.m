@@ -50,7 +50,16 @@ NSFetchedResultsControllerDelegate
 
 @end
 
+
+
 @implementation NYCMapViewController
+
+- (NSManagedObjectContext *)managedObjectContext {
+    
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    
+    return delegate.managedObjectContext;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,38 +98,38 @@ NSFetchedResultsControllerDelegate
 
 - (void)loadUserPaths{
     
-    if (self.managedObjectContext != nil) {
+    
+    
+    //Create an instance of NSFetchRequest with an entity name
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
+    
+    //create a sort descriptor
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    
+    //set the sort descriptors on the fetchRequest
+    fetchRequest.sortDescriptors = @[sort];
+    
+    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    self.fetchedResultsController.delegate = self;
+    
+    [self.fetchedResultsController performFetch:nil];
+    
+    if (self.fetchedResultsController.fetchedObjects != nil) {
         
-        //Create an instance of NSFetchRequest with an entity name
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
+        self.userPaths = self.fetchedResultsController.fetchedObjects;
         
-        //create a sort descriptor
-        NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
-        
-        //set the sort descriptors on the fetchRequest
-        fetchRequest.sortDescriptors = @[sort];
-        
-        //create a fetchedResultsController with a fetchRequest and a managedObjectContext
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        
-        self.fetchedResultsController.delegate = self;
-        
-        [self.fetchedResultsController performFetch:nil];
-        
-        if (self.fetchedResultsController.fetchedObjects != nil) {
+        for (Path *path in self.userPaths) {
             
-            self.userPaths = self.fetchedResultsController.fetchedObjects;
+            NSOrderedSet *pathLocations = path.locations;
             
-            for (Path *path in self.userPaths) {
-                
-                NSOrderedSet *pathLocations = path.locations;
-                
-                [self.mapView addOverlay:[self polyLineWithLocations:pathLocations.array]];
-            }
-            
+            [self.mapView addOverlay:[self polyLineWithLocations:pathLocations.array]];
         }
-
+        
     }
+    
+    
     
 }
 
