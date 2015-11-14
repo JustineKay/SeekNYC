@@ -69,6 +69,7 @@ NSFetchedResultsControllerDelegate
     self.trackPathButton.hidden = NO;
     self.stopTrackingPathButton.hidden = YES;
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -82,6 +83,7 @@ NSFetchedResultsControllerDelegate
     
     self.mapView.showsUserLocation = YES;
     self.mapView.showsPointsOfInterest = YES;
+    self.mapView.showsCompass = NO;
     self.mapView.mapType = MKMapTypeHybrid;
     
     CLLocationCoordinate2D centerCoord = CLLocationCoordinate2DMake(40.7127, -74.0059);
@@ -118,19 +120,19 @@ NSFetchedResultsControllerDelegate
     
     if (self.fetchedResultsController.fetchedObjects != nil) {
         
-        self.userPaths = self.fetchedResultsController.fetchedObjects;
+        NSArray *fetchedPaths = self.fetchedResultsController.fetchedObjects;
         
-        for (Path *path in self.userPaths) {
+        for (Path *path in fetchedPaths) {
+           
+            NSArray *locations = [path locationsAsCLLocation];
             
-            NSOrderedSet *pathLocations = path.locations;
+            MKPolyline *polyline = [self polyLineWithLocations:locations];
             
-            [self.mapView addOverlay:[self polyLineWithLocations:pathLocations.array]];
+            [self.mapView addOverlay:polyline];
+            
         }
         
     }
-    
-    
-    
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -191,6 +193,14 @@ NSFetchedResultsControllerDelegate
     
     [self.locationManager requestAlwaysAuthorization];
     
+    if (self.mapView.userTrackingMode == MKUserTrackingModeFollow) {
+        CLLocationCoordinate2D location = self.mapView.userLocation.coordinate;
+        MKCoordinateSpan span = MKCoordinateSpanMake(0.005, 0.005);
+        MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
+        
+        [self.mapView setRegion:region animated:YES];
+    }
+    
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES]; 
 }
 
@@ -223,11 +233,11 @@ NSFetchedResultsControllerDelegate
     self.stopTrackingPathButton.hidden = YES;
     self.trackPathButton.hidden = NO;
     
-    self.locations = nil;
-    
     [self.locationManager stopUpdatingLocation];
     
     [self savePath];
+    
+    self.locations = nil;
 }
 
 
@@ -289,7 +299,7 @@ NSFetchedResultsControllerDelegate
     return nil;
 }
 
-- (MKPolyline *)polyLineWithLocations: (NSArray *)locations {
+- (MKPolyline *)polyLineWithLocations: (NSArray <CLLocation *> *)locations {
     
     CLLocationCoordinate2D coords[locations.count];
     
