@@ -81,7 +81,8 @@
     MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
     [self.mapView addOverlay: fullOverlay];
     
-    [self.mapView addOverlay:[self polyLine]];
+    //If self.userPath.locations != nil then lay down the existing polyline
+    //[self.mapView addOverlay:[self polyLine]];
     
     [self.mapView setRegion: NYRegion animated: YES];
 }
@@ -93,17 +94,19 @@
         NSLog(@"%f", newLocation.horizontalAccuracy);
         NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
         
-        BOOL isAccurate = newLocation.horizontalAccuracy < 20;
-        BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
-        if (isAccurate && isRecent) {
+        //BOOL isAccurate = newLocation.horizontalAccuracy < 20;
+        //BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
+        
+        if (self.locations.count > 0) {
             
             // update distance
-            if (self.locations.count > 0) {
-                self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
-            }
+            self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
             
-            [self.locations addObject:newLocation];
+            //drop polyline ***************************
+            //[self.mapView addOverlay:[self polyLine]];
         }
+        
+            [self.locations addObject:newLocation];
     }
 }
 
@@ -115,7 +118,7 @@
         self.locationManager = [[CLLocationManager alloc] init];
     }
     
-    //[self.locationManager requestAlwaysAuthorization];
+    [self.locationManager requestAlwaysAuthorization];
     
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -126,12 +129,6 @@
     
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
-}
-
-
-- (void)eachSecond {
-    
-    self.seconds++;
 }
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
@@ -150,11 +147,14 @@
     self.trackPathButton.hidden = YES;
     self.stopTrackingPathButton.hidden = NO;
     
-    self.distance = 0;
-    self.locations = [NSMutableArray array];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self
-                                                selector:@selector(eachSecond) userInfo:nil repeats:YES];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
+    self.distance = 0;
+    
+    if (self.locations == nil) {
+        
+        self.locations = [NSMutableArray array];
+    }
     
     [self startLocationUpdates];
     
@@ -244,14 +244,14 @@
 
 - (MKPolyline *)polyLine {
     
-    CLLocationCoordinate2D coords[self.userPath.locations.count];
+    CLLocationCoordinate2D coords[self.locations.count];
     
-    for (int i = 0; i < self.userPath.locations.count; i++) {
-        Location *location = (Location *)[self.userPath.locations objectAtIndex:i];
+    for (int i = 0; i < self.locations.count; i++) {
+        Location *location = [self.locations objectAtIndex:i];
         coords[i] = CLLocationCoordinate2DMake(location.latitude.doubleValue, location.longitude.doubleValue);
     }
     
-    return [MKPolyline polylineWithCoordinates:coords count:self.userPath.locations.count];
+    return [MKPolyline polylineWithCoordinates:coords count:self.locations.count];
 }
 
 
