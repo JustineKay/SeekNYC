@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="740" id="buc-aK-Bmf">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="740"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="buc-aK-Bmf" id="yoc-pZ-geE">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="739"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gray Background" translatesAutoresizingMaskIntoConstraints="NO" id="9TC-9i-qXj">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="739"/>
+                        <animations/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o89-4O-23o">
+                        <rect key="frame" x="23" y="8" width="150" height="150"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wind Rose Filled-100-3" translatesAutoresizingMaskIntoConstraints="NO" id="wSQ-gL-hwD">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.76417773962020874" green="0.18088284134864807" blue="0.080890454351902008" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wSQ-gL-hwD" firstAttribute="top" secondItem="o89-4O-23o" secondAttribute="top" id="4Ck-Tm-OpC"/>
+                            <constraint firstAttribute="width" constant="150" id="EdJ-yh-OIk"/>
+                            <constraint firstAttribute="trailing" secondItem="wSQ-gL-hwD" secondAttribute="trailing" id="NGr-qU-Dpy"/>
+                            <constraint firstItem="wSQ-gL-hwD" firstAttribute="leading" secondItem="o89-4O-23o" secondAttribute="leading" id="fjh-yG-Hih"/>
+                            <constraint firstAttribute="height" constant="150" id="g6W-YW-XlE"/>
+                            <constraint firstAttribute="bottom" secondItem="wSQ-gL-hwD" secondAttribute="bottom" id="iyG-Ki-rEG"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brooklyn, NY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOQ-vy-1Gd">
+                        <rect key="frame" x="23" y="198" width="150" height="20"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="123" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSv-KW-bVl">
+                        <rect key="frame" x="318" y="69" width="28" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                        <color key="textColor" red="0.76417773962020874" green="0.18088284134864807" blue="0.080890454351902008" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWW-H6-2tI">
+                        <rect key="frame" x="300" y="98" width="64" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAR-5s-Lt1">
+                        <rect key="frame" x="424" y="97" width="67" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="234" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ME-Zo-ePn">
+                        <rect key="frame" x="443" y="68" width="28" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                        <color key="textColor" red="0.76417773962020874" green="0.18088284134864807" blue="0.080890454351902008" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jane Doe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4m-6e-ISF">
+                        <rect key="frame" x="23" y="166" width="150" height="24"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="o89-4O-23o" firstAttribute="leading" secondItem="yoc-pZ-geE" secondAttribute="leadingMargin" constant="15" id="2JG-Ii-ajQ"/>
+                    <constraint firstItem="Z4m-6e-ISF" firstAttribute="top" secondItem="o89-4O-23o" secondAttribute="bottom" constant="8" id="7Jc-B0-wqQ"/>
+                    <constraint firstItem="TAR-5s-Lt1" firstAttribute="top" secondItem="9ME-Zo-ePn" secondAttribute="bottom" constant="8" id="7QU-9I-Jb1"/>
+                    <constraint firstItem="oWW-H6-2tI" firstAttribute="top" secondItem="NSv-KW-bVl" secondAttribute="bottom" constant="8" id="9hh-yZ-xAQ"/>
+                    <constraint firstItem="gOQ-vy-1Gd" firstAttribute="top" secondItem="Z4m-6e-ISF" secondAttribute="bottom" constant="8" id="BxN-gd-F2b"/>
+                    <constraint firstAttribute="trailing" secondItem="9TC-9i-qXj" secondAttribute="trailing" id="CBK-h9-uWE"/>
+                    <constraint firstItem="o89-4O-23o" firstAttribute="top" secondItem="yoc-pZ-geE" secondAttribute="topMargin" id="EE9-Cy-e9c"/>
+                    <constraint firstItem="9ME-Zo-ePn" firstAttribute="leading" secondItem="NSv-KW-bVl" secondAttribute="trailing" constant="97" id="IW4-n1-xjI"/>
+                    <constraint firstAttribute="bottom" secondItem="9TC-9i-qXj" secondAttribute="bottom" id="Ikf-jH-Miw"/>
+                    <constraint firstAttribute="trailing" secondItem="TAR-5s-Lt1" secondAttribute="trailing" constant="49" id="Jq0-GL-0C4"/>
+                    <constraint firstItem="oWW-H6-2tI" firstAttribute="leading" secondItem="o89-4O-23o" secondAttribute="trailing" constant="127" id="MRy-nT-odN"/>
+                    <constraint firstItem="9TC-9i-qXj" firstAttribute="top" secondItem="yoc-pZ-geE" secondAttribute="top" id="Q1h-0B-STM"/>
+                    <constraint firstItem="9TC-9i-qXj" firstAttribute="leading" secondItem="yoc-pZ-geE" secondAttribute="leading" id="T4v-k3-iwK"/>
+                    <constraint firstItem="Z4m-6e-ISF" firstAttribute="leading" secondItem="yoc-pZ-geE" secondAttribute="leading" constant="23" id="Vpf-L6-1Rk"/>
+                    <constraint firstItem="gOQ-vy-1Gd" firstAttribute="leading" secondItem="yoc-pZ-geE" secondAttribute="leadingMargin" constant="15" id="elm-Zv-57p"/>
+                    <constraint firstItem="NSv-KW-bVl" firstAttribute="top" secondItem="yoc-pZ-geE" secondAttribute="top" constant="69" id="fHX-lO-uCP"/>
+                    <constraint firstItem="Z4m-6e-ISF" firstAttribute="width" secondItem="wSQ-gL-hwD" secondAttribute="width" id="hoZ-Bk-IOc"/>
+                    <constraint firstAttribute="trailing" secondItem="9ME-Zo-ePn" secondAttribute="trailing" constant="69" id="mlz-gB-XEU"/>
+                    <constraint firstItem="9ME-Zo-ePn" firstAttribute="top" secondItem="yoc-pZ-geE" secondAttribute="top" constant="68" id="nvy-iN-D8N"/>
+                    <constraint firstItem="gOQ-vy-1Gd" firstAttribute="width" secondItem="wSQ-gL-hwD" secondAttribute="width" id="rpr-NG-Hgb"/>
+                    <constraint firstAttribute="bottom" secondItem="TAR-5s-Lt1" secondAttribute="bottom" constant="621" id="xGg-MG-nwC"/>
+                    <constraint firstItem="TAR-5s-Lt1" firstAttribute="leading" secondItem="oWW-H6-2tI" secondAttribute="trailing" constant="60" id="y6T-8q-qQY"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="xGg-MG-nwC"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <animations/>
+            <point key="canvasLocation" x="1172" y="392"/>
+        </tableViewCell>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FSw-K2-gm7">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <animations/>
+        </imageView>
+    </objects>
+    <resources>
+        <image name="Gray Background" width="1500" height="2666"/>
+        <image name="Wind Rose Filled-100-3" width="292" height="292"/>
+    </resources>
+</document>

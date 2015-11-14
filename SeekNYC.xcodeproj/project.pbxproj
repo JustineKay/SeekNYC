@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001961C51BF7A33C00E08B91 /* UserProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001961C41BF7A33C00E08B91 /* UserProfileTableViewCell.xib */; };
+		001961C81BF7C37800E08B91 /* UserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 001961C71BF7C37800E08B91 /* UserProfileTableViewCell.m */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -32,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		001961C41BF7A33C00E08B91 /* UserProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileTableViewCell.xib; sourceTree = "<group>"; };
+		001961C61BF7C37800E08B91 /* UserProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewCell.h; sourceTree = "<group>"; };
+		001961C71BF7C37800E08B91 /* UserProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileTableViewCell.m; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -137,6 +142,9 @@
 				6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */,
 				6B9B79801BF68D6B004A7756 /* OtherUserProfileViewController.h */,
 				6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */,
+				001961C61BF7C37800E08B91 /* UserProfileTableViewCell.h */,
+				001961C71BF7C37800E08B91 /* UserProfileTableViewCell.m */,
+				001961C41BF7A33C00E08B91 /* UserProfileTableViewCell.xib */,
 				6B9B79651BF68D05004A7756 /* Main.storyboard */,
 				6B9B796B1BF68D05004A7756 /* Assets.xcassets */,
 				6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */,
@@ -218,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				001961C51BF7A33C00E08B91 /* UserProfileTableViewCell.xib in Resources */,
 				6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */,
 				6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */,
 				6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */,
@@ -239,6 +248,7 @@
 				6B9B79891BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m in Sources */,
 				6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */,
 				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
+				001961C81BF7C37800E08B91 /* UserProfileTableViewCell.m in Sources */,
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
 				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
 				6B9B798C1BF68D6B004A7756 /* SignUpViewController.m in Sources */,
