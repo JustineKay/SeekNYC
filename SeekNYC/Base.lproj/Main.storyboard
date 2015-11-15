@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Blf-1U-uPe">
-=======
+
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Blf-1U-uPe">
->>>>>>> bb65f39bae1cb3c0e37c244e1bea75f6bbc0eb55
+
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -183,11 +181,9 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="443"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X5N-8A-ovY" id="hPE-Ki-5mv">
-<<<<<<< HEAD
+
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="442"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
->>>>>>> bb65f39bae1cb3c0e37c244e1bea75f6bbc0eb55
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
