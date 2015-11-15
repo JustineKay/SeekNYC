@@ -18,7 +18,9 @@
 #import "MKMapFullCoverageOverlay.h"
 #import "AppDelegate.h"
 
-@class Path;
+static bool const isMetric = NO;
+static float const metersInKM = 1000;
+static float const metersInMile = 1609.344;
 
 @interface NYCMapViewController ()
 <
@@ -139,8 +141,8 @@ NSFetchedResultsControllerDelegate
      didUpdateLocations:(NSArray *)locations
 {
     for (CLLocation *newLocation in locations) {
-        NSLog(@"%f", newLocation.horizontalAccuracy);
-        NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
+//        NSLog(@"%f", newLocation.horizontalAccuracy);
+//        NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
         
         //BOOL isAccurate = newLocation.horizontalAccuracy < 20;
         //BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
@@ -148,9 +150,6 @@ NSFetchedResultsControllerDelegate
         [self.locations addObject:newLocation];
         
         if (self.locations.count > 1) {
-            
-            // update distance
-            self.distance += [newLocation distanceFromLocation:self.locations.lastObject];
             
             NSInteger sourceIndex = self.locations.count - 1;
             NSInteger destinationIndex = self.locations.count - 2;
@@ -163,6 +162,27 @@ NSFetchedResultsControllerDelegate
         
     }
 }
+
+- (NSString *)stringifyDistance:(float)meters
+{
+    float unitDivider;
+    NSString *unitName;
+    
+    // metric
+    if (isMetric) {
+        unitName = @"km";
+        // to get from meters to kilometers divide by this
+        unitDivider = metersInKM;
+        // U.S.
+    } else {
+        unitName = @"mi";
+        // to get from meters to miles divide by this
+        unitDivider = metersInMile;
+    }
+    
+    return [NSString stringWithFormat:@"%.2f %@", (meters / unitDivider), unitName];
+}
+
 
 - (void)startLocationUpdates
 {
@@ -211,8 +231,6 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
-    self.distance = 0;
-    
     if (self.locations == nil) {
         
         self.locations = [NSMutableArray array];
@@ -225,6 +243,10 @@ NSFetchedResultsControllerDelegate
 - (IBAction)stopTrackingPathButtonTapped:(UIButton *)sender {
     
     [self stopTrackingUserLocation];
+    
+    [self updateDistance];
+    
+    self.locations = nil;
 }
 
 
@@ -236,8 +258,16 @@ NSFetchedResultsControllerDelegate
     [self.locationManager stopUpdatingLocation];
     
     [self savePath];
+}
+
+- (void)updateDistance{
     
-    self.locations = nil;
+    NSLog(@"self.distance: %f", self.distance);
+    self.distance += [self.locations.firstObject distanceFromLocation:self.locations.lastObject];
+    
+    NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
+    NSLog(@"self.distance: %f", self.distance);
+    NSLog(@"%@", [NSString stringWithFormat:@"Distance: %@", [self stringifyDistance:self.distance]]);
 }
 
 
