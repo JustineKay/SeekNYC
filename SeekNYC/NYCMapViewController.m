@@ -101,6 +101,13 @@ NSFetchedResultsControllerDelegate
     [self.mapView setRegion: NYRegion animated: YES];
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return [[MKAnnotationView alloc] init];
+    }
+    return nil;
+}
+
 - (void)loadUserPaths{
     
     
@@ -329,7 +336,8 @@ NSFetchedResultsControllerDelegate
         ClearOverlayPathRenderer *renderer = [[ClearOverlayPathRenderer alloc] initWithPolyline:polyLine];
         
         renderer.strokeColor = [UIColor blackColor];
-        renderer.lineWidth = 18;
+        renderer.lineWidth = 10;
+        //renderer.lineCap = kCGLineCapRound;
         
         return renderer;
         

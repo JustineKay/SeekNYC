@@ -95,6 +95,9 @@
     // now set the colour and width
     CGContextSetStrokeColorWithColor(context, color);
     CGContextSetLineWidth(context, width / zoomScale);
+    //CGContextSetLineWidth(context, 5.0 * zoomScale);
+    
+    CGContextSetLineCap(context, kCGLineCapRound);
     
     CGContextSetBlendMode(context, kCGBlendModeClear);
     
