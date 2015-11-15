@@ -10,6 +10,10 @@
 #import "CircleProgressBar.h"
 
 @interface UserProfileTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+
+
 @property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
 
 @end

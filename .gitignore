@@ -42,4 +42,4 @@ xcuserdata
 
 Carthage/Build
 .DS_Store
-*/.DS_Store
+*/*.DS_Store

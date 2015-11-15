@@ -7,8 +7,13 @@
 //
 
 #import "UserProfileViewController.h"
+#import "UserProfileTableViewCell.h"
 
-@interface UserProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface UserProfileViewController ()
+<
+UITableViewDelegate,
+UITableViewDataSource
+>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -18,7 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    // grab the nib from the main bundle
+    UINib *nib = [UINib nibWithNibName:@"UserProfileTableViewCell" bundle:nil];
+    
+    // register the nib for the cell identifer
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"UserProfileCellIdentifier"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,24 +49,42 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.view.frame.size.height;
+}
+
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
+//    
+//    
+//    
+//    
+//    return cell;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
+        // Create a temporary UIViewController to instantiate the custom cell.
+//        UIViewController *temporaryController = [[UIViewController alloc] initWithNibName:@"UserProfileCellIdentifier" bundle:nil];
+//        // Grab a pointer to the custom cell.
+//        cell = (UserProfileTableViewCell *)temporaryController.view;
+
+//        NSLog(@"%@", temporaryController.nibName);
     
     return cell;
 }
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
