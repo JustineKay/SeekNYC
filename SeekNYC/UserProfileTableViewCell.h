@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CircleProgressBar.h"
+#import "UserProfileViewController.h"
+#import "NYCMapViewController.h"
 
 @interface UserProfileTableViewCell : UITableViewCell
 
@@ -15,5 +17,8 @@
 
 
 @property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
+
+@property (nonatomic) CGFloat percentage;
+
 
 @end

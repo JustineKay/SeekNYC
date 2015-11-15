@@ -16,6 +16,7 @@ UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+
 @end
 
 @implementation UserProfileViewController
@@ -66,15 +67,17 @@ UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
-        // Create a temporary UIViewController to instantiate the custom cell.
-//        UIViewController *temporaryController = [[UIViewController alloc] initWithNibName:@"UserProfileCellIdentifier" bundle:nil];
-//        // Grab a pointer to the custom cell.
-//        cell = (UserProfileTableViewCell *)temporaryController.view;
-
-//        NSLog(@"%@", temporaryController.nibName);
+    
+    cell.percentage = self.percentage1;
+    
+    
+    NSLog(@"It's passing %f", self.percentage1);
     
     return cell;
 }
+
+
+
 
 
 /*

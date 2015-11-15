@@ -8,15 +8,14 @@
 
 #import "UserProfileTableViewCell.h"
 
+
 @implementation UserProfileTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
     
-    float div = (15.0f / 50.0f);
-    printf("%2f",div);
     
-    [self.nycCircleProgressBar setProgress:div animated:YES]; //in set progress number add
+    [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
 
 }
 
