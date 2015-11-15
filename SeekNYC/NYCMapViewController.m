@@ -17,6 +17,8 @@
 #import "MKMapGrayOverlayRenderer.h"
 #import "MKMapFullCoverageOverlay.h"
 #import "AppDelegate.h"
+#import "UserProfileTableViewCell.h"
+#import "UserProfileViewController.h"
 
 static bool const isMetric = NO;
 static float const metersInKM = 1000;
@@ -47,7 +49,7 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) NSArray *userPaths;
 @property (nonatomic) float distance;
 @property (nonatomic) int seconds;
-@property (nonatomic) float percentageTravelled;
+
 
 @property (nonatomic) NSTimer *timer;
 
@@ -265,12 +267,15 @@ NSFetchedResultsControllerDelegate
 
     self.percentageTravelled = (squareMiles / 305) * 100;
     
+    
+    
     NSLog(@"SquareMiles: %2f", squareMiles);
     NSLog(@"Percentage travelled: %2f", self.percentageTravelled);
     
     
     
 }
+
 
 
 
@@ -355,6 +360,12 @@ NSFetchedResultsControllerDelegate
     }
     
     return [MKPolyline polylineWithCoordinates:coords count:locations.count];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+   UserProfileViewController *detailViewController = segue.destinationViewController;
+    detailViewController.percentage1 = self.percentageTravelled;
 }
 
 
