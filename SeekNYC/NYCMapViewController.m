@@ -47,6 +47,7 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) NSArray *userPaths;
 @property (nonatomic) float distance;
 @property (nonatomic) int seconds;
+@property (nonatomic) float percentageTravelled;
 
 @property (nonatomic) NSTimer *timer;
 
@@ -163,24 +164,20 @@ NSFetchedResultsControllerDelegate
     }
 }
 
-- (NSString *)stringifyDistance:(float)meters
+- (float)distanceInMiles:(float)meters
 {
     float unitDivider;
     NSString *unitName;
     
-    // metric
-    if (isMetric) {
-        unitName = @"km";
-        // to get from meters to kilometers divide by this
-        unitDivider = metersInKM;
-        // U.S.
-    } else {
-        unitName = @"mi";
-        // to get from meters to miles divide by this
-        unitDivider = metersInMile;
-    }
     
-    return [NSString stringWithFormat:@"%.2f %@", (meters / unitDivider), unitName];
+    unitName = @"mi";
+    // to get from meters to miles divide by this
+    unitDivider = metersInMile;
+    
+    
+    float distanceInMiles = meters/unitDivider;
+    
+    return distanceInMiles;
 }
 
 
@@ -260,6 +257,23 @@ NSFetchedResultsControllerDelegate
     [self savePath];
 }
 
+-(void)convertMilesToSqMiles {
+    
+    float miles = [self distanceInMiles:self.distance];
+   
+    float squareMiles = miles * .0621371;
+
+    self.percentageTravelled = (squareMiles / 305) * 100;
+    
+    NSLog(@"SquareMiles: %2f", squareMiles);
+    NSLog(@"Percentage travelled: %2f", self.percentageTravelled);
+    
+    
+    
+}
+
+
+
 - (void)updateDistance{
     
     NSLog(@"self.distance: %f", self.distance);
@@ -267,7 +281,9 @@ NSFetchedResultsControllerDelegate
     
     NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
     NSLog(@"self.distance: %f", self.distance);
-    NSLog(@"%@", [NSString stringWithFormat:@"Distance: %@", [self stringifyDistance:self.distance]]);
+   // NSLog(@"%@", [NSString stringWithFormat:@"Distance: %@", [self stringifyDistance:self.distance]]);
+    
+    [self convertMilesToSqMiles];
 }
 
 
