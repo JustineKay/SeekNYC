@@ -49,6 +49,10 @@ UITableViewDataSource
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.view.frame.size.height;
+}
+
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    
@@ -63,11 +67,11 @@ UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
         // Create a temporary UIViewController to instantiate the custom cell.
-        UIViewController *temporaryController = [[UIViewController alloc] initWithNibName:@"UserProfileCellIdentifier" bundle:nil];
-        // Grab a pointer to the custom cell.
-        cell = (UserProfileTableViewCell *)temporaryController.view;
+//        UIViewController *temporaryController = [[UIViewController alloc] initWithNibName:@"UserProfileCellIdentifier" bundle:nil];
+//        // Grab a pointer to the custom cell.
+//        cell = (UserProfileTableViewCell *)temporaryController.view;
 
-        NSLog(@"%@", temporaryController.nibName);
+//        NSLog(@"%@", temporaryController.nibName);
     
     return cell;
 }
