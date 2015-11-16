@@ -43,11 +43,11 @@ http://en.fogofworld.com/
 #### Timeline
 | Week | Date | Sprint |
 |----|----|---|
-| Week 1 | Nov 3 - 5 | Research: Submit project proposal (11/5). Create wireframes. Research, research, research. |
-| Week 2 | Nov 6 - 10 | Development I: Determine awards and acheivements. Set up Parse. Get MVP up & running.|
-| Week 2 | Nov 11 - 17 | Development II & FIRST RELEASE: Testing. Write demo script. Refine look & design. Fix Bugs. MVP running smoothly. |
-| Week 3 | Nov 18 - 24 | Development III & SECOND RELEASE: Add bonus features. Revised demo script. Fix bugs. |
-| Week 4 | Nov 25 - Dec 1 | Testing & THIRD RELEASE: Finalize app. |
+| Week 0 | Nov 3 - 5 | Research: Submit project proposal (11/5). Create wireframes. Research, research, research. |
+| Week 1 | Nov 6 - 10 | Development I: Determine awards and acheivements. Set up Core Data. Get MVP up & running.|
+| Week 2 | Nov 11 - 17 | Development II & FIRST RELEASE(11/17): Testing. Write demo script. Refine look & design. Fix Bugs. MVP running smoothly. |
+| Week 3 | Nov 18 - 24 | Development III & SECOND RELEASE(11/24): Testing. Figure out geolocation options for awards/acheivements.  Refine look & design; softness of path clearing, buttons and icons, font. Add bonus features: Parse- connect with other users, Dropping Pins, Awards. Revised demo script. Fix bugs. |
+| Week 4 | Nov 25 - Dec 1 | Testing & THIRD RELEASE(12/1): Finalize app. |
 | Week 5 | Dec 8, 7pm | Final Demo Day |
 
 #### Team Member Responsibilities
@@ -63,8 +63,10 @@ http://en.fogofworld.com/
 
 **Justine:**
 
+- Set up Core Data
 - Set up Parse
 - Research and implementation of map tracking
+- Reserch and implementation of polyine path clearing
 - Ideas for Achievements/Badges
 - Prep Demo Script and Pitch
 - Draft of Logo
