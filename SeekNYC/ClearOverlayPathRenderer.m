@@ -60,7 +60,7 @@
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context
 {
-    CGFloat baseWidth = self.lineWidth;
+    CGFloat baseWidth = self.lineWidth / zoomScale;
     
      //nice for debugging
       //CGContextSetRGBFillColor(context, (0.0 / 255.0), (0.0 / 255.0), (0.0 / 255.0), 1.0);
@@ -94,8 +94,9 @@
     
     // now set the colour and width
     CGContextSetStrokeColorWithColor(context, color);
-    CGContextSetLineWidth(context, width / zoomScale);
+    CGContextSetLineWidth(context, width);
     //CGContextSetLineWidth(context, 5.0 * zoomScale);
+    
     
     CGContextSetLineCap(context, kCGLineCapRound);
     

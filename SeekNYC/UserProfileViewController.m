@@ -55,39 +55,20 @@ UITableViewDataSource
 }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
-//    
-//    
-//    
-//    
-//    return cell;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
     
     cell.percentage = self.percentage1;
     
+    cell.redBkgdUserAvatarView.layer.cornerRadius = 50.5;
+    cell.redBkgdUserAvatarView.clipsToBounds = YES;
+    
+    cell.redBkgdUserAvatarView.layer.borderColor = [UIColor blackColor].CGColor;
+    cell.redBkgdUserAvatarView.layer.borderWidth = 5;
     
     NSLog(@"It's passing %f", self.percentage1);
     
     return cell;
 }
-
-
-
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

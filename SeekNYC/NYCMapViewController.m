@@ -84,6 +84,8 @@ NSFetchedResultsControllerDelegate
     [self loadUserPaths];
 }
 
+#pragma mark - UI
+
 - (void)loadNYCMap {
     
     self.mapView.showsUserLocation = YES;
@@ -111,8 +113,6 @@ NSFetchedResultsControllerDelegate
 }
 
 - (void)loadUserPaths{
-    
-    
     
     //Create an instance of NSFetchRequest with an entity name
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
@@ -147,12 +147,16 @@ NSFetchedResultsControllerDelegate
     }
 }
 
+
+#pragma mark - location manager delegate
+
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations
 {
     for (CLLocation *newLocation in locations) {
-//        NSLog(@"%f", newLocation.horizontalAccuracy);
-//        NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
+       
+        //NSLog(@"%f", newLocation.horizontalAccuracy);
+        //NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
         
         //BOOL isAccurate = newLocation.horizontalAccuracy < 20;
         //BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
@@ -171,22 +175,6 @@ NSFetchedResultsControllerDelegate
         }
         
     }
-}
-
-- (float)distanceInMiles:(float)meters
-{
-    float unitDivider;
-    NSString *unitName;
-    
-    
-    unitName = @"mi";
-    // to get from meters to miles divide by this
-    unitDivider = metersInMile;
-    
-    
-    float distanceInMiles = meters/unitDivider;
-    
-    return distanceInMiles;
 }
 
 
@@ -210,6 +198,8 @@ NSFetchedResultsControllerDelegate
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
 }
+
+#pragma mark - Action Buttons
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
     
@@ -266,44 +256,12 @@ NSFetchedResultsControllerDelegate
     [self savePath];
 }
 
--(void)convertMilesToSqMiles {
-    
-    float miles = [self distanceInMiles:self.distance];
-   
-    float squareMiles = miles * .0621371;
-
-    self.percentageTravelled = (squareMiles / 305) * 100;
-    
-    
-    
-    NSLog(@"SquareMiles: %2f", squareMiles);
-    NSLog(@"Percentage travelled: %2f", self.percentageTravelled);
-    
-    
-    
-}
-
-
-
-
-- (void)updateDistance{
-    
-    NSLog(@"self.distance: %f", self.distance);
-    self.distance += [self.locations.firstObject distanceFromLocation:self.locations.lastObject];
-    
-    NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
-    NSLog(@"self.distance: %f", self.distance);
-   // NSLog(@"%@", [NSString stringWithFormat:@"Distance: %@", [self stringifyDistance:self.distance]]);
-    
-    [self convertMilesToSqMiles];
-}
-
-
+#pragma mark - Core Data
 
 - (void)savePath {
     
     Path *path = [NSEntityDescription insertNewObjectForEntityForName:@"Path"
-                                                inManagedObjectContext:self.managedObjectContext];
+                                               inManagedObjectContext:self.managedObjectContext];
     
     path.distance = [NSNumber numberWithFloat:self.distance];
     path.duration = [NSNumber numberWithInt:self.seconds];
@@ -332,6 +290,55 @@ NSFetchedResultsControllerDelegate
     }
 }
 
+
+#pragma mark - Distance Calculations
+
+- (float)distanceInMiles:(float)meters
+{
+    float unitDivider;
+    NSString *unitName;
+    
+    unitName = @"mi";
+    // to get from meters to miles divide by this
+    unitDivider = metersInMile;
+    
+    float distanceInMiles = meters/unitDivider;
+    
+    return distanceInMiles;
+}
+
+
+
+-(void)convertMilesToSqMiles {
+    
+    float miles = [self distanceInMiles:self.distance];
+   
+    float squareMiles = miles * .0621371;
+
+    self.percentageTravelled = (squareMiles / 305) * 100;
+    
+    NSLog(@"SquareMiles: %2f", squareMiles);
+    NSLog(@"Percentage travelled: %2f", self.percentageTravelled);
+
+}
+
+
+- (void)updateDistance{
+    
+    NSLog(@"self.distance: %f", self.distance);
+    self.distance += [self.locations.firstObject distanceFromLocation:self.locations.lastObject];
+    
+    NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
+    NSLog(@"self.distance: %f", self.distance);
+   // NSLog(@"%@", [NSString stringWithFormat:@"Distance: %@", [self stringifyDistance:self.distance]]);
+    
+    [self convertMilesToSqMiles];
+}
+
+
+
+#pragma mark - Overlay Renderer
+
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
     if ([overlay isKindOfClass:[MKPolyline class]]) {
@@ -341,9 +348,8 @@ NSFetchedResultsControllerDelegate
         ClearOverlayPathRenderer *renderer = [[ClearOverlayPathRenderer alloc] initWithPolyline:polyLine];
         
         renderer.strokeColor = [UIColor blackColor];
-        renderer.lineWidth = 10;
-        //renderer.lineCap = kCGLineCapRound;
-        
+        renderer.lineWidth = 18;
+                
         return renderer;
         
     } else if([overlay isMemberOfClass:[MKMapFullCoverageOverlay class]]) {
@@ -369,6 +375,8 @@ NSFetchedResultsControllerDelegate
     
     return [MKPolyline polylineWithCoordinates:coords count:locations.count];
 }
+
+#pragma  mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

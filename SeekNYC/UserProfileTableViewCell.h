@@ -14,6 +14,7 @@
 @interface UserProfileTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+@property (weak, nonatomic) IBOutlet UIView *redBkgdUserAvatarView;
 
 
 @property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
