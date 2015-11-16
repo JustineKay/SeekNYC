@@ -18,7 +18,7 @@ In NYC, how can we motivate people to discover other locations around the city o
 
 A real-life game that reveals how much of NYC you've actually explored and rewards you for uncovering more of the map.  
 
-The app tracks your movement as you trek through the city and reveals an underlying map of NYC in full color and detail. It shows you what percentage of the 5 boroughs you've actually covered, and you earn badges for covering more ground and exploring areas off your beaten path. 
+The app tracks your movement as you trek through the city and reveals an underlying map of NYC in full color and detail. It shows you what percentage of the 5 boroughs you've actually covered, and you earn badges for uncovering more ground and exploring areas off your beaten path. 
 
 The map has a gray opaque overlay.  Everywhere the user has been is uncovered in full color and detail.
 
