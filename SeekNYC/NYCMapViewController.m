@@ -73,8 +73,6 @@ NSFetchedResultsControllerDelegate
     
     self.trackPathButton.hidden = NO;
     self.stopTrackingPathButton.hidden = YES;
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -158,8 +156,8 @@ NSFetchedResultsControllerDelegate
         //NSLog(@"%f", newLocation.horizontalAccuracy);
         //NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
         
-        //BOOL isAccurate = newLocation.horizontalAccuracy < 20;
-        //BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
+        BOOL isAccurate = newLocation.horizontalAccuracy < 20;
+        BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
         
         [self.locations addObject:newLocation];
         
@@ -330,7 +328,7 @@ NSFetchedResultsControllerDelegate
     
     NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
     NSLog(@"self.distance: %f", self.distance);
-   // NSLog(@"%@", [NSString stringWithFormat:@"Distance: %@", [self stringifyDistance:self.distance]]);
+    NSLog(@"%@", [NSString stringWithFormat:@"Distance: %f", [self distanceInMiles:self.distance]]);
     
     [self convertMilesToSqMiles];
 }
@@ -380,7 +378,10 @@ NSFetchedResultsControllerDelegate
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-   UserProfileViewController *detailViewController = segue.destinationViewController;
+    UINavigationController *navController = segue.destinationViewController;
+    
+   UserProfileViewController *detailViewController = (UserProfileViewController *) ([navController viewControllers][0]);
+    
     detailViewController.percentage1 = self.percentageTravelled;
 }
 

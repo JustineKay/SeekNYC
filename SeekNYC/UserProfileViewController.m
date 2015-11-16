@@ -27,6 +27,8 @@ UITableViewDataSource
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
     // grab the nib from the main bundle
     UINib *nib = [UINib nibWithNibName:@"UserProfileTableViewCell" bundle:nil];
     
