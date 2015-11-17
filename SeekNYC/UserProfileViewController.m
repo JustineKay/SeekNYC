@@ -60,7 +60,7 @@ UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
     
-    cell.percentage = self.percentage1;
+    cell.percentage = self.progress;
     
     cell.redBkgdUserAvatarView.layer.cornerRadius = 50.5;
     cell.redBkgdUserAvatarView.clipsToBounds = YES;
@@ -68,7 +68,7 @@ UITableViewDataSource
     cell.redBkgdUserAvatarView.layer.borderColor = [UIColor blackColor].CGColor;
     cell.redBkgdUserAvatarView.layer.borderWidth = 5;
     
-    NSLog(@"It's passing %f", self.percentage1);
+    NSLog(@"Is it passing %2f?", cell.percentage);
     
     return cell;
 }

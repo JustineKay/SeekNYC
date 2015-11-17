@@ -7,6 +7,7 @@
 //
 
 #import "UserProfileTableViewCell.h"
+#import "UserProfileViewController.h"
 
 
 @implementation UserProfileTableViewCell
@@ -14,8 +15,10 @@
 - (void)awakeFromNib {
     // Initialization code
     
+  
     
-    [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
+   [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
+    NSLog(@"Let's see %2f", self.percentage);
 
 }
 
