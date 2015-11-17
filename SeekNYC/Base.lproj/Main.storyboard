@@ -79,7 +79,7 @@
                                             <constraint firstAttribute="height" constant="34" id="clg-bP-ZVA"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="Cs2-N8-DIE">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="Cs2-N8-DIE">
                                         <rect key="frame" x="260" y="18" width="81" height="24"/>
                                         <animations/>
                                         <constraints>
