@@ -10,6 +10,6 @@
 
 @interface UserProfileViewController : UIViewController
 
-@property (nonatomic) CGFloat percentage1;
+@property (nonatomic) CGFloat progress;
 
 @end

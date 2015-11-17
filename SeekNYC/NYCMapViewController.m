@@ -383,7 +383,9 @@ NSFetchedResultsControllerDelegate
     
    UserProfileViewController *detailViewController = (UserProfileViewController *) ([navController viewControllers][0]);
     
-    detailViewController.percentage1 = self.percentageTravelled;
+    detailViewController.progress = self.percentageTravelled;
+    
+    NSLog(@"self.percentage travelled is stored %2f", detailViewController.progress);
 }
 
 
