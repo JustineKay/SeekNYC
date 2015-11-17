@@ -17,9 +17,15 @@
     
   
     
-   [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
-    NSLog(@"Let's see %2f", self.percentage);
+   
 
+}
+
+- (void)setPercentage:(CGFloat)percentage {
+    _percentage = percentage;
+    
+    [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
+    NSLog(@"Let's see %2f", self.percentage);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

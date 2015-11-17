@@ -27,7 +27,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLZ-dn-JUP" userLabel="Clear Bkgrd View">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="739"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o89-4O-23o" userLabel="Profile Icon View">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o89-4O-23o" userLabel="Profile Icon View">
                                 <rect key="frame" x="20" y="30" width="101" height="101"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wind Rose Filled-100-3" translatesAutoresizingMaskIntoConstraints="NO" id="wSQ-gL-hwD">
@@ -46,14 +46,14 @@
                                     <constraint firstItem="wSQ-gL-hwD" firstAttribute="leading" secondItem="o89-4O-23o" secondAttribute="leading" constant="16" id="pbH-jY-1AD"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carla" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bG-YH-dAy">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carla" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bG-YH-dAy">
                                 <rect key="frame" x="50" y="139" width="41" height="24"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-Lb-iiy" userLabel="follower/following bar">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-Lb-iiy" userLabel="follower/following bar">
                                 <rect key="frame" x="121" y="82" width="407" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAR-5s-Lt1">
@@ -115,7 +115,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="progressBarWidth">
                                         <integer key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="progressBarColor">
+                                    <userDefinedRuntimeAttribute type="color" keyPath="progressBarProgressColor">
                                         <color key="value" red="1" green="0.2448768788092327" blue="0.25240983473152301" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="progressBarTrackColor">
@@ -139,7 +139,7 @@
                                     <constraint firstAttribute="width" secondItem="4hH-pH-fwE" secondAttribute="height" multiplier="2:1" id="prK-Ve-kmh"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brooklyn, NY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOQ-vy-1Gd">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brooklyn, NY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOQ-vy-1Gd">
                                 <rect key="frame" x="27" y="165" width="87" height="20"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
