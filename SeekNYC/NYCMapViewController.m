@@ -324,6 +324,7 @@ NSFetchedResultsControllerDelegate
 - (void)updateDistance{
     
     NSLog(@"self.distance: %f", self.distance);
+    
     self.distance += [self.locations.firstObject distanceFromLocation:self.locations.lastObject];
     
     NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
