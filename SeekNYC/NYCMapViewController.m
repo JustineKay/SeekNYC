@@ -431,17 +431,6 @@ NSFetchedResultsControllerDelegate
     return [MKPolyline polylineWithCoordinates:coords count:locations.count];
 }
 
-//#pragma  mark - Segue
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    UserProfileViewController *userProfileVC = segue.destinationViewController;
-//    
-//    userProfileVC.progress = self.percentageTravelled;
-//    
-//    NSLog(@"self.percentage travelled is stored %2f", detailViewController.progress);
-//}
-
 
 #pragma  mark - Testing Grid
 
