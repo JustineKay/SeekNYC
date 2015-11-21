@@ -1,10 +1,12 @@
 //
 //  NYCMapViewController.m
-//  TrueLocalNYC
 //
 //  Created by Christella on 11/12/15.
 //  Copyright © 2015 Christella. All rights reserved.
 //
+
+//SPAN: (latitudeDelta = 0.55000001339033844, longitudeDelta = 0.72560419568399936)
+//Center Coord of Region: (latitude = 40.712699999999984, longitude = -74.005899999999997)
 
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
@@ -23,6 +25,7 @@
 static bool const isMetric = NO;
 static float const metersInKM = 1000;
 static float const metersInMile = 1609.344;
+static double const tileSizeInMeters = 40.0;
 
 @interface NYCMapViewController ()
 <
@@ -91,17 +94,111 @@ NSFetchedResultsControllerDelegate
     self.mapView.showsCompass = NO;
     self.mapView.mapType = MKMapTypeHybrid;
     
+    //set mapview to bounds of screen for grid testing
+    self.mapView.frame = self.view.bounds;
+    
     CLLocationCoordinate2D centerCoord = CLLocationCoordinate2DMake(40.7127, -74.0059);
     
-    MKCoordinateSpan spanOfNY = MKCoordinateSpanMake(0.55, 0.55 );
+    MKCoordinateSpan spanOfNY = MKCoordinateSpanMake(0.525, 0.525);
     
     MKCoordinateRegion NYRegion = MKCoordinateRegionMake(centerCoord, spanOfNY);
     
-    MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
-    [self.mapView addOverlay: fullOverlay];
+//    MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
+//    [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
+    
+    
+    //Testing Grid
+    
+    CLLocation *location1 = [self topLeftLocationOfGrid:&centerCoord And:&spanOfNY];
+    
+    CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
+    CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
+    
+    NSString *visitedTile1 = [self findUserLocationInGridWith:location1 And:userLocationTest];
+    NSString *visitedTile2 = [self findUserLocationInGridWith:location1 And:userLocationTest2];
+  
+    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
+    
 }
+
+#pragma mark - Grid Set Up
+
+-(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D *)centerCoord And: (MKCoordinateSpan *)span {
+    
+    double latDegreesFromCenter = span->latitudeDelta * 0.5;
+    double lngDegreesFromCenter = span->longitudeDelta * 0.5;
+    
+    //Create topLeft corner of grid
+    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord->latitude + latDegreesFromCenter, centerCoord->longitude - lngDegreesFromCenter);
+    
+    CLLocation *topLeftLocation = [[CLLocation alloc] initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
+    
+    return topLeftLocation;
+}
+
+-(void)setGridWith:(CLLocationCoordinate2D)centerCoord And:(MKCoordinateSpan)span {
+    
+    double latDegreesFromCenter = span.latitudeDelta * 0.5;
+    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
+    
+    //Create outer corners of grid
+    CLLocationCoordinate2D loc1TopLeft = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D loc2TopRight = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude + lngDegreesFromCenter);
+    CLLocationCoordinate2D loc3BottomLeft = CLLocationCoordinate2DMake(centerCoord.latitude - latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D loc4BottomRight = CLLocationCoordinate2DMake(centerCoord.latitude - latDegreesFromCenter, centerCoord.longitude + lngDegreesFromCenter);
+
+    //Add annotations to map for visual debugging
+    [self addAnnotationToMapWith:loc1TopLeft];
+    [self addAnnotationToMapWith:loc2TopRight];
+    [self addAnnotationToMapWith:loc3BottomLeft];
+    [self addAnnotationToMapWith:loc4BottomRight];
+    [self addAnnotationToMapWith:centerCoord];
+    
+    //Set total number of columns and rows for debugging
+    
+    //Convert CLLocationCoordinate2D to CLLocation
+    CLLocation *location1 = [[CLLocation alloc] initWithLatitude:loc1TopLeft.latitude longitude:loc1TopLeft.longitude];
+    CLLocation *location2 = [[CLLocation alloc] initWithLatitude:loc2TopRight.latitude longitude:loc2TopRight.longitude];
+    CLLocation *location3 = [[CLLocation alloc] initWithLatitude:loc3BottomLeft.latitude longitude:loc3BottomLeft.longitude];
+    
+    //Find distance in meters between topLeft and topRt, topLf and bottomLft
+    CLLocationDistance distanceFromLoc1ToLoc2 = [location1 distanceFromLocation:location2];
+    CLLocationDistance distanceFromLoc1ToLoc3 = [location1 distanceFromLocation:location3];
+    
+    //Divide distance by width of each grid tile in meters
+    double numberOfColumns = distanceFromLoc1ToLoc2 / tileSizeInMeters;
+    double numberOfRows = distanceFromLoc1ToLoc3 / tileSizeInMeters;
+    
+    NSLog(@"Columns: %f, Rows: %f", numberOfColumns, numberOfRows);
+
+}
+
+-(void)addAnnotationToMapWith:(CLLocationCoordinate2D)coord {
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = coord;
+    
+    [self.mapView addAnnotation:annotation];
+}
+
+-(NSString *)findUserLocationInGridWith:(CLLocation *)gridOriginLocation And:(CLLocation *) userLocation{
+    
+    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:gridOriginLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:gridOriginLocation.coordinate.longitude];
+    
+    CLLocationDistance latitudinalDistance = [userLocation distanceFromLocation:latDiff];
+    CLLocationDistance longitudinalDistance = [userLocation distanceFromLocation:lngDiff];
+    
+    double rowNumber = latitudinalDistance / tileSizeInMeters;
+    double columnNumber = longitudinalDistance / tileSizeInMeters;
+    
+    NSString *columnRow = [NSString stringWithFormat:@"%.f, %.f", columnNumber, rowNumber];
+    
+    return  columnRow;
+}
+
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {

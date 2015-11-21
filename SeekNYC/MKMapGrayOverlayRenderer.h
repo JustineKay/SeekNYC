@@ -1,6 +1,5 @@
 //
 //  MKMapGrayOverlayRenderer.h
-//  MoonRunner
 //
 //  Created by Justine Kay 🙏🏼 on 11/8/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
@@ -12,7 +11,7 @@
 @interface MKMapGrayOverlayRenderer : MKOverlayRenderer
 
 /**
- *  Color for the overlay. Default color is 'white'
+ *  Color for the overlay. Default color is 'gray'
  */
 @property (nonatomic, strong) UIColor *overlayColor;
 

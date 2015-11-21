@@ -1,6 +1,5 @@
 //
 //  MKMapGrayOverlayRenderer.m
-//  MoonRunner
 //
 //  Created by Justine Kay 🙏🏼 on 11/8/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
