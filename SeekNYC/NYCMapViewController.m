@@ -16,7 +16,7 @@
 #import "Location.h"
 #import "Location+CoreDataProperties.h"
 #import "ClearOverlayPathRenderer.h"
-#import "MKMapGrayOverlayRenderer.h"
+#import "MKMapColorOverlayRenderer.h"
 #import "MKMapFullCoverageOverlay.h"
 #import "AppDelegate.h"
 #import "UserProfileTableViewCell.h"
@@ -123,6 +123,43 @@ NSFetchedResultsControllerDelegate
     
 }
 
+- (void)loadUserPaths{
+    
+    //Create an instance of NSFetchRequest with an entity name
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
+    
+    //create a sort descriptor
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    
+    //set the sort descriptors on the fetchRequest
+    fetchRequest.sortDescriptors = @[sort];
+    
+    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    self.fetchedResultsController.delegate = self;
+    
+    [self.fetchedResultsController performFetch:nil];
+    
+    if (self.fetchedResultsController.fetchedObjects != nil) {
+        
+        NSArray *fetchedPaths = self.fetchedResultsController.fetchedObjects;
+        
+        for (Path *path in fetchedPaths) {
+            
+            NSArray *locations = [path locationsAsCLLocation];
+            
+            MKPolyline *polyline = [self polyLineWithLocations:locations];
+            
+            [self.mapView addOverlay:polyline];
+            
+        }
+        
+    }
+}
+
+
+
 #pragma mark - Grid Set Up
 
 -(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D *)centerCoord And: (MKCoordinateSpan *)span {
@@ -138,50 +175,6 @@ NSFetchedResultsControllerDelegate
     return topLeftLocation;
 }
 
--(void)setGridWith:(CLLocationCoordinate2D)centerCoord And:(MKCoordinateSpan)span {
-    
-    double latDegreesFromCenter = span.latitudeDelta * 0.5;
-    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
-    
-    //Create outer corners of grid
-    CLLocationCoordinate2D loc1TopLeft = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
-    CLLocationCoordinate2D loc2TopRight = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude + lngDegreesFromCenter);
-    CLLocationCoordinate2D loc3BottomLeft = CLLocationCoordinate2DMake(centerCoord.latitude - latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
-    CLLocationCoordinate2D loc4BottomRight = CLLocationCoordinate2DMake(centerCoord.latitude - latDegreesFromCenter, centerCoord.longitude + lngDegreesFromCenter);
-
-    //Add annotations to map for visual debugging
-    [self addAnnotationToMapWith:loc1TopLeft];
-    [self addAnnotationToMapWith:loc2TopRight];
-    [self addAnnotationToMapWith:loc3BottomLeft];
-    [self addAnnotationToMapWith:loc4BottomRight];
-    [self addAnnotationToMapWith:centerCoord];
-    
-    //Set total number of columns and rows for debugging
-    
-    //Convert CLLocationCoordinate2D to CLLocation
-    CLLocation *location1 = [[CLLocation alloc] initWithLatitude:loc1TopLeft.latitude longitude:loc1TopLeft.longitude];
-    CLLocation *location2 = [[CLLocation alloc] initWithLatitude:loc2TopRight.latitude longitude:loc2TopRight.longitude];
-    CLLocation *location3 = [[CLLocation alloc] initWithLatitude:loc3BottomLeft.latitude longitude:loc3BottomLeft.longitude];
-    
-    //Find distance in meters between topLeft and topRt, topLf and bottomLft
-    CLLocationDistance distanceFromLoc1ToLoc2 = [location1 distanceFromLocation:location2];
-    CLLocationDistance distanceFromLoc1ToLoc3 = [location1 distanceFromLocation:location3];
-    
-    //Divide distance by width of each grid tile in meters
-    double numberOfColumns = distanceFromLoc1ToLoc2 / tileSizeInMeters;
-    double numberOfRows = distanceFromLoc1ToLoc3 / tileSizeInMeters;
-    
-    NSLog(@"Columns: %f, Rows: %f", numberOfColumns, numberOfRows);
-
-}
-
--(void)addAnnotationToMapWith:(CLLocationCoordinate2D)coord {
-    
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate = coord;
-    
-    [self.mapView addAnnotation:annotation];
-}
 
 -(NSString *)findUserLocationInGridWith:(CLLocation *)gridOriginLocation And:(CLLocation *) userLocation{
     
@@ -207,47 +200,12 @@ NSFetchedResultsControllerDelegate
     return nil;
 }
 
-- (void)loadUserPaths{
-    
-    //Create an instance of NSFetchRequest with an entity name
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
-    
-    //create a sort descriptor
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
-    
-    //set the sort descriptors on the fetchRequest
-    fetchRequest.sortDescriptors = @[sort];
-    
-    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    self.fetchedResultsController.delegate = self;
-    
-    [self.fetchedResultsController performFetch:nil];
-    
-    if (self.fetchedResultsController.fetchedObjects != nil) {
-        
-        NSArray *fetchedPaths = self.fetchedResultsController.fetchedObjects;
-        
-        for (Path *path in fetchedPaths) {
-           
-            NSArray *locations = [path locationsAsCLLocation];
-            
-            MKPolyline *polyline = [self polyLineWithLocations:locations];
-            
-            [self.mapView addOverlay:polyline];
-            
-        }
-        
-    }
-}
 
-
-#pragma mark - location manager delegate
+#pragma mark - Location Manager Delegate
 
 - (void)locationManager:(CLLocationManager *)manager
-     didUpdateLocations:(NSArray *)locations
-{
+     didUpdateLocations:(NSArray *)locations {
+    
     for (CLLocation *newLocation in locations) {
        
         //NSLog(@"%f", newLocation.horizontalAccuracy);
@@ -256,7 +214,10 @@ NSFetchedResultsControllerDelegate
         BOOL isAccurate = newLocation.horizontalAccuracy < 20;
         BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
         
-        [self.locations addObject:newLocation];
+        if (isAccurate && isRecent) {
+            
+            [self.locations addObject:newLocation];
+        }
         
         if (self.locations.count > 1) {
             
@@ -273,10 +234,8 @@ NSFetchedResultsControllerDelegate
 }
 
 
-- (void)startLocationUpdates
-{
-    // Create the location manager if this object does not
-    // already have one.
+- (void)startLocationUpdates {
+    
     if (self.locationManager == nil) {
         self.locationManager = [[CLLocationManager alloc] init];
     }
@@ -450,7 +409,7 @@ NSFetchedResultsControllerDelegate
         
     } else if([overlay isMemberOfClass:[MKMapFullCoverageOverlay class]]) {
         
-        MKMapGrayOverlayRenderer *fullOverlayView = [[MKMapGrayOverlayRenderer alloc] initWithOverlay:overlay];
+        MKMapColorOverlayRenderer *fullOverlayView = [[MKMapColorOverlayRenderer alloc] initWithOverlay:overlay];
         
         fullOverlayView.overlayAlpha = 0.90;
         
@@ -485,6 +444,53 @@ NSFetchedResultsControllerDelegate
     NSLog(@"self.percentage travelled is stored %2f", detailViewController.progress);
 }
 
+
+#pragma  mark - Testing Grid
+
+-(void)setGridWith:(CLLocationCoordinate2D)centerCoord And:(MKCoordinateSpan)span {
+    
+    double latDegreesFromCenter = span.latitudeDelta * 0.5;
+    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
+    
+    //Create outer corners of grid
+    CLLocationCoordinate2D loc1TopLeft = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D loc2TopRight = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude + lngDegreesFromCenter);
+    CLLocationCoordinate2D loc3BottomLeft = CLLocationCoordinate2DMake(centerCoord.latitude - latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D loc4BottomRight = CLLocationCoordinate2DMake(centerCoord.latitude - latDegreesFromCenter, centerCoord.longitude + lngDegreesFromCenter);
+    
+    //Add annotations to map for visual debugging
+    [self addAnnotationToMapWith:loc1TopLeft];
+    [self addAnnotationToMapWith:loc2TopRight];
+    [self addAnnotationToMapWith:loc3BottomLeft];
+    [self addAnnotationToMapWith:loc4BottomRight];
+    [self addAnnotationToMapWith:centerCoord];
+    
+    //Set total number of columns and rows for debugging
+    
+    //Convert CLLocationCoordinate2D to CLLocation
+    CLLocation *location1 = [[CLLocation alloc] initWithLatitude:loc1TopLeft.latitude longitude:loc1TopLeft.longitude];
+    CLLocation *location2 = [[CLLocation alloc] initWithLatitude:loc2TopRight.latitude longitude:loc2TopRight.longitude];
+    CLLocation *location3 = [[CLLocation alloc] initWithLatitude:loc3BottomLeft.latitude longitude:loc3BottomLeft.longitude];
+    
+    //Find distance in meters between topLeft and topRt, topLf and bottomLft
+    CLLocationDistance distanceFromLoc1ToLoc2 = [location1 distanceFromLocation:location2];
+    CLLocationDistance distanceFromLoc1ToLoc3 = [location1 distanceFromLocation:location3];
+    
+    //Divide distance by width of each grid tile in meters
+    double numberOfColumns = distanceFromLoc1ToLoc2 / tileSizeInMeters;
+    double numberOfRows = distanceFromLoc1ToLoc3 / tileSizeInMeters;
+    
+    NSLog(@"Columns: %f, Rows: %f", numberOfColumns, numberOfRows);
+    
+}
+
+-(void)addAnnotationToMapWith:(CLLocationCoordinate2D)coord {
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = coord;
+    
+    [self.mapView addAnnotation:annotation];
+}
 
 
 @end
