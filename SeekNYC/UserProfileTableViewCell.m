@@ -7,17 +7,25 @@
 //
 
 #import "UserProfileTableViewCell.h"
+#import "UserProfileViewController.h"
+
 
 @implementation UserProfileTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
     
-    float div = (15.0f / 50.0f);
-    printf("%2f",div);
+  
     
-    [self.nycCircleProgressBar setProgress:div animated:YES]; //in set progress number add
+   
 
+}
+
+- (void)setPercentage:(CGFloat)percentage {
+    _percentage = percentage;
+    
+    [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
+    NSLog(@"Let's see %2f", self.percentage);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

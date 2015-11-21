@@ -1,8 +1,7 @@
-//    MKMapDimOverlay.h
-//    MKMapDimOverlay
+//    MKMapFullCoverageOverlay.h
 //
+//    Based on MKMapDimOverlay
 //    Created by swapnil luktuke on 01/05/15.
-
 //    Copyright (c) 2015 lukya
 //
 //    Permission is hereby granted, free of charge, to any person obtaining a copy

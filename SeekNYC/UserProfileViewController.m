@@ -16,6 +16,7 @@ UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+
 @end
 
 @implementation UserProfileViewController
@@ -25,6 +26,8 @@ UITableViewDataSource
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     // grab the nib from the main bundle
     UINib *nib = [UINib nibWithNibName:@"UserProfileTableViewCell" bundle:nil];
@@ -54,37 +57,20 @@ UITableViewDataSource
 }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
-//    
-//    
-//    
-//    
-//    return cell;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserProfileCellIdentifier" forIndexPath:indexPath];
-        // Create a temporary UIViewController to instantiate the custom cell.
-//        UIViewController *temporaryController = [[UIViewController alloc] initWithNibName:@"UserProfileCellIdentifier" bundle:nil];
-//        // Grab a pointer to the custom cell.
-//        cell = (UserProfileTableViewCell *)temporaryController.view;
-
-//        NSLog(@"%@", temporaryController.nibName);
+    
+    cell.percentage = self.progress;
+    
+    cell.redBkgdUserAvatarView.layer.cornerRadius = 50.5;
+    cell.redBkgdUserAvatarView.clipsToBounds = YES;
+    
+    cell.redBkgdUserAvatarView.layer.borderColor = [UIColor blackColor].CGColor;
+    cell.redBkgdUserAvatarView.layer.borderWidth = 5;
+    
+    NSLog(@"Is it passing %2f?", cell.percentage);
     
     return cell;
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

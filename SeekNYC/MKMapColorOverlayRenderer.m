@@ -1,14 +1,15 @@
 //
-//  MKMapGrayOverlayRenderer.m
-//  MoonRunner
+//  MKMapColorOverlayRenderer.m
 //
 //  Created by Justine Kay 🙏🏼 on 11/8/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 
-#import "MKMapGrayOverlayRenderer.h"
+#import "MKMapColorOverlayRenderer.h"
 
-@implementation MKMapGrayOverlayRenderer
+@implementation MKMapColorOverlayRenderer
+
+
 
 - (instancetype)initWithOverlay:(id <MKOverlay>)overlay {
     self = [super initWithOverlay:overlay];

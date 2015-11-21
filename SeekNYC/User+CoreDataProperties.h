@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.h
 //  SeekNYC
 //
-//  Created by Justine Gartner on 11/13/15.
+//  Created by Justine Kay 🙏🏼 on 11/13/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

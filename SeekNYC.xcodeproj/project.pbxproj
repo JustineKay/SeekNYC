@@ -17,7 +17,7 @@
 		6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */; };
 		6B9B79871BF68D6B004A7756 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79791BF68D6B004A7756 /* LoginViewController.m */; };
 		6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */; };
-		6B9B79891BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797D1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m */; };
+		6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */; };
 		6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */; };
 		6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */; };
 		6B9B798C1BF68D6B004A7756 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79831BF68D6B004A7756 /* SignUpViewController.m */; };
@@ -53,8 +53,8 @@
 		6B9B79791BF68D6B004A7756 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapFullCoverageOverlay.h; sourceTree = "<group>"; };
 		6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapFullCoverageOverlay.m; sourceTree = "<group>"; };
-		6B9B797C1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapGrayOverlayRenderer.h; sourceTree = "<group>"; };
-		6B9B797D1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapGrayOverlayRenderer.m; sourceTree = "<group>"; };
+		6B9B797C1BF68D6B004A7756 /* MKMapColorOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapColorOverlayRenderer.h; sourceTree = "<group>"; };
+		6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapColorOverlayRenderer.m; sourceTree = "<group>"; };
 		6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYCMapViewController.h; sourceTree = "<group>"; };
 		6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYCMapViewController.m; sourceTree = "<group>"; };
 		6B9B79801BF68D6B004A7756 /* OtherUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileViewController.h; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 				6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */,
 				6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */,
 				6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */,
-				6B9B797C1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.h */,
-				6B9B797D1BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m */,
+				6B9B797C1BF68D6B004A7756 /* MKMapColorOverlayRenderer.h */,
+				6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */,
 				6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */,
 				6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */,
 				6B9B79781BF68D6B004A7756 /* LoginViewController.h */,
@@ -226,7 +226,7 @@
 				TargetAttributes = {
 					6B9B79581BF68D05004A7756 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 8338VRHY69;
+						DevelopmentTeam = 26RHXP32FH;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -326,7 +326,7 @@
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
 				F721F9F81BF7F26E007684EA /* UserProfileTableViewCell.m in Sources */,
 				6B9B79A31BF68F66004A7756 /* User.m in Sources */,
-				6B9B79891BF68D6B004A7756 /* MKMapGrayOverlayRenderer.m in Sources */,
+				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
 				6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */,
 				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
@@ -453,7 +453,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.justinekay.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -468,7 +468,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.justinekay.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
