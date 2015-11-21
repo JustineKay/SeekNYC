@@ -21,6 +21,8 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     UserProfileView *profileView = [[[NSBundle mainBundle] loadNibNamed:@"UserProfileView" owner:self options:nil] firstObject];
+    profileView.frame = self.view.bounds;
+    [self.view addSubview:profileView];
     
     NSLog(@"Is it passing %2f?", profileView.percentage);
     

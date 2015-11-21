@@ -13,11 +13,12 @@
 - (void)setPercentage:(CGFloat)percentage {
     
     if (percentage) {
+        NSLog(@"%f", percentage);
+        _percentage = percentage;
         
-        self.percentage = percentage;
     }else {
         
-        self.percentage = 0.0;
+        _percentage = 0.001;
     }
     
     
