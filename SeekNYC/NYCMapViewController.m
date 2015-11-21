@@ -103,8 +103,8 @@ NSFetchedResultsControllerDelegate
     
     MKCoordinateRegion NYRegion = MKCoordinateRegionMake(centerCoord, spanOfNY);
     
-//    MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
-//    [self.mapView addOverlay: fullOverlay];
+    MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
+    [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
     
