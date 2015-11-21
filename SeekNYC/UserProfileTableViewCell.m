@@ -13,11 +13,6 @@
 @implementation UserProfileTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
-    
-  
-    
-   
 
 }
 

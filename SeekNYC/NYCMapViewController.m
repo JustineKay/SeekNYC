@@ -56,6 +56,8 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) NSMutableOrderedSet *visitedTiles;
 @property (nonatomic) CLLocation *gridOriginPoint;
 
+@property (nonatomic) CGFloat percentageTravelled;
+
 @property (nonatomic) NSTimer *timer;
 
 @end
@@ -300,8 +302,6 @@ NSFetchedResultsControllerDelegate
     
     [self stopTrackingUserLocation];
     
-    [self updateDistance];
-    
     self.locations = nil;
 }
 
@@ -368,20 +368,6 @@ NSFetchedResultsControllerDelegate
 }
 
 
-
--(void)convertMilesToSqMiles {
-    
-    float miles = [self distanceInMiles:self.distance];
-   
-    float squareMiles = miles * .0621371;
-
-    self.percentageTravelled = (squareMiles / 305) * 100;
-    
-    NSLog(@"SquareMiles: %2f", squareMiles);
-    NSLog(@"Percentage travelled: %2f", self.percentageTravelled);
-
-}
-
 -(void)percentageOfNYCUncovered{
     
     float userMeters = self.visitedTiles.count * 40;
@@ -391,22 +377,6 @@ NSFetchedResultsControllerDelegate
     
     self.percentageTravelled = percentageOfNYCUncovered;
 }
-
-
-- (void)updateDistance{
-    
-    NSLog(@"self.distance: %f", self.distance);
-    
-    self.distance += [self.locations.firstObject distanceFromLocation:self.locations.lastObject];
-    
-    NSLog(@"Distance between first Location and last location: %f", [self.locations.firstObject distanceFromLocation:self.locations.lastObject]);
-    NSLog(@"self.distance: %f", self.distance);
-    NSLog(@"%@", [NSString stringWithFormat:@"Distance: %f", [self distanceInMiles:self.distance]]);
-    
-    [self convertMilesToSqMiles];
-}
-
-
 
 #pragma mark - Overlay Renderer
 
