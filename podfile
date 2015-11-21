@@ -1,2 +1,3 @@
+pod 'JVMenuPopover', '~> 1.0'
 pod 'CircleProgressBar', '~> 0.21'
 use_frameworks!

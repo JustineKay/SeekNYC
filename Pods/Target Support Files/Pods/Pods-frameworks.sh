@@ -53,7 +53,9 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/CircleProgressBar.framework'
+  install_framework 'Pods/JVMenuPopover.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/CircleProgressBar.framework'
+  install_framework 'Pods/JVMenuPopover.framework'
 fi
