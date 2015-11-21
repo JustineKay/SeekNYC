@@ -111,7 +111,7 @@ NSFetchedResultsControllerDelegate
     
     //Testing Grid
     
-    CLLocation *location1 = [self topLeftLocationOfGrid:&centerCoord And:&spanOfNY];
+    CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
     
     CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
     CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
@@ -162,13 +162,13 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - Grid Set Up
 
--(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D *)centerCoord And: (MKCoordinateSpan *)span {
+-(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
     
-    double latDegreesFromCenter = span->latitudeDelta * 0.5;
-    double lngDegreesFromCenter = span->longitudeDelta * 0.5;
+    double latDegreesFromCenter = span.latitudeDelta * 0.5;
+    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
     
     //Create topLeft corner of grid
-    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord->latitude + latDegreesFromCenter, centerCoord->longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
     
     CLLocation *topLeftLocation = [[CLLocation alloc] initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
     
