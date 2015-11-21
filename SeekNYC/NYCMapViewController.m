@@ -53,6 +53,8 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) float distance;
 @property (nonatomic) int seconds;
 
+@property (nonatomic) NSMutableOrderedSet *visitedTiles;
+@property (nonatomic) CLLocation *gridOriginPoint;
 
 @property (nonatomic) NSTimer *timer;
 
@@ -112,12 +114,13 @@ NSFetchedResultsControllerDelegate
     //Testing Grid
     
     CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
+    self.gridOriginPoint = location1;
     
     CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
     CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
     
-    NSString *visitedTile1 = [self findUserLocationInGridWith:location1 And:userLocationTest];
-    NSString *visitedTile2 = [self findUserLocationInGridWith:location1 And:userLocationTest2];
+    NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
+    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
   
     NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
     
@@ -162,24 +165,10 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - Grid Set Up
 
--(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
+-(NSString *)userLocationInGrid:(CLLocation *) userLocation{
     
-    double latDegreesFromCenter = span.latitudeDelta * 0.5;
-    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
-    
-    //Create topLeft corner of grid
-    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
-    
-    CLLocation *topLeftLocation = [[CLLocation alloc] initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
-    
-    return topLeftLocation;
-}
-
-
--(NSString *)findUserLocationInGridWith:(CLLocation *)gridOriginLocation And:(CLLocation *) userLocation{
-    
-    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:gridOriginLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:gridOriginLocation.coordinate.longitude];
+    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:userLocation.coordinate.longitude];
+    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
     
     CLLocationDistance latitudinalDistance = [userLocation distanceFromLocation:latDiff];
     CLLocationDistance longitudinalDistance = [userLocation distanceFromLocation:lngDiff];
@@ -207,9 +196,6 @@ NSFetchedResultsControllerDelegate
      didUpdateLocations:(NSArray *)locations {
     
     for (CLLocation *newLocation in locations) {
-       
-        //NSLog(@"%f", newLocation.horizontalAccuracy);
-        //NSLog(@"%f", fabs([newLocation.timestamp timeIntervalSinceNow]));
         
         BOOL isAccurate = newLocation.horizontalAccuracy < 20;
         BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
@@ -217,6 +203,26 @@ NSFetchedResultsControllerDelegate
         if (isAccurate && isRecent) {
             
             [self.locations addObject:newLocation];
+            
+            BOOL matchingTileFound = NO;
+            
+            NSString *visitedTile = [self userLocationInGrid:newLocation];
+            
+            for (int i = 0; i < self.visitedTiles.count; i++) {
+                
+                if ([visitedTile isEqualToString:self.visitedTiles[i]]) {
+                    
+                    matchingTileFound = YES;
+                    break;
+                }
+                
+            }
+            
+            if (matchingTileFound == NO) {
+                
+                [self.visitedTiles addObject:visitedTile];
+            }
+            
         }
         
         if (self.locations.count > 1) {
@@ -376,6 +382,16 @@ NSFetchedResultsControllerDelegate
 
 }
 
+-(void)percentageOfNYCUncovered{
+    
+    float userMeters = self.visitedTiles.count * 40;
+    float nycMeters = 785000;
+    float metersOfNYCUncovered = userMeters / nycMeters;
+    float percentageOfNYCUncovered = metersOfNYCUncovered * 100;
+    
+    self.percentageTravelled = percentageOfNYCUncovered;
+}
+
 
 - (void)updateDistance{
     
@@ -446,6 +462,19 @@ NSFetchedResultsControllerDelegate
 
 
 #pragma  mark - Testing Grid
+
+-(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
+    
+    double latDegreesFromCenter = span.latitudeDelta * 0.5;
+    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
+    
+    //Create topLeft corner of grid
+    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
+    
+    CLLocation *topLeftLocation = [[CLLocation alloc] initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
+    
+    return topLeftLocation;
+}
 
 -(void)setGridWith:(CLLocationCoordinate2D)centerCoord And:(MKCoordinateSpan)span {
     
