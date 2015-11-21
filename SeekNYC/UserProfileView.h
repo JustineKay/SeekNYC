@@ -1,8 +1,8 @@
 //
-//  UserProfileTableViewCell.h
+//  UserProfileView.h
 //  SeekNYC
 //
-//  Created by Christella on 11/14/15.
+//  Created by Justine Gartner on 11/21/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 
@@ -11,7 +11,8 @@
 #import "UserProfileViewController.h"
 #import "NYCMapViewController.h"
 
-@interface UserProfileTableViewCell : UITableViewCell
+@interface UserProfileView : UIView
+@property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
 
 @property (nonatomic) CGFloat percentage;
 

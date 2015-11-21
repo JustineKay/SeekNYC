@@ -263,6 +263,20 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - Action Buttons
 
+
+- (IBAction)menuButtonTapped:(UIButton *)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
+    
+    userProfileVC.progress = self.percentageTravelled;
+    
+    [self presentViewController:userProfileVC animated:YES completion:nil];
+    
+    NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
+}
+
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
     
     if (self.locationManager == nil) {
@@ -417,18 +431,16 @@ NSFetchedResultsControllerDelegate
     return [MKPolyline polylineWithCoordinates:coords count:locations.count];
 }
 
-#pragma  mark - Segue
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    UINavigationController *navController = segue.destinationViewController;
-    
-   UserProfileViewController *detailViewController = (UserProfileViewController *) ([navController viewControllers][0]);
-    
-    detailViewController.progress = self.percentageTravelled;
-    
-    NSLog(@"self.percentage travelled is stored %2f", detailViewController.progress);
-}
+//#pragma  mark - Segue
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    UserProfileViewController *userProfileVC = segue.destinationViewController;
+//    
+//    userProfileVC.progress = self.percentageTravelled;
+//    
+//    NSLog(@"self.percentage travelled is stored %2f", detailViewController.progress);
+//}
 
 
 #pragma  mark - Testing Grid

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001961C51BF7A33C00E08B91 /* UserProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001961C41BF7A33C00E08B91 /* UserProfileTableViewCell.xib */; };
+		001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001961C41BF7A33C00E08B91 /* UserProfileView.xib */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -15,12 +15,9 @@
 		6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B796B1BF68D05004A7756 /* Assets.xcassets */; };
 		6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */; };
 		6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */; };
-		6B9B79871BF68D6B004A7756 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79791BF68D6B004A7756 /* LoginViewController.m */; };
 		6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */; };
 		6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */; };
 		6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */; };
-		6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */; };
-		6B9B798C1BF68D6B004A7756 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79831BF68D6B004A7756 /* SignUpViewController.m */; };
 		6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */; };
 		6B9B798F1BF68DBB004A7756 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B798E1BF68DBB004A7756 /* MapKit.framework */; };
 		6B9B79911BF68DC5004A7756 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B79901BF68DC5004A7756 /* CoreLocation.framework */; };
@@ -30,13 +27,13 @@
 		6B9B79A11BF68F66004A7756 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79991BF68F66004A7756 /* Location.m */; };
 		6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */; };
 		6B9B79A31BF68F66004A7756 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B799D1BF68F66004A7756 /* User.m */; };
+		6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB08B951C0111C20098C805 /* UserProfileView.m */; };
 		6D2E837437078CAA4ED253D7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB25FEF09FD3D81CB565DF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F721F9F41BF7ED65007684EA /* CircleProgressBar.m */; };
-		F721F9F81BF7F26E007684EA /* UserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F721F9F71BF7F26E007684EA /* UserProfileTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		001961C41BF7A33C00E08B91 /* UserProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileTableViewCell.xib; sourceTree = "<group>"; };
+		001961C41BF7A33C00E08B91 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
 		244FD1D516831678CBE69EC9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,18 +46,12 @@
 		6B9B79701BF68D05004A7756 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPathRenderer.h; sourceTree = "<group>"; };
 		6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPathRenderer.m; sourceTree = "<group>"; };
-		6B9B79781BF68D6B004A7756 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		6B9B79791BF68D6B004A7756 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapFullCoverageOverlay.h; sourceTree = "<group>"; };
 		6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapFullCoverageOverlay.m; sourceTree = "<group>"; };
 		6B9B797C1BF68D6B004A7756 /* MKMapColorOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapColorOverlayRenderer.h; sourceTree = "<group>"; };
 		6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapColorOverlayRenderer.m; sourceTree = "<group>"; };
 		6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYCMapViewController.h; sourceTree = "<group>"; };
 		6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYCMapViewController.m; sourceTree = "<group>"; };
-		6B9B79801BF68D6B004A7756 /* OtherUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileViewController.h; sourceTree = "<group>"; };
-		6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileViewController.m; sourceTree = "<group>"; };
-		6B9B79821BF68D6B004A7756 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		6B9B79831BF68D6B004A7756 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		6B9B798E1BF68DBB004A7756 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -77,11 +68,11 @@
 		6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		6B9B799C1BF68F66004A7756 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6B9B799D1BF68F66004A7756 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		6BB08B941C0111C20098C805 /* UserProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileView.h; sourceTree = "<group>"; };
+		6BB08B951C0111C20098C805 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileView.m; sourceTree = "<group>"; };
 		B774AB6CAB0AF8AD8B747DEF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F721F9F31BF7ED65007684EA /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressBar.h; sourceTree = "<group>"; };
 		F721F9F41BF7ED65007684EA /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBar.m; sourceTree = "<group>"; };
-		F721F9F61BF7F26E007684EA /* UserProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewCell.h; sourceTree = "<group>"; };
-		F721F9F71BF7F26E007684EA /* UserProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileTableViewCell.m; sourceTree = "<group>"; };
 		F7DB25FEF09FD3D81CB565DF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,17 +137,11 @@
 				6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */,
 				6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */,
 				6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */,
-				6B9B79781BF68D6B004A7756 /* LoginViewController.h */,
-				6B9B79791BF68D6B004A7756 /* LoginViewController.m */,
-				6B9B79821BF68D6B004A7756 /* SignUpViewController.h */,
-				6B9B79831BF68D6B004A7756 /* SignUpViewController.m */,
-				6B9B79801BF68D6B004A7756 /* OtherUserProfileViewController.h */,
-				6B9B79811BF68D6B004A7756 /* OtherUserProfileViewController.m */,
 				6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */,
 				6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */,
-				F721F9F61BF7F26E007684EA /* UserProfileTableViewCell.h */,
-				F721F9F71BF7F26E007684EA /* UserProfileTableViewCell.m */,
-				001961C41BF7A33C00E08B91 /* UserProfileTableViewCell.xib */,
+				6BB08B941C0111C20098C805 /* UserProfileView.h */,
+				6BB08B951C0111C20098C805 /* UserProfileView.m */,
+				001961C41BF7A33C00E08B91 /* UserProfileView.xib */,
 				6B9B79651BF68D05004A7756 /* Main.storyboard */,
 				6B9B796B1BF68D05004A7756 /* Assets.xcassets */,
 				6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */,
@@ -258,7 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				001961C51BF7A33C00E08B91 /* UserProfileTableViewCell.xib in Resources */,
+				001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */,
 				6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */,
 				6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */,
 				6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */,
@@ -324,21 +309,18 @@
 				6B9B79A11BF68F66004A7756 /* Location.m in Sources */,
 				6B9B799E1BF68F66004A7756 /* Path+CoreDataProperties.m in Sources */,
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
-				F721F9F81BF7F26E007684EA /* UserProfileTableViewCell.m in Sources */,
 				6B9B79A31BF68F66004A7756 /* User.m in Sources */,
 				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
-				6B9B798B1BF68D6B004A7756 /* OtherUserProfileViewController.m in Sources */,
 				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
 				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
-				6B9B798C1BF68D6B004A7756 /* SignUpViewController.m in Sources */,
 				6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */,
 				6B9B79A01BF68F66004A7756 /* Location+CoreDataProperties.m in Sources */,
 				F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */,
 				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */,
-				6B9B79871BF68D6B004A7756 /* LoginViewController.m in Sources */,
+				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
