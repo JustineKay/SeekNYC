@@ -54,7 +54,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newBackButton" translatesAutoresizingMaskIntoConstraints="NO" id="4hH-pH-fwE" userLabel="backButtonImageView">
-                            <rect key="frame" x="20" y="30" width="43" height="41"/>
+                            <rect key="frame" x="20" y="539" width="43" height="41"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="4hH-pH-fwE" secondAttribute="height" multiplier="43:41" id="1V3-Nu-AKR"/>
@@ -67,12 +67,22 @@
                                 </mask>
                             </variation>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Kg-JS-ae7">
+                            <rect key="frame" x="20" y="539" width="43" height="41"/>
+                            <animations/>
+                        </button>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="IAa-LE-pHp" firstAttribute="centerX" secondItem="BLZ-dn-JUP" secondAttribute="centerX" id="1ig-WS-lpn"/>
+                        <constraint firstItem="2Kg-JS-ae7" firstAttribute="height" secondItem="4hH-pH-fwE" secondAttribute="height" id="5NL-DX-dRq"/>
+                        <constraint firstAttribute="bottom" secondItem="4hH-pH-fwE" secondAttribute="bottom" constant="20" id="5dg-JW-JfZ"/>
                         <constraint firstItem="IAa-LE-pHp" firstAttribute="centerY" secondItem="BLZ-dn-JUP" secondAttribute="centerY" id="Hxk-Mi-JUF"/>
+                        <constraint firstItem="2Kg-JS-ae7" firstAttribute="width" secondItem="4hH-pH-fwE" secondAttribute="width" id="KYw-Wq-E9e"/>
+                        <constraint firstItem="2Kg-JS-ae7" firstAttribute="centerY" secondItem="4hH-pH-fwE" secondAttribute="centerY" id="S8v-2e-lrm"/>
+                        <constraint firstItem="2Kg-JS-ae7" firstAttribute="centerX" secondItem="4hH-pH-fwE" secondAttribute="centerX" id="She-5j-dEs"/>
+                        <constraint firstItem="4hH-pH-fwE" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" constant="20" id="f3F-hQ-VrJ"/>
                         <constraint firstItem="IAa-LE-pHp" firstAttribute="centerX" secondItem="BLZ-dn-JUP" secondAttribute="centerX" id="gQf-Cc-CjH"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" id="iJp-gG-TSQ"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" constant="20" id="oin-RM-59u"/>
@@ -82,7 +92,9 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="iJp-gG-TSQ"/>
+                            <exclude reference="oin-RM-59u"/>
                             <exclude reference="rfn-Sk-1x0"/>
+                            <exclude reference="vva-9G-oAR"/>
                         </mask>
                     </variation>
                 </view>
@@ -104,6 +116,7 @@
                 <constraint firstItem="BLZ-dn-JUP" firstAttribute="leading" secondItem="hqI-sq-Vzm" secondAttribute="leading" id="qeE-iL-Q5Z"/>
             </constraints>
             <connections>
+                <outlet property="backButton" destination="2Kg-JS-ae7" id="ZF8-aA-UpS"/>
                 <outlet property="nycCircleProgressBar" destination="IAa-LE-pHp" id="Wqk-Sz-fRG"/>
             </connections>
             <point key="canvasLocation" x="1313" y="284"/>

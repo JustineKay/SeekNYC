@@ -15,21 +15,24 @@
 
 @implementation UserProfileViewController
 
+- (void)loadView {
+    self.view = [[[NSBundle mainBundle] loadNibNamed:@"UserProfileView" owner:self options:nil] firstObject];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
-    UserProfileView *profileView = [[[NSBundle mainBundle] loadNibNamed:@"UserProfileView" owner:self options:nil] firstObject];
-    profileView.frame = self.view.bounds;
-    [self.view addSubview:profileView];
+    UserProfileView *view = (UserProfileView *)self.view;
+    [view.backButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     
-    NSLog(@"Is it passing %2f?", profileView.percentage);
-    
-    
-    profileView.percentage = self.progress;
-    
-    //self.view.frame.size.height
+    NSLog(@"Is it passing %2f?", view.percentage);
+ 
+    view.percentage = self.progress;
 }
 
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

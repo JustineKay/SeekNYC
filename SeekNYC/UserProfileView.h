@@ -12,8 +12,9 @@
 #import "NYCMapViewController.h"
 
 @interface UserProfileView : UIView
-@property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
 
+@property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (nonatomic) CGFloat percentage;
 
 @end
