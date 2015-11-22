@@ -8,6 +8,8 @@
 //SPAN: (latitudeDelta = 0.55000001339033844, longitudeDelta = 0.72560419568399936)
 //Center Coord of Region: (latitude = 40.712699999999984, longitude = -74.005899999999997)
 
+#define TintKey @"TintKey"
+
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "NYCMapViewController.h"
@@ -525,9 +527,20 @@ NSFetchedResultsControllerDelegate
     } else if([overlay isMemberOfClass:[MKMapFullCoverageOverlay class]]) {
         
         MKMapColorOverlayRenderer *fullOverlayView = [[MKMapColorOverlayRenderer alloc] initWithOverlay:overlay];
-        
         fullOverlayView.overlayAlpha = 0.90;
-//        fullOverlayView.overlayColor
+
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:TintKey]) {
+            
+            NSData *colourData = [[NSUserDefaults standardUserDefaults] objectForKey:TintKey];
+            
+            UIColor *userColour = [NSKeyedUnarchiver unarchiveObjectWithData:colourData];
+            
+            fullOverlayView.overlayColor = userColour;
+            
+            fullOverlayView.overlayAlpha = 0.75;
+            
+
+        }
         
         return fullOverlayView;
     }
@@ -615,11 +628,26 @@ NSFetchedResultsControllerDelegate
                                                             style:UIAlertActionStyleCancel
                                                           handler:^(NYAlertAction *action) {
                                                               
+                                                            //set the nsUserDefaults for the background view
+                                                            UIColor *userColourChoice = alertViewController.alertViewBackgroundColor;
+                                                              
+                                                              
+                                                              NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:userColourChoice];
+                                                              
                                                              
+                                                              [[NSUserDefaults standardUserDefaults] setObject:colourData forKey:TintKey];
                                                               
-                                                              //set the nsUserDefaults for the background view
                                                               
-                                                              [NSUserDefaults standardUserDefaults]
+                                                              NSArray *overlays = self.mapView.overlays;
+                                                              [self.mapView removeOverlays:overlays];
+                                                              
+                                                              
+                                                              MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
+
+                                                              [self.mapView addOverlay: fullOverlay];
+                                                              
+                                                              [self loadUserPaths];
+
                                                               
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }]];
