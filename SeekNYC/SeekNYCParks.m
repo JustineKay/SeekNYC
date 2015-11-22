@@ -17,11 +17,10 @@
         
         NSDictionary *venueType = [venue[@"items"]objectAtIndex:0];
         self.name = venueType[@"venue"][@"name"];
-        NSDictionary *venueAddress = [venueType ]
-        self.address = [venueType objectForKey:@"location"];
-
+        NSDictionary *venueAddress = venueType[@"venue"][@"location"];
+        self.address = [[venueAddress objectForKey:@"formattedAddress"] componentsJoinedByString:@" "];
         
-
+        
         
         NSLog(@"%@",venueType);
         NSLog(@"%@",self.name);
