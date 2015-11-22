@@ -35,6 +35,7 @@
       //  NSLog(@"%@", json);
         
         NSArray *venues = json[@"response"][@"groups"];
+       
         
      //   NSLog(@"VENUES HERE %@", venues);
         
@@ -92,10 +93,13 @@
     
     SuggestedVenuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placesidentifier" forIndexPath:indexPath];
     
-   SeekNYCParks *parks = self.parkResults[indexPath.row];
-
+    SeekNYCParks *parks = self.parkResults[indexPath.row];
+    
+    cell.placeAddress.text = [NSString stringWithFormat:@"%@", parks.address];
+    NSLog(@"%@", cell.placeAddress.text);
+    
     cell.placeName.text = [NSString stringWithFormat:@"%@", parks.name];
-    cell.address.text = [NSString stringWithFormat:@"%@", parks.address];
+    
     cell.placeDetail.text = [NSString stringWithFormat:@"%@", parks.detail];
     
     return cell;
