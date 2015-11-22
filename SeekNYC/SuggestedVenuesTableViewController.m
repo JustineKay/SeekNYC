@@ -89,6 +89,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     SuggestedVenuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placesidentifier" forIndexPath:indexPath];
     
    SeekNYCParks *parks = self.parkResults[indexPath.row];
@@ -96,7 +97,6 @@
     cell.placeName.text = [NSString stringWithFormat:@"%@", parks.name];
     cell.address.text = [NSString stringWithFormat:@"%@", parks.address];
     cell.placeDetail.text = [NSString stringWithFormat:@"%@", parks.detail];
-    
     
     return cell;
 }
