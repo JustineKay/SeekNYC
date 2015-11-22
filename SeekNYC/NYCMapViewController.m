@@ -503,6 +503,7 @@ NSFetchedResultsControllerDelegate
         MKMapColorOverlayRenderer *fullOverlayView = [[MKMapColorOverlayRenderer alloc] initWithOverlay:overlay];
         
         fullOverlayView.overlayAlpha = 0.90;
+//        fullOverlayView.overlayColor
         
         return fullOverlayView;
     }
