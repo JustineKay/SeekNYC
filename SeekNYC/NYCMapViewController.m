@@ -19,8 +19,8 @@
 #import "MKMapColorOverlayRenderer.h"
 #import "MKMapFullCoverageOverlay.h"
 #import "AppDelegate.h"
-#import "UserProfileTableViewCell.h"
 #import "UserProfileViewController.h"
+#import "NYAlertViewController.h"
 
 static bool const isMetric = NO;
 static float const metersInKM = 1000;
@@ -209,6 +209,11 @@ NSFetchedResultsControllerDelegate
         
         if (isAccurate && isRecent) {
             
+            if (self.locations == nil) {
+                
+                self.locations = [NSMutableArray array];
+            }
+            
             [self.locations addObject:newLocation];
             
             BOOL matchingTileFound = NO;
@@ -228,19 +233,24 @@ NSFetchedResultsControllerDelegate
             if (matchingTileFound == NO) {
                 
                 [self.visitedTiles addObject:visitedTile];
+                
             }
             
-        }
-        
-        if (self.locations.count > 1) {
+            if (self.locations.count > 1) {
+                
+                NSInteger sourceIndex = self.locations.count - 1;
+                NSInteger destinationIndex = self.locations.count - 2;
+                
+                NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
+                
+                //drop polyline ***************************
+                [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
+            }
+
             
-            NSInteger sourceIndex = self.locations.count - 1;
-            NSInteger destinationIndex = self.locations.count - 2;
+        }else {
             
-            NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
-            
-            //drop polyline ***************************
-            [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
+            self.locations = nil;
         }
         
     }
@@ -271,6 +281,8 @@ NSFetchedResultsControllerDelegate
 
 - (IBAction)menuButtonTapped:(UIButton *)sender {
     
+    
+ 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     NSArray *images = @[
@@ -292,6 +304,15 @@ NSFetchedResultsControllerDelegate
     [callout show];
 
     
+
+    //***TINT***
+    //AlertVC for custom tint
+    //[self setCustomTint];
+    
+    //***SEGUE TO PROFILE***
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    
+
 //    UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
 //    
 //    userProfileVC.progress = self.percentageTravelled;
@@ -317,6 +338,8 @@ NSFetchedResultsControllerDelegate
     else {
         [self.optionIndices removeIndex:index];
     }
+
+
 }
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
@@ -344,11 +367,6 @@ NSFetchedResultsControllerDelegate
     self.stopTrackingPathButton.hidden = NO;
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    
-    if (self.locations == nil) {
-        
-        self.locations = [NSMutableArray array];
-    }
     
     [self startLocationUpdates];
     
@@ -471,6 +489,80 @@ NSFetchedResultsControllerDelegate
     }
     
     return [MKPolyline polylineWithCoordinates:coords count:locations.count];
+}
+
+
+#pragma mark - AlertViewController
+
+-(void)setCustomTint {
+    
+    NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alertViewController.title = NSLocalizedString(@"Tint", nil);
+    alertViewController.message = NSLocalizedString(@"Pick a color, Set the vibe.", nil);
+    
+    // Customize appearance as desired
+    
+    alertViewController.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    
+    alertViewController.buttonCornerRadius = 20.0f;
+    alertViewController.view.tintColor = self.view.tintColor;
+    
+    alertViewController.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
+    alertViewController.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
+    alertViewController.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:alertViewController.buttonTitleFont.pointSize];
+    alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:alertViewController.cancelButtonTitleFont.pointSize];
+    
+    alertViewController.swipeDismissalGestureEnabled = YES;
+    alertViewController.backgroundTapDismissalGestureEnabled = YES;
+    
+    // Add alert actions
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Hot Pink"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(NYAlertAction *action) {
+                                                              
+                                                              alertViewController.alertViewBackgroundColor = [UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:128.0/255.0 alpha:1];
+                                                              
+                                                          }]];
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Neon Green"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(NYAlertAction *action) {
+                                                              
+                                                              alertViewController.alertViewBackgroundColor = [UIColor colorWithRed:57.0/255.0 green:255.0/255.0 blue:20.0/255.0 alpha:1];
+                                                              
+                                                          }]];
+
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Florescent Yellow"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(NYAlertAction *action) {
+                                                              
+                                                              alertViewController.alertViewBackgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:21.0/255.0 alpha:1];
+                                                              
+                                                          }]];
+
+    
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Set Tint", nil)
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:^(NYAlertAction *action) {
+                                                              
+                                                              //set the nsUserDefaults for the background view
+                                                              
+                                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                                          }]];
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:^(NYAlertAction *action) {
+                                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                                          }]];
+    
+    // Present the alert view controller
+    [self presentViewController:alertViewController animated:YES completion:nil];
 }
 
 

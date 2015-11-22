@@ -1,0 +1,6 @@
+framework module RNFrostedSidebar {
+  umbrella header "RNFrostedSidebar-umbrella.h"
+
+  export *
+  module * { export * }
+}
