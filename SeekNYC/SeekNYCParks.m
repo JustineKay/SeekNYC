@@ -17,7 +17,7 @@
         
         NSDictionary *venueType = [venue[@"items"]objectAtIndex:0];
         self.name = venueType[@"venue"][@"name"];
-        NSDictionary *venueAddress = [venueType ]
+        NSDictionary *venueAddress = venueType;
         self.address = [venueType objectForKey:@"location"];
 
         
