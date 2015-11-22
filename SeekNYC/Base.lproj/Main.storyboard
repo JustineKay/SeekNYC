@@ -242,7 +242,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <outlet property="address" destination="psB-Bk-d4f" id="JHW-7p-cNa"/>
+                                    <outlet property="placeAddress" destination="h1B-hD-cT8" id="cVH-PA-iHi"/>
                                     <outlet property="placeDetail" destination="psB-Bk-d4f" id="ZBQ-0V-VYo"/>
                                     <outlet property="placeName" destination="OMW-NI-eCO" id="z85-Ag-aTn"/>
                                 </connections>
