@@ -512,7 +512,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.feliciaweathers.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -530,7 +530,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.feliciaweathers.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

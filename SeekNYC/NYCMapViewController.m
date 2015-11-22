@@ -545,6 +545,7 @@ NSFetchedResultsControllerDelegate
                                                               
                                                               alertViewController.alertViewBackgroundColor = [UIColor hotPinkColor];
                                                               
+
                                                           }]];
     
     [alertViewController addAction:[NYAlertAction actionWithTitle:@"Neon Green"
@@ -578,7 +579,11 @@ NSFetchedResultsControllerDelegate
                                                             style:UIAlertActionStyleCancel
                                                           handler:^(NYAlertAction *action) {
                                                               
+                                                             
+                                                              
                                                               //set the nsUserDefaults for the background view
+                                                              
+                                                              [NSUserDefaults standardUserDefaults]
                                                               
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }]];
