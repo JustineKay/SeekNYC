@@ -24,6 +24,7 @@
 #import "RNFrostedSidebar.h"
 #import "SuggestedVenuesTableViewController.h"
 #import "UIColor+Color.h"
+#import "DiamondAnnotationView.h"
 
 static bool const isMetric = NO;
 static float const metersInKM = 1000;
@@ -193,9 +194,44 @@ NSFetchedResultsControllerDelegate
 
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        return [[MKAnnotationView alloc] init];
+    
+//    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+//        return [[MKAnnotationView alloc] init];
+//    }
+    
+    if([annotation isKindOfClass:[MKUserLocation class]]) {
+        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        if(!view)
+            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        view.bounds = CGRectMake(0, 0, 45, 45);
+        //view.backgroundColor = [UIColor purpleColor];
+        
+        //
+        //Animate it like any UIView!
+        //
+        
+        CABasicAnimation *theAnimation;
+        
+        //within the animation we will adjust the "opacity"
+        //value of the layer
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        //animation lasts 1 second
+        theAnimation.duration=1.0;
+        //and it repeats forever
+        theAnimation.repeatCount= HUGE_VALF;
+        //we want a reverse animation
+        theAnimation.autoreverses=YES;
+        //justify the opacity as you like (1=fully visible, 0=unvisible)
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+        
+        //Assign the animation to your UIImage layer and the
+        //animation will start immediately
+        [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        
+        return view;
     }
+    
     return nil;
 }
 
