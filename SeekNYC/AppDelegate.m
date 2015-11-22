@@ -6,10 +6,7 @@
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 
-//COLORS
-//HotPink: hex# FF0080, rgb(255,0,128)
-//NeonGreen: hex# 39FF14, rgb(57,255,20)
-//FlorescentYellow: hex# F3F315, rgb(243,243,21)
+
 
 #import "AppDelegate.h"
 
