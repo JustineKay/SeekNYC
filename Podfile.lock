@@ -1,13 +1,13 @@
 PODS:
   - CircleProgressBar (0.21)
-  - JVMenuPopover (1.0)
+  - RNFrostedSidebar (0.2.0)
 
 DEPENDENCIES:
   - CircleProgressBar (~> 0.21)
-  - JVMenuPopover (~> 1.0)
+  - RNFrostedSidebar (~> 0.2)
 
 SPEC CHECKSUMS:
   CircleProgressBar: 4ce12ddcdc5673cc9f0fb83f6ec7b2a53ecb28df
-  JVMenuPopover: f03964d7c7f2e90972f828cb991c7b99f0de58ba
+  RNFrostedSidebar: 9491d8627e5e99b92334d36def432c0faf7ebae4
 
 COCOAPODS: 0.38.2

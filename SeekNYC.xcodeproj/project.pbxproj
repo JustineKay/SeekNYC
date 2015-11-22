@@ -8,7 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001961C41BF7A33C00E08B91 /* UserProfileView.xib */; };
+		003EA1871C021BA200090E13 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003EA1861C021BA200090E13 /* QuartzCore.framework */; };
+		003EA1891C021BB200090E13 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003EA1881C021BB200090E13 /* Accelerate.framework */; };
+		003EA18C1C02204B00090E13 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = 003EA18B1C02204B00090E13 /* RNFrostedSidebar.m */; };
 		6B28AA2D1C01310C001CFF08 /* Viafont.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B28AA2C1C01310C001CFF08 /* Viafont.otf */; };
+		6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */; };
+		6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -39,8 +44,16 @@
 
 /* Begin PBXFileReference section */
 		001961C41BF7A33C00E08B91 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
+		003EA1861C021BA200090E13 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		003EA1881C021BB200090E13 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		003EA18A1C02204B00090E13 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNFrostedSidebar.h; path = ../../../../../../../var/folders/v9/13clzsfs1nld5gpyq9f9shtr0000gp/T/CocoaPods/Try/RNFrostedSidebar/RNFrostedSidebar.h; sourceTree = "<group>"; };
+		003EA18B1C02204B00090E13 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNFrostedSidebar.m; path = ../../../../../../../var/folders/v9/13clzsfs1nld5gpyq9f9shtr0000gp/T/CocoaPods/Try/RNFrostedSidebar/RNFrostedSidebar.m; sourceTree = "<group>"; };
 		244FD1D516831678CBE69EC9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6B28AA2C1C01310C001CFF08 /* Viafont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Viafont.otf; sourceTree = "<group>"; };
+		6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertView.h; sourceTree = "<group>"; };
+		6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYAlertView.m; sourceTree = "<group>"; };
+		6B28AA301C0220C1001CFF08 /* NYAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertViewController.h; sourceTree = "<group>"; };
+		6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYAlertViewController.m; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -95,6 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				003EA1891C021BB200090E13 /* Accelerate.framework in Frameworks */,
+				003EA1871C021BA200090E13 /* QuartzCore.framework in Frameworks */,
 				6B9B79911BF68DC5004A7756 /* CoreLocation.framework in Frameworks */,
 				6B9B798F1BF68DBB004A7756 /* MapKit.framework in Frameworks */,
 				6D2E837437078CAA4ED253D7 /* Pods.framework in Frameworks */,
@@ -159,6 +174,10 @@
 				6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */,
 				6B9B799C1BF68F66004A7756 /* User.h */,
 				6B9B799D1BF68F66004A7756 /* User.m */,
+				6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */,
+				6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */,
+				6B28AA301C0220C1001CFF08 /* NYAlertViewController.h */,
+				6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */,
 				6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */,
 				6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */,
 				6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */,
@@ -167,6 +186,8 @@
 				6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */,
 				6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */,
 				6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */,
+				003EA18A1C02204B00090E13 /* RNFrostedSidebar.h */,
+				003EA18B1C02204B00090E13 /* RNFrostedSidebar.m */,
 				6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */,
 				6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */,
 				6BB08B941C0111C20098C805 /* UserProfileView.h */,
@@ -203,6 +224,8 @@
 		E901EDBA99C3032109C46281 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				003EA1881C021BB200090E13 /* Accelerate.framework */,
+				003EA1861C021BA200090E13 /* QuartzCore.framework */,
 				F7DB25FEF09FD3D81CB565DF /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -343,6 +366,7 @@
 				F79D2E0A1C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m in Sources */,
 				F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */,
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
+				6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */,
 				6B9B79A31BF68F66004A7756 /* User.m in Sources */,
 				F79D2E0D1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m in Sources */,
 				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
@@ -352,9 +376,11 @@
 				6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */,
 				6B9B79A01BF68F66004A7756 /* Location+CoreDataProperties.m in Sources */,
 				F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */,
+				003EA18C1C02204B00090E13 /* RNFrostedSidebar.m in Sources */,
 				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */,
+				6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */,
 				F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */,
 				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,
 			);
