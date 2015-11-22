@@ -23,6 +23,7 @@
 #import "NYAlertViewController.h"
 #import "RNFrostedSidebar.h"
 #import "SuggestedVenuesTableViewController.h"
+#import "UIColor+Color.h"
 
 static bool const isMetric = NO;
 static float const metersInKM = 1000;
@@ -284,19 +285,16 @@ NSFetchedResultsControllerDelegate
 - (IBAction)menuButtonTapped:(UIButton *)sender {
     
     
- 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
     NSArray *images = @[
-                        [UIImage imageNamed:@"progress"],
-                        [UIImage imageNamed:@"seek"],
-                        [UIImage imageNamed:@"theme"]
+                        [UIImage imageNamed:@"ProgressButtonImage"],
+                        [UIImage imageNamed:@"SeekButtonImage"],
+                        [UIImage imageNamed:@"TintButtonImage"]
                         ];
     
     NSArray *colors = @[
-                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1],
-                        [UIColor colorWithRed:255/255.f green:137/255.f blue:167/255.f alpha:1],
-                        [UIColor colorWithRed:255/255.f green:137/255.f blue:167/255.f alpha:1]
+                        [UIColor hotPinkColor],
+                        [UIColor neonGreenColor],
+                        [UIColor florescentYellow]
                         ];
     
     RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images selectedIndices:self.optionIndices borderColors:colors];
@@ -362,16 +360,6 @@ NSFetchedResultsControllerDelegate
     }
 }
 
-//- (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
-//    if (index == 1) {
-//        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-//            if (finished) {
-//                UIViewController *secondVC = [[UIViewController alloc] init];
-//                [self.navigationController pushViewController:secondVC animated:YES];
-//            }
-//        }];
-//    }
-//}
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
     
@@ -554,7 +542,7 @@ NSFetchedResultsControllerDelegate
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(NYAlertAction *action) {
                                                               
-                                                              alertViewController.alertViewBackgroundColor = [UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:128.0/255.0 alpha:1];
+                                                              alertViewController.alertViewBackgroundColor = [UIColor hotPinkColor];
                                                               
                                                           }]];
     
@@ -562,7 +550,7 @@ NSFetchedResultsControllerDelegate
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(NYAlertAction *action) {
                                                               
-                                                              alertViewController.alertViewBackgroundColor = [UIColor colorWithRed:57.0/255.0 green:255.0/255.0 blue:20.0/255.0 alpha:1];
+                                                              alertViewController.alertViewBackgroundColor = [UIColor neonGreenColor];
                                                               
                                                           }]];
 
@@ -571,7 +559,15 @@ NSFetchedResultsControllerDelegate
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(NYAlertAction *action) {
                                                               
-                                                              alertViewController.alertViewBackgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:21.0/255.0 alpha:1];
+                                                              alertViewController.alertViewBackgroundColor = [UIColor florescentYellow];
+                                                              
+                                                          }]];
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Pavement Gray"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(NYAlertAction *action) {
+                                                              
+                                                              alertViewController.alertViewBackgroundColor = [UIColor grayColor];
                                                               
                                                           }]];
 
