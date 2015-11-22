@@ -60,6 +60,9 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSTimer *timer;
 
+
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+
 @end
 
 
@@ -80,6 +83,8 @@ NSFetchedResultsControllerDelegate
     
     self.trackPathButton.hidden = NO;
     self.stopTrackingPathButton.hidden = YES;
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -268,13 +273,48 @@ NSFetchedResultsControllerDelegate
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
+    NSArray *images = @[
+                        [UIImage imageNamed:@"theme"],
+                        [UIImage imageNamed:@"progress"]
+                        ];
     
-    userProfileVC.progress = self.percentageTravelled;
+    NSArray *colors = @[
+                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1],
+                        [UIColor colorWithRed:255/255.f green:137/255.f blue:167/255.f alpha:1]
+                        ];
     
-    [self presentViewController:userProfileVC animated:YES completion:nil];
+    RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images selectedIndices:self.optionIndices borderColors:colors];
     
-    NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
+    callout.delegate = self;
+
+    [callout show];
+
+    
+//    UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
+//    
+//    userProfileVC.progress = self.percentageTravelled;
+//    
+//    [self presentViewController:userProfileVC animated:YES completion:nil];
+//    
+//    NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
+}
+
+#pragma mark - RNFrostedSidebarDelegate
+
+- (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
+    NSLog(@"Tapped item at index %i",index);
+    if (index == 3) {
+        [sidebar dismiss];
+    }
+}
+
+- (void)sidebar:(RNFrostedSidebar *)sidebar didEnable:(BOOL)itemEnabled itemAtIndex:(NSUInteger)index {
+    if (itemEnabled) {
+        [self.optionIndices addIndex:index];
+    }
+    else {
+        [self.optionIndices removeIndex:index];
+    }
 }
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {

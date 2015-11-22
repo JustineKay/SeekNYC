@@ -7,227 +7,157 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A790510131B770878118A34346A2AF2 /* UIViewController+JVMenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D40F26ECCC909757DACA836324E3D15E /* UIViewController+JVMenuCategory.m */; };
-		0D8C9BAF0A61EA2A6466210D9C754B6C /* UIView+JVMenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D2618790366CAC99573294922F323F7D /* UIView+JVMenuCategory.m */; };
-		1364BB7FDCFC038F0AEDEB0EB3157043 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E67E038C9239B604FFE89B2F501C11 /* QuartzCore.framework */; };
-		16D20D3E8C19D84E91A8D2A36D50E49F /* CircleProgressBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 09DADBDEC721EECE32E28FAFFDE0C6C3 /* CircleProgressBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		28E30C6965B904462908B07FF6DCDCED /* JVMenuPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 608533F49BDBD2A4BB02F98BB5EECF49 /* JVMenuPopoverView.m */; };
-		36A039BE8AC6A91B13A95958C042092F /* JVMenuNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 91999B0553FD575BE0578858D334A89E /* JVMenuNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3900CFACD9A042221E6C708AE45940FB /* UIColor+JVMenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EDBD0DDDA63460299072056865BD89E /* UIColor+JVMenuCategory.m */; };
-		41BB47C70D322C5148CC2B75E205F970 /* JVMenuItems.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D842E743C7CB25B72F0B71DE4F164E /* JVMenuItems.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49AE8876D00E3A5F43A684BA2B9BC12D /* JVMenuPopoverView.h in Headers */ = {isa = PBXBuildFile; fileRef = 55790F0B0C8C487D7885C245A1FB3035 /* JVMenuPopoverView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4C42D9E0B40A0E4C8070F9745C712338 /* UIVisualEffectView+JVMenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6F47638E5A8D017B86FF78163C897E /* UIVisualEffectView+JVMenuCategory.m */; };
-		4E1CBB5F70A408374C5B2E80D7F77748 /* UIImage+JVMenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF16147B7069F9E800706E077AB97A3 /* UIImage+JVMenuCategory.m */; };
-		55F30E6CB6BDF7A42FCA608A620E8366 /* JVMenuPopover-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB540EF708FA4437929324101CA2F6 /* JVMenuPopover-dummy.m */; };
-		580B8FA102FB9DE17FB38FEC1F6D7BBB /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A8B17FBC1F29F4FEEBDED4978CBBC3 /* CircleProgressBar.m */; };
-		5F2CF670C155C99B47086573B3C429F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCBD376CCAEB0D73AD94EE4E7314BDA /* Foundation.framework */; };
-		6A9C21FABC1C9EA19C81959234D49BB6 /* JVMenuPopover.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2E020442E473CB09889C619701CADC9 /* JVMenuPopover.bundle */; };
-		6CBC4EABD5AEB255DEF0F3F26C848520 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E649EFD8E5BFB688963A7945A2A35F /* Pods-dummy.m */; };
-		6D77F7E95FA6DB922EF41B63DF529CDB /* UIImage+JVMenuCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 81D27925BB821D75CFA2D2F8A42BE157 /* UIImage+JVMenuCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		70149F2D9FC48B5B69D084D990EBD68B /* UIView+JVMenuCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 3690A742E77481C8EBE0545A9D9DD480 /* UIView+JVMenuCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		713DC33B2A17A656F03D8D6281EC6C38 /* JVMenuPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F9C0BAD1F868B77C7ACC0589B815DC3 /* JVMenuPopover.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C56CF055B21CE6D0EB7F44026E81818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCBD376CCAEB0D73AD94EE4E7314BDA /* Foundation.framework */; };
-		8783246D1D94ECD623C6E4CFF4E442A4 /* UIViewController+JVMenuCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F6538F93C74EF76125108EE85902F7F /* UIViewController+JVMenuCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9BAF5FD0756FD5F7F1D27B868ABB2B92 /* CircleProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 33B6E0F8B34DEDA91AD1B1B0C134D9A4 /* CircleProgressBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A0F8BE9AD12AAD499A066882B4F80442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCBD376CCAEB0D73AD94EE4E7314BDA /* Foundation.framework */; };
-		B499A2BB5107385A503A7C133D89D90B /* JVMenuPopover-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF5824530D8EB0AD4ACED5021C30FF9 /* JVMenuPopover-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C58E46F77846C081BEBE4EE5B743E1C1 /* UIColor+JVMenuCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BFC6162206CEF4C436092F9D51FE5E3 /* UIColor+JVMenuCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D4EB34862790608B2B7CE92459BAE955 /* JVMenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC716DC696295DE48BCBE74F9DB51A /* JVMenuNavigationController.m */; };
-		D7ED939889F3D35BD21B9858F6BD2A1A /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B5EDE03725C6ECF2BB6F117AB7D85AA /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E0724A62DD4C82C167DCD7AC717A0908 /* JVMenuItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 819325C549B4E03D1E7B4D7CEDBA58C1 /* JVMenuItems.m */; };
-		E5973B76E022A47953C1E5676C7E7962 /* UIVisualEffectView+JVMenuCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EFCA918EE81E211DE8FDD34DC8EC8C0 /* UIVisualEffectView+JVMenuCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9B2CF5351B10F259DED564CD334EE32 /* CircleProgressBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A762BCEB8A12BE86E62F489CA092E07 /* CircleProgressBar-dummy.m */; };
-		F294C15BCD110702B3484E90ACBAAEE1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC963DA4565EE3C7E5A0A77D53B14A7 /* UIKit.framework */; };
+		007DC5CF843B68956C1D46CCB01A9F8F /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 517DC008615EDF725E4C2ACDA7C5E497 /* CircleProgressBar.m */; };
+		1D199B8142CCE6BF2D44DA34B8169FC6 /* CircleProgressBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0E68528C1B1618431FAF5620F5997C /* CircleProgressBar-dummy.m */; };
+		2FB0FB07A815249218C4C3941890FEB9 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C4FB259C039B6DB1F24764AFDA7ED /* RNFrostedSidebar.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3AD61C7F09D7C3415B2F2571ECF91CA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54CEBFE6696441C901B31E5C4F67593 /* QuartzCore.framework */; };
+		3E223EB7793BD52B4CBE4F2FF1181A7A /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 26BEB57F5538C7706C43CEA031FC0FF2 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4131C196A2C8AEE67418443191B4EA29 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B763E5B03CE0280E6DFBAE610B1B350D /* Accelerate.framework */; };
+		48A7B6FC4DA8CF6799828C1671B1EB6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B511D64018B03C9A03513077B7AE5858 /* Foundation.framework */; };
+		4A231221CB2BFA1A299E87BEBDCCCBD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B511D64018B03C9A03513077B7AE5858 /* Foundation.framework */; };
+		5C448A9BCB6B783F91F915CA1D6919FF /* CircleProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E5EC3CB9482C92645FA1A1985AF4C55 /* CircleProgressBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		825C87C1D8173D5378C0126B4210E7D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EE3004198EC8FA81770036AEEACDD8 /* UIKit.framework */; };
+		9110AE9D43FD9C5D0EA3313EB77E4A20 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54CEBFE6696441C901B31E5C4F67593 /* QuartzCore.framework */; };
+		A2D9BB580BCE88EDA836EB1C5BE9388E /* RNFrostedSidebar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6708C4AD526C0E439B4E4DB4FE48B60 /* RNFrostedSidebar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C43BBBCF88EDA6DAF1CE073BFF461FB5 /* RNFrostedSidebar.h in Headers */ = {isa = PBXBuildFile; fileRef = 78FCAE61326B543E9913B9742826A63A /* RNFrostedSidebar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D82180F4AFDB1528154C3F8AF0594F08 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A9CB676B8922B3C63ED9116520EB3 /* Pods-dummy.m */; };
+		E1BCA8E7D925E6084F8F2A6BF8069D53 /* CircleProgressBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F8E8DFCECE2E72B053E8DDDE926C9518 /* CircleProgressBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E32708F8471C2BC3B6B88766B9A3838C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B511D64018B03C9A03513077B7AE5858 /* Foundation.framework */; };
+		ED65F69C85FD37F8798B629B4CF1230A /* RNFrostedSidebar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6713402544F93E4B503E7AB474535B /* RNFrostedSidebar-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		11A393033D33473C619CFC842832B8BB /* PBXContainerItemProxy */ = {
+		167993FB558E22CE7A19027C4B53F4EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F4960DFE2643BF9CCF1C118DC0FA8587;
+			remoteGlobalIDString = E20269321DD7CB1B07C4C7540C072E7F;
+			remoteInfo = RNFrostedSidebar;
+		};
+		1E43B9687D63D0324729C8F0E434E55D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4640F7BC7ED0052A0469529ACCF2455B;
 			remoteInfo = CircleProgressBar;
-		};
-		4E20E2B542F29D4E205D3C873339D919 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0F5240E34DE806A84BE78E1C93639030;
-			remoteInfo = "JVMenuPopover-JVMenuPopover";
-		};
-		6A631961FD87948503A338505AEDE26A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 094E8A4B2B5C0D5D76620631BAEC6BCC;
-			remoteInfo = JVMenuPopover;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09DADBDEC721EECE32E28FAFFDE0C6C3 /* CircleProgressBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircleProgressBar-umbrella.h"; sourceTree = "<group>"; };
-		1EF16147B7069F9E800706E077AB97A3 /* UIImage+JVMenuCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+JVMenuCategory.m"; path = "Source/Classes/JVMenuCategories/UIImage+JVMenuCategory.m"; sourceTree = "<group>"; };
-		2AFB387E1FD4B0C6F410A30591D77DF6 /* CircleProgressBar-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CircleProgressBar-Private.xcconfig"; sourceTree = "<group>"; };
-		3205798149053A11B965BCF7B4A292C4 /* JVMenuPopover-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JVMenuPopover-prefix.pch"; sourceTree = "<group>"; };
-		33B6E0F8B34DEDA91AD1B1B0C134D9A4 /* CircleProgressBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CircleProgressBar.h; path = CircleProgressBarDemo/CircleProgressBar/CircleProgressBar.h; sourceTree = "<group>"; };
-		357F3F27463B215444473B24FFC0AF14 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		3690A742E77481C8EBE0545A9D9DD480 /* UIView+JVMenuCategory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+JVMenuCategory.h"; path = "Source/Classes/JVMenuCategories/UIView+JVMenuCategory.h"; sourceTree = "<group>"; };
-		37149D33D4D69C44CCABCF02E13E3C85 /* CircleProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CircleProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		39E57C9553F2E3E2098C30BC42C918F0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		3F9C0BAD1F868B77C7ACC0589B815DC3 /* JVMenuPopover.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JVMenuPopover.h; path = Source/Classes/JVMenuPopover.h; sourceTree = "<group>"; };
-		492233D4E88BE0ACD28C4397F4A874E4 /* JVMenuPopover.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = JVMenuPopover.modulemap; sourceTree = "<group>"; };
-		545EB9BA40EF951E9A829470368CFD81 /* CircleProgressBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CircleProgressBar.modulemap; sourceTree = "<group>"; };
-		55790F0B0C8C487D7885C245A1FB3035 /* JVMenuPopoverView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JVMenuPopoverView.h; path = Source/Classes/JVMenuViews/JVMenuPopoverView.h; sourceTree = "<group>"; };
-		55D6284F378DB1896D2D651B89DB4169 /* JVMenuPopover.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JVMenuPopover.xcconfig; sourceTree = "<group>"; };
-		5EFCA918EE81E211DE8FDD34DC8EC8C0 /* UIVisualEffectView+JVMenuCategory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIVisualEffectView+JVMenuCategory.h"; path = "Source/Classes/JVMenuCategories/UIVisualEffectView+JVMenuCategory.h"; sourceTree = "<group>"; };
-		5FF5824530D8EB0AD4ACED5021C30FF9 /* JVMenuPopover-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JVMenuPopover-umbrella.h"; sourceTree = "<group>"; };
-		608533F49BDBD2A4BB02F98BB5EECF49 /* JVMenuPopoverView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JVMenuPopoverView.m; path = Source/Classes/JVMenuViews/JVMenuPopoverView.m; sourceTree = "<group>"; };
-		616AA8A093A19DF18C6271DC178D1963 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62CF6FB1492B2B5ECDA52764680EF9EE /* JVMenuPopover-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "JVMenuPopover-Private.xcconfig"; sourceTree = "<group>"; };
-		77D7EDE7E45B727098DF8FBE3471888F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05176A1212F27D3F9CB776CDA4DDE8D9 /* CircleProgressBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CircleProgressBar.modulemap; sourceTree = "<group>"; };
+		177411524A86655DE43C777EDE2B274A /* CircleProgressBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CircleProgressBar.xcconfig; sourceTree = "<group>"; };
+		18C6754D8378E4FA6FCF74EBB98D330C /* RNFrostedSidebar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RNFrostedSidebar.xcconfig; sourceTree = "<group>"; };
+		1F6713402544F93E4B503E7AB474535B /* RNFrostedSidebar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RNFrostedSidebar-dummy.m"; sourceTree = "<group>"; };
+		266502001F1995FBCC65C6F12C1BCA66 /* RNFrostedSidebar-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "RNFrostedSidebar-Private.xcconfig"; sourceTree = "<group>"; };
+		26BEB57F5538C7706C43CEA031FC0FF2 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
+		29EDF963A5A2588AB8D4E3632C0A1F36 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A9A9CB676B8922B3C63ED9116520EB3 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		517DC008615EDF725E4C2ACDA7C5E497 /* CircleProgressBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CircleProgressBar.m; path = CircleProgressBarDemo/CircleProgressBar/CircleProgressBar.m; sourceTree = "<group>"; };
+		5814C586B328E072D91690190B11F240 /* RNFrostedSidebar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RNFrostedSidebar-prefix.pch"; sourceTree = "<group>"; };
+		5D39572C4EE7B524BC4B2CD54523B2D2 /* RNFrostedSidebar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = RNFrostedSidebar.modulemap; sourceTree = "<group>"; };
+		5E0E1FBF4EFD281F0B01F234EAB387B9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0C4FB259C039B6DB1F24764AFDA7ED /* RNFrostedSidebar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
+		78FCAE61326B543E9913B9742826A63A /* RNFrostedSidebar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
 		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
-		7B5EDE03725C6ECF2BB6F117AB7D85AA /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
-		7EEB540EF708FA4437929324101CA2F6 /* JVMenuPopover-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JVMenuPopover-dummy.m"; sourceTree = "<group>"; };
-		819325C549B4E03D1E7B4D7CEDBA58C1 /* JVMenuItems.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JVMenuItems.m; path = Source/Classes/JVMenuModel/JVMenuItems.m; sourceTree = "<group>"; };
-		81D27925BB821D75CFA2D2F8A42BE157 /* UIImage+JVMenuCategory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+JVMenuCategory.h"; path = "Source/Classes/JVMenuCategories/UIImage+JVMenuCategory.h"; sourceTree = "<group>"; };
-		82E649EFD8E5BFB688963A7945A2A35F /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		8A58DEACC8571AF2774EB056C6CF6304 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A762BCEB8A12BE86E62F489CA092E07 /* CircleProgressBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CircleProgressBar-dummy.m"; sourceTree = "<group>"; };
-		8F6538F93C74EF76125108EE85902F7F /* UIViewController+JVMenuCategory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+JVMenuCategory.h"; path = "Source/Classes/JVMenuCategories/UIViewController+JVMenuCategory.h"; sourceTree = "<group>"; };
-		91999B0553FD575BE0578858D334A89E /* JVMenuNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JVMenuNavigationController.h; path = Source/Classes/JVMenuControllers/JVMenuNavigationController.h; sourceTree = "<group>"; };
-		94E67E038C9239B604FFE89B2F501C11 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		9BFC6162206CEF4C436092F9D51FE5E3 /* UIColor+JVMenuCategory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+JVMenuCategory.h"; path = "Source/Classes/JVMenuCategories/UIColor+JVMenuCategory.h"; sourceTree = "<group>"; };
-		9EDBD0DDDA63460299072056865BD89E /* UIColor+JVMenuCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+JVMenuCategory.m"; path = "Source/Classes/JVMenuCategories/UIColor+JVMenuCategory.m"; sourceTree = "<group>"; };
-		A4BC716DC696295DE48BCBE74F9DB51A /* JVMenuNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JVMenuNavigationController.m; path = Source/Classes/JVMenuControllers/JVMenuNavigationController.m; sourceTree = "<group>"; };
-		AE61ADA9C28870B9240A7C8D87E6584C /* JVMenuPopover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JVMenuPopover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1A8B17FBC1F29F4FEEBDED4978CBBC3 /* CircleProgressBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CircleProgressBar.m; path = CircleProgressBarDemo/CircleProgressBar/CircleProgressBar.m; sourceTree = "<group>"; };
-		B7D842E743C7CB25B72F0B71DE4F164E /* JVMenuItems.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JVMenuItems.h; path = Source/Classes/JVMenuModel/JVMenuItems.h; sourceTree = "<group>"; };
+		8E5EC3CB9482C92645FA1A1985AF4C55 /* CircleProgressBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CircleProgressBar.h; path = CircleProgressBarDemo/CircleProgressBar/CircleProgressBar.h; sourceTree = "<group>"; };
+		9880AC269EE91FABAA045A62AF4FB41A /* CircleProgressBar-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CircleProgressBar-Private.xcconfig"; sourceTree = "<group>"; };
+		99E119F0A60748FFA4CB8983D8961693 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B8981FB4EF5A4964A056CEF966C0EBA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		B42050612571B88D78EC2652BCB03E8E /* CircleProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CircleProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B511D64018B03C9A03513077B7AE5858 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B54CEBFE6696441C901B31E5C4F67593 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		B6708C4AD526C0E439B4E4DB4FE48B60 /* RNFrostedSidebar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RNFrostedSidebar-umbrella.h"; sourceTree = "<group>"; };
+		B763E5B03CE0280E6DFBAE610B1B350D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BC6F47638E5A8D017B86FF78163C897E /* UIVisualEffectView+JVMenuCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIVisualEffectView+JVMenuCategory.m"; path = "Source/Classes/JVMenuCategories/UIVisualEffectView+JVMenuCategory.m"; sourceTree = "<group>"; };
-		BDC963DA4565EE3C7E5A0A77D53B14A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		C94170862AC35004B2A3562B82520B8E /* CircleProgressBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CircleProgressBar.xcconfig; sourceTree = "<group>"; };
+		C349DB08AC1E7676121246A76C1336E1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		CAA1332C1297D776BFCEE8DB68FA4751 /* RNFrostedSidebar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RNFrostedSidebar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
 		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D2618790366CAC99573294922F323F7D /* UIView+JVMenuCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+JVMenuCategory.m"; path = "Source/Classes/JVMenuCategories/UIView+JVMenuCategory.m"; sourceTree = "<group>"; };
-		D40F26ECCC909757DACA836324E3D15E /* UIViewController+JVMenuCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+JVMenuCategory.m"; path = "Source/Classes/JVMenuCategories/UIViewController+JVMenuCategory.m"; sourceTree = "<group>"; };
-		D5DD0038BB798A0EF476557F6CDC187D /* CircleProgressBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircleProgressBar-prefix.pch"; sourceTree = "<group>"; };
-		DBCBD376CCAEB0D73AD94EE4E7314BDA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DA0E68528C1B1618431FAF5620F5997C /* CircleProgressBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CircleProgressBar-dummy.m"; sourceTree = "<group>"; };
+		E3EE3004198EC8FA81770036AEEACDD8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		E5524FB5F8FF9F9F5843FF009F374423 /* CircleProgressBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircleProgressBar-prefix.pch"; sourceTree = "<group>"; };
 		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2E020442E473CB09889C619701CADC9 /* JVMenuPopover.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JVMenuPopover.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8E8DFCECE2E72B053E8DDDE926C9518 /* CircleProgressBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircleProgressBar-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		48C127C0D09C11CE80210C458CC81E16 /* Frameworks */ = {
+		E3905F2D8253D04F511F34734AED21CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C56CF055B21CE6D0EB7F44026E81818 /* Foundation.framework in Frameworks */,
+				48A7B6FC4DA8CF6799828C1671B1EB6B /* Foundation.framework in Frameworks */,
+				3AD61C7F09D7C3415B2F2571ECF91CA9 /* QuartzCore.framework in Frameworks */,
+				825C87C1D8173D5378C0126B4210E7D7 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		61F06C752FF3645E567C9366F5C93A82 /* Frameworks */ = {
+		E59A210F2E753CD3F5E88B37E2F47171 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F2CF670C155C99B47086573B3C429F9 /* Foundation.framework in Frameworks */,
+				4131C196A2C8AEE67418443191B4EA29 /* Accelerate.framework in Frameworks */,
+				E32708F8471C2BC3B6B88766B9A3838C /* Foundation.framework in Frameworks */,
+				9110AE9D43FD9C5D0EA3313EB77E4A20 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DEAD2C2D1410EB852AB533689740F21E /* Frameworks */ = {
+		EEA34A335B62C9EEC41688955C9FAC1B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F5D52D9F4417CACA144BE40CE9A1BF79 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0F8BE9AD12AAD499A066882B4F80442 /* Foundation.framework in Frameworks */,
-				1364BB7FDCFC038F0AEDEB0EB3157043 /* QuartzCore.framework in Frameworks */,
-				F294C15BCD110702B3484E90ACBAAEE1 /* UIKit.framework in Frameworks */,
+				4A231221CB2BFA1A299E87BEBDCCCBD6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02792D48D6CD45C0C7D8C381623A22DB /* Pods */ = {
+		082ED1ABD1CE5738B420C3E2315A8025 /* RNFrostedSidebar */ = {
 			isa = PBXGroup;
 			children = (
-				0812C9831B585A1E5B43F6B2D811E3FA /* CircleProgressBar */,
-				5C63DCCFCEC6A3A835F54DFEF1FF5F07 /* JVMenuPopover */,
+				78FCAE61326B543E9913B9742826A63A /* RNFrostedSidebar.h */,
+				6E0C4FB259C039B6DB1F24764AFDA7ED /* RNFrostedSidebar.m */,
+				795354D1FD79AC7A2D9FF03C01D55188 /* Support Files */,
 			);
-			name = Pods;
+			path = RNFrostedSidebar;
 			sourceTree = "<group>";
 		};
-		0812C9831B585A1E5B43F6B2D811E3FA /* CircleProgressBar */ = {
+		14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				33B6E0F8B34DEDA91AD1B1B0C134D9A4 /* CircleProgressBar.h */,
-				B1A8B17FBC1F29F4FEEBDED4978CBBC3 /* CircleProgressBar.m */,
-				7C6E82B5885D7DD1A3A0A6537DB7AD72 /* Support Files */,
-			);
-			path = CircleProgressBar;
-			sourceTree = "<group>";
-		};
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				64F024328420545A9A70B81EC0160AA9 /* iOS */,
+				5CEF6FF80D31821CC2F63D93ECB9D491 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2A8DF5A68E9BF2AFB68E5963643EDA08 /* Support Files */ = {
+		1A0CB83A0BFD9CFB26548EA12AF74EA9 /* CircleProgressBar */ = {
 			isa = PBXGroup;
 			children = (
-				77D7EDE7E45B727098DF8FBE3471888F /* Info.plist */,
-				492233D4E88BE0ACD28C4397F4A874E4 /* JVMenuPopover.modulemap */,
-				55D6284F378DB1896D2D651B89DB4169 /* JVMenuPopover.xcconfig */,
-				62CF6FB1492B2B5ECDA52764680EF9EE /* JVMenuPopover-Private.xcconfig */,
-				7EEB540EF708FA4437929324101CA2F6 /* JVMenuPopover-dummy.m */,
-				3205798149053A11B965BCF7B4A292C4 /* JVMenuPopover-prefix.pch */,
-				5FF5824530D8EB0AD4ACED5021C30FF9 /* JVMenuPopover-umbrella.h */,
+				8E5EC3CB9482C92645FA1A1985AF4C55 /* CircleProgressBar.h */,
+				517DC008615EDF725E4C2ACDA7C5E497 /* CircleProgressBar.m */,
+				A2561355151BC3A94E294464ACCBE7D8 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/JVMenuPopover";
+			path = CircleProgressBar;
 			sourceTree = "<group>";
 		};
-		5C63DCCFCEC6A3A835F54DFEF1FF5F07 /* JVMenuPopover */ = {
+		43DF6375E7089A81897921613061F384 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B7D842E743C7CB25B72F0B71DE4F164E /* JVMenuItems.h */,
-				819325C549B4E03D1E7B4D7CEDBA58C1 /* JVMenuItems.m */,
-				91999B0553FD575BE0578858D334A89E /* JVMenuNavigationController.h */,
-				A4BC716DC696295DE48BCBE74F9DB51A /* JVMenuNavigationController.m */,
-				3F9C0BAD1F868B77C7ACC0589B815DC3 /* JVMenuPopover.h */,
-				55790F0B0C8C487D7885C245A1FB3035 /* JVMenuPopoverView.h */,
-				608533F49BDBD2A4BB02F98BB5EECF49 /* JVMenuPopoverView.m */,
-				9BFC6162206CEF4C436092F9D51FE5E3 /* UIColor+JVMenuCategory.h */,
-				9EDBD0DDDA63460299072056865BD89E /* UIColor+JVMenuCategory.m */,
-				81D27925BB821D75CFA2D2F8A42BE157 /* UIImage+JVMenuCategory.h */,
-				1EF16147B7069F9E800706E077AB97A3 /* UIImage+JVMenuCategory.m */,
-				3690A742E77481C8EBE0545A9D9DD480 /* UIView+JVMenuCategory.h */,
-				D2618790366CAC99573294922F323F7D /* UIView+JVMenuCategory.m */,
-				8F6538F93C74EF76125108EE85902F7F /* UIViewController+JVMenuCategory.h */,
-				D40F26ECCC909757DACA836324E3D15E /* UIViewController+JVMenuCategory.m */,
-				5EFCA918EE81E211DE8FDD34DC8EC8C0 /* UIVisualEffectView+JVMenuCategory.h */,
-				BC6F47638E5A8D017B86FF78163C897E /* UIVisualEffectView+JVMenuCategory.m */,
-				2A8DF5A68E9BF2AFB68E5963643EDA08 /* Support Files */,
+				1A0CB83A0BFD9CFB26548EA12AF74EA9 /* CircleProgressBar */,
+				082ED1ABD1CE5738B420C3E2315A8025 /* RNFrostedSidebar */,
 			);
-			path = JVMenuPopover;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		64F024328420545A9A70B81EC0160AA9 /* iOS */ = {
+		5CEF6FF80D31821CC2F63D93ECB9D491 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				DBCBD376CCAEB0D73AD94EE4E7314BDA /* Foundation.framework */,
-				94E67E038C9239B604FFE89B2F501C11 /* QuartzCore.framework */,
-				BDC963DA4565EE3C7E5A0A77D53B14A7 /* UIKit.framework */,
+				B763E5B03CE0280E6DFBAE610B1B350D /* Accelerate.framework */,
+				B511D64018B03C9A03513077B7AE5858 /* Foundation.framework */,
+				B54CEBFE6696441C901B31E5C4F67593 /* QuartzCore.framework */,
+				E3EE3004198EC8FA81770036AEEACDD8 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -239,41 +169,56 @@
 				79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */,
 				D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */,
 				87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */,
-				82E649EFD8E5BFB688963A7945A2A35F /* Pods-dummy.m */,
+				4A9A9CB676B8922B3C63ED9116520EB3 /* Pods-dummy.m */,
 				E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */,
 				CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */,
-				7B5EDE03725C6ECF2BB6F117AB7D85AA /* Pods-umbrella.h */,
-				39E57C9553F2E3E2098C30BC42C918F0 /* Pods.debug.xcconfig */,
-				357F3F27463B215444473B24FFC0AF14 /* Pods.release.xcconfig */,
+				26BEB57F5538C7706C43CEA031FC0FF2 /* Pods-umbrella.h */,
+				C349DB08AC1E7676121246A76C1336E1 /* Pods.debug.xcconfig */,
+				9B8981FB4EF5A4964A056CEF966C0EBA /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			path = "Target Support Files/Pods";
 			sourceTree = "<group>";
 		};
-		7C6E82B5885D7DD1A3A0A6537DB7AD72 /* Support Files */ = {
+		795354D1FD79AC7A2D9FF03C01D55188 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				545EB9BA40EF951E9A829470368CFD81 /* CircleProgressBar.modulemap */,
-				C94170862AC35004B2A3562B82520B8E /* CircleProgressBar.xcconfig */,
-				2AFB387E1FD4B0C6F410A30591D77DF6 /* CircleProgressBar-Private.xcconfig */,
-				8A762BCEB8A12BE86E62F489CA092E07 /* CircleProgressBar-dummy.m */,
-				D5DD0038BB798A0EF476557F6CDC187D /* CircleProgressBar-prefix.pch */,
-				09DADBDEC721EECE32E28FAFFDE0C6C3 /* CircleProgressBar-umbrella.h */,
-				8A58DEACC8571AF2774EB056C6CF6304 /* Info.plist */,
+				5E0E1FBF4EFD281F0B01F234EAB387B9 /* Info.plist */,
+				5D39572C4EE7B524BC4B2CD54523B2D2 /* RNFrostedSidebar.modulemap */,
+				18C6754D8378E4FA6FCF74EBB98D330C /* RNFrostedSidebar.xcconfig */,
+				266502001F1995FBCC65C6F12C1BCA66 /* RNFrostedSidebar-Private.xcconfig */,
+				1F6713402544F93E4B503E7AB474535B /* RNFrostedSidebar-dummy.m */,
+				5814C586B328E072D91690190B11F240 /* RNFrostedSidebar-prefix.pch */,
+				B6708C4AD526C0E439B4E4DB4FE48B60 /* RNFrostedSidebar-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/CircleProgressBar";
+			path = "../Target Support Files/RNFrostedSidebar";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				02792D48D6CD45C0C7D8C381623A22DB /* Pods */,
+				14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */,
+				43DF6375E7089A81897921613061F384 /* Pods */,
 				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
 				B7B80995527643776607AFFA75B91E24 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		A2561355151BC3A94E294464ACCBE7D8 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				05176A1212F27D3F9CB776CDA4DDE8D9 /* CircleProgressBar.modulemap */,
+				177411524A86655DE43C777EDE2B274A /* CircleProgressBar.xcconfig */,
+				9880AC269EE91FABAA045A62AF4FB41A /* CircleProgressBar-Private.xcconfig */,
+				DA0E68528C1B1618431FAF5620F5997C /* CircleProgressBar-dummy.m */,
+				E5524FB5F8FF9F9F5843FF009F374423 /* CircleProgressBar-prefix.pch */,
+				F8E8DFCECE2E72B053E8DDDE926C9518 /* CircleProgressBar-umbrella.h */,
+				29EDF963A5A2588AB8D4E3632C0A1F36 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/CircleProgressBar";
 			sourceTree = "<group>";
 		};
 		B7B80995527643776607AFFA75B91E24 /* Targets Support Files */ = {
@@ -287,10 +232,9 @@
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				37149D33D4D69C44CCABCF02E13E3C85 /* CircleProgressBar.framework */,
-				F2E020442E473CB09889C619701CADC9 /* JVMenuPopover.bundle */,
-				AE61ADA9C28870B9240A7C8D87E6584C /* JVMenuPopover.framework */,
-				616AA8A093A19DF18C6271DC178D1963 /* Pods.framework */,
+				B42050612571B88D78EC2652BCB03E8E /* CircleProgressBar.framework */,
+				99E119F0A60748FFA4CB8983D8961693 /* Pods.framework */,
+				CAA1332C1297D776BFCEE8DB68FA4751 /* RNFrostedSidebar.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -298,105 +242,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		006DCB12FE8854A9D4B9CE6F64DBC464 /* Headers */ = {
+		0E2D4EC79740BB7B00ADD37C0E3BB7ED /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41BB47C70D322C5148CC2B75E205F970 /* JVMenuItems.h in Headers */,
-				36A039BE8AC6A91B13A95958C042092F /* JVMenuNavigationController.h in Headers */,
-				B499A2BB5107385A503A7C133D89D90B /* JVMenuPopover-umbrella.h in Headers */,
-				713DC33B2A17A656F03D8D6281EC6C38 /* JVMenuPopover.h in Headers */,
-				49AE8876D00E3A5F43A684BA2B9BC12D /* JVMenuPopoverView.h in Headers */,
-				C58E46F77846C081BEBE4EE5B743E1C1 /* UIColor+JVMenuCategory.h in Headers */,
-				6D77F7E95FA6DB922EF41B63DF529CDB /* UIImage+JVMenuCategory.h in Headers */,
-				70149F2D9FC48B5B69D084D990EBD68B /* UIView+JVMenuCategory.h in Headers */,
-				8783246D1D94ECD623C6E4CFF4E442A4 /* UIViewController+JVMenuCategory.h in Headers */,
-				E5973B76E022A47953C1E5676C7E7962 /* UIVisualEffectView+JVMenuCategory.h in Headers */,
+				A2D9BB580BCE88EDA836EB1C5BE9388E /* RNFrostedSidebar-umbrella.h in Headers */,
+				C43BBBCF88EDA6DAF1CE073BFF461FB5 /* RNFrostedSidebar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2559632FDD51B22CD7C8ECED8422F6BF /* Headers */ = {
+		766E6C081F637B87F1EA413B31C6D599 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7ED939889F3D35BD21B9858F6BD2A1A /* Pods-umbrella.h in Headers */,
+				E1BCA8E7D925E6084F8F2A6BF8069D53 /* CircleProgressBar-umbrella.h in Headers */,
+				5C448A9BCB6B783F91F915CA1D6919FF /* CircleProgressBar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D1EBBD739433EAF2413408715AA651D6 /* Headers */ = {
+		E3DF8F6F8228E5A811DEE3B674B9EEE3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16D20D3E8C19D84E91A8D2A36D50E49F /* CircleProgressBar-umbrella.h in Headers */,
-				9BAF5FD0756FD5F7F1D27B868ABB2B92 /* CircleProgressBar.h in Headers */,
+				3E223EB7793BD52B4CBE4F2FF1181A7A /* Pods-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		094E8A4B2B5C0D5D76620631BAEC6BCC /* JVMenuPopover */ = {
+		4640F7BC7ED0052A0469529ACCF2455B /* CircleProgressBar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 39B444F70FFD78CB9447097F4ABDCEFB /* Build configuration list for PBXNativeTarget "JVMenuPopover" */;
+			buildConfigurationList = 8D807E3AAF4527F83AC19D5C5B3A84EB /* Build configuration list for PBXNativeTarget "CircleProgressBar" */;
 			buildPhases = (
-				EE6060AA63872F2F06CB7826390B015C /* Sources */,
-				61F06C752FF3645E567C9366F5C93A82 /* Frameworks */,
-				F530601E3E5DA7DA5988DB5655CE725B /* Resources */,
-				006DCB12FE8854A9D4B9CE6F64DBC464 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				92B2D68629EDDA7E5B789A095B7DF65D /* PBXTargetDependency */,
-			);
-			name = JVMenuPopover;
-			productName = JVMenuPopover;
-			productReference = AE61ADA9C28870B9240A7C8D87E6584C /* JVMenuPopover.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		0F5240E34DE806A84BE78E1C93639030 /* JVMenuPopover-JVMenuPopover */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8136B2F7BC577F9987D9069A2D81FC13 /* Build configuration list for PBXNativeTarget "JVMenuPopover-JVMenuPopover" */;
-			buildPhases = (
-				62708BE00E8A04ABE5DC322D4CAF3C66 /* Sources */,
-				DEAD2C2D1410EB852AB533689740F21E /* Frameworks */,
-				66533B913A20C8719F09E8500F2CD5AA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "JVMenuPopover-JVMenuPopover";
-			productName = "JVMenuPopover-JVMenuPopover";
-			productReference = F2E020442E473CB09889C619701CADC9 /* JVMenuPopover.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		5CC239A94E58BB27C07A94D0423B3FA3 /* Pods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9AA4EB7FC5739FBB74EBEA49DEA3B3FF /* Build configuration list for PBXNativeTarget "Pods" */;
-			buildPhases = (
-				4C08870CF274C3107087C1094E53E0D2 /* Sources */,
-				48C127C0D09C11CE80210C458CC81E16 /* Frameworks */,
-				2559632FDD51B22CD7C8ECED8422F6BF /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				ED5C0B36D461C735130977B3033F9A95 /* PBXTargetDependency */,
-				4F9994844C8D6B2B64C72EDB64E9C857 /* PBXTargetDependency */,
-			);
-			name = Pods;
-			productName = Pods;
-			productReference = 616AA8A093A19DF18C6271DC178D1963 /* Pods.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		F4960DFE2643BF9CCF1C118DC0FA8587 /* CircleProgressBar */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 632A0DE80923CFF979A3580916E5F1D9 /* Build configuration list for PBXNativeTarget "CircleProgressBar" */;
-			buildPhases = (
-				17DB14CE4F26A257269FA348E65C83CA /* Sources */,
-				F5D52D9F4417CACA144BE40CE9A1BF79 /* Frameworks */,
-				D1EBBD739433EAF2413408715AA651D6 /* Headers */,
+				E865062E2B94E54C5F2F4D0161A2E9D5 /* Sources */,
+				E3905F2D8253D04F511F34734AED21CE /* Frameworks */,
+				766E6C081F637B87F1EA413B31C6D599 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -404,7 +285,43 @@
 			);
 			name = CircleProgressBar;
 			productName = CircleProgressBar;
-			productReference = 37149D33D4D69C44CCABCF02E13E3C85 /* CircleProgressBar.framework */;
+			productReference = B42050612571B88D78EC2652BCB03E8E /* CircleProgressBar.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BF75E6B284975649D6BCA66ECB8F47DE /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1303942DF42323B8B2907D79A0FB97C3 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				687A67315B6A375E2E950E92ADFA72AD /* Sources */,
+				EEA34A335B62C9EEC41688955C9FAC1B /* Frameworks */,
+				E3DF8F6F8228E5A811DEE3B674B9EEE3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D269D749333E6B0F74151AF19997B90 /* PBXTargetDependency */,
+				D745AAB095F813F4025B2CED73F0BC6F /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 99E119F0A60748FFA4CB8983D8961693 /* Pods.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E20269321DD7CB1B07C4C7540C072E7F /* RNFrostedSidebar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80CCA3F50A7E0501E9FDA0B9DCCBD038 /* Build configuration list for PBXNativeTarget "RNFrostedSidebar" */;
+			buildPhases = (
+				0B81984BC965EE31948B82EA42C9F7D8 /* Sources */,
+				E59A210F2E753CD3F5E88B37E2F47171 /* Frameworks */,
+				0E2D4EC79740BB7B00ADD37C0E3BB7ED /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNFrostedSidebar;
+			productName = RNFrostedSidebar;
+			productReference = CAA1332C1297D776BFCEE8DB68FA4751 /* RNFrostedSidebar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -428,195 +345,61 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4960DFE2643BF9CCF1C118DC0FA8587 /* CircleProgressBar */,
-				094E8A4B2B5C0D5D76620631BAEC6BCC /* JVMenuPopover */,
-				0F5240E34DE806A84BE78E1C93639030 /* JVMenuPopover-JVMenuPopover */,
-				5CC239A94E58BB27C07A94D0423B3FA3 /* Pods */,
+				4640F7BC7ED0052A0469529ACCF2455B /* CircleProgressBar */,
+				BF75E6B284975649D6BCA66ECB8F47DE /* Pods */,
+				E20269321DD7CB1B07C4C7540C072E7F /* RNFrostedSidebar */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		66533B913A20C8719F09E8500F2CD5AA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F530601E3E5DA7DA5988DB5655CE725B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A9C21FABC1C9EA19C81959234D49BB6 /* JVMenuPopover.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		17DB14CE4F26A257269FA348E65C83CA /* Sources */ = {
+		0B81984BC965EE31948B82EA42C9F7D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9B2CF5351B10F259DED564CD334EE32 /* CircleProgressBar-dummy.m in Sources */,
-				580B8FA102FB9DE17FB38FEC1F6D7BBB /* CircleProgressBar.m in Sources */,
+				ED65F69C85FD37F8798B629B4CF1230A /* RNFrostedSidebar-dummy.m in Sources */,
+				2FB0FB07A815249218C4C3941890FEB9 /* RNFrostedSidebar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4C08870CF274C3107087C1094E53E0D2 /* Sources */ = {
+		687A67315B6A375E2E950E92ADFA72AD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CBC4EABD5AEB255DEF0F3F26C848520 /* Pods-dummy.m in Sources */,
+				D82180F4AFDB1528154C3F8AF0594F08 /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62708BE00E8A04ABE5DC322D4CAF3C66 /* Sources */ = {
+		E865062E2B94E54C5F2F4D0161A2E9D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EE6060AA63872F2F06CB7826390B015C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E0724A62DD4C82C167DCD7AC717A0908 /* JVMenuItems.m in Sources */,
-				D4EB34862790608B2B7CE92459BAE955 /* JVMenuNavigationController.m in Sources */,
-				55F30E6CB6BDF7A42FCA608A620E8366 /* JVMenuPopover-dummy.m in Sources */,
-				28E30C6965B904462908B07FF6DCDCED /* JVMenuPopoverView.m in Sources */,
-				3900CFACD9A042221E6C708AE45940FB /* UIColor+JVMenuCategory.m in Sources */,
-				4E1CBB5F70A408374C5B2E80D7F77748 /* UIImage+JVMenuCategory.m in Sources */,
-				0D8C9BAF0A61EA2A6466210D9C754B6C /* UIView+JVMenuCategory.m in Sources */,
-				0A790510131B770878118A34346A2AF2 /* UIViewController+JVMenuCategory.m in Sources */,
-				4C42D9E0B40A0E4C8070F9745C712338 /* UIVisualEffectView+JVMenuCategory.m in Sources */,
+				1D199B8142CCE6BF2D44DA34B8169FC6 /* CircleProgressBar-dummy.m in Sources */,
+				007DC5CF843B68956C1D46CCB01A9F8F /* CircleProgressBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4F9994844C8D6B2B64C72EDB64E9C857 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = JVMenuPopover;
-			target = 094E8A4B2B5C0D5D76620631BAEC6BCC /* JVMenuPopover */;
-			targetProxy = 6A631961FD87948503A338505AEDE26A /* PBXContainerItemProxy */;
-		};
-		92B2D68629EDDA7E5B789A095B7DF65D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "JVMenuPopover-JVMenuPopover";
-			target = 0F5240E34DE806A84BE78E1C93639030 /* JVMenuPopover-JVMenuPopover */;
-			targetProxy = 4E20E2B542F29D4E205D3C873339D919 /* PBXContainerItemProxy */;
-		};
-		ED5C0B36D461C735130977B3033F9A95 /* PBXTargetDependency */ = {
+		1D269D749333E6B0F74151AF19997B90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CircleProgressBar;
-			target = F4960DFE2643BF9CCF1C118DC0FA8587 /* CircleProgressBar */;
-			targetProxy = 11A393033D33473C619CFC842832B8BB /* PBXContainerItemProxy */;
+			target = 4640F7BC7ED0052A0469529ACCF2455B /* CircleProgressBar */;
+			targetProxy = 1E43B9687D63D0324729C8F0E434E55D /* PBXContainerItemProxy */;
+		};
+		D745AAB095F813F4025B2CED73F0BC6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RNFrostedSidebar;
+			target = E20269321DD7CB1B07C4C7540C072E7F /* RNFrostedSidebar */;
+			targetProxy = 167993FB558E22CE7A19027C4B53F4EB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2C57D3100B83FC7AA3234D1E74AEAD89 /* Debug */ = {
+		825F04914EA1B54204DE8FB8F3CBEABD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62CF6FB1492B2B5ECDA52764680EF9EE /* JVMenuPopover-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JVMenuPopover/JVMenuPopover-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JVMenuPopover/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JVMenuPopover/JVMenuPopover.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = JVMenuPopover;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		34E54E69FBA09A1031D9D6A3CA996E73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AFB387E1FD4B0C6F410A30591D77DF6 /* CircleProgressBar-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.21.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.21.0;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CircleProgressBar/CircleProgressBar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CircleProgressBar/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CircleProgressBar/CircleProgressBar.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = CircleProgressBar;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		45D929922AA40C83D9978746933856DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39E57C9553F2E3E2098C30BC42C918F0 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		474EC72496E7781F2EC7F10BB36601DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62CF6FB1492B2B5ECDA52764680EF9EE /* JVMenuPopover-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = JVMenuPopover;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		86888AC2F315B02766F33640C4F4A217 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 357F3F27463B215444473B24FFC0AF14 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 9B8981FB4EF5A4964A056CEF966C0EBA /* Pods.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -643,71 +426,88 @@
 			};
 			name = Release;
 		};
-		87DFEBD91FD0A7B553F0F2171BC0890D /* Release */ = {
+		8A9D5F8BE06F8B4A7C6BC020126EDDC7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62CF6FB1492B2B5ECDA52764680EF9EE /* JVMenuPopover-Private.xcconfig */;
+			baseConfigurationReference = 266502001F1995FBCC65C6F12C1BCA66 /* RNFrostedSidebar-Private.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.2.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 0.2.0;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = JVMenuPopover;
+				GCC_PREFIX_HEADER = "Target Support Files/RNFrostedSidebar/RNFrostedSidebar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RNFrostedSidebar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RNFrostedSidebar/RNFrostedSidebar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = RNFrostedSidebar;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		A9F62F07B92B064A5961AD04C2EB8BB1 /* Release */ = {
+		8C760D32F4EABC7D5265708DA12C67E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62CF6FB1492B2B5ECDA52764680EF9EE /* JVMenuPopover-Private.xcconfig */;
+			baseConfigurationReference = C349DB08AC1E7676121246A76C1336E1 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JVMenuPopover/JVMenuPopover-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JVMenuPopover/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JVMenuPopover/JVMenuPopover.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = JVMenuPopover;
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		C03B982B26039B2FEFB758C91EF4274E /* Release */ = {
+		AE3416522617283720CD8290B006166E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AFB387E1FD4B0C6F410A30591D77DF6 /* CircleProgressBar-Private.xcconfig */;
+			baseConfigurationReference = 266502001F1995FBCC65C6F12C1BCA66 /* RNFrostedSidebar-Private.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.21.0;
+				CURRENT_PROJECT_VERSION = 0.2.0;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.21.0;
+				DYLIB_COMPATIBILITY_VERSION = 0.2.0;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CircleProgressBar/CircleProgressBar-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CircleProgressBar/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/RNFrostedSidebar/RNFrostedSidebar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RNFrostedSidebar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CircleProgressBar/CircleProgressBar.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CircleProgressBar;
+				MODULEMAP_FILE = "Target Support Files/RNFrostedSidebar/RNFrostedSidebar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = RNFrostedSidebar;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		C074F63C9EE7CB4D8C618390A32CEC35 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -782,9 +582,72 @@
 			};
 			name = Release;
 		};
+		F634B62D0B329B2E6852E58DC5FAE318 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9880AC269EE91FABAA045A62AF4FB41A /* CircleProgressBar-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.21.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 0.21.0;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CircleProgressBar/CircleProgressBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CircleProgressBar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CircleProgressBar/CircleProgressBar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CircleProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F9D38DBB520EE011F69FA9B5427C1E27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9880AC269EE91FABAA045A62AF4FB41A /* CircleProgressBar-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.21.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 0.21.0;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CircleProgressBar/CircleProgressBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CircleProgressBar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CircleProgressBar/CircleProgressBar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = CircleProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1303942DF42323B8B2907D79A0FB97C3 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C760D32F4EABC7D5265708DA12C67E1 /* Debug */,
+				825F04914EA1B54204DE8FB8F3CBEABD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -794,38 +657,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		39B444F70FFD78CB9447097F4ABDCEFB /* Build configuration list for PBXNativeTarget "JVMenuPopover" */ = {
+		80CCA3F50A7E0501E9FDA0B9DCCBD038 /* Build configuration list for PBXNativeTarget "RNFrostedSidebar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2C57D3100B83FC7AA3234D1E74AEAD89 /* Debug */,
-				A9F62F07B92B064A5961AD04C2EB8BB1 /* Release */,
+				AE3416522617283720CD8290B006166E /* Debug */,
+				8A9D5F8BE06F8B4A7C6BC020126EDDC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		632A0DE80923CFF979A3580916E5F1D9 /* Build configuration list for PBXNativeTarget "CircleProgressBar" */ = {
+		8D807E3AAF4527F83AC19D5C5B3A84EB /* Build configuration list for PBXNativeTarget "CircleProgressBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				34E54E69FBA09A1031D9D6A3CA996E73 /* Debug */,
-				C03B982B26039B2FEFB758C91EF4274E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8136B2F7BC577F9987D9069A2D81FC13 /* Build configuration list for PBXNativeTarget "JVMenuPopover-JVMenuPopover" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				474EC72496E7781F2EC7F10BB36601DC /* Debug */,
-				87DFEBD91FD0A7B553F0F2171BC0890D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9AA4EB7FC5739FBB74EBEA49DEA3B3FF /* Build configuration list for PBXNativeTarget "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				45D929922AA40C83D9978746933856DC /* Debug */,
-				86888AC2F315B02766F33640C4F4A217 /* Release */,
+				F9D38DBB520EE011F69FA9B5427C1E27 /* Debug */,
+				F634B62D0B329B2E6852E58DC5FAE318 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

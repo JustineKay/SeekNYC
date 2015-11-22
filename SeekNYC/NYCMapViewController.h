@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RNFrostedSidebar.h"
 
 @interface NYCMapViewController : UIViewController
+<RNFrostedSidebarDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
