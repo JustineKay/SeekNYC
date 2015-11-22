@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001961C41BF7A33C00E08B91 /* UserProfileView.xib */; };
 		6B28AA2D1C01310C001CFF08 /* Viafont.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B28AA2C1C01310C001CFF08 /* Viafont.otf */; };
+		6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */; };
+		6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -37,6 +39,10 @@
 		001961C41BF7A33C00E08B91 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
 		244FD1D516831678CBE69EC9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6B28AA2C1C01310C001CFF08 /* Viafont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Viafont.otf; sourceTree = "<group>"; };
+		6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertView.h; sourceTree = "<group>"; };
+		6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYAlertView.m; sourceTree = "<group>"; };
+		6B28AA301C0220C1001CFF08 /* NYAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertViewController.h; sourceTree = "<group>"; };
+		6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYAlertViewController.m; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -139,6 +145,10 @@
 				6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */,
 				6B9B799C1BF68F66004A7756 /* User.h */,
 				6B9B799D1BF68F66004A7756 /* User.m */,
+				6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */,
+				6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */,
+				6B28AA301C0220C1001CFF08 /* NYAlertViewController.h */,
+				6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */,
 				6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */,
 				6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */,
 				6B9B797A1BF68D6B004A7756 /* MKMapFullCoverageOverlay.h */,
@@ -321,6 +331,7 @@
 				6B9B79A11BF68F66004A7756 /* Location.m in Sources */,
 				6B9B799E1BF68F66004A7756 /* Path+CoreDataProperties.m in Sources */,
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
+				6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */,
 				6B9B79A31BF68F66004A7756 /* User.m in Sources */,
 				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
 				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
@@ -332,6 +343,7 @@
 				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */,
+				6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */,
 				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
