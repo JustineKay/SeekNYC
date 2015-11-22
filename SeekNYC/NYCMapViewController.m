@@ -21,6 +21,8 @@
 #import "AppDelegate.h"
 #import "UserProfileViewController.h"
 #import "NYAlertViewController.h"
+#import "RNFrostedSidebar.h"
+#import "SuggestedVenuesTableViewController.h"
 
 static bool const isMetric = NO;
 static float const metersInKM = 1000;
@@ -286,9 +288,9 @@ NSFetchedResultsControllerDelegate
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     NSArray *images = @[
-                        [UIImage imageNamed:@"theme"],
                         [UIImage imageNamed:@"progress"],
-                        [UIImage imageNamed:@"seek"]
+                        [UIImage imageNamed:@"seek"],
+                        [UIImage imageNamed:@"theme"]
                         ];
     
     NSArray *colors = @[
@@ -302,33 +304,53 @@ NSFetchedResultsControllerDelegate
     callout.delegate = self;
 
     [callout show];
-
-    
-
-    //***TINT***
-    //AlertVC for custom tint
-    //[self setCustomTint];
-    
-    //***SEGUE TO PROFILE***
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    
-
-//    UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
-//    
-//    userProfileVC.progress = self.percentageTravelled;
-//    
-//    [self presentViewController:userProfileVC animated:YES completion:nil];
-//    
-//    NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
 }
 
 #pragma mark - RNFrostedSidebarDelegate
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
-    NSLog(@"Tapped item at index %i",index);
-    if (index == 3) {
-        [sidebar dismiss];
-    }
+    NSLog(@"Tapped item at index %ld",index);
+    
+    
+    if (index == 0) {
+        
+        //***SEGUE TO PROFILE***
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        
+        UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
+        
+        userProfileVC.progress = self.percentageTravelled;
+        
+        [self presentViewController:userProfileVC animated:YES completion:nil];
+        
+        NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
+        
+
+        [sidebar dismissAnimated:YES];
+
+    
+    } else if (index == 1) {
+        
+        //***SEGUE TO SuggestedVenue***
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        
+        SuggestedVenuesTableViewController *tableVC = [storyboard instantiateViewControllerWithIdentifier:@"SuggestedVenuesTableViewController"];
+        
+        [self presentViewController:tableVC animated:YES completion:nil];
+
+        [sidebar dismissAnimated:YES];
+        
+        } else if (index == 2) {
+
+//                ***TINT***
+//                AlertVC for custom tint
+            [self setCustomTint];
+            
+            [sidebar dismissAnimated:YES];
+        
+        };
 }
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didEnable:(BOOL)itemEnabled itemAtIndex:(NSUInteger)index {
@@ -338,9 +360,18 @@ NSFetchedResultsControllerDelegate
     else {
         [self.optionIndices removeIndex:index];
     }
-
-
 }
+
+//- (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
+//    if (index == 1) {
+//        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+//            if (finished) {
+//                UIViewController *secondVC = [[UIViewController alloc] init];
+//                [self.navigationController pushViewController:secondVC animated:YES];
+//            }
+//        }];
+//    }
+//}
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
     
