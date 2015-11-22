@@ -276,8 +276,11 @@ NSFetchedResultsControllerDelegate
 
 - (IBAction)menuButtonTapped:(UIButton *)sender {
     
-    [self setCustomTint];
+    //***TINT***
+    //AlertVC for custom tint
+    //[self setCustomTint];
     
+    //***SEGUE TO PROFILE***
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    
 //    UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
@@ -314,11 +317,6 @@ NSFetchedResultsControllerDelegate
     self.stopTrackingPathButton.hidden = NO;
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    
-//    if (self.locations == nil) {
-//        
-//        self.locations = [NSMutableArray array];
-//    }
     
     [self startLocationUpdates];
     
