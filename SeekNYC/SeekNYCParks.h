@@ -13,4 +13,6 @@
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
 
+- (instancetype)initWithJSON:(NSDictionary *)json;
+
 @end
