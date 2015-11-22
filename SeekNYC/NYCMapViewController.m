@@ -204,6 +204,11 @@ NSFetchedResultsControllerDelegate
         
         if (isAccurate && isRecent) {
             
+            if (self.locations == nil) {
+                
+                self.locations = [NSMutableArray array];
+            }
+            
             [self.locations addObject:newLocation];
             
             BOOL matchingTileFound = NO;
@@ -223,19 +228,24 @@ NSFetchedResultsControllerDelegate
             if (matchingTileFound == NO) {
                 
                 [self.visitedTiles addObject:visitedTile];
+                
             }
             
-        }
-        
-        if (self.locations.count > 1) {
+            if (self.locations.count > 1) {
+                
+                NSInteger sourceIndex = self.locations.count - 1;
+                NSInteger destinationIndex = self.locations.count - 2;
+                                
+                NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
+                
+                //drop polyline ***************************
+                [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
+            }
+
             
-            NSInteger sourceIndex = self.locations.count - 1;
-            NSInteger destinationIndex = self.locations.count - 2;
+        }else {
             
-            NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
-            
-            //drop polyline ***************************
-            [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
+            self.locations = nil;
         }
         
     }
@@ -303,10 +313,10 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
-    if (self.locations == nil) {
-        
-        self.locations = [NSMutableArray array];
-    }
+//    if (self.locations == nil) {
+//        
+//        self.locations = [NSMutableArray array];
+//    }
     
     [self startLocationUpdates];
     
