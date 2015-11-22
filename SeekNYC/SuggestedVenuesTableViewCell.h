@@ -10,4 +10,9 @@
 
 @interface SuggestedVenuesTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *placeName;
+@property (weak, nonatomic) IBOutlet UILabel *address;
+@property (weak, nonatomic) IBOutlet UILabel *placeDetail;
+
+
 @end
