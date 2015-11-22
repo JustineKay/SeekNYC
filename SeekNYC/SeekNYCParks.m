@@ -19,12 +19,16 @@
         self.name = venueType[@"venue"][@"name"];
         NSDictionary *venueAddress = venueType[@"venue"][@"location"];
         self.address = [[venueAddress objectForKey:@"formattedAddress"] componentsJoinedByString:@" "];
+        NSDictionary *parkDetails = [venueType[@"tips"]objectAtIndex:0];
+        self.detail = [parkDetails objectForKey:@"text"];
         
         
         
-        NSLog(@"%@",venueType);
+        
+//        NSLog(@"%@",venueType);
         NSLog(@"%@",self.name);
         NSLog(@"%@",self.address);
+        NSLog(@"%@",self.detail);
         
         return self;
     }
