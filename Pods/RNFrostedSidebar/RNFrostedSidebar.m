@@ -285,13 +285,13 @@ static RNFrostedSidebar *rn_frostedMenu;
             
             [_itemViews addObject:view];
             
-            if (_borderColors && _selectedIndices && [_selectedIndices containsIndex:idx]) {
+//            if (_borderColors && _selectedIndices && [_selectedIndices containsIndex:idx]) {
                 UIColor *color = _borderColors[idx];
                 view.layer.borderColor = color.CGColor;
-            }
-            else {
-                view.layer.borderColor = [UIColor clearColor].CGColor;
-            }
+//            }
+//            else {
+//                view.layer.borderColor = [UIColor clearColor].CGColor;
+//            }
         }];
     }
     return self;
