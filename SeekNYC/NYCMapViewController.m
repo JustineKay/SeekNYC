@@ -134,7 +134,7 @@ NSFetchedResultsControllerDelegate
     
     NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
     NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
-  
+    
     NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
     
 }
@@ -197,9 +197,9 @@ NSFetchedResultsControllerDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-//    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-//        return [[MKAnnotationView alloc] init];
-//    }
+    //    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+    //        return [[MKAnnotationView alloc] init];
+    //    }
     
     if([annotation isKindOfClass:[MKUserLocation class]]) {
         DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
@@ -287,7 +287,7 @@ NSFetchedResultsControllerDelegate
                 //drop polyline ***************************
                 [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
             }
-
+            
             
         }else {
             
@@ -338,7 +338,7 @@ NSFetchedResultsControllerDelegate
     RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images selectedIndices:self.optionIndices borderColors:colors];
     
     callout.delegate = self;
-
+    
     [callout show];
 }
 
@@ -362,10 +362,10 @@ NSFetchedResultsControllerDelegate
         
         NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
         
-
+        
         [sidebar dismissAnimated:YES];
-
-    
+        
+        
     } else if (index == 1) {
         
         //***SEGUE TO SuggestedVenue***
@@ -375,18 +375,20 @@ NSFetchedResultsControllerDelegate
         SuggestedVenuesTableViewController *tableVC = [storyboard instantiateViewControllerWithIdentifier:@"SuggestedVenuesTableViewController"];
         
         [self presentViewController:tableVC animated:YES completion:nil];
-
+        
         [sidebar dismissAnimated:YES];
         
-        } else if (index == 2) {
-
-//                ***TINT***
-//                AlertVC for custom tint
-            [self setCustomTint];
-            
-            [sidebar dismissAnimated:YES];
+    } else if (index == 2) {
         
-        };
+        //                ***TINT***
+        //                AlertVC for custom tint
+        [self savePath];
+        
+        [self setCustomTint];
+        
+        [sidebar dismissAnimated:YES];
+        
+    };
 }
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didEnable:(BOOL)itemEnabled itemAtIndex:(NSUInteger)index {
@@ -415,7 +417,7 @@ NSFetchedResultsControllerDelegate
         [self.mapView setRegion:region animated:YES];
     }
     
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES]; 
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
 - (IBAction)trackPathButtonTapped:(UIButton *)sender {
@@ -521,14 +523,14 @@ NSFetchedResultsControllerDelegate
         
         renderer.strokeColor = [UIColor blackColor];
         renderer.lineWidth = 18;
-                
+        
         return renderer;
         
     } else if([overlay isMemberOfClass:[MKMapFullCoverageOverlay class]]) {
         
         MKMapColorOverlayRenderer *fullOverlayView = [[MKMapColorOverlayRenderer alloc] initWithOverlay:overlay];
         fullOverlayView.overlayAlpha = 0.90;
-
+        
         if ([[NSUserDefaults standardUserDefaults] objectForKey:TintKey]) {
             
             NSData *colourData = [[NSUserDefaults standardUserDefaults] objectForKey:TintKey];
@@ -539,7 +541,7 @@ NSFetchedResultsControllerDelegate
             
             fullOverlayView.overlayAlpha = 0.75;
             
-
+            
         }
         
         return fullOverlayView;
@@ -594,7 +596,7 @@ NSFetchedResultsControllerDelegate
                                                               
                                                               alertViewController.alertViewBackgroundColor = [UIColor hotPinkColor];
                                                               
-
+                                                              
                                                           }]];
     
     [alertViewController addAction:[NYAlertAction actionWithTitle:@"Neon Green"
@@ -604,7 +606,7 @@ NSFetchedResultsControllerDelegate
                                                               alertViewController.alertViewBackgroundColor = [UIColor neonGreenColor];
                                                               
                                                           }]];
-
+    
     
     [alertViewController addAction:[NYAlertAction actionWithTitle:@"Florescent Yellow"
                                                             style:UIAlertActionStyleDefault
@@ -621,20 +623,20 @@ NSFetchedResultsControllerDelegate
                                                               alertViewController.alertViewBackgroundColor = [UIColor grayColor];
                                                               
                                                           }]];
-
+    
     
     
     [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Set Tint", nil)
                                                             style:UIAlertActionStyleCancel
                                                           handler:^(NYAlertAction *action) {
                                                               
-                                                            //set the nsUserDefaults for the background view
-                                                            UIColor *userColourChoice = alertViewController.alertViewBackgroundColor;
+                                                              //set the nsUserDefaults for the background view
+                                                              UIColor *userColourChoice = alertViewController.alertViewBackgroundColor;
                                                               
                                                               
                                                               NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:userColourChoice];
                                                               
-                                                             
+                                                              
                                                               [[NSUserDefaults standardUserDefaults] setObject:colourData forKey:TintKey];
                                                               
                                                               
@@ -643,11 +645,11 @@ NSFetchedResultsControllerDelegate
                                                               
                                                               
                                                               MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
-
+                                                              
                                                               [self.mapView addOverlay: fullOverlay];
                                                               
                                                               [self loadUserPaths];
-
+                                                              
                                                               
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }]];
