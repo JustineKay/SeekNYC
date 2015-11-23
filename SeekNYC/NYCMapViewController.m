@@ -382,6 +382,8 @@ NSFetchedResultsControllerDelegate
         
         //                ***TINT***
         //                AlertVC for custom tint
+        [self savePath];
+        
         [self setCustomTint];
         
         [sidebar dismissAnimated:YES];
