@@ -353,7 +353,6 @@ NSFetchedResultsControllerDelegate
         //***SEGUE TO PROFILE***
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        
         UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
         
         userProfileVC.progress = self.percentageTravelled;
@@ -370,8 +369,7 @@ NSFetchedResultsControllerDelegate
         
         //***SEGUE TO SuggestedVenue***
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        
+    
         SuggestedVenuesTableViewController *tableVC = [storyboard instantiateViewControllerWithIdentifier:@"SuggestedVenuesTableViewController"];
         
         [self presentViewController:tableVC animated:YES completion:nil];
@@ -380,9 +378,8 @@ NSFetchedResultsControllerDelegate
         
     } else if (index == 2) {
         
-        //                ***TINT***
-        //                AlertVC for custom tint
-        [self savePath];
+        //***TINT***
+        //AlertVC for custom tint
         
         [self setCustomTint];
         
@@ -639,6 +636,7 @@ NSFetchedResultsControllerDelegate
                                                               
                                                               [[NSUserDefaults standardUserDefaults] setObject:colourData forKey:TintKey];
                                                               
+                                                              [self savePath];
                                                               
                                                               NSArray *overlays = self.mapView.overlays;
                                                               [self.mapView removeOverlays:overlays];
