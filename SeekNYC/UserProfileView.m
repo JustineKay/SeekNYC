@@ -12,13 +12,16 @@
 
 - (void)setPercentage:(CGFloat)percentage {
     
+    //Change to percentage uncovered?
+    //CGFloat percentageUncovered = 100 - percentage;
+    
     if (percentage) {
         NSLog(@"%f", percentage);
         _percentage = percentage;
         
     }else {
         
-        _percentage = 0.001;
+        _percentage = 0.01;
     }
     
     

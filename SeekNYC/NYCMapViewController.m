@@ -17,6 +17,8 @@
 #import "Path+CoreDataProperties.h"
 #import "Location.h"
 #import "Location+CoreDataProperties.h"
+#import "VisitedTile.h"
+#import "VisitedTile+CoreDataProperties.h"
 #import "ClearOverlayPathRenderer.h"
 #import "MKMapColorOverlayRenderer.h"
 #import "MKMapFullCoverageOverlay.h"
@@ -97,6 +99,11 @@ NSFetchedResultsControllerDelegate
     
     [self loadNYCMap];
     [self loadUserPaths];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [self savePath];
 }
 
 #pragma mark - UI
@@ -325,9 +332,9 @@ NSFetchedResultsControllerDelegate
     
     
     NSArray *images = @[
-                        [UIImage imageNamed:@"ProgressButtonImage"],
-                        [UIImage imageNamed:@"SeekButtonImage"],
-                        [UIImage imageNamed:@"TintButtonImage"]
+                        [UIImage imageNamed:@"percentage"],
+                        [UIImage imageNamed:@"seek"],
+                        [UIImage imageNamed:@"tint"]
                         ];
     
     NSArray *colors = @[
@@ -478,6 +485,51 @@ NSFetchedResultsControllerDelegate
         
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
+    }
+}
+
+- (void)saveVisitedTile: (NSString *)columnRow {
+    
+    VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"Tile"
+                                               inManagedObjectContext:self.managedObjectContext];
+    
+    tile.timestamp = [NSDate date];
+    tile.columnRow = columnRow;
+    
+    
+    // Save the context.
+    NSError *error = nil;
+    
+    if (![self.managedObjectContext save:&error]) {
+        
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+-(void)loadVisitedTiles {
+    //Create an instance of NSFetchRequest with an entity name
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tile"];
+    
+    //create a sort descriptor
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    
+    //set the sort descriptors on the fetchRequest
+    fetchRequest.sortDescriptors = @[sort];
+    
+    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    self.fetchedResultsController.delegate = self;
+    
+    [self.fetchedResultsController performFetch:nil];
+    
+    if (self.fetchedResultsController.fetchedObjects != nil) {
+        
+        NSArray *fetchedTiles = self.fetchedResultsController.fetchedObjects;
+        
+        
+        
     }
 }
 
