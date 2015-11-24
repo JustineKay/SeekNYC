@@ -26,10 +26,13 @@
     
     UserProfileView *view = (UserProfileView *)self.view;
     [view.backButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSLog(@"Is it passing %2f?", view.percentage);
  
     view.percentage = self.progress;
+    
+    [view.nycCircleProgressBar setProgress:view.percentage animated:YES]; //in set progress number add
+
+    
+    NSLog(@"Is it passing %2f?", view.percentage);
 }
 
 - (void)dismiss {
