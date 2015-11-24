@@ -62,10 +62,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self fetchFourSquareData];
     
-   
-}
+    [self fetchFourSquareData];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:
+                                     [UIImage imageNamed:@"Gray Background.png"]];
+    
+    
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

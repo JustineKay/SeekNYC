@@ -44,6 +44,7 @@
 		F79D2E0A1C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E091C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m */; };
 		F79D2E0D1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E0C1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m */; };
 		F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E0F1C02204300A5F7CA /* SeekNYCParks.m */; };
+		F7ACEA991C04F82600316323 /* Viafont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7ACEA981C04F82600316323 /* Viafont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		F79D2E0C1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestedVenuesTableViewController.m; sourceTree = "<group>"; };
 		F79D2E0E1C02204300A5F7CA /* SeekNYCParks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekNYCParks.h; sourceTree = "<group>"; };
 		F79D2E0F1C02204300A5F7CA /* SeekNYCParks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekNYCParks.m; sourceTree = "<group>"; };
+		F7ACEA981C04F82600316323 /* Viafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Viafont.ttf; sourceTree = "<group>"; };
 		F7DB25FEF09FD3D81CB565DF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -163,6 +165,7 @@
 		6B9B795B1BF68D05004A7756 /* SeekNYC */ = {
 			isa = PBXGroup;
 			children = (
+				F7ACEA981C04F82600316323 /* Viafont.ttf */,
 				6B9B795F1BF68D05004A7756 /* AppDelegate.h */,
 				6B9B79601BF68D05004A7756 /* AppDelegate.m */,
 				F79D2E031C021CAD00A5F7CA /* APIManager.h */,
@@ -318,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7ACEA991C04F82600316323 /* Viafont.ttf in Resources */,
 				001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */,
 				6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */,
 				6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */,
