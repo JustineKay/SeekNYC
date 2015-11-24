@@ -16,11 +16,13 @@
 		6B28AA361C026650001CFF08 /* UIColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA351C026650001CFF08 /* UIColor+Color.m */; };
 		6B28AA3C1C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA391C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m */; };
 		6B28AA3D1C0271C5001CFF08 /* VisitedTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA3B1C0271C5001CFF08 /* VisitedTile.m */; };
+		6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA3F1C0274BD001CFF08 /* DiamondAnnotationView.m */; };
+		6B28AA431C02C2E3001CFF08 /* UberBlackAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */; };
+		6B3BF7F21C03DA4B00F72765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
 		6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79681BF68D05004A7756 /* SeekNYC.xcdatamodeld */; };
-		6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B796B1BF68D05004A7756 /* Assets.xcassets */; };
 		6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */; };
 		6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79771BF68D6B004A7756 /* ClearOverlayPathRenderer.m */; };
 		6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */; };
@@ -61,13 +63,17 @@
 		6B28AA391C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VisitedTile+CoreDataProperties.m"; sourceTree = "<group>"; };
 		6B28AA3A1C0271C5001CFF08 /* VisitedTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitedTile.h; sourceTree = "<group>"; };
 		6B28AA3B1C0271C5001CFF08 /* VisitedTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitedTile.m; sourceTree = "<group>"; };
+		6B28AA3E1C0274BD001CFF08 /* DiamondAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiamondAnnotationView.h; sourceTree = "<group>"; };
+		6B28AA3F1C0274BD001CFF08 /* DiamondAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiamondAnnotationView.m; sourceTree = "<group>"; };
+		6B28AA411C02C2E3001CFF08 /* UberBlackAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UberBlackAnnotationView.h; sourceTree = "<group>"; };
+		6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UberBlackAnnotationView.m; sourceTree = "<group>"; };
+		6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6B9B79601BF68D05004A7756 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6B9B79661BF68D05004A7756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6B9B79691BF68D05004A7756 /* SeekNYC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SeekNYC.xcdatamodel; sourceTree = "<group>"; };
-		6B9B796B1BF68D05004A7756 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B9B796E1BF68D05004A7756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B9B79701BF68D05004A7756 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPathRenderer.h; sourceTree = "<group>"; };
@@ -169,6 +175,10 @@
 				F79D2E091C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m */,
 				F721F9F31BF7ED65007684EA /* CircleProgressBar.h */,
 				F721F9F41BF7ED65007684EA /* CircleProgressBar.m */,
+				6B28AA411C02C2E3001CFF08 /* UberBlackAnnotationView.h */,
+				6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */,
+				6B28AA3E1C0274BD001CFF08 /* DiamondAnnotationView.h */,
+				6B28AA3F1C0274BD001CFF08 /* DiamondAnnotationView.m */,
 				6B28AA381C0271C5001CFF08 /* VisitedTile+CoreDataProperties.h */,
 				6B28AA391C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m */,
 				6B28AA3A1C0271C5001CFF08 /* VisitedTile.h */,
@@ -205,9 +215,9 @@
 				6BB08B951C0111C20098C805 /* UserProfileView.m */,
 				001961C41BF7A33C00E08B91 /* UserProfileView.xib */,
 				6B9B79651BF68D05004A7756 /* Main.storyboard */,
-				6B9B796B1BF68D05004A7756 /* Assets.xcassets */,
 				6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */,
 				6B9B79701BF68D05004A7756 /* Info.plist */,
+				6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */,
 				6B9B79681BF68D05004A7756 /* SeekNYC.xcdatamodeld */,
 				6B28AA2B1C0130D8001CFF08 /* Resources */,
 				6B9B795C1BF68D05004A7756 /* Supporting Files */,
@@ -276,7 +286,7 @@
 				TargetAttributes = {
 					6B9B79581BF68D05004A7756 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 9V5VY2T8PQ;
+						DevelopmentTeam = 26RHXP32FH;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -310,9 +320,9 @@
 			files = (
 				001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */,
 				6B9B796F1BF68D05004A7756 /* LaunchScreen.storyboard in Resources */,
-				6B9B796C1BF68D05004A7756 /* Assets.xcassets in Resources */,
 				6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */,
 				6B28AA2D1C01310C001CFF08 /* Viafont.otf in Resources */,
+				6B3BF7F21C03DA4B00F72765 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +389,7 @@
 				F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */,
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
 				6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */,
+				6B28AA431C02C2E3001CFF08 /* UberBlackAnnotationView.m in Sources */,
 				6B9B79A31BF68F66004A7756 /* User.m in Sources */,
 				F79D2E0D1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m in Sources */,
 				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
@@ -391,6 +402,7 @@
 				F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */,
 				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
+				6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */,
 				6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */,
 				6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */,
 				F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */,
@@ -512,7 +524,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JustineKay.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -530,7 +542,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JustineKay.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
