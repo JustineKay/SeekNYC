@@ -1,25 +1,25 @@
 //
-//  DiamondAnnotationView.m
+//  UberBlackAnnotationView.m
 //  SeekNYC
 //
 //  Created by Justine Gartner on 11/22/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 
-#import "DiamondAnnotationView.h"
+#import "UberBlackAnnotationView.h"
 
-@implementation DiamondAnnotationView
+@implementation UberBlackAnnotationView
 
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    
-    imageView.animationImages = @[[UIImage imageNamed:@"SuperDiamond1"],
-                                  [UIImage imageNamed:@"SuperDiamond2"],
-                                  [UIImage imageNamed:@"SuperDiamond3"],
-                                  [UIImage imageNamed:@"SuperDiamond4"]
+    imageView.animationImages = @[[UIImage imageNamed:@"UberBLACK1"],
+                                  [UIImage imageNamed:@"UberBLACK2"],
+                                  [UIImage imageNamed:@"UberBLACK3"],
+                                  [UIImage imageNamed:@"UberBLACK4"],
+                                  [UIImage imageNamed:@"UberBLACK5"]
                                   ];
     
     imageView.animationDuration = 0.5;
@@ -28,4 +28,5 @@
     
     return self;
 }
+
 @end

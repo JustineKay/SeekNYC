@@ -27,9 +27,8 @@
 #import "SuggestedVenuesTableViewController.h"
 #import "UIColor+Color.h"
 #import "DiamondAnnotationView.h"
+#import "UberBlackAnnotationView.h"
 
-static bool const isMetric = NO;
-static float const metersInKM = 1000;
 static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 40.0;
 
@@ -197,16 +196,18 @@ NSFetchedResultsControllerDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    //    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-    //        return [[MKAnnotationView alloc] init];
-    //    }
-    
     if([annotation isKindOfClass:[MKUserLocation class]]) {
+        
+//        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+//        if (!view)
+//            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
+//        view.bounds = CGRectMake(0, 0, 45, 20);
+        
         DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
         if(!view)
             view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
         view.bounds = CGRectMake(0, 0, 45, 45);
-        //view.backgroundColor = [UIColor purpleColor];
+        
         
         //
         //Animate it like any UIView!
@@ -506,6 +507,8 @@ NSFetchedResultsControllerDelegate
     float percentageOfNYCUncovered = metersOfNYCUncovered * 100;
     
     self.percentageTravelled = percentageOfNYCUncovered;
+    
+    NSLog(@"marker");
 }
 
 #pragma mark - Overlay Renderer
