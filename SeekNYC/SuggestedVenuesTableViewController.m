@@ -13,7 +13,7 @@
 
 @interface SuggestedVenuesTableViewController ()
 
-@property (nonatomic) NSMutableArray *parkResults;
+@property (nonatomic) NSMutableArray *venueResults;
 
 @end
 
@@ -25,7 +25,7 @@
     
     
     // create an instagram url
-    NSURL *foursquaredParksURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/explore?near=nyc&section=outdoors&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    NSURL *foursquaredParksURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=nyc&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
     // fetch data from the instagram endpoint and print json response
     [APIManager GETRequestWithURL:foursquaredParksURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -34,22 +34,22 @@
         
       //  NSLog(@"%@", json);
         
-        NSArray *venues = json[@"response"][@"groups"];
+        NSArray *venues = json[@"response"][@"venues"];
        
-        
      //   NSLog(@"VENUES HERE %@", venues);
         
         // reset my array
-        self.parkResults = [[NSMutableArray alloc] init];
+        self.venueResults = [[NSMutableArray alloc] init];
         
         // loop through all json posts
         for (NSDictionary *venue in venues) {
             
             // create new post from json
-            SeekNYCParks *parks = [[SeekNYCParks alloc] initWithJSON:venue];
+            SeekNYCParks *suggestedVenue = [[SeekNYCParks alloc] initWithJSON:venue];
             
             // add post to array
-            [self.parkResults addObject:parks];
+            [self.venueResults addObject:suggestedVenue];
+            
         }
         
         [self.tableView reloadData];
@@ -64,11 +64,7 @@
     [super viewDidLoad];
     [self fetchFourSquareParkData];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,7 +81,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.parkResults.count;
+    return self.venueResults.count;
 }
 
 
@@ -93,14 +89,14 @@
     
     SuggestedVenuesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placesidentifier" forIndexPath:indexPath];
     
-    SeekNYCParks *parks = self.parkResults[indexPath.row];
+    SeekNYCParks *suggestedVenue = self.venueResults[indexPath.row];
     
-    cell.placeAddress.text = [NSString stringWithFormat:@"%@", parks.address];
+    cell.placeAddress.text = [NSString stringWithFormat:@"%@", suggestedVenue.address];
     NSLog(@"%@", cell.placeAddress.text);
     
-    cell.placeName.text = [NSString stringWithFormat:@"%@", parks.name];
+    cell.placeName.text = [NSString stringWithFormat:@"%@", suggestedVenue.name];
     
-    cell.placeDetail.text = [NSString stringWithFormat:@"%@", parks.detail];
+    cell.placeCategory.text = [NSString stringWithFormat:@"%@", suggestedVenue.categoryName];
     
     return cell;
 }
