@@ -505,6 +505,8 @@ NSFetchedResultsControllerDelegate
 
 -(void)loadVisitedTiles {
     
+    self.visitedTiles = [[NSMutableArray alloc] init];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VisitedTile"];
     
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
