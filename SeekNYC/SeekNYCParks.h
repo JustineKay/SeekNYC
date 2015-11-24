@@ -12,7 +12,7 @@
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
-@property (nonatomic) NSString *detail;
+@property (nonatomic) NSString *categoryName;
 
 
 - (instancetype)initWithJSON:(NSDictionary *)json;

@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *placeName;
 @property (weak, nonatomic) IBOutlet UILabel *placeAddress;
-@property (weak, nonatomic) IBOutlet UILabel *placeDetail;
+@property (weak, nonatomic) IBOutlet UILabel *placeCategory;
 
 
 @end

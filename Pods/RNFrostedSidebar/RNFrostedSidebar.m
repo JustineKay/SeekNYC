@@ -201,8 +201,8 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     
-    float r, g, b, a;
-    float darkenFactor = 0.3f;
+    CGFloat r, g, b, a;
+    CGFloat darkenFactor = 0.3f;
     UIColor *darkerColor;
     if ([self.originalBackgroundColor getRed:&r green:&g blue:&b alpha:&a]) {
         darkerColor = [UIColor colorWithRed:MAX(r - darkenFactor, 0.0) green:MAX(g - darkenFactor, 0.0) blue:MAX(b - darkenFactor, 0.0) alpha:a];

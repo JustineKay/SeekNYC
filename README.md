@@ -4,6 +4,10 @@
 **Team Name: Seekers**  
 **Team Members: Christella Dolmo, Justine Kay, Felicia Weathers**  
 
+## Description  
+
+SeekNYC is a fun way to discover places you haven’t visited in New York City’s five boroughs. Explore and uncover a map of NYC as you seek out new adventures.  
+
 ## The Problem
 
 We all get stuck in the same old routine and repeat the same paths to similar destinations rather than discovering a new path.  
@@ -16,11 +20,10 @@ In NYC, how can we motivate people to discover other locations around the city o
 
 ## The Solution
 
-A real-life game that reveals how much of NYC you've actually explored and rewards you for uncovering more of the map.  
+A real-life game that reveals how much of NYC you've actually explored and gives you suggestions for uncovering more of the map.  
+The app tracks your movement as you trek through the city and reveals an underlying map of NYC in full color and detail. It shows you what percentage of the 5 boroughs you've actually covered, and you can request suggestions for exploring places off your beaten path. 
 
-The app tracks your movement as you trek through the city and reveals an underlying map of NYC in full color and detail. It shows you what percentage of the 5 boroughs you've actually covered, and you earn badges for uncovering more ground and exploring areas off your beaten path. 
-
-The map has a gray opaque overlay.  Everywhere the user has been is uncovered in full color and detail.
+The user can choose between 4 different colors for the opaque overlay on the map.  Everywhere the user has been uncovers the map below.
 
 #### Baseline Features:
 * User can acheive awards and obtain certain levels for visiting specific places, traveling new routes, and avoiding well-known tourist traps.

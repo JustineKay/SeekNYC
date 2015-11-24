@@ -17,6 +17,8 @@
 #import "Path+CoreDataProperties.h"
 #import "Location.h"
 #import "Location+CoreDataProperties.h"
+#import "VisitedTile.h"
+#import "VisitedTile+CoreDataProperties.h"
 #import "ClearOverlayPathRenderer.h"
 #import "MKMapColorOverlayRenderer.h"
 #import "MKMapFullCoverageOverlay.h"
@@ -27,9 +29,8 @@
 #import "SuggestedVenuesTableViewController.h"
 #import "UIColor+Color.h"
 #import "DiamondAnnotationView.h"
+#import "UberBlackAnnotationView.h"
 
-static bool const isMetric = NO;
-static float const metersInKM = 1000;
 static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 40.0;
 
@@ -98,6 +99,11 @@ NSFetchedResultsControllerDelegate
     
     [self loadNYCMap];
     [self loadUserPaths];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [self savePath];
 }
 
 #pragma mark - UI
@@ -197,16 +203,18 @@ NSFetchedResultsControllerDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    //    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-    //        return [[MKAnnotationView alloc] init];
-    //    }
-    
     if([annotation isKindOfClass:[MKUserLocation class]]) {
+        
+//        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+//        if (!view)
+//            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
+//        view.bounds = CGRectMake(0, 0, 45, 20);
+        
         DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
         if(!view)
             view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
         view.bounds = CGRectMake(0, 0, 45, 45);
-        //view.backgroundColor = [UIColor purpleColor];
+        
         
         //
         //Animate it like any UIView!
@@ -324,9 +332,9 @@ NSFetchedResultsControllerDelegate
     
     
     NSArray *images = @[
-                        [UIImage imageNamed:@"ProgressButtonImage"],
-                        [UIImage imageNamed:@"SeekButtonImage"],
-                        [UIImage imageNamed:@"TintButtonImage"]
+                        [UIImage imageNamed:@"percentage"],
+                        [UIImage imageNamed:@"seek"],
+                        [UIImage imageNamed:@"tint"]
                         ];
     
     NSArray *colors = @[
@@ -480,6 +488,51 @@ NSFetchedResultsControllerDelegate
     }
 }
 
+- (void)saveVisitedTile: (NSString *)columnRow {
+    
+    VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"Tile"
+                                               inManagedObjectContext:self.managedObjectContext];
+    
+    tile.timestamp = [NSDate date];
+    tile.columnRow = columnRow;
+    
+    
+    // Save the context.
+    NSError *error = nil;
+    
+    if (![self.managedObjectContext save:&error]) {
+        
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+-(void)loadVisitedTiles {
+    //Create an instance of NSFetchRequest with an entity name
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tile"];
+    
+    //create a sort descriptor
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    
+    //set the sort descriptors on the fetchRequest
+    fetchRequest.sortDescriptors = @[sort];
+    
+    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    self.fetchedResultsController.delegate = self;
+    
+    [self.fetchedResultsController performFetch:nil];
+    
+    if (self.fetchedResultsController.fetchedObjects != nil) {
+        
+        NSArray *fetchedTiles = self.fetchedResultsController.fetchedObjects;
+        
+        
+        
+    }
+}
+
 
 #pragma mark - Distance Calculations
 
@@ -506,6 +559,8 @@ NSFetchedResultsControllerDelegate
     float percentageOfNYCUncovered = metersOfNYCUncovered * 100;
     
     self.percentageTravelled = percentageOfNYCUncovered;
+    
+    NSLog(@"marker");
 }
 
 #pragma mark - Overlay Renderer

@@ -14,22 +14,14 @@
     
     if (self = [super init]) {
         
-        
-        NSDictionary *venueType = [venue[@"items"]objectAtIndex:0];
-        self.name = venueType[@"venue"][@"name"];
+    
+        self.name = venue[@"name"];
+        self.address =[venue[@"location"][@"formattedAddress"] componentsJoinedByString:@" "];
 
-        NSDictionary *venueAddress = venueType[@"venue"][@"location"];
-        self.address = [[venueAddress objectForKey:@"formattedAddress"] componentsJoinedByString:@" "];
-        NSDictionary *parkDetails = [venueType[@"tips"]objectAtIndex:0];
-        self.detail = [parkDetails objectForKey:@"text"];
+        NSDictionary *venueType = [venue[@"categories"]objectAtIndex:0];
         
+        self.categoryName = [venueType objectForKey:@"name"];
 
-        
-//        NSLog(@"%@",venueType);
-        NSLog(@"%@",self.name);
-        NSLog(@"%@",self.address);
-        NSLog(@"%@",self.detail);
-        
         return self;
     }
     return nil;
