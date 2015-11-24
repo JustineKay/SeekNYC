@@ -22,14 +22,6 @@
         
         self.categoryName = [venueType objectForKey:@"name"];
 
-        
-
-        
-//        NSLog(@"%@",venueType);
-        NSLog(@"%@",self.name);
-        NSLog(@"%@",self.address);
-        NSLog(@"%@",self.categoryName);
-        
         return self;
     }
     return nil;

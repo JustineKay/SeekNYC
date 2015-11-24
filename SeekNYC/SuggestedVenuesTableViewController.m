@@ -20,12 +20,12 @@
 @implementation SuggestedVenuesTableViewController
 
 
-- (void)fetchFourSquareParkData {
+- (void)fetchFourSquareData {
     
     
     
     // create an instagram url
-    NSURL *foursquaredParksURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=nyc&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    NSURL *foursquaredParksURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
     // fetch data from the instagram endpoint and print json response
     [APIManager GETRequestWithURL:foursquaredParksURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -62,7 +62,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self fetchFourSquareParkData];
+    [self fetchFourSquareData];
     
    
 }
@@ -92,9 +92,12 @@
     SeekNYCParks *suggestedVenue = self.venueResults[indexPath.row];
     
     cell.placeAddress.text = [NSString stringWithFormat:@"%@", suggestedVenue.address];
-    NSLog(@"%@", cell.placeAddress.text);
-    
+    cell.placeAddress.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.placeAddress.numberOfLines = 0;
+   
     cell.placeName.text = [NSString stringWithFormat:@"%@", suggestedVenue.name];
+    cell.placeName.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.placeName.numberOfLines = 0;
     
     cell.placeCategory.text = [NSString stringWithFormat:@"%@", suggestedVenue.categoryName];
     
