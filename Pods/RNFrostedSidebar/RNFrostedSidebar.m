@@ -239,6 +239,7 @@
 @property (nonatomic, strong) NSArray *borderColors;
 @property (nonatomic, strong) NSMutableArray *itemViews;
 @property (nonatomic, strong) NSMutableIndexSet *selectedIndices;
+@pr
 
 @end
 
