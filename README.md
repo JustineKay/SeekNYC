@@ -4,6 +4,10 @@
 **Team Name: Seekers**  
 **Team Members: Christella Dolmo, Justine Kay, Felicia Weathers**  
 
+## Description  
+
+SeekNYC is a fun way to discover places you haven’t visited in New York City’s five boroughs. Explore and uncover a map of NYC as you seek out new adventures.  
+
 ## The Problem
 
 We all get stuck in the same old routine and repeat the same paths to similar destinations rather than discovering a new path.  
