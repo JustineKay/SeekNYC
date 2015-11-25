@@ -25,7 +25,6 @@
     }
     
     
-    [self.nycCircleProgressBar setProgress:self.percentage animated:YES]; //in set progress number add
     NSLog(@"Let's see %2f", self.percentage);
 }
 
