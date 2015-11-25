@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Viafont.ttf">
+            <string>Viafont</string>
+            <string>Viafont</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -71,22 +77,42 @@
                             <rect key="frame" x="20" y="539" width="43" height="41"/>
                             <animations/>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's do this!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhl-la-z2Q">
+                            <rect key="frame" x="20" y="460" width="560" height="22"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" name="Viafont" family="Viafont" pointSize="22"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total area of NYC uncovered: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F9-pb-ovL">
+                            <rect key="frame" x="20" y="140" width="560" height="19"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" name="Viafont" family="Viafont" pointSize="19"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="IAa-LE-pHp" firstAttribute="centerX" secondItem="BLZ-dn-JUP" secondAttribute="centerX" id="1ig-WS-lpn"/>
+                        <constraint firstItem="Fhl-la-z2Q" firstAttribute="top" secondItem="IAa-LE-pHp" secondAttribute="bottom" constant="35" id="2UZ-mA-9ay"/>
                         <constraint firstItem="2Kg-JS-ae7" firstAttribute="height" secondItem="4hH-pH-fwE" secondAttribute="height" id="5NL-DX-dRq"/>
                         <constraint firstAttribute="bottom" secondItem="4hH-pH-fwE" secondAttribute="bottom" constant="20" id="5dg-JW-JfZ"/>
+                        <constraint firstItem="IAa-LE-pHp" firstAttribute="top" secondItem="0F9-pb-ovL" secondAttribute="bottom" constant="16" id="CKu-GZ-0jo"/>
                         <constraint firstItem="IAa-LE-pHp" firstAttribute="centerY" secondItem="BLZ-dn-JUP" secondAttribute="centerY" id="Hxk-Mi-JUF"/>
                         <constraint firstItem="2Kg-JS-ae7" firstAttribute="width" secondItem="4hH-pH-fwE" secondAttribute="width" id="KYw-Wq-E9e"/>
+                        <constraint firstAttribute="trailing" secondItem="0F9-pb-ovL" secondAttribute="trailing" constant="20" id="Kxh-Qb-RGH"/>
                         <constraint firstItem="2Kg-JS-ae7" firstAttribute="centerY" secondItem="4hH-pH-fwE" secondAttribute="centerY" id="S8v-2e-lrm"/>
                         <constraint firstItem="2Kg-JS-ae7" firstAttribute="centerX" secondItem="4hH-pH-fwE" secondAttribute="centerX" id="She-5j-dEs"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" constant="20" id="f3F-hQ-VrJ"/>
+                        <constraint firstItem="Fhl-la-z2Q" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" constant="20" id="g2Q-Db-naT"/>
                         <constraint firstItem="IAa-LE-pHp" firstAttribute="centerX" secondItem="BLZ-dn-JUP" secondAttribute="centerX" id="gQf-Cc-CjH"/>
+                        <constraint firstAttribute="trailing" secondItem="Fhl-la-z2Q" secondAttribute="trailing" constant="20" id="gQs-rc-o7p"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" id="iJp-gG-TSQ"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" constant="20" id="oin-RM-59u"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="top" secondItem="BLZ-dn-JUP" secondAttribute="top" constant="12" id="rfn-Sk-1x0"/>
+                        <constraint firstItem="0F9-pb-ovL" firstAttribute="leading" secondItem="BLZ-dn-JUP" secondAttribute="leading" constant="20" id="sJt-c9-HFj"/>
                         <constraint firstItem="4hH-pH-fwE" firstAttribute="top" secondItem="BLZ-dn-JUP" secondAttribute="top" constant="30" id="vva-9G-oAR"/>
                     </constraints>
                     <variation key="default">

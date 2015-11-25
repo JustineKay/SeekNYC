@@ -60,7 +60,7 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) float distance;
 @property (nonatomic) int seconds;
 
-@property (nonatomic) NSMutableOrderedSet *visitedTiles;
+@property (nonatomic) NSMutableArray *visitedTiles;
 @property (nonatomic) CLLocation *gridOriginPoint;
 
 @property (nonatomic) CGFloat percentageTravelled;
@@ -92,6 +92,8 @@ NSFetchedResultsControllerDelegate
     self.stopTrackingPathButton.hidden = YES;
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
+    
+    self.visitedTiles = [[NSMutableArray alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -99,6 +101,7 @@ NSFetchedResultsControllerDelegate
     
     [self loadNYCMap];
     [self loadUserPaths];
+    [self loadVisitedTiles];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -128,20 +131,6 @@ NSFetchedResultsControllerDelegate
     [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
-    
-    
-    //Testing Grid
-    
-    CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
-    self.gridOriginPoint = location1;
-    
-    CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
-    CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
-    
-    NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
-    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
-    
-    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
     
 }
 
@@ -254,7 +243,7 @@ NSFetchedResultsControllerDelegate
     for (CLLocation *newLocation in locations) {
         
         BOOL isAccurate = newLocation.horizontalAccuracy < 20;
-        BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 2.0;
+        BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 30.0;
         
         if (isAccurate && isRecent) {
             
@@ -267,13 +256,15 @@ NSFetchedResultsControllerDelegate
             
             BOOL matchingTileFound = NO;
             
-            NSString *visitedTile = [self userLocationInGrid:newLocation];
+            NSString *newTile = [self userLocationInGrid:newLocation];
             
             for (int i = 0; i < self.visitedTiles.count; i++) {
                 
-                if ([visitedTile isEqualToString:self.visitedTiles[i]]) {
+                if ([newTile isEqualToString:self.visitedTiles[i]]) {
                     
                     matchingTileFound = YES;
+                    NSLog(@"Matching Tile Found");
+                    
                     break;
                 }
                 
@@ -281,8 +272,13 @@ NSFetchedResultsControllerDelegate
             
             if (matchingTileFound == NO) {
                 
-                [self.visitedTiles addObject:visitedTile];
+                NSLog(@"No matching tile found");
                 
+                [self saveVisitedTile:newTile];
+                
+                [self.visitedTiles addObject:newTile];
+                
+                [self percentageOfNYCUncovered];
             }
             
             if (self.locations.count > 1) {
@@ -490,7 +486,7 @@ NSFetchedResultsControllerDelegate
 
 - (void)saveVisitedTile: (NSString *)columnRow {
     
-    VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"Tile"
+    VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"VisitedTile"
                                                inManagedObjectContext:self.managedObjectContext];
     
     tile.timestamp = [NSDate date];
@@ -508,16 +504,15 @@ NSFetchedResultsControllerDelegate
 }
 
 -(void)loadVisitedTiles {
-    //Create an instance of NSFetchRequest with an entity name
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tile"];
     
-    //create a sort descriptor
+    self.visitedTiles = [[NSMutableArray alloc] init];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VisitedTile"];
+    
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
     
-    //set the sort descriptors on the fetchRequest
     fetchRequest.sortDescriptors = @[sort];
     
-    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
     self.fetchedResultsController.delegate = self;
@@ -528,7 +523,11 @@ NSFetchedResultsControllerDelegate
         
         NSArray *fetchedTiles = self.fetchedResultsController.fetchedObjects;
         
+        for (VisitedTile *tile in fetchedTiles) {
+            
+            [self.visitedTiles addObject: tile.columnRow];
         
+        }
         
     }
 }
@@ -536,16 +535,16 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - Distance Calculations
 
-- (float)distanceInMiles:(float)meters
+- (CGFloat)distanceInMiles:(CGFloat)meters
 {
-    float unitDivider;
+    CGFloat unitDivider;
     NSString *unitName;
     
     unitName = @"mi";
     // to get from meters to miles divide by this
     unitDivider = metersInMile;
     
-    float distanceInMiles = meters/unitDivider;
+    CGFloat distanceInMiles = meters/unitDivider;
     
     return distanceInMiles;
 }
@@ -553,14 +552,14 @@ NSFetchedResultsControllerDelegate
 
 -(void)percentageOfNYCUncovered{
     
-    float userMeters = self.visitedTiles.count * 40;
-    float nycMeters = 785000;
-    float metersOfNYCUncovered = userMeters / nycMeters;
-    float percentageOfNYCUncovered = metersOfNYCUncovered * 100;
+    CGFloat userMeters = self.visitedTiles.count * 40;
+    CGFloat nycMeters = 785000;
+    CGFloat metersOfNYCUncovered = userMeters / nycMeters;
+    CGFloat percentageOfNYCUncovered = metersOfNYCUncovered * 100;
     
     self.percentageTravelled = percentageOfNYCUncovered;
     
-    NSLog(@"marker");
+    NSLog(@"percentage travelled: %f", self.percentageTravelled);
 }
 
 #pragma mark - Overlay Renderer
@@ -719,6 +718,23 @@ NSFetchedResultsControllerDelegate
 
 
 #pragma  mark - Testing Grid
+
+-(void)gridTest{
+    
+    //Testing Grid
+    
+//    CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
+//    self.gridOriginPoint = location1;
+//    
+//    CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
+//    CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
+//    
+//    NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
+//    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
+//    
+//    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
+//    
+}
 
 -(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
     
