@@ -794,5 +794,27 @@ NSFetchedResultsControllerDelegate
     [self.mapView addAnnotation:annotation];
 }
 
+#pragma mark - ShakeGesture
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        [self showAlert];
+    }
+}
+
+-(IBAction)showAlert
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SeekNYC" message:@"Places to explore!" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    
+    [alertView show];
+}
+
 
 @end
