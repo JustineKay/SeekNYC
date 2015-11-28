@@ -94,6 +94,20 @@ NSFetchedResultsControllerDelegate
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
     self.visitedTiles = [[NSMutableArray alloc] init];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *infoAlert = @"infoAlert";
+    if ([prefs boolForKey:infoAlert])
+        return;
+    [prefs setBool:YES forKey:infoAlert];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Heads Up"
+                          message:@"Shake your phone to receive info on places to visit"
+                          delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
