@@ -6,7 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Viafont.ttf">
+        <mutableArray key="Viafont.otf">
             <string>Viafont</string>
             <string>Viafont</string>
         </mutableArray>

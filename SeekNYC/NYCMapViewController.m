@@ -33,6 +33,9 @@
 
 static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 40.0;
+static float const centerCoordLat = 40.7127;
+static float const centerCoordLng = -74.0059;
+static float const NYRegionSpan = 0.525;
 
 @interface NYCMapViewController ()
 <
@@ -62,8 +65,10 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSMutableArray *visitedTiles;
 @property (nonatomic) CLLocation *gridOriginPoint;
+@property (nonatomic) CLLocationCoordinate2D gridCenterCoord;
+@property (nonatomic) MKCoordinateSpan gridSpan;
 
-@property (nonatomic) CGFloat percentageTravelled;
+@property (nonatomic) CGFloat percentageOfNYC;
 
 @property (nonatomic) NSTimer *timer;
 
@@ -94,6 +99,20 @@ NSFetchedResultsControllerDelegate
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
     self.visitedTiles = [[NSMutableArray alloc] init];
+    
+    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
+    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
+    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
+    
+    //Testing Grid
+    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+    
+    //Testing Tile coordinates
+    //40.6928, -73.9903
+    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -121,16 +140,15 @@ NSFetchedResultsControllerDelegate
     //set mapview to bounds of screen for grid testing
     self.mapView.frame = self.view.bounds;
     
-    CLLocationCoordinate2D centerCoord = CLLocationCoordinate2DMake(40.7127, -74.0059);
-    
-    MKCoordinateSpan spanOfNY = MKCoordinateSpanMake(0.525, 0.525);
-    
-    MKCoordinateRegion NYRegion = MKCoordinateRegionMake(centerCoord, spanOfNY);
+    MKCoordinateRegion NYRegion = MKCoordinateRegionMake(self.gridCenterCoord, self.gridSpan);
     
     MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
     [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
+    
+//    MKCoordinateSpan trueSpan = self.mapView.region.span;
+//    NSLog(@"true span");
     
 }
 
@@ -173,6 +191,20 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - Grid Set Up
 
+
+-(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
+    
+    double latDegreesFromCenter = span.latitudeDelta * 0.5;
+    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
+    
+    //Create topLeft corner of grid
+    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
+    
+    CLLocation *topLeftLocation = [[CLLocation alloc] initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
+    
+    return topLeftLocation;
+}
+
 -(NSString *)userLocationInGrid:(CLLocation *) userLocation{
     
     CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:userLocation.coordinate.longitude];
@@ -187,6 +219,66 @@ NSFetchedResultsControllerDelegate
     NSString *columnRow = [NSString stringWithFormat:@"%.f, %.f", columnNumber, rowNumber];
     
     return  columnRow;
+}
+
+-(NSArray *)visitedTileCoordinatesWith: (NSString *)columnRow {
+    
+    NSArray *columnRowNumbers = [columnRow componentsSeparatedByString:@", "];
+    NSString *column = columnRowNumbers[0];
+    NSString *row = columnRowNumbers[1];
+    NSInteger columnNumber = column.integerValue;
+    NSInteger rowNumber = row.integerValue;
+    
+    double latDiff = columnNumber * tileSizeInMeters;
+    double lngDiff = rowNumber * tileSizeInMeters;
+    
+    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
+    
+    MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(gridOriginPoint, latDiff, lngDiff);
+    MKCoordinateSpan tempSpan = tempRegion.span;
+    double latDegreesFromGridOriginPoint = tempSpan.latitudeDelta * 0.05;
+    double lngDegreesFromGridOriginPoint = tempSpan.longitudeDelta * 0.05;
+    
+    CLLocationCoordinate2D topLeft;
+    topLeft.latitude = gridOriginPoint.latitude - latDegreesFromGridOriginPoint;
+    topLeft.longitude = gridOriginPoint.longitude + lngDegreesFromGridOriginPoint;
+    
+    MKCoordinateRegion tileRegion = MKCoordinateRegionMakeWithDistance(topLeft, tileSizeInMeters, tileSizeInMeters);
+    MKCoordinateSpan tileSpan = tileRegion.span;
+    double latDegreesFromTopLeft = tileSpan.latitudeDelta * 0.05;
+    double lngDegreesFromTopLeft = tileSpan.longitudeDelta * 0.05;
+    
+    CLLocationCoordinate2D topRight;
+    topRight.latitude = topLeft.latitude - latDegreesFromTopLeft;
+    topRight.longitude = topLeft.longitude + lngDegreesFromTopLeft;
+//    CLLocationDistance longitudinalDistance = self.gridOriginPoint.coordinate.latitude - latDiff;
+//    CLLocationDistance latitudinalDistance = self.gridOriginPoint.coordinate.longitude + lngDiff;
+    
+//    CLLocation *tileTopLeftLocation = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude - latDiff longitude:self.gridOriginPoint.coordinate.longitude + lngDiff];
+//    
+//    CLLocation *tileTopRightLocation = [[CLLocation alloc ]initWithLatitude:tileTopLeftLocation.coordinate.latitude longitude:tileTopLeftLocation.coordinate.longitude + tileSizeInMeters];
+//    
+//    CLLocation *tileBottomLeftLocation = [[CLLocation alloc] initWithLatitude:tileTopLeftLocation.coordinate.latitude - tileSizeInMeters longitude:tileTopLeftLocation.coordinate.longitude];
+//    
+//    CLLocation *tileBottomRightLocation = [[CLLocation alloc] initWithLatitude:tileBottomLeftLocation.coordinate.latitude longitude:tileTopRightLocation.coordinate.longitude];
+//    
+//    NSArray *visitedTileCoordinates = @[ tileTopLeftLocation,
+//                                         tileTopRightLocation,
+//                                         tileBottomRightLocation,
+//                                         tileBottomLeftLocation
+//                                         ];
+    CLLocation *tileTopLeft = [[CLLocation alloc] initWithLatitude:topLeft.latitude longitude:topLeft.longitude];
+    CLLocation *tileTopRight = [[CLLocation alloc] initWithLatitude:topRight.latitude longitude:topRight.longitude];
+    
+    NSArray *visitedTileCoordinates = @[tileTopLeft, tileTopRight];
+    
+    //Add annotations to map for visual debugging
+    [self addAnnotationToMapWith:topLeft];
+    [self addAnnotationToMapWith:topRight];
+//    [self addAnnotationToMapWith:bottomRight];
+//    [self addAnnotationToMapWith:bottomLeft];
+    
+    return visitedTileCoordinates;
 }
 
 
@@ -274,6 +366,9 @@ NSFetchedResultsControllerDelegate
                 
                 NSLog(@"No matching tile found");
                 
+                //Use these coords to draw the tile
+                NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
+                
                 [self saveVisitedTile:newTile];
                 
                 [self.visitedTiles addObject:newTile];
@@ -359,7 +454,7 @@ NSFetchedResultsControllerDelegate
         
         UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
         
-        userProfileVC.progress = self.percentageTravelled;
+        userProfileVC.progress = self.percentageOfNYC;
         
         [self presentViewController:userProfileVC animated:YES completion:nil];
         
@@ -557,9 +652,9 @@ NSFetchedResultsControllerDelegate
     CGFloat metersOfNYCUncovered = userMeters / nycMeters;
     CGFloat percentageOfNYCUncovered = metersOfNYCUncovered * 100;
     
-    self.percentageTravelled = percentageOfNYCUncovered;
+    self.percentageOfNYC = percentageOfNYCUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageTravelled);
+    NSLog(@"percentage travelled: %f", self.percentageOfNYC);
 }
 
 #pragma mark - Overlay Renderer
@@ -736,18 +831,7 @@ NSFetchedResultsControllerDelegate
 //    
 }
 
--(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
-    
-    double latDegreesFromCenter = span.latitudeDelta * 0.5;
-    double lngDegreesFromCenter = span.longitudeDelta * 0.5;
-    
-    //Create topLeft corner of grid
-    CLLocationCoordinate2D topLeftCoord = CLLocationCoordinate2DMake(centerCoord.latitude + latDegreesFromCenter, centerCoord.longitude - lngDegreesFromCenter);
-    
-    CLLocation *topLeftLocation = [[CLLocation alloc] initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
-    
-    return topLeftLocation;
-}
+
 
 -(void)setGridWith:(CLLocationCoordinate2D)centerCoord And:(MKCoordinateSpan)span {
     
