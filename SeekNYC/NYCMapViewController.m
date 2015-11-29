@@ -93,6 +93,12 @@ NSFetchedResultsControllerDelegate
     
     self.mapView.delegate = self;
     
+    if (self.locationManager == nil) {
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    [self.locationManager requestAlwaysAuthorization];
+    
     self.trackPathButton.hidden = NO;
     self.stopTrackingPathButton.hidden = YES;
     
@@ -138,6 +144,7 @@ NSFetchedResultsControllerDelegate
     NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
     NSLog(@"testUserTileCoords: %@", testUserTileCoords);
     
+    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
     [self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
     //**********************
 
@@ -678,6 +685,20 @@ NSFetchedResultsControllerDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
+    if ([overlay isKindOfClass:[MKPolygon class]]) {
+        
+        MKPolygon *tileOverlay = (MKPolygon *)overlay;
+        
+        MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        
+        renderer.fillColor   = [UIColor blackColor];
+        renderer.strokeColor = [UIColor blackColor];
+        renderer.lineWidth   = 3;
+        
+        return renderer;
+        
+    }
+    
     if ([overlay isKindOfClass:[MKPolyline class]]) {
         
         MKPolyline *polyLine = (MKPolyline *)overlay;
@@ -691,8 +712,8 @@ NSFetchedResultsControllerDelegate
         
     } else if([overlay isMemberOfClass:[MKMapFullCoverageOverlay class]]) {
         
-        MKMapColorOverlayRenderer *fullOverlayView = [[MKMapColorOverlayRenderer alloc] initWithOverlay:overlay];
-        fullOverlayView.overlayAlpha = 0.90;
+        MKMapColorOverlayRenderer *fullOverlayRenderer = [[MKMapColorOverlayRenderer alloc] initWithOverlay:overlay];
+        fullOverlayRenderer.overlayAlpha = 0.90;
         
         if ([[NSUserDefaults standardUserDefaults] objectForKey:TintKey]) {
             
@@ -700,14 +721,14 @@ NSFetchedResultsControllerDelegate
             
             UIColor *userColour = [NSKeyedUnarchiver unarchiveObjectWithData:colourData];
             
-            fullOverlayView.overlayColor = userColour;
+            fullOverlayRenderer.overlayColor = userColour;
             
-            fullOverlayView.overlayAlpha = 0.75;
+            fullOverlayRenderer.overlayAlpha = 0.75;
             
             
         }
         
-        return fullOverlayView;
+        return fullOverlayRenderer;
     }
     
     return nil;
@@ -723,6 +744,18 @@ NSFetchedResultsControllerDelegate
     }
     
     return [MKPolyline polylineWithCoordinates:coords count:locations.count];
+}
+
+- (MKPolygon *)polygonWithLocations: (NSArray <CLLocation *> *)locations {
+    
+    CLLocationCoordinate2D coords[locations.count];
+    
+    for (int i = 0; i < locations.count; i++) {
+        CLLocation *location = [locations objectAtIndex:i];
+        coords[i] = location.coordinate;
+    }
+    
+    return [MKPolygon polygonWithCoordinates:coords count:locations.count];
 }
 
 

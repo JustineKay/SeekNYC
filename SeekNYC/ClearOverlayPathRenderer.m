@@ -62,9 +62,9 @@
 {
     CGFloat baseWidth = self.lineWidth / zoomScale;
     
-     //nice for debugging
-      //CGContextSetRGBFillColor(context, (0.0 / 255.0), (0.0 / 255.0), (0.0 / 255.0), 1.0);
-      //CGContextFillRect(context, [self rectForMapRect:mapRect]);
+    //nice for debugging
+//    CGContextSetRGBFillColor(context, (0.0 / 255.0), (0.0 / 255.0), (0.0 / 255.0), 1.0);
+//    CGContextFillRect(context, [self rectForMapRect:mapRect]);
     
     // a black background. Might Not need this...
     [self drawLine:self.backgroundColor.CGColor
@@ -97,6 +97,7 @@
     CGContextSetLineWidth(context, width);
     //CGContextSetLineWidth(context, 5.0 * zoomScale);
     
+    CGContextSetFillColorWithColor(context, color);
     
     CGContextSetLineCap(context, kCGLineCapRound);
     
