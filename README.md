@@ -77,11 +77,12 @@ http://en.fogofworld.com/
 
 **Felicia:**
 
-- Implement posting to Facebook, Twitter, Instagram
+- Implement shake gesture and one time alertView notification for shake gesture (NSUserDefault)
 - Editing ReadMe
 - Work on customizing map
 - Ideas for Achievements/Badges
 - Prep Demo Script and Pitch
+- Implement cutsomized menu button
 
 
 
