@@ -103,6 +103,7 @@
     CGContextSetBlendMode(context, kCGBlendModeClear);
     
     CGContextStrokePath(context);
+    CGContextFillPath(context);
 }
 
 

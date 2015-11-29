@@ -104,16 +104,7 @@ NSFetchedResultsControllerDelegate
     self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
     self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
     
-//    //Testing Grid
-//    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
-//    
-//    //Testing Tile coordinates
-//    //40.6928, -73.9903
-//    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-//    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
-//    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
-//    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
-
+    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSString *infoAlert = @"infoAlert";
     if ([prefs boolForKey:infoAlert])
@@ -136,6 +127,20 @@ NSFetchedResultsControllerDelegate
     [self loadNYCMap];
     [self loadUserPaths];
     [self loadVisitedTiles];
+    
+    //Testing Grid*********
+    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+    
+    //Testing Tile coordinates
+    //40.6928, -73.9903
+    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+    
+    [self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
+    //**********************
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -280,7 +285,8 @@ NSFetchedResultsControllerDelegate
     NSArray *visitedTileCoordinates = @[tileTopLeft,
                                         tileTopRight,
                                         tileBottomRight,
-                                        tileBottomLeft
+                                        tileBottomLeft,
+                                        tileTopLeft
                                         ];
     
     //Add annotations to map for visual debugging
