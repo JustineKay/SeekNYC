@@ -30,6 +30,8 @@
 #import "UIColor+Color.h"
 #import "DiamondAnnotationView.h"
 #import "UberBlackAnnotationView.h"
+#import "ClearOverlayPolygonRenderer.h"
+#import "ClearTileOverlayRenderer.h"
 
 static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 40.0;
@@ -689,11 +691,13 @@ NSFetchedResultsControllerDelegate
         
         MKPolygon *tileOverlay = (MKPolygon *)overlay;
         
-        MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        //MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        //ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        ClearTileOverlayRenderer *renderer = [[ClearTileOverlayRenderer alloc] initWithOverlay:tileOverlay];
         
-        renderer.fillColor   = [UIColor blackColor];
-        renderer.strokeColor = [UIColor blackColor];
-        renderer.lineWidth   = 3;
+//        renderer.fillColor   = [UIColor blackColor];
+//        renderer.strokeColor = [UIColor blackColor];
+//        renderer.lineWidth   = 3;
         
         return renderer;
         

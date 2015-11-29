@@ -30,4 +30,14 @@
     return self;
 }
 
+-(void)drawMapRect:(MKMapRect)mapRect
+         zoomScale:(MKZoomScale)zoomScale
+         inContext:(CGContextRef)context
+{
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    //CGContextFillPath(context);
+
+}
+
 @end
