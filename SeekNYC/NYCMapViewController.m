@@ -104,15 +104,30 @@ NSFetchedResultsControllerDelegate
     self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
     self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
     
-    //Testing Grid
-    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+//    //Testing Grid
+//    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+//    
+//    //Testing Tile coordinates
+//    //40.6928, -73.9903
+//    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+//    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+//    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+//    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *infoAlert = @"infoAlert";
+    if ([prefs boolForKey:infoAlert])
+        return;
+    [prefs setBool:YES forKey:infoAlert];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Heads Up"
+                          message:@"Shake your phone to receive info on places to visit"
+                          delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
     
-    //Testing Tile coordinates
-    //40.6928, -73.9903
-    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
-    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
-    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -146,10 +161,7 @@ NSFetchedResultsControllerDelegate
     [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
-    
-//    MKCoordinateSpan trueSpan = self.mapView.region.span;
-//    NSLog(@"true span");
-    
+        
 }
 
 - (void)loadUserPaths{
@@ -229,15 +241,15 @@ NSFetchedResultsControllerDelegate
     NSInteger columnNumber = column.integerValue;
     NSInteger rowNumber = row.integerValue;
     
-    double latDiff = columnNumber * tileSizeInMeters;
-    double lngDiff = rowNumber * tileSizeInMeters;
+    double lngDiff = columnNumber * tileSizeInMeters;
+    double latDiff = rowNumber * tileSizeInMeters;
     
     CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
     
     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(gridOriginPoint, latDiff, lngDiff);
     MKCoordinateSpan tempSpan = tempRegion.span;
-    double latDegreesFromGridOriginPoint = tempSpan.latitudeDelta * 0.05;
-    double lngDegreesFromGridOriginPoint = tempSpan.longitudeDelta * 0.05;
+    double latDegreesFromGridOriginPoint = tempSpan.latitudeDelta;
+    double lngDegreesFromGridOriginPoint = tempSpan.longitudeDelta;
     
     CLLocationCoordinate2D topLeft;
     topLeft.latitude = gridOriginPoint.latitude - latDegreesFromGridOriginPoint;
@@ -245,38 +257,37 @@ NSFetchedResultsControllerDelegate
     
     MKCoordinateRegion tileRegion = MKCoordinateRegionMakeWithDistance(topLeft, tileSizeInMeters, tileSizeInMeters);
     MKCoordinateSpan tileSpan = tileRegion.span;
-    double latDegreesFromTopLeft = tileSpan.latitudeDelta * 0.05;
-    double lngDegreesFromTopLeft = tileSpan.longitudeDelta * 0.05;
+    double latDegreesFromTopLeft = tileSpan.latitudeDelta;
+    double lngDegreesFromTopLeft = tileSpan.longitudeDelta;
     
     CLLocationCoordinate2D topRight;
-    topRight.latitude = topLeft.latitude - latDegreesFromTopLeft;
+    topRight.latitude = topLeft.latitude;
     topRight.longitude = topLeft.longitude + lngDegreesFromTopLeft;
-//    CLLocationDistance longitudinalDistance = self.gridOriginPoint.coordinate.latitude - latDiff;
-//    CLLocationDistance latitudinalDistance = self.gridOriginPoint.coordinate.longitude + lngDiff;
     
-//    CLLocation *tileTopLeftLocation = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude - latDiff longitude:self.gridOriginPoint.coordinate.longitude + lngDiff];
-//    
-//    CLLocation *tileTopRightLocation = [[CLLocation alloc ]initWithLatitude:tileTopLeftLocation.coordinate.latitude longitude:tileTopLeftLocation.coordinate.longitude + tileSizeInMeters];
-//    
-//    CLLocation *tileBottomLeftLocation = [[CLLocation alloc] initWithLatitude:tileTopLeftLocation.coordinate.latitude - tileSizeInMeters longitude:tileTopLeftLocation.coordinate.longitude];
-//    
-//    CLLocation *tileBottomRightLocation = [[CLLocation alloc] initWithLatitude:tileBottomLeftLocation.coordinate.latitude longitude:tileTopRightLocation.coordinate.longitude];
-//    
-//    NSArray *visitedTileCoordinates = @[ tileTopLeftLocation,
-//                                         tileTopRightLocation,
-//                                         tileBottomRightLocation,
-//                                         tileBottomLeftLocation
-//                                         ];
+    CLLocationCoordinate2D bottomLeft;
+    bottomLeft.latitude = topLeft.latitude - latDegreesFromTopLeft;
+    bottomLeft.longitude = topLeft.longitude;
+    
+    CLLocationCoordinate2D bottomRight;
+    bottomRight.latitude = topRight.latitude - latDegreesFromTopLeft;
+    bottomRight.longitude = topRight.longitude;
+    
     CLLocation *tileTopLeft = [[CLLocation alloc] initWithLatitude:topLeft.latitude longitude:topLeft.longitude];
     CLLocation *tileTopRight = [[CLLocation alloc] initWithLatitude:topRight.latitude longitude:topRight.longitude];
+    CLLocation *tileBottomRight = [[CLLocation alloc] initWithLatitude:bottomRight.latitude longitude:bottomRight.longitude];
+    CLLocation *tileBottomLeft = [[CLLocation alloc]initWithLatitude:bottomLeft.latitude longitude:bottomLeft.longitude];
     
-    NSArray *visitedTileCoordinates = @[tileTopLeft, tileTopRight];
+    NSArray *visitedTileCoordinates = @[tileTopLeft,
+                                        tileTopRight,
+                                        tileBottomRight,
+                                        tileBottomLeft
+                                        ];
     
     //Add annotations to map for visual debugging
     [self addAnnotationToMapWith:topLeft];
     [self addAnnotationToMapWith:topRight];
-//    [self addAnnotationToMapWith:bottomRight];
-//    [self addAnnotationToMapWith:bottomLeft];
+    [self addAnnotationToMapWith:bottomRight];
+    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -876,6 +887,28 @@ NSFetchedResultsControllerDelegate
     annotation.coordinate = coord;
     
     [self.mapView addAnnotation:annotation];
+}
+
+#pragma mark - ShakeGesture
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        [self showAlert];
+    }
+}
+
+-(IBAction)showAlert
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SeekNYC" message:@"Places to explore!" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    
+    [alertView show];
 }
 
 

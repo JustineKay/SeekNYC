@@ -44,7 +44,7 @@
             
             // add post to array
             [self.venueResults addObject:suggestedVenue];
-            NSLog(@"%@", self.venueResults);
+          //  NSLog(@"%@", self.venueResults);
             
         }
         
@@ -80,7 +80,7 @@
             
             // add post to array
             [self.parkResults addObject:suggestedVenuePark];
-            NSLog(@"%@", self.parkResults);
+       //     NSLog(@"%@", self.parkResults);
             
         }
         

@@ -239,6 +239,9 @@
 @property (nonatomic, strong) NSArray *borderColors;
 @property (nonatomic, strong) NSMutableArray *itemViews;
 @property (nonatomic, strong) NSMutableIndexSet *selectedIndices;
+@property (nonatomic, strong) UILabel *seekLabel;
+@property (nonatomic, strong) UILabel *tintLabel;
+@property (nonatomic, strong) UILabel *progressLabel;
 
 @end
 
