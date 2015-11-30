@@ -29,9 +29,6 @@
         
         _mutablePath = CGPathCreateMutable();
         [self pathForPolygon:self.clearPolygon];
-        
-        // defaults
-        self.backgroundColor  = [UIColor blackColor];
 
     }
     

@@ -137,19 +137,22 @@ NSFetchedResultsControllerDelegate
     [self loadUserPaths];
     [self loadVisitedTiles];
     
-    //Testing Grid*********
-    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
     
-    //Testing Tile coordinates
-    //40.6928, -73.9903
-    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
-    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
-    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
-    
-    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
-    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
-    //**********************
+    //UNCOMMENT THE FOLLOWING FOR TESTING
+//    
+//    //*****Testing Grid*********
+//    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+//    
+//    //*****Testing Tile coordinates***************************************************************
+//    //40.6928, -73.9903
+//    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+//    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+//    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+//    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+//    
+//    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
+//    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
+//    //*********************************************************************************************
 
 }
 
@@ -313,6 +316,8 @@ NSFetchedResultsControllerDelegate
     
     if([annotation isKindOfClass:[MKUserLocation class]]) {
         
+        
+        //******Testing an alternative annotationView**********************************************************
 //        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
 //        if (!view)
 //            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
@@ -693,20 +698,19 @@ NSFetchedResultsControllerDelegate
         MKPolygon *tileOverlay = (MKPolygon *)overlay;
         
         MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        
+        //********These attempts to draw the polygon in a clear blend mode are not currently working***********************
         //ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
         //ClearTileOverlayRenderer *renderer = [[ClearTileOverlayRenderer alloc] initWithOverlay:tileOverlay];
-        //MKOverlayRenderer *renderer = [[MKOverlayRenderer alloc] initWithOverlay:tileOverlay];
         
-        //renderer.fillColor   = [[UIColor blackColor] colorWithColor:[UIColor blackColor] andBlendMode:kCGBlendModeClear];
+        //renderer.fillColor   = [[UIColor clearColor] colorWithColor:[UIColor blackColor] andBlendMode:kCGBlendModeOverlay];
         renderer.fillColor = [UIColor blackColor];
         renderer.strokeColor = [UIColor blackColor];
         renderer.lineWidth   = 3;
         
         return renderer;
         
-    }
-    
-    if ([overlay isKindOfClass:[MKPolyline class]]) {
+    }else if ([overlay isKindOfClass:[MKPolyline class]]) {
         
         MKPolyline *polyLine = (MKPolyline *)overlay;
         
@@ -885,7 +889,7 @@ NSFetchedResultsControllerDelegate
 //    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
 //    
 //    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
-//    
+    
 }
 
 
