@@ -40,6 +40,7 @@
 		6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB08B951C0111C20098C805 /* UserProfileView.m */; };
 		6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */; };
 		6BF12A761C0B78E200A21CF8 /* ClearTileOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */; };
+		6BF12A791C0BCC9000A21CF8 /* UIColor+BlendMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A781C0BCC9000A21CF8 /* UIColor+BlendMode.m */; };
 		6D2E837437078CAA4ED253D7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB25FEF09FD3D81CB565DF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F721F9F41BF7ED65007684EA /* CircleProgressBar.m */; };
 		F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E041C021CAD00A5F7CA /* APIManager.m */; };
@@ -109,6 +110,8 @@
 		6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPolygonRenderer.m; sourceTree = "<group>"; };
 		6BF12A741C0B78E200A21CF8 /* ClearTileOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearTileOverlayRenderer.h; sourceTree = "<group>"; };
 		6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearTileOverlayRenderer.m; sourceTree = "<group>"; };
+		6BF12A771C0BCC9000A21CF8 /* UIColor+BlendMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BlendMode.h"; sourceTree = "<group>"; };
+		6BF12A781C0BCC9000A21CF8 /* UIColor+BlendMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BlendMode.m"; sourceTree = "<group>"; };
 		B774AB6CAB0AF8AD8B747DEF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F721F9F31BF7ED65007684EA /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressBar.h; sourceTree = "<group>"; };
 		F721F9F41BF7ED65007684EA /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBar.m; sourceTree = "<group>"; };
@@ -204,12 +207,16 @@
 				6B9B799B1BF68F66004A7756 /* User+CoreDataProperties.m */,
 				6B9B799C1BF68F66004A7756 /* User.h */,
 				6B9B799D1BF68F66004A7756 /* User.m */,
+				6BF12A771C0BCC9000A21CF8 /* UIColor+BlendMode.h */,
+				6BF12A781C0BCC9000A21CF8 /* UIColor+BlendMode.m */,
 				6B28AA341C026650001CFF08 /* UIColor+Color.h */,
 				6B28AA351C026650001CFF08 /* UIColor+Color.m */,
 				6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */,
 				6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */,
 				6B28AA301C0220C1001CFF08 /* NYAlertViewController.h */,
 				6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */,
+				6BF12A741C0B78E200A21CF8 /* ClearTileOverlayRenderer.h */,
+				6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */,
 				6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */,
 				6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */,
 				6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */,
@@ -218,8 +225,6 @@
 				6B9B797B1BF68D6B004A7756 /* MKMapFullCoverageOverlay.m */,
 				6B9B797C1BF68D6B004A7756 /* MKMapColorOverlayRenderer.h */,
 				6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */,
-				6BF12A741C0B78E200A21CF8 /* ClearTileOverlayRenderer.h */,
-				6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */,
 				6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */,
 				6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */,
 				6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */,
@@ -417,6 +422,7 @@
 				F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */,
 				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
 				6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */,
+				6BF12A791C0BCC9000A21CF8 /* UIColor+BlendMode.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */,
 				6B9B79A21BF68F66004A7756 /* User+CoreDataProperties.m in Sources */,

@@ -30,6 +30,7 @@
 #import "UIColor+Color.h"
 #import "DiamondAnnotationView.h"
 #import "UberBlackAnnotationView.h"
+#import "UIColor+BlendMode.h"
 #import "ClearOverlayPolygonRenderer.h"
 #import "ClearTileOverlayRenderer.h"
 
@@ -147,7 +148,7 @@ NSFetchedResultsControllerDelegate
     NSLog(@"testUserTileCoords: %@", testUserTileCoords);
     
     [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
-    [self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
+    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
     //**********************
 
 }
@@ -691,13 +692,15 @@ NSFetchedResultsControllerDelegate
         
         MKPolygon *tileOverlay = (MKPolygon *)overlay;
         
-        //MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
         //ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
-        ClearTileOverlayRenderer *renderer = [[ClearTileOverlayRenderer alloc] initWithOverlay:tileOverlay];
+        //ClearTileOverlayRenderer *renderer = [[ClearTileOverlayRenderer alloc] initWithOverlay:tileOverlay];
+        //MKOverlayRenderer *renderer = [[MKOverlayRenderer alloc] initWithOverlay:tileOverlay];
         
-//        renderer.fillColor   = [UIColor blackColor];
-//        renderer.strokeColor = [UIColor blackColor];
-//        renderer.lineWidth   = 3;
+        //renderer.fillColor   = [[UIColor blackColor] colorWithColor:[UIColor blackColor] andBlendMode:kCGBlendModeClear];
+        renderer.fillColor = [UIColor blackColor];
+        renderer.strokeColor = [UIColor blackColor];
+        renderer.lineWidth   = 3;
         
         return renderer;
         

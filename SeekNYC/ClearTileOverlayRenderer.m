@@ -14,7 +14,8 @@
     
     self = [super initWithOverlay:overlay];
     if (self != nil) {
-        
+        self.overlayColor = [UIColor blackColor];
+        self.overlayAlpha = 1.0;
     }
     return self;
 }
@@ -29,10 +30,14 @@
           zoomScale:(MKZoomScale)zoomScale
           inContext:(CGContextRef)context {
     
-    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    
+    CGContextSetAlpha(context, self.overlayAlpha);
+    CGContextSetFillColorWithColor(context, self.overlayColor.CGColor);
     CGContextSetBlendMode(context, kCGBlendModeClear);
     //CGContextFillRect(context, [self rectForMapRect: mapRect]);
+    CGContextFillPath(context);
     
 }
+
 
 @end

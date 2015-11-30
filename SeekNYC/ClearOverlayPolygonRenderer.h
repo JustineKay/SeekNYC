@@ -10,4 +10,10 @@
 
 @interface ClearOverlayPolygonRenderer : MKPolygonRenderer
 
+@property (nonatomic, strong) UIColor *backgroundColor;
+
+-(id)initWithPolygon:(MKPolygon *)polygon;
+
+-(MKPolygon *)clearPolygon;
+
 @end
