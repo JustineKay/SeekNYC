@@ -545,31 +545,31 @@ NSFetchedResultsControllerDelegate
         //Accummulate a count for each borough
         if ([zip.borough isEqualToString:@"Brooklyn"]) {
             
-            //ADD to percentageOfBKUncovered
+            [self percentageOfBKUncovered];
             
             borough = @"Brooklyn";
             
         }else if ([zip.borough isEqualToString:@"Manhattan"]){
             
-            //Add to percentageOfMANUncovered
+            [self percentageOfMANUncovered];
             
             borough = @"Manhattan";
             
         }else if ([zip.borough isEqualToString:@"Staten Island"]){
             
-            //add to percentageOfSIUncovered
+            [self percentageOfSIUncovered];
             
             borough = @"Staten Island";
             
         }else if ([zip.borough isEqualToString:@"Bronx"]) {
             
-            //add to percentageOfBRXUncovered
+            [self percentageOfBRXUncovered];
             
             borough = @"Bronx";
             
         }else if ([zip.borough isEqualToString:@"Queens"]){
             
-            //add to percentageOfQNSUncovered
+            [self percentageOfQNSUncovered];
             
             borough = @"Queens";
         }
@@ -877,6 +877,56 @@ NSFetchedResultsControllerDelegate
     
     NSLog(@"percentage travelled: %f", self.percentageOfBK);
 }
+
+-(void)percentageOfMANUncovered{
+    
+    CGFloat userMeters = self.visitedTilesMAN.count * 40;
+    CGFloat manMeters = 59000;
+    CGFloat metersOfMANUncovered = userMeters / manMeters;
+    CGFloat percentageOfMANUncovered = metersOfMANUncovered * 100;
+    
+    self.percentageOfMAN = percentageOfMANUncovered;
+    
+    NSLog(@"percentage travelled: %f", self.percentageOfMAN);
+}
+
+-(void)percentageOfBRXUncovered{
+    
+    CGFloat userMeters = self.visitedTilesBRX.count * 40;
+    CGFloat brxMeters = 109000;
+    CGFloat metersOfBRXUncovered = userMeters / brxMeters;
+    CGFloat percentageOfBRXUncovered = metersOfBRXUncovered * 100;
+    
+    self.percentageOfBRX = percentageOfBRXUncovered;
+    
+    NSLog(@"percentage travelled: %f", self.percentageOfBRX);
+}
+
+-(void)percentageOfQNSUncovered{
+    
+    CGFloat userMeters = self.visitedTilesQNS.count * 40;
+    CGFloat qnsMeters = 283000;
+    CGFloat metersOfQNSUncovered = userMeters / qnsMeters;
+    CGFloat percentageOfQNSUncovered = metersOfQNSUncovered * 100;
+    
+    self.percentageOfQNS = percentageOfQNSUncovered;
+    
+    NSLog(@"percentage travelled: %f", self.percentageOfQNS);
+}
+
+-(void)percentageOfSIUncovered{
+    
+    CGFloat userMeters = self.visitedTilesSI.count * 40;
+    CGFloat siMeters = 151000;
+    CGFloat metersOfSIUncovered = userMeters / siMeters;
+    CGFloat percentageOfSIUncovered = metersOfSIUncovered * 100;
+    
+    self.percentageOfSI = percentageOfSIUncovered;
+    
+    NSLog(@"percentage travelled: %f", self.percentageOfSI);
+}
+
+
 
 #pragma mark - Overlay Renderer
 
