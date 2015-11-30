@@ -158,8 +158,6 @@
         
         [self.allZipCodes addObject:zip];
     }
-    
-    NSLog(@"Broklyn Zipcodes count: %ld", brooklynZipCodes.count);
 
     
     //Manhattan Zip Codes

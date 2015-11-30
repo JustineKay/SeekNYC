@@ -440,18 +440,20 @@ NSFetchedResultsControllerDelegate
                 [self.visitedTiles addObject:newTile];
                 
                 [self percentageOfNYCUncovered];
+                
+                [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
             }
             
-            if (self.locations.count > 1) {
-                
-                NSInteger sourceIndex = self.locations.count - 1;
-                NSInteger destinationIndex = self.locations.count - 2;
-                
-                NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
-                
-                //drop polyline ***************************
-                [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
-            }
+//            if (self.locations.count > 1) {
+//                
+//                NSInteger sourceIndex = self.locations.count - 1;
+//                NSInteger destinationIndex = self.locations.count - 2;
+//                
+//                NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
+//                
+//                //drop polyline ***************************
+//                [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
+//            }
             
             
         }else {
@@ -753,10 +755,11 @@ NSFetchedResultsControllerDelegate
     tile.columnRow = columnRow;
     tile.borough = borough;
     
-    tile.coordinateTopLeft = coords[0];
-    tile.coordinateTopRight = coords[1];
-    tile.coordinateBottomRight = coords[2];
-    tile.coordinateBottomLeft = coords[3];
+    //Change to CLLocation!!!!!!!!!!!
+//    tile.coordinateTopLeft = coords[0];
+//    tile.coordinateTopRight = coords[1];
+//    tile.coordinateBottomRight = coords[2];
+//    tile.coordinateBottomLeft = coords[3];
     
     // Save the context.
     NSError *error = nil;
@@ -821,15 +824,15 @@ NSFetchedResultsControllerDelegate
             
             
             //Draw tile with tile coordinates
-            
-            NSArray *visitedTileCoordinates = @[tile.coordinateTopLeft,
-                                                tile.coordinateTopRight,
-                                                tile.coordinateBottomRight,
-                                                tile.coordinateBottomLeft,
-                                                tile.coordinateTopLeft
-                                                ];
-            
-            [self.mapView addOverlay:[self polygonWithLocations:visitedTileCoordinates]];
+            //Change this to accomodate CLLocation Coordinates!!!!!!!!!!!!!!!
+//            NSArray *visitedTileCoordinates = @[tile.coordinateTopLeft,
+//                                                tile.coordinateTopRight,
+//                                                tile.coordinateBottomRight,
+//                                                tile.coordinateBottomLeft,
+//                                                tile.coordinateTopLeft
+//                                                ];
+//            
+//            [self.mapView addOverlay:[self polygonWithLocations:visitedTileCoordinates]];
         
         }
         

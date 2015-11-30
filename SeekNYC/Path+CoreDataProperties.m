@@ -2,7 +2,7 @@
 //  Path+CoreDataProperties.m
 //  SeekNYC
 //
-//  Created by Justine Kay 🙏🏼 on 11/13/15.
+//  Created by Justine Gartner on 11/30/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,7 +16,6 @@
 @dynamic distance;
 @dynamic duration;
 @dynamic timestamp;
-@dynamic user;
 @dynamic locations;
 
 @end
