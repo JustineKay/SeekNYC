@@ -69,11 +69,11 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) int seconds;
 
 @property (nonatomic) NSMutableArray *visitedTiles;
-@property (nonatomic) NSInteger visitedTilesBKcount;
-@property (nonatomic) NSInteger visitedTilesMANcount;
-@property (nonatomic) NSInteger visitedTilesBRXcount;
-@property (nonatomic) NSInteger visitedTilesQNScount;
-@property (nonatomic) NSInteger visitedTilesSIcount;
+@property (nonatomic) NSMutableArray *visitedTilesBK;
+@property (nonatomic) NSMutableArray *visitedTilesMAN;
+@property (nonatomic) NSMutableArray *visitedTilesBRX;
+@property (nonatomic) NSMutableArray *visitedTilesQNS;
+@property (nonatomic) NSMutableArray *visitedTilesSI;
 
 @property (nonatomic) CLLocation *gridOriginPoint;
 @property (nonatomic) CLLocationCoordinate2D gridCenterCoord;
@@ -91,6 +91,8 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSMutableArray *zipCodesOfNYC;
 @property (nonatomic) ZipCodeData *zipCodeData;
+
+@property (nonatomic) NSString *userLocationZipCode;
 
 @property (nonatomic) BOOL isNYC;
 
@@ -166,19 +168,19 @@ NSFetchedResultsControllerDelegate
     
     //UNCOMMENT THE FOLLOWING FOR TESTING
     
-    //*****Testing Grid*********
-    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
-    
-    //*****Testing Tile coordinates***************************************************************
-    //40.6928, -73.9903
-    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
-    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
-    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
-    
-    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
-    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
-    //*********************************************************************************************
+//    //*****Testing Grid*********
+//    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+//    
+//    //*****Testing Tile coordinates***************************************************************
+//    //40.6928, -73.9903
+//    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+//    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+//    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+//    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+//    
+//    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
+//    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
+//    //*********************************************************************************************
 
 }
 
@@ -329,10 +331,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-    [self addAnnotationToMapWith:topLeft];
-    [self addAnnotationToMapWith:topRight];
-    [self addAnnotationToMapWith:bottomRight];
-    [self addAnnotationToMapWith:bottomLeft];
+//    [self addAnnotationToMapWith:topLeft];
+//    [self addAnnotationToMapWith:topRight];
+//    [self addAnnotationToMapWith:bottomRight];
+//    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -430,6 +432,9 @@ NSFetchedResultsControllerDelegate
                 //Use these coords to draw the tile
                 NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
                 
+                //get borough to save to visitedTile
+                NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
+                
                 [self saveVisitedTile:newTile];
                 
                 [self.visitedTiles addObject:newTile];
@@ -490,10 +495,10 @@ NSFetchedResultsControllerDelegate
              NSLog(@"\nCurrent Location Detected\n");
              NSLog(@"placemark %@",placemark);
              
-             NSString *userLocationZipCode = [[NSString alloc]initWithString:placemark.postalCode];
-             NSLog(@"%@",userLocationZipCode);
+             NSString *zipNumber = [[NSString alloc]initWithString:placemark.postalCode];
+             self.userLocationZipCode = zipNumber;
              
-             [self verifyZipCode:userLocationZipCode];
+             [self verifyZipCode:zipNumber];
          }
          else
          {
@@ -512,32 +517,6 @@ NSFetchedResultsControllerDelegate
             
             NSLog(@"User is in NYC, %@", zip.borough);
             
-            
-            //For borough calculations
-            
-            //Accummulate a count for each borough
-            if ([zip.borough isEqualToString:@"Brooklyn"]) {
-                
-                //ADD to percentageOfBKUncovered
-                
-            }else if ([zip.borough isEqualToString:@"Manhattan"]){
-                
-                //Add to percentageOfMANUncovered
-                
-            }else if ([zip.borough isEqualToString:@"Staten Island"]){
-                
-                //add to percentageOfSIUncovered
-                
-            }else if ([zip.borough isEqualToString:@"Bronx"]) {
-                
-                //add to percentageOfBRXUncovered
-                
-            }else if ([zip.borough isEqualToString:@"Queens"]){
-                
-                //add to percentageOfQNSUncovered
-            }
-            
-            
             self.isNYC = YES;
             
         }else {
@@ -553,6 +532,52 @@ NSFetchedResultsControllerDelegate
     
     NSLog(@"self.zipCodeData.allZipcodes: %@", self.zipCodeData.allZipCodes);
     
+}
+
+- (NSString *) getBorough: (NSString *)newLocationZipCode {
+    
+    NSString *borough;
+    
+    for (ZipCode *zip in self.zipCodeData.allZipCodes){
+        
+        //For borough calculations
+        
+        //Accummulate a count for each borough
+        if ([zip.borough isEqualToString:@"Brooklyn"]) {
+            
+            //ADD to percentageOfBKUncovered
+            
+            borough = @"Brooklyn";
+            
+        }else if ([zip.borough isEqualToString:@"Manhattan"]){
+            
+            //Add to percentageOfMANUncovered
+            
+            borough = @"Manhattan";
+            
+        }else if ([zip.borough isEqualToString:@"Staten Island"]){
+            
+            //add to percentageOfSIUncovered
+            
+            borough = @"Staten Island";
+            
+        }else if ([zip.borough isEqualToString:@"Bronx"]) {
+            
+            //add to percentageOfBRXUncovered
+            
+            borough = @"Bronx";
+            
+        }else if ([zip.borough isEqualToString:@"Queens"]){
+            
+            //add to percentageOfQNSUncovered
+            
+            borough = @"Queens";
+        }
+        
+        
+    }
+    
+    return borough;
 }
 
 
