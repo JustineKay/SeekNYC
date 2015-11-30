@@ -634,11 +634,37 @@ NSFetchedResultsControllerDelegate
     } else if (index == 1) {
         
         //***SEGUE TO SuggestedVenue***
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-        SuggestedVenuesTableViewController *tableVC = [storyboard instantiateViewControllerWithIdentifier:@"SuggestedVenuesTableViewController"];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        [self presentViewController:tableVC animated:YES completion:nil];
+        NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+        
+        // Set a title and message
+        gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
+        gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to receive info on places to visit", nil);
+        
+        // Customize appearance as desired
+        
+        gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+        
+        gestureAlertInfo.buttonCornerRadius = 20.0f;
+        gestureAlertInfo.view.tintColor = self.view.tintColor;
+        
+        gestureAlertInfo.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
+        gestureAlertInfo.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
+        gestureAlertInfo.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.buttonTitleFont.pointSize];
+        gestureAlertInfo.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.cancelButtonTitleFont.pointSize];
+        
+        gestureAlertInfo.swipeDismissalGestureEnabled = YES;
+        gestureAlertInfo.backgroundTapDismissalGestureEnabled = YES;
+        
+        [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                              style:UIAlertActionStyleCancel
+                                                            handler:^(NYAlertAction *action) {
+                                                                [self dismissViewControllerAnimated:YES completion:nil];
+                                                            }]];
+        
+        // Present the alert view controller
+        [self presentViewController:gestureAlertInfo animated:YES completion:nil];
         
         [sidebar dismissAnimated:YES];
         
@@ -1197,8 +1223,8 @@ NSFetchedResultsControllerDelegate
 NYAlertViewController *alertShakeGesture = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
 
 // Set a title and message
-alertShakeGesture.title = NSLocalizedString(@"SeekNYC", nil);
-alertShakeGesture.message = NSLocalizedString(@"Let's find somewhere to explore", nil);
+alertShakeGesture.title = NSLocalizedString(@"Title", nil);
+alertShakeGesture.message = NSLocalizedString(@"Description", nil);
 
 // Customize appearance as desired
 
@@ -1215,74 +1241,26 @@ alertShakeGesture.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:a
 alertShakeGesture.swipeDismissalGestureEnabled = YES;
 alertShakeGesture.backgroundTapDismissalGestureEnabled = YES;
 
-// Add alert actions
+//// Add alert actions
+//
+//[alertShakeGesture addAction:[NYAlertAction actionWithTitle:@"Hot Pink"
+//                                                        style:UIAlertActionStyleDefault
+//                                                      handler:^(NYAlertAction *action) {
+//                                                          
+//                                                          alertShakeGesture.alertViewBackgroundColor = [UIColor hotPinkColor];
+//                                                          
+//                                                          
+//                                                      }]];
 
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:@"Hot Pink"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(NYAlertAction *action) {
-                                                          
-                                                          alertShakeGesture.alertViewBackgroundColor = [UIColor hotPinkColor];
-                                                          
-                                                          
-                                                      }]];
-
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:@"Neon Green"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(NYAlertAction *action) {
-                                                          
-                                                          alertShakeGesture.alertViewBackgroundColor = [UIColor neonGreenColor];
-                                                          
-                                                      }]];
-
-
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:@"Florescent Yellow"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(NYAlertAction *action) {
-                                                          
-                                                          alertShakeGesture.alertViewBackgroundColor = [UIColor florescentYellow];
-                                                          
-                                                      }]];
-
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:@"Pavement Gray"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(NYAlertAction *action) {
-                                                          
-                                                          alertShakeGesture.alertViewBackgroundColor = [UIColor grayColor];
-                                                          
-                                                      }]];
-
-
-
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Set Tint", nil)
+[alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Go", nil)
                                                         style:UIAlertActionStyleCancel
                                                       handler:^(NYAlertAction *action) {
                                                           
-                                                          //set the nsUserDefaults for the background view
-                                                          UIColor *userColourChoice = alertShakeGesture.alertViewBackgroundColor;
-                                                          
-                                                          
-                                                          NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:userColourChoice];
-                                                          
-                                                          
-                                                          [[NSUserDefaults standardUserDefaults] setObject:colourData forKey:TintKey];
-                                                          
-                                                          [self savePath];
-                                                          
-                                                          NSArray *overlays = self.mapView.overlays;
-                                                          [self.mapView removeOverlays:overlays];
-                                                          
-                                                          
-                                                          MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
-                                                          
-                                                          [self.mapView addOverlay: fullOverlay];
-                                                          
                                                           [self loadUserPaths];
-                                                          
-                                                          
                                                           [self dismissViewControllerAnimated:YES completion:nil];
                                                       }]];
 
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+[alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", nil)
                                                         style:UIAlertActionStyleCancel
                                                       handler:^(NYAlertAction *action) {
                                                           [self dismissViewControllerAnimated:YES completion:nil];
@@ -1291,14 +1269,5 @@ alertShakeGesture.backgroundTapDismissalGestureEnabled = YES;
 // Present the alert view controller
 [self presentViewController:alertShakeGesture animated:YES completion:nil];
 }
-
-
-
-//{
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SeekNYC" message:@"Places to explore!" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//
-//    [alertView show];
-//}
-
 
 @end
