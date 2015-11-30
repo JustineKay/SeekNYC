@@ -2,7 +2,7 @@
 //  Location+CoreDataProperties.h
 //  SeekNYC
 //
-//  Created by Justine Kay 🙏🏼 on 11/13/15.
+//  Created by Justine Gartner on 11/30/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Location (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSDate *timestamp;
 @property (nullable, nonatomic, retain) NSNumber *latitude;
 @property (nullable, nonatomic, retain) NSNumber *longitude;
+@property (nullable, nonatomic, retain) NSDate *timestamp;
 @property (nullable, nonatomic, retain) Path *path;
 
 @end

@@ -14,11 +14,15 @@
 @implementation VisitedTile (CoreDataProperties)
 
 @dynamic columnRow;
+@dynamic coordinateTopLeftLatitude;
+@dynamic coordinateTopRightLatitude;
 @dynamic timestamp;
+@dynamic coordinateTopRightLongitude;
+@dynamic coordinateBottomRightLatitude;
+@dynamic coordinateBottomRightLongitude;
+@dynamic coordinateBottomLeftLatitude;
+@dynamic coordinateBottomLeftLongitude;
+@dynamic coordinateTopLeftLongitude;
 @dynamic borough;
-@dynamic coordinateTopLeft;
-@dynamic coordinateTopRight;
-@dynamic coordinateBottomLeft;
-@dynamic coordinateBottomRight;
 
 @end
