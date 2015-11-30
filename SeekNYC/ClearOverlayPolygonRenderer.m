@@ -23,7 +23,6 @@
     CGContextSetBlendMode(context, kCGBlendModeClear);
     CGContextDrawPath(context, kCGPathFillStroke);
 
-    NSLog(@"here");
 }
 
 @end

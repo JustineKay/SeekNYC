@@ -2,7 +2,7 @@
 //  VisitedTile+CoreDataProperties.h
 //  SeekNYC
 //
-//  Created by Justine Gartner on 11/22/15.
+//  Created by Justine Gartner on 11/30/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,6 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *columnRow;
 @property (nullable, nonatomic, retain) NSDate *timestamp;
+@property (nullable, nonatomic, retain) NSString *borough;
+@property (nullable, nonatomic, retain) NSNumber *coordinateTopLeft;
+@property (nullable, nonatomic, retain) NSNumber *coordinateTopRight;
+@property (nullable, nonatomic, retain) NSNumber *coordinateBottomLeft;
+@property (nullable, nonatomic, retain) NSNumber *coordinateBottomRight;
 
 @end
 

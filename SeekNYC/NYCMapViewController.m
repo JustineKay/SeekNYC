@@ -247,7 +247,7 @@ NSFetchedResultsControllerDelegate
 
 
 
-#pragma mark - Grid Set Up
+#pragma mark - Grid and VisitedTile calculations
 
 
 -(CLLocation *)topLeftLocationOfGrid:(CLLocationCoordinate2D)centerCoord And: (MKCoordinateSpan)span {
@@ -435,7 +435,7 @@ NSFetchedResultsControllerDelegate
                 //get borough to save to visitedTile
                 NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
                 
-                [self saveVisitedTile:newTile];
+                [self saveVisitedTile:newTile With:newLocationBorough And:tileCoords];
                 
                 [self.visitedTiles addObject:newTile];
                 
@@ -744,14 +744,19 @@ NSFetchedResultsControllerDelegate
     }
 }
 
-- (void)saveVisitedTile: (NSString *)columnRow {
+- (void)saveVisitedTile: (NSString *)columnRow With: (NSString *)borough And: (NSArray *)coords {
     
     VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"VisitedTile"
                                                inManagedObjectContext:self.managedObjectContext];
     
     tile.timestamp = [NSDate date];
     tile.columnRow = columnRow;
+    tile.borough = borough;
     
+    tile.coordinateTopLeft = coords[0];
+    tile.coordinateTopRight = coords[1];
+    tile.coordinateBottomRight = coords[2];
+    tile.coordinateBottomLeft = coords[3];
     
     // Save the context.
     NSError *error = nil;
@@ -785,7 +790,46 @@ NSFetchedResultsControllerDelegate
         
         for (VisitedTile *tile in fetchedTiles) {
             
+            //Get tile's columnRow string
+            
             [self.visitedTiles addObject: tile.columnRow];
+            
+            
+            //Check tile borough, add to borough array
+            
+            if ([tile.borough isEqualToString:@"Brooklyn"]) {
+                
+                [self.visitedTilesBK addObject:tile.borough];
+                
+            }else if ([tile.borough isEqualToString:@"Manhattan"]) {
+                
+                [self.visitedTilesMAN addObject:tile.borough];
+                
+            }else if ([tile.borough isEqualToString:@"Bronx"]) {
+                
+                [self.visitedTilesBRX addObject:tile.borough];
+                
+            }else if ([tile.borough isEqualToString:@"Queens"]) {
+                
+                [self.visitedTilesQNS addObject: tile.borough];
+                
+            }else if ([tile.borough isEqualToString:@"Staten Island"]) {
+                
+                [self.visitedTilesSI addObject:tile.borough];
+                
+            }
+            
+            
+            //Draw tile with tile coordinates
+            
+            NSArray *visitedTileCoordinates = @[tile.coordinateTopLeft,
+                                                tile.coordinateTopRight,
+                                                tile.coordinateBottomRight,
+                                                tile.coordinateBottomLeft,
+                                                tile.coordinateTopLeft
+                                                ];
+            
+            [self.mapView addOverlay:[self polygonWithLocations:visitedTileCoordinates]];
         
         }
         
@@ -820,6 +864,18 @@ NSFetchedResultsControllerDelegate
     self.percentageOfNYC = percentageOfNYCUncovered;
     
     NSLog(@"percentage travelled: %f", self.percentageOfNYC);
+}
+
+-(void)percentageOfBKUncovered{
+    
+    CGFloat userMeters = self.visitedTilesBK.count * 40;
+    CGFloat bkMeters = 183000;
+    CGFloat metersOfBKUncovered = userMeters / bkMeters;
+    CGFloat percentageOfBKUncovered = metersOfBKUncovered * 100;
+    
+    self.percentageOfBK = percentageOfBKUncovered;
+    
+    NSLog(@"percentage travelled: %f", self.percentageOfBK);
 }
 
 #pragma mark - Overlay Renderer
