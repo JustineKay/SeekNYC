@@ -39,7 +39,6 @@
 		6B9B79A31BF68F66004A7756 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B799D1BF68F66004A7756 /* User.m */; };
 		6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB08B951C0111C20098C805 /* UserProfileView.m */; };
 		6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */; };
-		6BF12A761C0B78E200A21CF8 /* ClearTileOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */; };
 		6BF12A791C0BCC9000A21CF8 /* UIColor+BlendMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A781C0BCC9000A21CF8 /* UIColor+BlendMode.m */; };
 		6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */; };
 		6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */; };
@@ -110,8 +109,6 @@
 		6BB08B951C0111C20098C805 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileView.m; sourceTree = "<group>"; };
 		6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPolygonRenderer.h; sourceTree = "<group>"; };
 		6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPolygonRenderer.m; sourceTree = "<group>"; };
-		6BF12A741C0B78E200A21CF8 /* ClearTileOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearTileOverlayRenderer.h; sourceTree = "<group>"; };
-		6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearTileOverlayRenderer.m; sourceTree = "<group>"; };
 		6BF12A771C0BCC9000A21CF8 /* UIColor+BlendMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BlendMode.h"; sourceTree = "<group>"; };
 		6BF12A781C0BCC9000A21CF8 /* UIColor+BlendMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BlendMode.m"; sourceTree = "<group>"; };
 		6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipCode.h; sourceTree = "<group>"; };
@@ -225,8 +222,6 @@
 				6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */,
 				6B28AA301C0220C1001CFF08 /* NYAlertViewController.h */,
 				6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */,
-				6BF12A741C0B78E200A21CF8 /* ClearTileOverlayRenderer.h */,
-				6BF12A751C0B78E200A21CF8 /* ClearTileOverlayRenderer.m */,
 				6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */,
 				6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */,
 				6B9B79761BF68D6B004A7756 /* ClearOverlayPathRenderer.h */,
@@ -416,7 +411,6 @@
 				6B9B799E1BF68F66004A7756 /* Path+CoreDataProperties.m in Sources */,
 				F79D2E0A1C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m in Sources */,
 				F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */,
-				6BF12A761C0B78E200A21CF8 /* ClearTileOverlayRenderer.m in Sources */,
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
 				6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */,
 				6B28AA431C02C2E3001CFF08 /* UberBlackAnnotationView.m in Sources */,

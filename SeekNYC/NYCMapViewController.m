@@ -165,20 +165,20 @@ NSFetchedResultsControllerDelegate
     
     
     //UNCOMMENT THE FOLLOWING FOR TESTING
-//    
-//    //*****Testing Grid*********
-//    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
-//    
-//    //*****Testing Tile coordinates***************************************************************
-//    //40.6928, -73.9903
-//    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-//    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
-//    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
-//    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
-//    
-//    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
-//    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
-//    //*********************************************************************************************
+    
+    //*****Testing Grid*********
+    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+    
+    //*****Testing Tile coordinates***************************************************************
+    //40.6928, -73.9903
+    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+    
+    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
+    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
+    //*********************************************************************************************
 
 }
 
@@ -329,10 +329,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-//    [self addAnnotationToMapWith:topLeft];
-//    [self addAnnotationToMapWith:topRight];
-//    [self addAnnotationToMapWith:bottomRight];
-//    [self addAnnotationToMapWith:bottomLeft];
+    [self addAnnotationToMapWith:topLeft];
+    [self addAnnotationToMapWith:topRight];
+    [self addAnnotationToMapWith:bottomRight];
+    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -805,13 +805,9 @@ NSFetchedResultsControllerDelegate
         
         MKPolygon *tileOverlay = (MKPolygon *)overlay;
         
-        MKPolygonRenderer *renderer = [[MKPolygonRenderer alloc] initWithPolygon:tileOverlay];
         
-        //********These attempts to draw the polygon in a clear blend mode are not currently working***********************
-        //ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
-        //ClearTileOverlayRenderer *renderer = [[ClearTileOverlayRenderer alloc] initWithOverlay:tileOverlay];
-        
-        //renderer.fillColor   = [[UIColor clearColor] colorWithColor:[UIColor blackColor] andBlendMode:kCGBlendModeOverlay];
+        ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
+
         renderer.fillColor = [UIColor blackColor];
         renderer.strokeColor = [UIColor blackColor];
         renderer.lineWidth   = 3;

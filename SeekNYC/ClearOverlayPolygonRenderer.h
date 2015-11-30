@@ -10,8 +10,5 @@
 
 @interface ClearOverlayPolygonRenderer : MKPolygonRenderer
 
--(id)initWithPolygon:(MKPolygon *)polygon;
-
--(MKPolygon *)clearPolygon;
 
 @end
