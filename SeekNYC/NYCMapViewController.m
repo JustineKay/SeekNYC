@@ -33,6 +33,8 @@
 #import "UIColor+BlendMode.h"
 #import "ClearOverlayPolygonRenderer.h"
 #import "ClearTileOverlayRenderer.h"
+#import "ZipCodeData.h"
+#import "ZipCode.h"
 
 static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 40.0;
@@ -72,9 +74,19 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) MKCoordinateSpan gridSpan;
 
 @property (nonatomic) CGFloat percentageOfNYC;
+@property (nonatomic) CGFloat percentageOfBK;
+@property (nonatomic) CGFloat percentageOfMAN;
+@property (nonatomic) CGFloat percentageOfBRX;
+@property (nonatomic) CGFloat percentageOfQNS;
+@property (nonatomic) CGFloat percentageOfSI;
+
 
 @property (nonatomic) NSTimer *timer;
 
+@property (nonatomic) NSMutableArray *zipCodesOfNYC;
+@property (nonatomic) ZipCodeData *zipCodeData;
+
+@property (nonatomic) BOOL isNYC;
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
@@ -101,6 +113,14 @@ NSFetchedResultsControllerDelegate
     }
     
     [self.locationManager requestAlwaysAuthorization];
+    
+    
+    if (self.zipCodeData == nil) {
+        
+        self.zipCodeData = [[ZipCodeData alloc] init];
+        [self.zipCodeData initializeData];
+        
+    }
     
     self.trackPathButton.hidden = NO;
     self.stopTrackingPathButton.hidden = YES;
@@ -302,11 +322,11 @@ NSFetchedResultsControllerDelegate
                                         tileTopLeft
                                         ];
     
-    //Add annotations to map for visual debugging
-    [self addAnnotationToMapWith:topLeft];
-    [self addAnnotationToMapWith:topRight];
-    [self addAnnotationToMapWith:bottomRight];
-    [self addAnnotationToMapWith:bottomLeft];
+    //***Add annotations to map for visual debugging***
+//    [self addAnnotationToMapWith:topLeft];
+//    [self addAnnotationToMapWith:topRight];
+//    [self addAnnotationToMapWith:bottomRight];
+//    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -369,7 +389,10 @@ NSFetchedResultsControllerDelegate
         BOOL isAccurate = newLocation.horizontalAccuracy < 20;
         BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 30.0;
         
-        if (isAccurate && isRecent) {
+        [self getZipCode:newLocation];
+        
+        //***TAKE OUT (&& self.isNYC) to test in simulator *************
+        if (isAccurate && isRecent && self.isNYC) {
             
             if (self.locations == nil) {
                 
@@ -446,7 +469,86 @@ NSFetchedResultsControllerDelegate
     
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
+    
 }
+
+
+-(void)getZipCode: (CLLocation *)newLocation {
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark *placemark = [placemarks objectAtIndex:0];
+             NSLog(@"\nCurrent Location Detected\n");
+             NSLog(@"placemark %@",placemark);
+             
+             NSString *userLocationZipCode = [[NSString alloc]initWithString:placemark.postalCode];
+             NSLog(@"%@",userLocationZipCode);
+             
+             [self verifyZipCode:userLocationZipCode];
+         }
+         else
+         {
+             NSLog(@"Geocode failed with error %@", error); // Error handling must required
+         }
+     }];
+
+}
+
+-(void)verifyZipCode: (NSString *)userLocationZipCode{
+    
+    
+    for (ZipCode *zip in self.zipCodeData.allZipCodes){
+        
+        if ([zip.number isEqualToString:userLocationZipCode]) {
+            
+            NSLog(@"User is in NYC, %@", zip.borough);
+            
+            
+            //For borough calculations
+            
+            //Accummulate a count for each borough
+            if ([zip.borough isEqualToString:@"Brooklyn"]) {
+                
+                //ADD to percentageOfBKUncovered
+                
+            }else if ([zip.borough isEqualToString:@"Manhattan"]){
+                
+                //Add to percentageOfMANUncovered
+                
+            }else if ([zip.borough isEqualToString:@"Staten Island"]){
+                
+                //add to percentageOfSIUncovered
+                
+            }else if ([zip.borough isEqualToString:@"Bronx"]) {
+                
+                //add to percentageOfBRXUncovered
+                
+            }else if ([zip.borough isEqualToString:@"Queens"]){
+                
+                //add to percentageOfQNSUncovered
+            }
+            
+            
+            self.isNYC = YES;
+            
+        }else {
+            
+            NSLog(@"User is not in NYC");
+            
+            self.isNYC = NO;
+            
+            break;
+        }
+        
+    }
+    
+    NSLog(@"self.zipCodeData.allZipcodes: %@", self.zipCodeData.allZipCodes);
+    
+}
+
 
 #pragma mark - Action Buttons
 
