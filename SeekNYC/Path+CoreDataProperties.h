@@ -10,6 +10,7 @@
 //
 
 #import "Path.h"
+#import "Location.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
