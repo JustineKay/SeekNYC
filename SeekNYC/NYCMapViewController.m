@@ -69,6 +69,12 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) int seconds;
 
 @property (nonatomic) NSMutableArray *visitedTiles;
+@property (nonatomic) NSInteger visitedTilesBKcount;
+@property (nonatomic) NSInteger visitedTilesMANcount;
+@property (nonatomic) NSInteger visitedTilesBRXcount;
+@property (nonatomic) NSInteger visitedTilesQNScount;
+@property (nonatomic) NSInteger visitedTilesSIcount;
+
 @property (nonatomic) CLLocation *gridOriginPoint;
 @property (nonatomic) CLLocationCoordinate2D gridCenterCoord;
 @property (nonatomic) MKCoordinateSpan gridSpan;
@@ -391,7 +397,7 @@ NSFetchedResultsControllerDelegate
         
         [self getZipCode:newLocation];
         
-        //***TAKE OUT (&& self.isNYC) to test in simulator *************
+        //***REMOVE (&& self.isNYC) to test in simulator *************
         if (isAccurate && isRecent && self.isNYC) {
             
             if (self.locations == nil) {
