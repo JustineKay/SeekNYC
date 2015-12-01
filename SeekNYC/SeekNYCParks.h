@@ -14,6 +14,8 @@
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *categoryName;
 
+@property (nonatomic) float landmarkLat;
+@property (nonatomic) float landmarkLng;
 
 - (instancetype)initWithJSON:(NSDictionary *)json;
 
