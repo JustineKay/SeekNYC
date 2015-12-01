@@ -612,7 +612,7 @@ NSFetchedResultsControllerDelegate
 
 }
 
--(void)verifyZipCode: (NSString *)userLocationZipCode{
+-(void)verifyZipCode: (NSString *)userLocationZipCode {
     
     
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
