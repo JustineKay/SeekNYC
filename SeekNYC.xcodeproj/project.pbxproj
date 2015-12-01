@@ -108,6 +108,7 @@
 		6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipCodeData.m; sourceTree = "<group>"; };
 		6BF12A801C0CEA0700A21CF8 /* SeekNYC 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 3.xcdatamodel"; sourceTree = "<group>"; };
 		6BF12A811C0D016C00A21CF8 /* SeekNYC 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 4.xcdatamodel"; sourceTree = "<group>"; };
+		6BF12A821C0D12C400A21CF8 /* SeekNYC 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 5.xcdatamodel"; sourceTree = "<group>"; };
 		B774AB6CAB0AF8AD8B747DEF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F721F9F31BF7ED65007684EA /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressBar.h; sourceTree = "<group>"; };
 		F721F9F41BF7ED65007684EA /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBar.m; sourceTree = "<group>"; };
@@ -587,12 +588,13 @@
 		6B9B79681BF68D05004A7756 /* SeekNYC.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6BF12A821C0D12C400A21CF8 /* SeekNYC 5.xcdatamodel */,
 				6BF12A811C0D016C00A21CF8 /* SeekNYC 4.xcdatamodel */,
 				6BF12A801C0CEA0700A21CF8 /* SeekNYC 3.xcdatamodel */,
 				6B28AA371C027081001CFF08 /* SeekNYC 2.xcdatamodel */,
 				6B9B79691BF68D05004A7756 /* SeekNYC.xcdatamodel */,
 			);
-			currentVersion = 6BF12A811C0D016C00A21CF8 /* SeekNYC 4.xcdatamodel */;
+			currentVersion = 6BF12A821C0D12C400A21CF8 /* SeekNYC 5.xcdatamodel */;
 			path = SeekNYC.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
