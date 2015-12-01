@@ -35,6 +35,8 @@
 #import "ClearTileOverlayRenderer.h"
 #import "ZipCodeData.h"
 #import "ZipCode.h"
+#import "APIManager.h"
+#import "SeekNYCParks.h"
 
 static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 40.0;
@@ -98,6 +100,8 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
+@property (nonatomic) NSMutableArray *parkResults;
+
 @end
 
 
@@ -111,8 +115,44 @@ NSFetchedResultsControllerDelegate
     return delegate.managedObjectContext;
 }
 
+
+- (void)fetchFourSquareData {
+    
+    //     create an url
+    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    
+    // fetch data from the endpoint and print json response
+    [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSArray *venues = json[@"response"][@"venues"];
+        
+        // reset my array
+        self.parkResults = [[NSMutableArray alloc] init];
+        
+        // loop through all json posts
+        for (NSDictionary *venue in venues) {
+            
+            // create new post from json
+            SeekNYCParks *suggestedVenue = [[SeekNYCParks alloc] initWithJSON:venue];
+            
+            // add post to array
+            [self.parkResults addObject:suggestedVenue];
+            //  NSLog(@"%@", self.venueResults);
+            
+        }
+     }];
+    
+}
+     
+    
+    
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self fetchFourSquareData];
     
     self.mapView.delegate = self;
     
@@ -1229,11 +1269,15 @@ NSFetchedResultsControllerDelegate
 }
 
 -(IBAction)showAlert {
+    
+    
+    
+ SeekNYCParks *suggestedVenue = self.parkResults[1];
 
 NYAlertViewController *alertShakeGesture = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
 
 // Set a title and message
-alertShakeGesture.title = NSLocalizedString(@"Title", nil);
+alertShakeGesture.title = NSLocalizedString(suggestedVenue.name, nil);
 alertShakeGesture.message = NSLocalizedString(@"Description", nil);
 
 // Customize appearance as desired
