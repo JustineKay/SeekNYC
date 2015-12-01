@@ -30,9 +30,7 @@
 #import "UIColor+Color.h"
 #import "DiamondAnnotationView.h"
 #import "UberBlackAnnotationView.h"
-#import "UIColor+BlendMode.h"
 #import "ClearOverlayPolygonRenderer.h"
-#import "ClearTileOverlayRenderer.h"
 #import "ZipCodeData.h"
 #import "ZipCode.h"
 #import "APIManager.h"
@@ -226,7 +224,7 @@ NSFetchedResultsControllerDelegate
     
     // Set a title and message
     gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
-    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone \n receive info on \n places to visit", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to\n generate places to visit", nil);
     
     // Customize appearance as desired
     
@@ -257,7 +255,6 @@ NSFetchedResultsControllerDelegate
     [super viewWillAppear:YES];
     
     [self loadNYCMap];
-    [self loadUserPaths];
     [self loadVisitedTiles];
     
     
@@ -278,20 +275,9 @@ NSFetchedResultsControllerDelegate
 //    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
 //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
 //    //*********************************************************************************************
-//
+
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    
-    [self savePath];
-    
-    [self percentageOfNYCUncovered];
-    [self percentageOfBKUncovered];
-    [self percentageOfBRXUncovered];
-    [self percentageOfMANUncovered];
-    [self percentageOfQNSUncovered];
-    [self percentageOfSIUncovered];
-}
 
 #pragma mark - UI
 
@@ -313,42 +299,6 @@ NSFetchedResultsControllerDelegate
     [self.mapView setRegion: NYRegion animated: YES];
         
 }
-
-- (void)loadUserPaths{
-    
-    //Create an instance of NSFetchRequest with an entity name
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
-    
-    //create a sort descriptor
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
-    
-    //set the sort descriptors on the fetchRequest
-    fetchRequest.sortDescriptors = @[sort];
-    
-    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    self.fetchedResultsController.delegate = self;
-    
-    [self.fetchedResultsController performFetch:nil];
-    
-    if (self.fetchedResultsController.fetchedObjects != nil) {
-        
-        NSArray *fetchedPaths = self.fetchedResultsController.fetchedObjects;
-        
-        for (Path *path in fetchedPaths) {
-            
-            NSArray *locations = [path locationsAsCLLocation];
-            
-            MKPolyline *polyline = [self polyLineWithLocations:locations];
-            
-            [self.mapView addOverlay:polyline];
-            
-        }
-        
-    }
-}
-
 
 
 #pragma mark - Grid and VisitedTile calculations
@@ -435,10 +385,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-    //[self addAnnotationToMapWith:topLeft];
-    //[self addAnnotationToMapWith:topRight];
-    //[self addAnnotationToMapWith:bottomRight];
-    //[self addAnnotationToMapWith:bottomLeft];
+//    [self addAnnotationToMapWith:topLeft];
+//    [self addAnnotationToMapWith:topRight];
+//    [self addAnnotationToMapWith:bottomRight];
+//    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -506,13 +456,6 @@ NSFetchedResultsControllerDelegate
         //***REMOVE (&& self.isNYC) to test in simulator *************
         if (isAccurate && isRecent && self.isNYC) {
             
-            if (self.locations == nil) {
-                
-                self.locations = [NSMutableArray array];
-            }
-            
-            [self.locations addObject:newLocation];
-            
             BOOL matchingTileFound = NO;
             
             NSString *newTile = [self locationInGrid:newLocation];
@@ -542,25 +485,11 @@ NSFetchedResultsControllerDelegate
                 [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
                 
                 [self.visitedTiles addObject:newTile];
+                [self addNewTileBoroughToVisitedTilesBoroughArray:newLocationBorough];
                 
                 [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
             }
             
-//            if (self.locations.count > 1) {
-//                
-//                NSInteger sourceIndex = self.locations.count - 1;
-//                NSInteger destinationIndex = self.locations.count - 2;
-//                
-//                NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
-//                
-//                //drop polyline ***************************
-//                [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
-//            }
-            
-            
-        }else {
-            
-            self.locations = nil;
         }
         
     }
@@ -639,11 +568,36 @@ NSFetchedResultsControllerDelegate
 
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
       if ([zip.number isEqualToString:newLocationZipCode]) {
+         
         return zip.borough;
       }
     }
     
     return nil;
+}
+
+-(void) addNewTileBoroughToVisitedTilesBoroughArray: (NSString *)newTileBorough {
+    
+    if ([newTileBorough isEqualToString:@"Brooklyn"]) {
+        
+        [self.visitedTilesBK addObject:newTileBorough];
+        
+    }else if ([newTileBorough isEqualToString:@"Manhattan"]){
+        
+        [self.visitedTilesMAN addObject:newTileBorough];
+        
+    }else if ([newTileBorough isEqualToString:@"Queens"]) {
+        
+        [self.visitedTilesQNS addObject:newTileBorough];
+        
+    }else if ([newTileBorough isEqualToString:@"Bronx"]) {
+        
+        [self.visitedTilesBRX addObject:newTileBorough];
+        
+    }else {
+        
+        [self.visitedTilesSI addObject:newTileBorough];
+    }
 }
 
 
@@ -681,16 +635,31 @@ NSFetchedResultsControllerDelegate
     if (index == 0) {
         
         //***SEGUE TO PROFILE***
+        
+        [self percentageOfNYCUncovered];
+        [self percentageOfBKUncovered];
+        [self percentageOfBRXUncovered];
+        [self percentageOfMANUncovered];
+        [self percentageOfQNSUncovered];
+        [self percentageOfSIUncovered];
+        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
         UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
         
-        userProfileVC.progress = self.percentageOfNYC;
+        userProfileVC.progressNYC = self.percentageOfNYC;
+        userProfileVC.progressBK = self.percentageOfBK;
+        userProfileVC.progressMAN = self.percentageOfMAN;
+        userProfileVC.progressQNS = self.percentageOfQNS;
+        userProfileVC.progressBRX = self.percentageOfBRX;
+        userProfileVC.progressSI = self.percentageOfSI;
         
         [self presentViewController:userProfileVC animated:YES completion:nil];
         
-        NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
-        
+        NSLog(@"percentageNYC %2f", userProfileVC.progressNYC);
+        NSLog(@"percentageBK %2f", userProfileVC.progressBK);
+        NSLog(@"percentageMAN %2f", userProfileVC.progressMAN);
+        NSLog(@"percentageNYC %2f", userProfileVC.progressQNS);
         
         [sidebar dismissAnimated:YES];
         
@@ -769,43 +738,9 @@ NSFetchedResultsControllerDelegate
     self.trackPathButton.hidden = NO;
     
     [self.locationManager stopUpdatingLocation];
-    
-    [self savePath];
 }
 
 #pragma mark - Core Data
-
-- (void)savePath {
-    
-    Path *path = [NSEntityDescription insertNewObjectForEntityForName:@"Path"
-                                               inManagedObjectContext:self.managedObjectContext];
-    
-    path.distance = [NSNumber numberWithFloat:self.distance];
-    path.duration = [NSNumber numberWithInt:self.seconds];
-    path.timestamp = [NSDate date];
-    
-    NSMutableArray *locationArray = [NSMutableArray array];
-    for (CLLocation *location in self.locations) {
-        Location *locationObject = [NSEntityDescription insertNewObjectForEntityForName:@"Location"
-                                                                 inManagedObjectContext:self.managedObjectContext];
-        
-        locationObject.timestamp = location.timestamp;
-        locationObject.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
-        locationObject.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-        [locationArray addObject:locationObject];
-    }
-    
-    path.locations = [NSOrderedSet orderedSetWithArray:locationArray];
-    
-    // Save the context.
-    NSError *error = nil;
-    
-    if (![self.managedObjectContext save:&error]) {
-        
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
 
 - (void)saveVisitedTile: (NSString *)columnRow WithBorough: (NSString *)borough AndCoordinates: (NSArray *)coords {
     
@@ -861,21 +796,31 @@ NSFetchedResultsControllerDelegate
             
             if ([tile.borough isEqualToString:@"Brooklyn"]) {
                 
+                self.visitedTilesBK = [[NSMutableArray alloc] init];
+                
                 [self.visitedTilesBK addObject:tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Manhattan"]) {
+                
+                self.visitedTilesMAN = [[NSMutableArray alloc] init];
                 
                 [self.visitedTilesMAN addObject:tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Bronx"]) {
                 
+                self.visitedTilesBRX = [[NSMutableArray alloc] init];
+                
                 [self.visitedTilesBRX addObject:tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Queens"]) {
                 
+                self.visitedTilesQNS = [[NSMutableArray alloc] init];
+                
                 [self.visitedTilesQNS addObject: tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Staten Island"]) {
+                
+                self.visitedTilesSI = [[NSMutableArray alloc] init];
                 
                 [self.visitedTilesSI addObject:tile.borough];
                 
@@ -915,8 +860,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTiles.count * 40;
     CGFloat nycMeters = 785000;
-    CGFloat metersOfNYCUncovered = userMeters / nycMeters;
-    CGFloat percentageOfNYCUncovered = metersOfNYCUncovered * 100;
+    CGFloat percentageOfNYCUncovered = userMeters / nycMeters;
     
     self.percentageOfNYC = percentageOfNYCUncovered;
     
@@ -927,8 +871,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesBK.count * 40;
     CGFloat bkMeters = 183000;
-    CGFloat metersOfBKUncovered = userMeters / bkMeters;
-    CGFloat percentageOfBKUncovered = metersOfBKUncovered * 100;
+    CGFloat percentageOfBKUncovered = userMeters / bkMeters;
     
     self.percentageOfBK = percentageOfBKUncovered;
     
@@ -939,8 +882,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesMAN.count * 40;
     CGFloat manMeters = 59000;
-    CGFloat metersOfMANUncovered = userMeters / manMeters;
-    CGFloat percentageOfMANUncovered = metersOfMANUncovered * 100;
+    CGFloat percentageOfMANUncovered = userMeters / manMeters;
     
     self.percentageOfMAN = percentageOfMANUncovered;
     
@@ -951,8 +893,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesBRX.count * 40;
     CGFloat brxMeters = 109000;
-    CGFloat metersOfBRXUncovered = userMeters / brxMeters;
-    CGFloat percentageOfBRXUncovered = metersOfBRXUncovered * 100;
+    CGFloat percentageOfBRXUncovered = userMeters / brxMeters;
     
     self.percentageOfBRX = percentageOfBRXUncovered;
     
@@ -963,8 +904,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesQNS.count * 40;
     CGFloat qnsMeters = 283000;
-    CGFloat metersOfQNSUncovered = userMeters / qnsMeters;
-    CGFloat percentageOfQNSUncovered = metersOfQNSUncovered * 100;
+    CGFloat percentageOfQNSUncovered = userMeters / qnsMeters;
     
     self.percentageOfQNS = percentageOfQNSUncovered;
     
@@ -975,8 +915,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesSI.count * 40;
     CGFloat siMeters = 151000;
-    CGFloat metersOfSIUncovered = userMeters / siMeters;
-    CGFloat percentageOfSIUncovered = metersOfSIUncovered * 100;
+    CGFloat percentageOfSIUncovered = userMeters / siMeters;
     
     self.percentageOfSI = percentageOfSIUncovered;
     
@@ -1132,25 +1071,18 @@ NSFetchedResultsControllerDelegate
                                                               //set the nsUserDefaults for the background view
                                                               UIColor *userColourChoice = alertViewController.alertViewBackgroundColor;
                                                               
-                                                              
                                                               NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:userColourChoice];
-                                                              
                                                               
                                                               [[NSUserDefaults standardUserDefaults] setObject:colourData forKey:TintKey];
                                                               
-                                                              [self savePath];
-                                                              
                                                               NSArray *overlays = self.mapView.overlays;
                                                               [self.mapView removeOverlays:overlays];
-                                                              
                                                               
                                                               MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
                                                               
                                                               [self.mapView addOverlay: fullOverlay];
                                                               
-                                                              //[self loadUserPaths];
                                                               [self loadVisitedTiles];
-                                                              
                                                               
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }]];
@@ -1247,7 +1179,6 @@ NSFetchedResultsControllerDelegate
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
                                                             
-                                                            [self loadUserPaths];
                                                             [self dismissViewControllerAnimated:YES completion:nil];
                                                         }]];
     

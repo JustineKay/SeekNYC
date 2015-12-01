@@ -23,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet CircleProgressBar *SICircleProgressBar;
 
 
-@property (nonatomic) CGFloat percentage;
+@property (nonatomic) CGFloat percentageNYC;
+@property (nonatomic) CGFloat percentageBK;
+@property (nonatomic) CGFloat percentageMAN;
+@property (nonatomic) CGFloat percentageQNS;
+@property (nonatomic) CGFloat percentageBRX;
+@property (nonatomic) CGFloat percentageSI;
 
 @end
