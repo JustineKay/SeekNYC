@@ -561,7 +561,7 @@
 
         }
         
-        if (isLastButton) {
+        if (isLastButton && i > 0) {
             [self.actionButtonContainerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[currentButton]|"
                                                                                                    options:0
                                                                                                    metrics:nil
