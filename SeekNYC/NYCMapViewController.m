@@ -141,21 +141,45 @@ NSFetchedResultsControllerDelegate
     self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
     self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSString *infoAlert = @"infoAlert";
     if ([prefs boolForKey:infoAlert])
         return;
     [prefs setBool:YES forKey:infoAlert];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Heads Up"
-                          message:@"Shake your phone to receive info on places to visit"
-                          delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
     
-
+    NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone \n receive info on \n places to visit", nil);
+    
+    // Customize appearance as desired
+    
+    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    
+    gestureAlertInfo.buttonCornerRadius = 20.0f;
+    gestureAlertInfo.view.tintColor = self.view.tintColor;
+    
+    gestureAlertInfo.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
+    gestureAlertInfo.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
+    gestureAlertInfo.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.buttonTitleFont.pointSize];
+    gestureAlertInfo.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.cancelButtonTitleFont.pointSize];
+    
+    gestureAlertInfo.swipeDismissalGestureEnabled = YES;
+    gestureAlertInfo.backgroundTapDismissalGestureEnabled = YES;
+    
+    [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(NYAlertAction *action) {
+                                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                                       }]];
+    
+    // Present the alert view controller
+    [self presentViewController:gestureAlertInfo animated:YES completion:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -634,13 +658,12 @@ NSFetchedResultsControllerDelegate
     } else if (index == 1) {
         
         //***SEGUE TO SuggestedVenue***
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
         NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
         
         // Set a title and message
         gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
-        gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to receive info on places to visit", nil);
+        gestureAlertInfo.message = NSLocalizedString(@"Shake your phone \n receive info on \n places to visit", nil);
         
         // Customize appearance as desired
         
