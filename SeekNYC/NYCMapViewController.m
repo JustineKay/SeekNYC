@@ -174,19 +174,28 @@ NSFetchedResultsControllerDelegate
 //    //*****Testing Tile coordinates***************************************************************
 //    //40.6928, -73.9903
 //    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-//    NSString *testUserColumnRow = [self userLocationInGrid:testUserLocation];
+//    NSString *testUserColumnRow = [self locationInGrid:testUserLocation];
 //    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
 //    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+//    
+//    [self saveVisitedTile:testUserColumnRow WithBorough: @"Brooklyn" AndCoordinates:testUserTileCoords];
 //    
 //    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
 //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
 //    //*********************************************************************************************
-
+//
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     
     [self savePath];
+    
+    [self percentageOfNYCUncovered];
+    [self percentageOfBKUncovered];
+    [self percentageOfBRXUncovered];
+    [self percentageOfMANUncovered];
+    [self percentageOfQNSUncovered];
+    [self percentageOfSIUncovered];
 }
 
 #pragma mark - UI
@@ -263,7 +272,7 @@ NSFetchedResultsControllerDelegate
     return topLeftLocation;
 }
 
--(NSString *)userLocationInGrid:(CLLocation *) userLocation{
+-(NSString *)locationInGrid:(CLLocation *) userLocation{
     
     CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:userLocation.coordinate.longitude];
     CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
@@ -331,10 +340,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-//    [self addAnnotationToMapWith:topLeft];
-//    [self addAnnotationToMapWith:topRight];
-//    [self addAnnotationToMapWith:bottomRight];
-//    [self addAnnotationToMapWith:bottomLeft];
+    [self addAnnotationToMapWith:topLeft];
+    [self addAnnotationToMapWith:topRight];
+    [self addAnnotationToMapWith:bottomRight];
+    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -411,7 +420,7 @@ NSFetchedResultsControllerDelegate
             
             BOOL matchingTileFound = NO;
             
-            NSString *newTile = [self userLocationInGrid:newLocation];
+            NSString *newTile = [self locationInGrid:newLocation];
             
             for (int i = 0; i < self.visitedTiles.count; i++) {
                 
@@ -435,11 +444,9 @@ NSFetchedResultsControllerDelegate
                 //get borough to save to visitedTile
                 NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
                 
-                [self saveVisitedTile:newTile With:newLocationBorough And:tileCoords];
+                [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
                 
                 [self.visitedTiles addObject:newTile];
-                
-                [self percentageOfNYCUncovered];
                 
                 [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
             }
@@ -542,36 +549,23 @@ NSFetchedResultsControllerDelegate
     
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
         
-        //For borough calculations
-        
-        //Accummulate a count for each borough
         if ([zip.borough isEqualToString:@"Brooklyn"]) {
-            
-            [self percentageOfBKUncovered];
             
             borough = @"Brooklyn";
             
         }else if ([zip.borough isEqualToString:@"Manhattan"]){
             
-            [self percentageOfMANUncovered];
-            
             borough = @"Manhattan";
             
         }else if ([zip.borough isEqualToString:@"Staten Island"]){
-            
-            [self percentageOfSIUncovered];
             
             borough = @"Staten Island";
             
         }else if ([zip.borough isEqualToString:@"Bronx"]) {
             
-            [self percentageOfBRXUncovered];
-            
             borough = @"Bronx";
             
         }else if ([zip.borough isEqualToString:@"Queens"]){
-            
-            [self percentageOfQNSUncovered];
             
             borough = @"Queens";
         }
@@ -746,7 +740,7 @@ NSFetchedResultsControllerDelegate
     }
 }
 
-- (void)saveVisitedTile: (NSString *)columnRow With: (NSString *)borough And: (NSArray *)coords {
+- (void)saveVisitedTile: (NSString *)columnRow WithBorough: (NSString *)borough AndCoordinates: (NSArray *)coords {
     
     VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"VisitedTile"
                                                inManagedObjectContext:self.managedObjectContext];
@@ -754,12 +748,8 @@ NSFetchedResultsControllerDelegate
     tile.timestamp = [NSDate date];
     tile.columnRow = columnRow;
     tile.borough = borough;
-    
-    //Change to CLLocation!!!!!!!!!!!
-//    tile.coordinateTopLeft = coords[0];
-//    tile.coordinateTopRight = coords[1];
-//    tile.coordinateBottomRight = coords[2];
-//    tile.coordinateBottomLeft = coords[3];
+    tile.coordinatesArray = coords;
+
     
     // Save the context.
     NSError *error = nil;
@@ -797,6 +787,8 @@ NSFetchedResultsControllerDelegate
             
             [self.visitedTiles addObject: tile.columnRow];
             
+            NSLog(@"tile.borough: %@",tile.borough);
+            
             
             //Check tile borough, add to borough array
             
@@ -824,15 +816,10 @@ NSFetchedResultsControllerDelegate
             
             
             //Draw tile with tile coordinates
-            //Change this to accomodate CLLocation Coordinates!!!!!!!!!!!!!!!
-//            NSArray *visitedTileCoordinates = @[tile.coordinateTopLeft,
-//                                                tile.coordinateTopRight,
-//                                                tile.coordinateBottomRight,
-//                                                tile.coordinateBottomLeft,
-//                                                tile.coordinateTopLeft
-//                                                ];
-//            
-//            [self.mapView addOverlay:[self polygonWithLocations:visitedTileCoordinates]];
+            
+            NSArray *visitedTileCoordinates = tile.coordinatesArray;
+            
+            [self.mapView addOverlay:[self polygonWithLocations:visitedTileCoordinates]];
         
         }
         
@@ -866,7 +853,7 @@ NSFetchedResultsControllerDelegate
     
     self.percentageOfNYC = percentageOfNYCUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageOfNYC);
+    NSLog(@"percentage of NYC travelled: %f", self.percentageOfNYC);
 }
 
 -(void)percentageOfBKUncovered{
@@ -878,7 +865,7 @@ NSFetchedResultsControllerDelegate
     
     self.percentageOfBK = percentageOfBKUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageOfBK);
+    NSLog(@"percentage of BK travelled: %f", self.percentageOfBK);
 }
 
 -(void)percentageOfMANUncovered{
@@ -890,7 +877,7 @@ NSFetchedResultsControllerDelegate
     
     self.percentageOfMAN = percentageOfMANUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageOfMAN);
+    NSLog(@"percentage of MAN travelled: %f", self.percentageOfMAN);
 }
 
 -(void)percentageOfBRXUncovered{
@@ -902,7 +889,7 @@ NSFetchedResultsControllerDelegate
     
     self.percentageOfBRX = percentageOfBRXUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageOfBRX);
+    NSLog(@"percentage of BRX travelled: %f", self.percentageOfBRX);
 }
 
 -(void)percentageOfQNSUncovered{
@@ -914,7 +901,7 @@ NSFetchedResultsControllerDelegate
     
     self.percentageOfQNS = percentageOfQNSUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageOfQNS);
+    NSLog(@"percentage of QNS travelled: %f", self.percentageOfQNS);
 }
 
 -(void)percentageOfSIUncovered{
@@ -926,7 +913,7 @@ NSFetchedResultsControllerDelegate
     
     self.percentageOfSI = percentageOfSIUncovered;
     
-    NSLog(@"percentage travelled: %f", self.percentageOfSI);
+    NSLog(@"percentage of SI travelled: %f", self.percentageOfSI);
 }
 
 

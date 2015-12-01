@@ -10,6 +10,10 @@
 
 @implementation VisitedTile
 
-// Insert code here to add functionality to your managed object subclass
+//+ (CLLocation *) tileCoordinates: (double)latitude And: (double)longitude {
+//    
+//    
+//    return <#expression#>
+//}
 
 @end

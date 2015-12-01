@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+    <entity name="Location" representedClassName="Location" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="path" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Path" inverseName="locations" inverseEntity="Path" syncable="YES"/>
+    </entity>
+    <entity name="Path" representedClassName="Path" syncable="YES">
+        <attribute name="distance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="path" inverseEntity="Location" syncable="YES"/>
+    </entity>
+    <entity name="VisitedTile" representedClassName="VisitedTile" syncable="YES">
+        <attribute name="borough" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="columnRow" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coordinatesArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Location" positionX="27" positionY="180" width="128" height="105"/>
+        <element name="Path" positionX="115" positionY="-63" width="128" height="105"/>
+        <element name="VisitedTile" positionX="-9" positionY="9" width="128" height="105"/>
+    </elements>
+</model>
