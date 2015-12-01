@@ -27,12 +27,19 @@
     UserProfileView *view = (UserProfileView *)self.view;
     [view.backButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
  
-    view.percentage = self.progress / 100.0;
+    view.percentageNYC = self.progressNYC;
+    view.percentageBK = self.progressBK;
+    view.percentageMAN = self.progressMAN;
+    view.percentageQNS = self.progressQNS;
+    view.percentageBRX = self.progressBRX;
+    view.percentageSI = self.progressSI;
     
-    [view.nycCircleProgressBar setProgress:view.percentage animated:YES]; //in set progress number add
-
-    
-    NSLog(@"Is it passing %2f?", view.percentage);
+    [view.nycCircleProgressBar setProgress:view.percentageNYC animated:YES];
+    [view.BKCircleProgressBar setProgress:view.percentageBK animated:YES];
+    [view.MANCircleProgressBar setProgress:view.percentageMAN animated:YES];
+    [view.QNSCircleProgressBar setProgress:view.percentageQNS animated:YES];
+    [view.BRXCircleProgressBar setProgress:view.percentageBRX animated:YES];
+    [view.SICircleProgressBar setProgress:view.percentageSI animated:YES];
 }
 
 - (void)dismiss {

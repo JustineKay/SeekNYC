@@ -13,10 +13,6 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "NYCMapViewController.h"
-#import "Path.h"
-#import "Path+CoreDataProperties.h"
-#import "Location.h"
-#import "Location+CoreDataProperties.h"
 #import "VisitedTile.h"
 #import "VisitedTile+CoreDataProperties.h"
 #import "ClearOverlayPathRenderer.h"
@@ -30,9 +26,7 @@
 #import "UIColor+Color.h"
 #import "DiamondAnnotationView.h"
 #import "UberBlackAnnotationView.h"
-#import "UIColor+BlendMode.h"
 #import "ClearOverlayPolygonRenderer.h"
-#import "ClearTileOverlayRenderer.h"
 #import "ZipCodeData.h"
 #import "ZipCode.h"
 #import "APIManager.h"
@@ -56,12 +50,7 @@ NSFetchedResultsControllerDelegate
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (weak, nonatomic) IBOutlet UIButton *profileSettingsButton;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *zoomToLocationButton;
-@property (weak, nonatomic) IBOutlet UIButton *stopTrackingPathButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *trackPathButton;
-
 
 @property (nonatomic) CLLocationManager *locationManager;
 
@@ -100,7 +89,7 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
-@property (nonatomic) NSMutableArray *parkResults;
+@property (nonatomic) NSMutableArray *venueResults;
 
 @end
 
@@ -130,20 +119,50 @@ NSFetchedResultsControllerDelegate
         NSArray *venues = json[@"response"][@"venues"];
         
         // reset my array
-        self.parkResults = [[NSMutableArray alloc] init];
+        self.venueResults = [[NSMutableArray alloc] init];
         
         // loop through all json posts
         for (NSDictionary *venue in venues) {
             
             // create new post from json
-            SeekNYCParks *suggestedVenue = [[SeekNYCParks alloc] initWithJSON:venue];
+            SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
             
             // add post to array
-            [self.parkResults addObject:suggestedVenue];
+            [self.venueResults addObject:suggestedParkVenue];
             //  NSLog(@"%@", self.venueResults);
             
         }
      }];
+    
+}
+
+- (void)fetchLandmarkFourSquareData {
+    
+    //     create an url
+    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    
+    // fetch data from the endpoint and print json response
+    [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSArray *venues = json[@"response"][@"venues"];
+        
+//        // reset my array
+//        self.venueResults = [[NSMutableArray alloc] init];
+        
+        // loop through all json posts
+        for (NSDictionary *venue in venues) {
+            
+            // create new post from json
+            SeekNYCParks *suggestedLandmarkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
+            
+            // add post to array
+            [self.venueResults addObject:suggestedLandmarkVenue];
+            //  NSLog(@"%@", self.venueResults);
+            
+        }
+    }];
     
 }
      
@@ -153,7 +172,9 @@ NSFetchedResultsControllerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self fetchFourSquareData];
+    [self fetchLandmarkFourSquareData];
     
     self.mapView.delegate = self;
     
@@ -163,6 +184,10 @@ NSFetchedResultsControllerDelegate
     
     [self.locationManager requestAlwaysAuthorization];
     
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    
+    [self startLocationUpdates];
+    
     
     if (self.zipCodeData == nil) {
         
@@ -170,9 +195,6 @@ NSFetchedResultsControllerDelegate
         [self.zipCodeData initializeData];
         
     }
-    
-    self.trackPathButton.hidden = NO;
-    self.stopTrackingPathButton.hidden = YES;
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
@@ -196,7 +218,7 @@ NSFetchedResultsControllerDelegate
     
     // Set a title and message
     gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
-    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone \n receive info on \n places to visit", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to\n generate places to visit", nil);
     
     // Customize appearance as desired
     
@@ -227,7 +249,6 @@ NSFetchedResultsControllerDelegate
     [super viewWillAppear:YES];
     
     [self loadNYCMap];
-    [self loadUserPaths];
     [self loadVisitedTiles];
     
     
@@ -248,20 +269,18 @@ NSFetchedResultsControllerDelegate
 //    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
 //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
 //    //*********************************************************************************************
-//
+
 }
+
 
 -(void)viewDidDisappear:(BOOL)animated{
     
-    [self savePath];
+    [super viewDidDisappear:YES];
     
-    [self percentageOfNYCUncovered];
-    [self percentageOfBKUncovered];
-    [self percentageOfBRXUncovered];
-    [self percentageOfMANUncovered];
-    [self percentageOfQNSUncovered];
-    [self percentageOfSIUncovered];
+    NSArray *overlays = self.mapView.overlays;
+    [self.mapView removeOverlays:overlays];
 }
+
 
 #pragma mark - UI
 
@@ -273,7 +292,7 @@ NSFetchedResultsControllerDelegate
     self.mapView.mapType = MKMapTypeHybrid;
     
     //set mapview to bounds of screen for grid testing
-    self.mapView.frame = self.view.bounds;
+    //self.mapView.frame = self.view.bounds;
     
     MKCoordinateRegion NYRegion = MKCoordinateRegionMake(self.gridCenterCoord, self.gridSpan);
     
@@ -281,44 +300,9 @@ NSFetchedResultsControllerDelegate
     [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
-        
+    
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
-
-- (void)loadUserPaths{
-    
-    //Create an instance of NSFetchRequest with an entity name
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Path"];
-    
-    //create a sort descriptor
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
-    
-    //set the sort descriptors on the fetchRequest
-    fetchRequest.sortDescriptors = @[sort];
-    
-    //create a fetchedResultsController with a fetchRequest and a managedObjectContext
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    self.fetchedResultsController.delegate = self;
-    
-    [self.fetchedResultsController performFetch:nil];
-    
-    if (self.fetchedResultsController.fetchedObjects != nil) {
-        
-        NSArray *fetchedPaths = self.fetchedResultsController.fetchedObjects;
-        
-        for (Path *path in fetchedPaths) {
-            
-            NSArray *locations = [path locationsAsCLLocation];
-            
-            MKPolyline *polyline = [self polyLineWithLocations:locations];
-            
-            [self.mapView addOverlay:polyline];
-            
-        }
-        
-    }
-}
-
 
 
 #pragma mark - Grid and VisitedTile calculations
@@ -405,10 +389,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-    //[self addAnnotationToMapWith:topLeft];
-    //[self addAnnotationToMapWith:topRight];
-    //[self addAnnotationToMapWith:bottomRight];
-    //[self addAnnotationToMapWith:bottomLeft];
+//    [self addAnnotationToMapWith:topLeft];
+//    [self addAnnotationToMapWith:topRight];
+//    [self addAnnotationToMapWith:bottomRight];
+//    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -420,10 +404,10 @@ NSFetchedResultsControllerDelegate
         
         
         //******Testing an alternative annotationView**********************************************************
-//        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-//        if (!view)
-//            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
-//        view.bounds = CGRectMake(0, 0, 45, 20);
+        //        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        //        if (!view)
+        //            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        //        view.bounds = CGRectMake(0, 0, 45, 20);
         
         DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
         if(!view)
@@ -457,6 +441,42 @@ NSFetchedResultsControllerDelegate
         return view;
     }
     
+    //        else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+    //
+    //            DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+    //            if(!view)
+    //                view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+    //            view.bounds = CGRectMake(0, 0, 45, 45);
+    //
+    //
+    //            //
+    //            //Animate it like any UIView!
+    //            //
+    //
+    //            CABasicAnimation *theAnimation;
+    //
+    //            //within the animation we will adjust the "opacity"
+    //            //value of the layer
+    //            theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+    //            //animation lasts 1 second
+    //            theAnimation.duration=1.0;
+    //            //and it repeats forever
+    //            theAnimation.repeatCount= HUGE_VALF;
+    //            //we want a reverse animation
+    //            theAnimation.autoreverses=YES;
+    //            //justify the opacity as you like (1=fully visible, 0=unvisible)
+    //            theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+    //            theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+    //
+    //            //Assign the animation to your UIImage layer and the
+    //            //animation will start immediately
+    //            [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+    //            
+    //            return view;
+    //    
+    //            
+    //        }
+    
     return nil;
 }
 
@@ -475,13 +495,6 @@ NSFetchedResultsControllerDelegate
         
         //***REMOVE (&& self.isNYC) to test in simulator *************
         if (isAccurate && isRecent && self.isNYC) {
-            
-            if (self.locations == nil) {
-                
-                self.locations = [NSMutableArray array];
-            }
-            
-            [self.locations addObject:newLocation];
             
             BOOL matchingTileFound = NO;
             
@@ -512,25 +525,11 @@ NSFetchedResultsControllerDelegate
                 [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
                 
                 [self.visitedTiles addObject:newTile];
+                [self addNewTileBoroughToVisitedTilesBoroughArray:newLocationBorough];
                 
                 [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
             }
             
-//            if (self.locations.count > 1) {
-//                
-//                NSInteger sourceIndex = self.locations.count - 1;
-//                NSInteger destinationIndex = self.locations.count - 2;
-//                
-//                NSArray *newLocations = @[self.locations[sourceIndex], self.locations[destinationIndex]];
-//                
-//                //drop polyline ***************************
-//                [self.mapView addOverlay:[self polyLineWithLocations:newLocations]];
-//            }
-            
-            
-        }else {
-            
-            self.locations = nil;
         }
         
     }
@@ -582,7 +581,7 @@ NSFetchedResultsControllerDelegate
 
 }
 
--(void)verifyZipCode: (NSString *)userLocationZipCode{
+-(void)verifyZipCode: (NSString *)userLocationZipCode {
     
     
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
@@ -609,11 +608,36 @@ NSFetchedResultsControllerDelegate
 
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
       if ([zip.number isEqualToString:newLocationZipCode]) {
+         
         return zip.borough;
       }
     }
     
     return nil;
+}
+
+-(void) addNewTileBoroughToVisitedTilesBoroughArray: (NSString *)newTileBorough {
+    
+    if ([newTileBorough isEqualToString:@"Brooklyn"]) {
+        
+        [self.visitedTilesBK addObject:newTileBorough];
+        
+    }else if ([newTileBorough isEqualToString:@"Manhattan"]){
+        
+        [self.visitedTilesMAN addObject:newTileBorough];
+        
+    }else if ([newTileBorough isEqualToString:@"Queens"]) {
+        
+        [self.visitedTilesQNS addObject:newTileBorough];
+        
+    }else if ([newTileBorough isEqualToString:@"Bronx"]) {
+        
+        [self.visitedTilesBRX addObject:newTileBorough];
+        
+    }else {
+        
+        [self.visitedTilesSI addObject:newTileBorough];
+    }
 }
 
 
@@ -651,53 +675,40 @@ NSFetchedResultsControllerDelegate
     if (index == 0) {
         
         //***SEGUE TO PROFILE***
+        
+        [self percentageOfNYCUncovered];
+        [self percentageOfBKUncovered];
+        [self percentageOfBRXUncovered];
+        [self percentageOfMANUncovered];
+        [self percentageOfQNSUncovered];
+        [self percentageOfSIUncovered];
+        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
         UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
         
-        userProfileVC.progress = self.percentageOfNYC;
+        userProfileVC.progressNYC = self.percentageOfNYC;
+        userProfileVC.progressBK = self.percentageOfBK;
+        userProfileVC.progressMAN = self.percentageOfMAN;
+        userProfileVC.progressQNS = self.percentageOfQNS;
+        userProfileVC.progressBRX = self.percentageOfBRX;
+        userProfileVC.progressSI = self.percentageOfSI;
         
         [self presentViewController:userProfileVC animated:YES completion:nil];
         
-        NSLog(@"self.percentage travelled is stored %2f", userProfileVC.progress);
-        
+        NSLog(@"percentageNYC %2f", userProfileVC.progressNYC);
+        NSLog(@"percentageBK %2f", userProfileVC.progressBK);
+        NSLog(@"percentageMAN %2f", userProfileVC.progressMAN);
+        NSLog(@"percentageNYC %2f", userProfileVC.progressQNS);
         
         [sidebar dismissAnimated:YES];
         
         
     } else if (index == 1) {
         
-        //***SEGUE TO SuggestedVenue***
+        //*** Alert for Suggested landmark/park ***
         
-        NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
-        
-        // Set a title and message
-        gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
-        gestureAlertInfo.message = NSLocalizedString(@"Shake your phone \n receive info on \n places to visit", nil);
-        
-        // Customize appearance as desired
-        
-        gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleFade;
-        
-        gestureAlertInfo.buttonCornerRadius = 20.0f;
-        gestureAlertInfo.view.tintColor = self.view.tintColor;
-        
-        gestureAlertInfo.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
-        gestureAlertInfo.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
-        gestureAlertInfo.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.buttonTitleFont.pointSize];
-        gestureAlertInfo.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.cancelButtonTitleFont.pointSize];
-        
-        gestureAlertInfo.swipeDismissalGestureEnabled = YES;
-        gestureAlertInfo.backgroundTapDismissalGestureEnabled = YES;
-        
-        [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
-                                                              style:UIAlertActionStyleCancel
-                                                            handler:^(NYAlertAction *action) {
-                                                                [self dismissViewControllerAnimated:YES completion:nil];
-                                                            }]];
-        
-        // Present the alert view controller
-        [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+        [self suggestedPlacesAlertVC];
         
         [sidebar dismissAnimated:YES];
         
@@ -742,68 +753,8 @@ NSFetchedResultsControllerDelegate
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
-- (IBAction)trackPathButtonTapped:(UIButton *)sender {
-    
-    self.trackPathButton.hidden = YES;
-    self.stopTrackingPathButton.hidden = NO;
-    
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    
-    [self startLocationUpdates];
-    
-}
-
-- (IBAction)stopTrackingPathButtonTapped:(UIButton *)sender {
-    
-    [self stopTrackingUserLocation];
-    
-    self.locations = nil;
-}
-
-
-- (void)stopTrackingUserLocation {
-    
-    self.stopTrackingPathButton.hidden = YES;
-    self.trackPathButton.hidden = NO;
-    
-    [self.locationManager stopUpdatingLocation];
-    
-    [self savePath];
-}
 
 #pragma mark - Core Data
-
-- (void)savePath {
-    
-    Path *path = [NSEntityDescription insertNewObjectForEntityForName:@"Path"
-                                               inManagedObjectContext:self.managedObjectContext];
-    
-    path.distance = [NSNumber numberWithFloat:self.distance];
-    path.duration = [NSNumber numberWithInt:self.seconds];
-    path.timestamp = [NSDate date];
-    
-    NSMutableArray *locationArray = [NSMutableArray array];
-    for (CLLocation *location in self.locations) {
-        Location *locationObject = [NSEntityDescription insertNewObjectForEntityForName:@"Location"
-                                                                 inManagedObjectContext:self.managedObjectContext];
-        
-        locationObject.timestamp = location.timestamp;
-        locationObject.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
-        locationObject.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-        [locationArray addObject:locationObject];
-    }
-    
-    path.locations = [NSOrderedSet orderedSetWithArray:locationArray];
-    
-    // Save the context.
-    NSError *error = nil;
-    
-    if (![self.managedObjectContext save:&error]) {
-        
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
 
 - (void)saveVisitedTile: (NSString *)columnRow WithBorough: (NSString *)borough AndCoordinates: (NSArray *)coords {
     
@@ -859,21 +810,31 @@ NSFetchedResultsControllerDelegate
             
             if ([tile.borough isEqualToString:@"Brooklyn"]) {
                 
+                self.visitedTilesBK = [[NSMutableArray alloc] init];
+                
                 [self.visitedTilesBK addObject:tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Manhattan"]) {
+                
+                self.visitedTilesMAN = [[NSMutableArray alloc] init];
                 
                 [self.visitedTilesMAN addObject:tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Bronx"]) {
                 
+                self.visitedTilesBRX = [[NSMutableArray alloc] init];
+                
                 [self.visitedTilesBRX addObject:tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Queens"]) {
                 
+                self.visitedTilesQNS = [[NSMutableArray alloc] init];
+                
                 [self.visitedTilesQNS addObject: tile.borough];
                 
             }else if ([tile.borough isEqualToString:@"Staten Island"]) {
+                
+                self.visitedTilesSI = [[NSMutableArray alloc] init];
                 
                 [self.visitedTilesSI addObject:tile.borough];
                 
@@ -913,8 +874,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTiles.count * 40;
     CGFloat nycMeters = 785000;
-    CGFloat metersOfNYCUncovered = userMeters / nycMeters;
-    CGFloat percentageOfNYCUncovered = metersOfNYCUncovered * 100;
+    CGFloat percentageOfNYCUncovered = userMeters / nycMeters;
     
     self.percentageOfNYC = percentageOfNYCUncovered;
     
@@ -925,8 +885,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesBK.count * 40;
     CGFloat bkMeters = 183000;
-    CGFloat metersOfBKUncovered = userMeters / bkMeters;
-    CGFloat percentageOfBKUncovered = metersOfBKUncovered * 100;
+    CGFloat percentageOfBKUncovered = userMeters / bkMeters;
     
     self.percentageOfBK = percentageOfBKUncovered;
     
@@ -937,8 +896,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesMAN.count * 40;
     CGFloat manMeters = 59000;
-    CGFloat metersOfMANUncovered = userMeters / manMeters;
-    CGFloat percentageOfMANUncovered = metersOfMANUncovered * 100;
+    CGFloat percentageOfMANUncovered = userMeters / manMeters;
     
     self.percentageOfMAN = percentageOfMANUncovered;
     
@@ -949,8 +907,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesBRX.count * 40;
     CGFloat brxMeters = 109000;
-    CGFloat metersOfBRXUncovered = userMeters / brxMeters;
-    CGFloat percentageOfBRXUncovered = metersOfBRXUncovered * 100;
+    CGFloat percentageOfBRXUncovered = userMeters / brxMeters;
     
     self.percentageOfBRX = percentageOfBRXUncovered;
     
@@ -961,8 +918,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesQNS.count * 40;
     CGFloat qnsMeters = 283000;
-    CGFloat metersOfQNSUncovered = userMeters / qnsMeters;
-    CGFloat percentageOfQNSUncovered = metersOfQNSUncovered * 100;
+    CGFloat percentageOfQNSUncovered = userMeters / qnsMeters;
     
     self.percentageOfQNS = percentageOfQNSUncovered;
     
@@ -973,8 +929,7 @@ NSFetchedResultsControllerDelegate
     
     CGFloat userMeters = self.visitedTilesSI.count * 40;
     CGFloat siMeters = 151000;
-    CGFloat metersOfSIUncovered = userMeters / siMeters;
-    CGFloat percentageOfSIUncovered = metersOfSIUncovered * 100;
+    CGFloat percentageOfSIUncovered = userMeters / siMeters;
     
     self.percentageOfSI = percentageOfSIUncovered;
     
@@ -1130,24 +1085,18 @@ NSFetchedResultsControllerDelegate
                                                               //set the nsUserDefaults for the background view
                                                               UIColor *userColourChoice = alertViewController.alertViewBackgroundColor;
                                                               
-                                                              
                                                               NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:userColourChoice];
-                                                              
                                                               
                                                               [[NSUserDefaults standardUserDefaults] setObject:colourData forKey:TintKey];
                                                               
-                                                              [self savePath];
-                                                              
                                                               NSArray *overlays = self.mapView.overlays;
                                                               [self.mapView removeOverlays:overlays];
-                                                              
                                                               
                                                               MKMapFullCoverageOverlay *fullOverlay = [[MKMapFullCoverageOverlay alloc] initWithMapView:self.mapView];
                                                               
                                                               [self.mapView addOverlay: fullOverlay];
                                                               
-                                                              [self loadUserPaths];
-                                                              
+                                                              [self loadVisitedTiles];
                                                               
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }]];
@@ -1163,22 +1112,121 @@ NSFetchedResultsControllerDelegate
 }
 
 
+-(void)suggestedPlacesAlertVC {
+    
+    NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    gestureAlertInfo.title = NSLocalizedString(@"Seeking something new?", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Shake Your Phone!", nil);
+    
+    // Customize appearance as desired
+    
+    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    
+    gestureAlertInfo.buttonCornerRadius = 20.0f;
+    gestureAlertInfo.view.tintColor = self.view.tintColor;
+    
+    gestureAlertInfo.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
+    gestureAlertInfo.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
+    gestureAlertInfo.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.buttonTitleFont.pointSize];
+    gestureAlertInfo.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.cancelButtonTitleFont.pointSize];
+    
+    gestureAlertInfo.swipeDismissalGestureEnabled = YES;
+    gestureAlertInfo.backgroundTapDismissalGestureEnabled = YES;
+    
+    [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(NYAlertAction *action) {
+                                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                                       }]];
+    
+    // Present the alert view controller
+    [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+}
+
+
+#pragma mark - ShakeGesture
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        [self showAlert];
+    }
+}
+
+-(IBAction)showAlert {
+    
+ //  NSLog(@"%@", self.venueResults);
+    int random = arc4random_uniform((int)self.venueResults.count);
+    
+    SeekNYCParks *suggestedVenue = [self.venueResults objectAtIndex:random];
+    
+    NYAlertViewController *alertShakeGesture = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alertShakeGesture.title = NSLocalizedString(suggestedVenue.name, nil);
+    alertShakeGesture.message = NSLocalizedString(suggestedVenue.categoryName, nil);
+    
+    // Customize appearance as desired
+    
+    alertShakeGesture.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    
+    alertShakeGesture.buttonCornerRadius = 20.0f;
+    alertShakeGesture.view.tintColor = self.view.tintColor;
+    
+    alertShakeGesture.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
+    alertShakeGesture.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
+    alertShakeGesture.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:alertShakeGesture.buttonTitleFont.pointSize];
+    alertShakeGesture.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:alertShakeGesture.cancelButtonTitleFont.pointSize];
+    
+    alertShakeGesture.swipeDismissalGestureEnabled = YES;
+    alertShakeGesture.backgroundTapDismissalGestureEnabled = YES;
+    
+    [alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Go", nil)
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:^(NYAlertAction *action) {
+                                                            
+                                                            MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+                                                            myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
+                                                            myAnnotation.title = suggestedVenue.name;
+                                                            [self.mapView addAnnotation:myAnnotation];
+                                                        
+                                                            [self dismissViewControllerAnimated:YES completion:nil];
+                                                        }]];
+    
+    [alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", nil)
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:^(NYAlertAction *action) {
+                                                            [self dismissViewControllerAnimated:YES completion:nil];
+                                                        }]];
+    
+    // Present the alert view controller
+    [self presentViewController:alertShakeGesture animated:YES completion:nil];
+}
+
 #pragma  mark - Testing Grid
 
 -(void)gridTest{
     
     //Testing Grid
     
-//    CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
-//    self.gridOriginPoint = location1;
-//    
-//    CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
-//    CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
-//    
-//    NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
-//    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
-//    
-//    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
+    //    CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
+    //    self.gridOriginPoint = location1;
+    //
+    //    CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
+    //    CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
+    //
+    //    NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
+    //    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
+    //
+    //    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
     
 }
 
@@ -1228,78 +1276,4 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView addAnnotation:annotation];
 }
-
-#pragma mark - ShakeGesture
-
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-    if (motion == UIEventSubtypeMotionShake)
-    {
-        [self showAlert];
-    }
-}
-
--(IBAction)showAlert {
-    
-int random = arc4random_uniform((int)self.parkResults.count);
-    
-    
-    
-SeekNYCParks *suggestedVenue = [self.parkResults objectAtIndex:random];
-
-NYAlertViewController *alertShakeGesture = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
-
-// Set a title and message
-alertShakeGesture.title = NSLocalizedString(suggestedVenue.name, nil);
-alertShakeGesture.message = NSLocalizedString(@"Description", nil);
-
-// Customize appearance as desired
-
-alertShakeGesture.transitionStyle = NYAlertViewControllerTransitionStyleFade;
-
-alertShakeGesture.buttonCornerRadius = 20.0f;
-alertShakeGesture.view.tintColor = self.view.tintColor;
-
-alertShakeGesture.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
-alertShakeGesture.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
-alertShakeGesture.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:alertShakeGesture.buttonTitleFont.pointSize];
-alertShakeGesture.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:alertShakeGesture.cancelButtonTitleFont.pointSize];
-
-alertShakeGesture.swipeDismissalGestureEnabled = YES;
-alertShakeGesture.backgroundTapDismissalGestureEnabled = YES;
-
-//// Add alert actions
-//
-//[alertShakeGesture addAction:[NYAlertAction actionWithTitle:@"Hot Pink"
-//                                                        style:UIAlertActionStyleDefault
-//                                                      handler:^(NYAlertAction *action) {
-//                                                          
-//                                                          alertShakeGesture.alertViewBackgroundColor = [UIColor hotPinkColor];
-//                                                          
-//                                                          
-//                                                      }]];
-
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Go", nil)
-                                                        style:UIAlertActionStyleCancel
-                                                      handler:^(NYAlertAction *action) {
-                                                          
-                                                          [self loadUserPaths];
-                                                          [self dismissViewControllerAnimated:YES completion:nil];
-                                                      }]];
-
-[alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", nil)
-                                                        style:UIAlertActionStyleCancel
-                                                      handler:^(NYAlertAction *action) {
-                                                          [self dismissViewControllerAnimated:YES completion:nil];
-                                                      }]];
-
-// Present the alert view controller
-[self presentViewController:alertShakeGesture animated:YES completion:nil];
-}
-
 @end

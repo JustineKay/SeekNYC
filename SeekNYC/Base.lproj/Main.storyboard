@@ -5,12 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Viafont.otf">
-            <string>Viafont</string>
-            <string>Viafont</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="4h4-cg-T3f">
@@ -108,55 +102,12 @@
                                     <constraint firstItem="fPC-3G-srQ" firstAttribute="leading" secondItem="msn-nz-gs4" secondAttribute="trailing" id="twv-bc-8QF"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGj-LI-B38" userLabel="Bottom Bar View">
-                                <rect key="frame" x="0.0" y="500" width="600" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5Q-F4-e0g">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="Viafont" family="Viafont" pointSize="19"/>
-                                        <state key="normal" title="Track">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="trackPathButtonTapped:" destination="Blf-1U-uPe" eventType="touchUpInside" id="b9a-jj-EuI"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXT-lb-jGJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="Viafont" family="Viafont" pointSize="19"/>
-                                        <state key="normal" title="Stop Tracking">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="stopTrackingPathButtonTapped:" destination="Blf-1U-uPe" eventType="touchUpInside" id="lqu-yN-EDu"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="kXT-lb-jGJ" secondAttribute="bottom" id="98z-sT-AuL"/>
-                                    <constraint firstAttribute="trailing" secondItem="kXT-lb-jGJ" secondAttribute="trailing" id="Ja5-eG-flF"/>
-                                    <constraint firstItem="b5Q-F4-e0g" firstAttribute="leading" secondItem="OGj-LI-B38" secondAttribute="leading" id="LCI-SM-C33"/>
-                                    <constraint firstAttribute="bottom" secondItem="b5Q-F4-e0g" secondAttribute="bottom" id="RDu-fl-8iw"/>
-                                    <constraint firstAttribute="trailing" secondItem="b5Q-F4-e0g" secondAttribute="trailing" id="eNF-JS-Dkj"/>
-                                    <constraint firstAttribute="height" constant="60" id="ek6-gg-OFl"/>
-                                    <constraint firstItem="kXT-lb-jGJ" firstAttribute="leading" secondItem="OGj-LI-B38" secondAttribute="leading" id="gb6-ZE-Vlx"/>
-                                    <constraint firstItem="kXT-lb-jGJ" firstAttribute="top" secondItem="OGj-LI-B38" secondAttribute="top" id="gcO-2R-LJt"/>
-                                    <constraint firstItem="b5Q-F4-e0g" firstAttribute="top" secondItem="OGj-LI-B38" secondAttribute="top" id="rT2-KY-Q0Z"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9rS-ea-nVE" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="0Bz-IF-cga"/>
-                            <constraint firstItem="OGj-LI-B38" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="0ub-7b-1ma"/>
                             <constraint firstItem="qkw-2I-T35" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="6M1-4L-au9"/>
-                            <constraint firstAttribute="trailing" secondItem="OGj-LI-B38" secondAttribute="trailing" id="QVc-48-1LR"/>
-                            <constraint firstAttribute="bottom" secondItem="OGj-LI-B38" secondAttribute="bottom" constant="40" id="UAv-3K-woi"/>
                             <constraint firstItem="qkw-2I-T35" firstAttribute="top" secondItem="QLD-xQ-21n" secondAttribute="top" id="ZXu-Wf-zRZ"/>
                             <constraint firstItem="9rS-ea-nVE" firstAttribute="top" secondItem="0KV-Qv-Yi6" secondAttribute="bottom" constant="30" id="Zik-u8-72e"/>
                             <constraint firstAttribute="trailing" secondItem="qkw-2I-T35" secondAttribute="trailing" id="pFi-y0-rJI"/>
@@ -167,9 +118,6 @@
                     <connections>
                         <outlet property="mapView" destination="qkw-2I-T35" id="JQy-z2-v4H"/>
                         <outlet property="profileSettingsButton" destination="dPc-fc-Lr4" id="02n-GE-ZnH"/>
-                        <outlet property="shareButton" destination="msn-nz-gs4" id="ahG-PL-7Db"/>
-                        <outlet property="stopTrackingPathButton" destination="kXT-lb-jGJ" id="KVt-cd-GHx"/>
-                        <outlet property="trackPathButton" destination="b5Q-F4-e0g" id="FQn-hw-KwK"/>
                         <outlet property="zoomToLocationButton" destination="fPC-3G-srQ" id="IiL-In-4Mg"/>
                     </connections>
                 </viewController>

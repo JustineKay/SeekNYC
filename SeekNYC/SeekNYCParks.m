@@ -21,6 +21,9 @@
         NSDictionary *venueType = [venue[@"categories"]objectAtIndex:0];
         
         self.categoryName = [venueType objectForKey:@"name"];
+        
+        self.landmarkLat = [venue[@"location"][@"lat"]floatValue];
+        self.landmarkLng = [venue[@"location"][@"lng"]floatValue];
 
         return self;
     }

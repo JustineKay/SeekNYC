@@ -10,6 +10,12 @@
 
 @interface UserProfileViewController : UIViewController
 
-@property (nonatomic) CGFloat progress;
+@property (nonatomic) CGFloat progressNYC;
+@property (nonatomic) CGFloat progressBK;
+@property (nonatomic) CGFloat progressMAN;
+@property (nonatomic) CGFloat progressQNS;
+@property (nonatomic) CGFloat progressBRX;
+@property (nonatomic) CGFloat progressSI;
+
 
 @end

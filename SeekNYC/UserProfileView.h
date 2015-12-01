@@ -15,6 +15,19 @@
 
 @property (weak, nonatomic) IBOutlet CircleProgressBar *nycCircleProgressBar;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (nonatomic) CGFloat percentage;
+
+@property (weak, nonatomic) IBOutlet CircleProgressBar *BKCircleProgressBar;
+@property (weak, nonatomic) IBOutlet CircleProgressBar *MANCircleProgressBar;
+@property (weak, nonatomic) IBOutlet CircleProgressBar *QNSCircleProgressBar;
+@property (weak, nonatomic) IBOutlet CircleProgressBar *BRXCircleProgressBar;
+@property (weak, nonatomic) IBOutlet CircleProgressBar *SICircleProgressBar;
+
+
+@property (nonatomic) CGFloat percentageNYC;
+@property (nonatomic) CGFloat percentageBK;
+@property (nonatomic) CGFloat percentageMAN;
+@property (nonatomic) CGFloat percentageQNS;
+@property (nonatomic) CGFloat percentageBRX;
+@property (nonatomic) CGFloat percentageSI;
 
 @end
