@@ -54,12 +54,7 @@ NSFetchedResultsControllerDelegate
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (weak, nonatomic) IBOutlet UIButton *profileSettingsButton;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *zoomToLocationButton;
-@property (weak, nonatomic) IBOutlet UIButton *stopTrackingPathButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *trackPathButton;
-
 
 @property (nonatomic) CLLocationManager *locationManager;
 
@@ -180,6 +175,7 @@ NSFetchedResultsControllerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self fetchFourSquareData];
     [self fetchLandmarkFourSquareData];
     
@@ -191,6 +187,10 @@ NSFetchedResultsControllerDelegate
     
     [self.locationManager requestAlwaysAuthorization];
     
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    
+    [self startLocationUpdates];
+    
     
     if (self.zipCodeData == nil) {
         
@@ -198,9 +198,6 @@ NSFetchedResultsControllerDelegate
         [self.zipCodeData initializeData];
         
     }
-    
-    self.trackPathButton.hidden = NO;
-    self.stopTrackingPathButton.hidden = YES;
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
@@ -276,6 +273,15 @@ NSFetchedResultsControllerDelegate
 //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
 //    //*********************************************************************************************
 
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:YES];
+    
+    NSArray *overlays = self.mapView.overlays;
+    [self.mapView removeOverlays:overlays];
 }
 
 
@@ -400,10 +406,10 @@ NSFetchedResultsControllerDelegate
         
         
         //******Testing an alternative annotationView**********************************************************
-//        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-//        if (!view)
-//            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
-//        view.bounds = CGRectMake(0, 0, 45, 20);
+        //        UberBlackAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        //        if (!view)
+        //            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        //        view.bounds = CGRectMake(0, 0, 45, 20);
         
         DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
         if(!view)
@@ -436,6 +442,42 @@ NSFetchedResultsControllerDelegate
         
         return view;
     }
+    
+    //        else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+    //
+    //            DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+    //            if(!view)
+    //                view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+    //            view.bounds = CGRectMake(0, 0, 45, 45);
+    //
+    //
+    //            //
+    //            //Animate it like any UIView!
+    //            //
+    //
+    //            CABasicAnimation *theAnimation;
+    //
+    //            //within the animation we will adjust the "opacity"
+    //            //value of the layer
+    //            theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+    //            //animation lasts 1 second
+    //            theAnimation.duration=1.0;
+    //            //and it repeats forever
+    //            theAnimation.repeatCount= HUGE_VALF;
+    //            //we want a reverse animation
+    //            theAnimation.autoreverses=YES;
+    //            //justify the opacity as you like (1=fully visible, 0=unvisible)
+    //            theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+    //            theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+    //
+    //            //Assign the animation to your UIImage layer and the
+    //            //animation will start immediately
+    //            [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+    //            
+    //            return view;
+    //    
+    //            
+    //        }
     
     return nil;
 }
@@ -713,32 +755,6 @@ NSFetchedResultsControllerDelegate
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
-- (IBAction)trackPathButtonTapped:(UIButton *)sender {
-    
-    self.trackPathButton.hidden = YES;
-    self.stopTrackingPathButton.hidden = NO;
-    
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    
-    [self startLocationUpdates];
-    
-}
-
-- (IBAction)stopTrackingPathButtonTapped:(UIButton *)sender {
-    
-    [self stopTrackingUserLocation];
-    
-    self.locations = nil;
-}
-
-
-- (void)stopTrackingUserLocation {
-    
-    self.stopTrackingPathButton.hidden = YES;
-    self.trackPathButton.hidden = NO;
-    
-    [self.locationManager stopUpdatingLocation];
-}
 
 #pragma mark - Core Data
 
@@ -1103,8 +1119,8 @@ NSFetchedResultsControllerDelegate
     NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
     // Set a title and message
-    gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
-    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone \n receive info on \n places to visit", nil);
+    gestureAlertInfo.title = NSLocalizedString(@"Seeking something new?", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Shake Your Phone!", nil);
     
     // Customize appearance as desired
     
