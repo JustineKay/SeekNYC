@@ -1270,9 +1270,11 @@ NSFetchedResultsControllerDelegate
 
 -(IBAction)showAlert {
     
+int random = arc4random_uniform((int)self.parkResults.count);
     
     
- SeekNYCParks *suggestedVenue = self.parkResults[1];
+    
+SeekNYCParks *suggestedVenue = [self.parkResults objectAtIndex:random];
 
 NYAlertViewController *alertShakeGesture = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
 
