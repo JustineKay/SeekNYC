@@ -119,6 +119,7 @@ NSFetchedResultsControllerDelegate
 - (void)fetchFourSquareData {
     
     //     create an url
+    
     NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
     // fetch data from the endpoint and print json response
