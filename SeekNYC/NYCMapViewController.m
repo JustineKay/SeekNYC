@@ -135,10 +135,10 @@ NSFetchedResultsControllerDelegate
         for (NSDictionary *venue in venues) {
             
             // create new post from json
-            SeekNYCParks *suggestedVenue = [[SeekNYCParks alloc] initWithJSON:venue];
+            SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
             
             // add post to array
-            [self.venueResults addObject:suggestedVenue];
+            [self.venueResults addObject:suggestedParkVenue];
             //  NSLog(@"%@", self.venueResults);
             
         }
@@ -165,10 +165,10 @@ NSFetchedResultsControllerDelegate
         for (NSDictionary *venue in venues) {
             
             // create new post from json
-            SeekNYCParks *suggestedVenue = [[SeekNYCParks alloc] initWithJSON:venue];
+            SeekNYCParks *suggestedLandmarkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
             
             // add post to array
-            [self.venueResults addObject:suggestedVenue];
+            [self.venueResults addObject:suggestedLandmarkVenue];
             //  NSLog(@"%@", self.venueResults);
             
         }
@@ -1217,7 +1217,7 @@ NSFetchedResultsControllerDelegate
 
 -(IBAction)showAlert {
     
-    
+ //  NSLog(@"%@", self.venueResults);
     int random = arc4random_uniform((int)self.venueResults.count);
     
     SeekNYCParks *suggestedVenue = [self.venueResults objectAtIndex:random];
@@ -1246,6 +1246,12 @@ NSFetchedResultsControllerDelegate
     [alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Go", nil)
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
+                                                            
+                                                            
+                                                            MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
+                                                            myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
+                                                            myAnnotation.title = suggestedVenue.name;
+                                                            [self.mapView addAnnotation:myAnnotation];
                                                             
                                                             [self loadUserPaths];
                                                             [self dismissViewControllerAnimated:YES completion:nil];
