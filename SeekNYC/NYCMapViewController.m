@@ -404,10 +404,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-    [self addAnnotationToMapWith:topLeft];
-    [self addAnnotationToMapWith:topRight];
-    [self addAnnotationToMapWith:bottomRight];
-    [self addAnnotationToMapWith:bottomLeft];
+    //[self addAnnotationToMapWith:topLeft];
+    //[self addAnnotationToMapWith:topRight];
+    //[self addAnnotationToMapWith:bottomRight];
+    //[self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -589,55 +589,30 @@ NSFetchedResultsControllerDelegate
         if ([zip.number isEqualToString:userLocationZipCode]) {
             
             NSLog(@"User is in NYC, %@", zip.borough);
-            
             self.isNYC = YES;
+
+            return;
             
-        }else {
-            
-            NSLog(@"User is not in NYC");
-            
-            self.isNYC = NO;
-            
-            break;
         }
         
     }
-    
+
+    NSLog(@"User is not in NYC");
+    self.isNYC = NO;
+
     NSLog(@"self.zipCodeData.allZipcodes: %@", self.zipCodeData.allZipCodes);
     
 }
 
 - (NSString *) getBorough: (NSString *)newLocationZipCode {
-    
-    NSString *borough;
-    
+
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
-        
-        if ([zip.borough isEqualToString:@"Brooklyn"]) {
-            
-            borough = @"Brooklyn";
-            
-        }else if ([zip.borough isEqualToString:@"Manhattan"]){
-            
-            borough = @"Manhattan";
-            
-        }else if ([zip.borough isEqualToString:@"Staten Island"]){
-            
-            borough = @"Staten Island";
-            
-        }else if ([zip.borough isEqualToString:@"Bronx"]) {
-            
-            borough = @"Bronx";
-            
-        }else if ([zip.borough isEqualToString:@"Queens"]){
-            
-            borough = @"Queens";
-        }
-        
-        
+      if ([zip.number isEqualToString:newLocationZipCode]) {
+        return zip.borough;
+      }
     }
     
-    return borough;
+    return nil;
 }
 
 
