@@ -13,10 +13,6 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "NYCMapViewController.h"
-#import "Path.h"
-#import "Path+CoreDataProperties.h"
-#import "Location.h"
-#import "Location+CoreDataProperties.h"
 #import "VisitedTile.h"
 #import "VisitedTile+CoreDataProperties.h"
 #import "ClearOverlayPathRenderer.h"
