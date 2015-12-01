@@ -291,7 +291,7 @@ NSFetchedResultsControllerDelegate
     self.mapView.mapType = MKMapTypeHybrid;
     
     //set mapview to bounds of screen for grid testing
-    self.mapView.frame = self.view.bounds;
+    //self.mapView.frame = self.view.bounds;
     
     MKCoordinateRegion NYRegion = MKCoordinateRegionMake(self.gridCenterCoord, self.gridSpan);
     
@@ -299,7 +299,8 @@ NSFetchedResultsControllerDelegate
     [self.mapView addOverlay: fullOverlay];
     
     [self.mapView setRegion: NYRegion animated: YES];
-        
+    
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
 
