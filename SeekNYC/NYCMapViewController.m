@@ -33,7 +33,7 @@
 #import "SeekNYCParks.h"
 
 static float const metersInMile = 1609.344;
-static double const tileSizeInMeters = 40.0;
+static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
 static float const centerCoordLng = -74.0059;
 static float const NYRegionSpan = 0.525;
@@ -353,7 +353,7 @@ NSFetchedResultsControllerDelegate
     NSArray *columnRowNumbers = [columnRow componentsSeparatedByString:@", "];
     NSString *column = columnRowNumbers[0];
     NSString *row = columnRowNumbers[1];
-    NSInteger columnNumber = column.integerValue;
+    NSInteger columnNumber = column.integerValue - 1;
     NSInteger rowNumber = row.integerValue;
     
     double lngDiff = columnNumber * tileSizeInMeters;
