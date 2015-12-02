@@ -508,7 +508,7 @@ NSFetchedResultsControllerDelegate
         [self getZipCode:newLocation];
         
         //***REMOVE (&& self.isNYC) to test in simulator *************
-        if (isAccurate && isRecent) {
+        if (isAccurate && isRecent && self.isNYC) {
             
             BOOL matchingTileFound = NO;
             
