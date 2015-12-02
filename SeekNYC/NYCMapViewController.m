@@ -24,7 +24,9 @@
 #import "RNFrostedSidebar.h"
 #import "SuggestedVenuesTableViewController.h"
 #import "UIColor+Color.h"
+#import "DiamondPinAnnotationView.h"
 #import "DiamondAnnotationView.h"
+#import "SunglassesAnnotationView.h"
 #import "UberBlackAnnotationView.h"
 #import "ClearOverlayPolygonRenderer.h"
 #import "ZipCodeData.h"
@@ -423,10 +425,16 @@ NSFetchedResultsControllerDelegate
         //            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
         //        view.bounds = CGRectMake(0, 0, 45, 20);
         
-        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-        if(!view)
-            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-        view.bounds = CGRectMake(0, 0, 45, 45);
+        SunglassesAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        if (!view) {
+            view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+            view.bounds = CGRectMake(0, 0, 113, 58);
+        }
+        
+        //        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        //        if(!view)
+        //            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        //        view.bounds = CGRectMake(0, 0, 45, 45);
         
         
         //
@@ -453,45 +461,104 @@ NSFetchedResultsControllerDelegate
         [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
         
         return view;
+        
+        
+    }else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+        
+        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        if(!view)
+            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        view.bounds = CGRectMake(0, 0, 35, 35);
+        
+        
+        //
+        //Animate it like any UIView!
+        //
+        
+        CABasicAnimation *theAnimation;
+        
+        //within the animation we will adjust the "opacity"
+        //value of the layer
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        //animation lasts 1 second
+        theAnimation.duration=1.0;
+        //and it repeats forever
+        theAnimation.repeatCount= HUGE_VALF;
+        //we want a reverse animation
+        theAnimation.autoreverses=YES;
+        //justify the opacity as you like (1=fully visible, 0=unvisible)
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+        
+        //Assign the animation to your UIImage layer and the
+        //animation will start immediately
+        [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        
+        view.canShowCallout = YES;
+        
+        return view;
+        
+        
     }
     
-    //        else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
-    //
-    //            DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-    //            if(!view)
-    //                view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-    //            view.bounds = CGRectMake(0, 0, 45, 45);
-    //
-    //
-    //            //
-    //            //Animate it like any UIView!
-    //            //
-    //
-    //            CABasicAnimation *theAnimation;
-    //
-    //            //within the animation we will adjust the "opacity"
-    //            //value of the layer
-    //            theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
-    //            //animation lasts 1 second
-    //            theAnimation.duration=1.0;
-    //            //and it repeats forever
-    //            theAnimation.repeatCount= HUGE_VALF;
-    //            //we want a reverse animation
-    //            theAnimation.autoreverses=YES;
-    //            //justify the opacity as you like (1=fully visible, 0=unvisible)
-    //            theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
-    //            theAnimation.toValue=[NSNumber numberWithFloat:1.0];
-    //
-    //            //Assign the animation to your UIImage layer and the
-    //            //animation will start immediately
-    //            [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
-    //            
-    //            return view;
-    //    
-    //            
-    //        }
-    
     return nil;
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    MKAnnotationView *annotationView;
+    
+    for (annotationView in views) {
+        
+        // Don't pin drop if annotation is user location
+//        if ([aV.annotation isKindOfClass:[MKUserLocation class]]) {
+//            continue;
+//        }
+        
+        // Check if current annotation is inside visible map rect
+        MKMapPoint point =  MKMapPointForCoordinate(annotationView.annotation.coordinate);
+        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+            
+            continue;
+        }
+        
+        CGRect endFrame = annotationView.frame;
+        
+        // Move annotation out of view
+        annotationView.frame = CGRectMake(annotationView.frame.origin.x,
+                              annotationView.frame.origin.y - self.view.frame.size.height,
+                              annotationView.frame.size.width,
+                              annotationView.frame.size.height);
+        
+        // Animate drop
+        [UIView animateWithDuration:0.5
+                              delay:0.04*[views indexOfObject:annotationView]
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             
+                             annotationView.frame = endFrame;
+                             
+                             // Animate squash
+                         }completion:^(BOOL finished){
+                             if (finished) {
+                                 [UIView animateWithDuration:0.05 animations:^{
+                                     annotationView.transform = CGAffineTransformMakeScale(1.0, 0.8);
+                                     
+                                 }completion:^(BOOL finished){
+                                     if (finished) {
+                                         [UIView animateWithDuration:0.1 animations:^{
+                                             annotationView.transform = CGAffineTransformIdentity;
+                                         }];
+                                     }
+                                 }];
+                             }
+                         }];
+    }
+    
 }
 
 
@@ -1172,6 +1239,13 @@ NSFetchedResultsControllerDelegate
     if (motion == UIEventSubtypeMotionShake)
     {
         [self showAlert];
+        
+        
+//        //CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.6617, -73.9708);
+//        CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.7538, -73.9836);
+//        
+//        [self addAnnotationToMapWith:test];
+        
     }
 }
 
@@ -1207,9 +1281,20 @@ NSFetchedResultsControllerDelegate
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
                                                             
+                                                            NSMutableArray *annotationsToRemove = [self.mapView.annotations mutableCopy];
+                                                            [self.mapView removeAnnotations:annotationsToRemove];
+                                                            
                                                             MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
+                                                            
+                                                            MKMapPoint point =  MKMapPointForCoordinate(myAnnotation.coordinate);
+                                                            if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+                                                                
+                                                                MKCoordinateRegion NYRegion = MKCoordinateRegionMake(self.gridCenterCoord, self.gridSpan);
+                                                                [self.mapView setRegion: NYRegion animated: YES];
+                                                            }
+                                                            
                                                             [self.mapView addAnnotation:myAnnotation];
                                                         
                                                             [self dismissViewControllerAnimated:YES completion:nil];
