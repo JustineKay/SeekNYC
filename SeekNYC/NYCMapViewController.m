@@ -199,9 +199,9 @@ NSFetchedResultsControllerDelegate
     
     self.visitedTiles = [[NSMutableArray alloc] init];
     
-    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
-    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
-    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
+//    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
+//    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
+//    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
     
 }
 
@@ -268,6 +268,13 @@ NSFetchedResultsControllerDelegate
 //    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
 //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
 //    //*********************************************************************************************
+    
+    //*****Testing Grid in Simulator*********CALIFORNIA, San Fran
+    CLLocationCoordinate2D testCenterCoord = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+    MKCoordinateSpan testSpan = MKCoordinateSpanMake(1.0, 1.0);
+    
+    [self setGridWith:testCenterCoord And:testSpan];
+    //**************************
 
 }
 
@@ -320,13 +327,18 @@ NSFetchedResultsControllerDelegate
     return topLeftLocation;
 }
 
--(NSString *)locationInGrid:(CLLocation *) userLocation{
+-(NSString *)locationInGrid:(CLLocation *)location {
     
-    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:userLocation.coordinate.longitude];
-    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
+    //TESTING in Simulator**********************
+    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:37.71641768 longitude:location.coordinate.longitude];
+    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:-122.44537354];
+    //*****************************
     
-    CLLocationDistance latitudinalDistance = [userLocation distanceFromLocation:latDiff];
-    CLLocationDistance longitudinalDistance = [userLocation distanceFromLocation:lngDiff];
+//    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:location.coordinate.longitude];
+//    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
+    
+    CLLocationDistance latitudinalDistance = [location distanceFromLocation:latDiff];
+    CLLocationDistance longitudinalDistance = [location distanceFromLocation:lngDiff];
     
     double rowNumber = latitudinalDistance / tileSizeInMeters;
     double columnNumber = longitudinalDistance / tileSizeInMeters;
@@ -347,7 +359,10 @@ NSFetchedResultsControllerDelegate
     double lngDiff = columnNumber * tileSizeInMeters;
     double latDiff = rowNumber * tileSizeInMeters;
     
-    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
+    //TESTING in Simulator********
+    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+    //****************
+//    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
     
     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(gridOriginPoint, latDiff, lngDiff);
     MKCoordinateSpan tempSpan = tempRegion.span;
@@ -493,7 +508,7 @@ NSFetchedResultsControllerDelegate
         [self getZipCode:newLocation];
         
         //***REMOVE (&& self.isNYC) to test in simulator *************
-        if (isAccurate && isRecent && self.isNYC) {
+        if (isAccurate && isRecent) {
             
             BOOL matchingTileFound = NO;
             
