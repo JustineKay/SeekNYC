@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="seekNYC-LOGO-LoadingScreen" translatesAutoresizingMaskIntoConstraints="NO" id="O2U-PS-4Fq">
-                                <rect key="frame" x="0.0" y="-6" width="600" height="606"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seekNYC-LOGO-LoadingScreen2" translatesAutoresizingMaskIntoConstraints="NO" id="O2U-PS-4Fq">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
                         </subviews>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="seekNYC-LOGO-LoadingScreen" width="1568" height="2203"/>
+        <image name="seekNYC-LOGO-LoadingScreen2" width="1568" height="2203"/>
     </resources>
 </document>
