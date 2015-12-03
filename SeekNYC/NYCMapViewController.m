@@ -413,10 +413,10 @@ NSFetchedResultsControllerDelegate
     return visitedTileCoordinates;
 }
 
--(void)surroundingVisitedTileCoordinatesWithLocation: (CLLocation *)newLocation {
+-(NSArray *)surroundingVisitedTileCoordinatesWithLocation: (CLLocation *)newLocation {
     
     CLLocationCoordinate2D newLoc = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    MKCoordinateSpan newLocSpan = MKCoordinateSpanMake(80, 80);
+    MKCoordinateSpan newLocSpan = MKCoordinateSpanMake(0.0008, 0.0008);
     
     double latDegreesFromCenter = newLocSpan.latitudeDelta * 0.5;
     double lngDegreesFromCenter = newLocSpan.longitudeDelta * 0.5;
@@ -431,7 +431,26 @@ NSFetchedResultsControllerDelegate
     CLLocationCoordinate2D bottomNewLocationRegion  = CLLocationCoordinate2DMake(bottomLeftNewLocationRegion.latitude, newLoc.longitude);
     CLLocationCoordinate2D leftNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude, topLeftNewLocationRegion.longitude);
     
+    CLLocation *topLeft = [[CLLocation alloc] initWithLatitude:topNewLocationRegion.latitude longitude:topLeftNewLocationRegion.longitude];
+    CLLocation *topRight = [[CLLocation alloc]initWithLatitude:topRightNewLocationRegion.latitude longitude:topRightNewLocationRegion.longitude];
+    CLLocation *bottomLeft = [[CLLocation alloc] initWithLatitude:bottomLeftNewLocationRegion.latitude longitude:bottomLeftNewLocationRegion.longitude];
+    CLLocation *bottomRight = [[CLLocation alloc] initWithLatitude:bottomRightNewLocationRegion.latitude longitude:bottomRightNewLocationRegion.longitude];
+    CLLocation *top = [[CLLocation alloc] initWithLatitude:topNewLocationRegion.latitude longitude:topNewLocationRegion.longitude];
+    CLLocation *right = [[CLLocation alloc] initWithLatitude:rightNewLocationRegion.latitude longitude:rightNewLocationRegion.longitude];
+    CLLocation *bottom = [[CLLocation alloc] initWithLatitude:bottomNewLocationRegion.latitude longitude:bottomNewLocationRegion.longitude];
+    CLLocation *left = [[CLLocation alloc] initWithLatitude:leftNewLocationRegion.latitude longitude:leftNewLocationRegion.longitude];
     
+    NSArray *surroundingTileCoords = @[ topLeft,
+                                        topRight,
+                                        bottomRight,
+                                        bottomLeft,
+                                        top,
+                                        right,
+                                        bottom,
+                                        left
+                                        ];
+    
+    return surroundingTileCoords;
 
 }
 
@@ -601,10 +620,18 @@ NSFetchedResultsControllerDelegate
         if (isAccurate && isRecent) {
             
             [self visitedLocation:newLocation];
+            NSLog(@"newLocation: %@", newLocation);
             
             //get locations from new locations
             //repeat the above
             
+            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+            NSLog(@"surroundingTileCoords: %@", surroundingTileCoords);
+            
+            for (CLLocation *loc in surroundingTileCoords) {
+                [self visitedLocation:loc];
+                NSLog(@"surroundingTileLocation: %@", loc);
+            }
             
         }
         
@@ -713,8 +740,6 @@ NSFetchedResultsControllerDelegate
 
     NSLog(@"User is not in NYC");
     self.isNYC = NO;
-
-    NSLog(@"self.zipCodeData.allZipcodes: %@", self.zipCodeData.allZipCodes);
     
 }
 
