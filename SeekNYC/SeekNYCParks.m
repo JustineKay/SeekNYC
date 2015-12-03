@@ -14,17 +14,41 @@
     
     if (self = [super init]) {
         
-    
-        self.name = venue[@"name"];
-        self.address =[venue[@"location"][@"formattedAddress"] componentsJoinedByString:@" "];
-
-        NSDictionary *venueType = [venue[@"categories"]objectAtIndex:0];
+        // Name
+        NSDictionary *items = [venue[@"items"]objectAtIndex:0];
+       // NSLog(@"%@", items);
+        self.name = items[@"venue"][@"name"];
+        // NSLog(@"%@", self.name);
+      
+       // Address
+       NSDictionary *address = items[@"venue"][@"location"];
+       self.address = [[address objectForKey:@"formattedAddress"]componentsJoinedByString:@" "];
+       self.landmarkLat = [[address objectForKey:@"lat"]floatValue];
+        self.landmarkLng = [[address objectForKey:@"lng"]floatValue];
+//        NSLog(@"%2lf %2lf", self.landmarkLat, self.landmarkLng);
         
-        self.categoryName = [venueType objectForKey:@"name"];
+        //NSLog(@"%@", self.address);
+       // NSLog(@"%@", address);
         
-        self.landmarkLat = [venue[@"location"][@"lat"]floatValue];
-        self.landmarkLng = [venue[@"location"][@"lng"]floatValue];
+        //Category
+        NSArray *venueType = items[@"venue"][@"categories"];
+        NSDictionary *category = [venueType objectAtIndex:0];
+        self.categoryName = [category objectForKey:@"name"];
+        //NSLog(@"%@", self.categoryName);
 
+        
+        //the detail
+        NSArray *tips = items[@"tips"];
+        NSDictionary *theTip = [tips objectAtIndex:0];
+        NSString *detail = [theTip objectForKey:@"text"];
+        
+        NSLog(@"%@", detail);
+        
+        
+        
+
+        
+        
         return self;
     }
     return nil;

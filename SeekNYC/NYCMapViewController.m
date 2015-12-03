@@ -108,14 +108,16 @@ NSFetchedResultsControllerDelegate
 - (void)fetchFourSquareData {
     
     //     create an url
-    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/explore?near=nyc&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
     // fetch data from the endpoint and print json response
     [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
-        NSArray *venues = json[@"response"][@"venues"];
+        NSArray *venues = json[@"response"][@"groups"];
+        
+       
         
         // reset my array
         self.venueResults = [[NSMutableArray alloc] init];
@@ -1207,10 +1209,20 @@ NSFetchedResultsControllerDelegate
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
                                                             
+                                                            
+                                                            
                                                             MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
                                                             [self.mapView addAnnotation:myAnnotation];
+                                                            
+                                                          
+                                                          
+                                                            
+                                 
+                                                            
+                                                            
+                                                            
                                                         
                                                             [self dismissViewControllerAnimated:YES completion:nil];
                                                         }]];
@@ -1224,6 +1236,7 @@ NSFetchedResultsControllerDelegate
     // Present the alert view controller
     [self presentViewController:alertShakeGesture animated:YES completion:nil];
 }
+
 
 #pragma  mark - Testing Grid
 
@@ -1290,4 +1303,5 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView addAnnotation:annotation];
 }
+
 @end
