@@ -19,6 +19,7 @@
 		6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA3F1C0274BD001CFF08 /* DiamondAnnotationView.m */; };
 		6B28AA431C02C2E3001CFF08 /* UberBlackAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */; };
 		6B3BF7F21C03DA4B00F72765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */; };
+		6B4CA97E1C0F8BFE00192FE1 /* SunglassesAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 		6B9B798F1BF68DBB004A7756 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B798E1BF68DBB004A7756 /* MapKit.framework */; };
 		6B9B79911BF68DC5004A7756 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B79901BF68DC5004A7756 /* CoreLocation.framework */; };
 		6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB08B951C0111C20098C805 /* UserProfileView.m */; };
+		6BCE1C111C0F950B00F0ABB0 /* DiamondPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE1C101C0F950B00F0ABB0 /* DiamondPinAnnotationView.m */; };
 		6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */; };
 		6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */; };
 		6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */; };
@@ -66,6 +68,8 @@
 		6B28AA411C02C2E3001CFF08 /* UberBlackAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UberBlackAnnotationView.h; sourceTree = "<group>"; };
 		6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UberBlackAnnotationView.m; sourceTree = "<group>"; };
 		6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B4CA97C1C0F8BFE00192FE1 /* SunglassesAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunglassesAnnotationView.h; sourceTree = "<group>"; };
+		6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunglassesAnnotationView.m; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		6B9B79901BF68DC5004A7756 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6BB08B941C0111C20098C805 /* UserProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileView.h; sourceTree = "<group>"; };
 		6BB08B951C0111C20098C805 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileView.m; sourceTree = "<group>"; };
+		6BCE1C0F1C0F950B00F0ABB0 /* DiamondPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiamondPinAnnotationView.h; sourceTree = "<group>"; };
+		6BCE1C101C0F950B00F0ABB0 /* DiamondPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiamondPinAnnotationView.m; sourceTree = "<group>"; };
 		6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPolygonRenderer.h; sourceTree = "<group>"; };
 		6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPolygonRenderer.m; sourceTree = "<group>"; };
 		6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipCode.h; sourceTree = "<group>"; };
@@ -175,6 +181,10 @@
 				F721F9F41BF7ED65007684EA /* CircleProgressBar.m */,
 				6B28AA411C02C2E3001CFF08 /* UberBlackAnnotationView.h */,
 				6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */,
+				6B4CA97C1C0F8BFE00192FE1 /* SunglassesAnnotationView.h */,
+				6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */,
+				6BCE1C0F1C0F950B00F0ABB0 /* DiamondPinAnnotationView.h */,
+				6BCE1C101C0F950B00F0ABB0 /* DiamondPinAnnotationView.m */,
 				6B28AA3E1C0274BD001CFF08 /* DiamondAnnotationView.h */,
 				6B28AA3F1C0274BD001CFF08 /* DiamondAnnotationView.m */,
 				6B28AA381C0271C5001CFF08 /* VisitedTile+CoreDataProperties.h */,
@@ -386,6 +396,7 @@
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
 				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
 				6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */,
+				6BCE1C111C0F950B00F0ABB0 /* DiamondPinAnnotationView.m in Sources */,
 				6B28AA361C026650001CFF08 /* UIColor+Color.m in Sources */,
 				6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */,
 				F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */,
@@ -398,6 +409,7 @@
 				F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */,
 				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,
 				6B28AA3D1C0271C5001CFF08 /* VisitedTile.m in Sources */,
+				6B4CA97E1C0F8BFE00192FE1 /* SunglassesAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +526,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JustineKay.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -532,7 +544,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JustineKay.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.c4q.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

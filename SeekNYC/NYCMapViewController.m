@@ -24,7 +24,9 @@
 #import "RNFrostedSidebar.h"
 #import "SuggestedVenuesTableViewController.h"
 #import "UIColor+Color.h"
+#import "DiamondPinAnnotationView.h"
 #import "DiamondAnnotationView.h"
+#import "SunglassesAnnotationView.h"
 #import "UberBlackAnnotationView.h"
 #import "ClearOverlayPolygonRenderer.h"
 #import "ZipCodeData.h"
@@ -33,7 +35,7 @@
 #import "SeekNYCParks.h"
 
 static float const metersInMile = 1609.344;
-static double const tileSizeInMeters = 40.0;
+static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
 static float const centerCoordLng = -74.0059;
 static float const NYRegionSpan = 0.525;
@@ -108,15 +110,18 @@ NSFetchedResultsControllerDelegate
 - (void)fetchFourSquareData {
     
     //     create an url
-    
     NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    
+    //    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/explore?near=nyc&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
     // fetch data from the endpoint and print json response
     [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
-        NSArray *venues = json[@"response"][@"venues"];
+        NSArray *venues = json[@"response"][@"groups"];
+        
+        
         
         // reset my array
         self.venueResults = [[NSMutableArray alloc] init];
@@ -132,7 +137,7 @@ NSFetchedResultsControllerDelegate
             //  NSLog(@"%@", self.venueResults);
             
         }
-     }];
+    }];
     
 }
 
@@ -148,8 +153,8 @@ NSFetchedResultsControllerDelegate
         
         NSArray *venues = json[@"response"][@"venues"];
         
-//        // reset my array
-//        self.venueResults = [[NSMutableArray alloc] init];
+        //        // reset my array
+        //        self.venueResults = [[NSMutableArray alloc] init];
         
         // loop through all json posts
         for (NSDictionary *venue in venues) {
@@ -165,9 +170,9 @@ NSFetchedResultsControllerDelegate
     }];
     
 }
-     
-    
-    
+
+
+
 
 
 - (void)viewDidLoad {
@@ -254,22 +259,29 @@ NSFetchedResultsControllerDelegate
     
     //UNCOMMENT THE FOLLOWING FOR TESTING
     
-//    //*****Testing Grid*********
-//    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
-//    
-//    //*****Testing Tile coordinates***************************************************************
-//    //40.6928, -73.9903
-//    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
-//    NSString *testUserColumnRow = [self locationInGrid:testUserLocation];
-//    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
-//    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
-//    
-//    [self saveVisitedTile:testUserColumnRow WithBorough: @"Brooklyn" AndCoordinates:testUserTileCoords];
-//    
-//    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
-//    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
-//    //*********************************************************************************************
-
+    //    //*****Testing Grid*********
+    //    [self setGridWith:self.gridCenterCoord And:self.gridSpan];
+    //
+    //    //*****Testing Tile coordinates***************************************************************
+    //    //40.6928, -73.9903
+    //    CLLocation *testUserLocation = [[CLLocation alloc]initWithLatitude:40.6928 longitude:-73.9903];
+    //    NSString *testUserColumnRow = [self locationInGrid:testUserLocation];
+    //    NSArray *testUserTileCoords = [self visitedTileCoordinatesWith:testUserColumnRow];
+    //    NSLog(@"testUserTileCoords: %@", testUserTileCoords);
+    //
+    //    [self saveVisitedTile:testUserColumnRow WithBorough: @"Brooklyn" AndCoordinates:testUserTileCoords];
+    //
+    //    [self.mapView addOverlay:[self polygonWithLocations:testUserTileCoords]];
+    //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
+    //    //*********************************************************************************************
+    
+    //    //*****Testing in Simulator*********CALIFORNIA, San Fran
+    //    CLLocationCoordinate2D testCenterCoord = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+    //    MKCoordinateSpan testSpan = MKCoordinateSpanMake(1.0, 1.0);
+    //
+    //    [self setGridWith:testCenterCoord And:testSpan];
+    //    //**************************
+    
 }
 
 
@@ -321,13 +333,18 @@ NSFetchedResultsControllerDelegate
     return topLeftLocation;
 }
 
--(NSString *)locationInGrid:(CLLocation *) userLocation{
+-(NSString *)locationInGrid:(CLLocation *)location {
     
-    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:userLocation.coordinate.longitude];
-    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
+    //    //TESTING in Simulator**********************
+    //    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:37.71641768 longitude:location.coordinate.longitude];
+    //    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:-122.44537354];
+    //    //*****************************
     
-    CLLocationDistance latitudinalDistance = [userLocation distanceFromLocation:latDiff];
-    CLLocationDistance longitudinalDistance = [userLocation distanceFromLocation:lngDiff];
+    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:location.coordinate.longitude];
+    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
+    
+    CLLocationDistance latitudinalDistance = [location distanceFromLocation:latDiff];
+    CLLocationDistance longitudinalDistance = [location distanceFromLocation:lngDiff];
     
     double rowNumber = latitudinalDistance / tileSizeInMeters;
     double columnNumber = longitudinalDistance / tileSizeInMeters;
@@ -342,12 +359,15 @@ NSFetchedResultsControllerDelegate
     NSArray *columnRowNumbers = [columnRow componentsSeparatedByString:@", "];
     NSString *column = columnRowNumbers[0];
     NSString *row = columnRowNumbers[1];
-    NSInteger columnNumber = column.integerValue;
+    NSInteger columnNumber = column.integerValue - 1;
     NSInteger rowNumber = row.integerValue;
     
     double lngDiff = columnNumber * tileSizeInMeters;
     double latDiff = rowNumber * tileSizeInMeters;
     
+    //    //TESTING in Simulator********
+    //    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+    //    //****************
     CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
     
     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(gridOriginPoint, latDiff, lngDiff);
@@ -389,10 +409,10 @@ NSFetchedResultsControllerDelegate
                                         ];
     
     //***Add annotations to map for visual debugging***
-//    [self addAnnotationToMapWith:topLeft];
-//    [self addAnnotationToMapWith:topRight];
-//    [self addAnnotationToMapWith:bottomRight];
-//    [self addAnnotationToMapWith:bottomLeft];
+    //    [self addAnnotationToMapWith:topLeft];
+    //    [self addAnnotationToMapWith:topRight];
+    //    [self addAnnotationToMapWith:bottomRight];
+    //    [self addAnnotationToMapWith:bottomLeft];
     
     return visitedTileCoordinates;
 }
@@ -409,10 +429,16 @@ NSFetchedResultsControllerDelegate
         //            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
         //        view.bounds = CGRectMake(0, 0, 45, 20);
         
-        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-        if(!view)
-            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-        view.bounds = CGRectMake(0, 0, 45, 45);
+        SunglassesAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        if (!view) {
+            view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+            view.bounds = CGRectMake(0, 0, 113, 58);
+        }
+        
+        //        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        //        if(!view)
+        //            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        //        view.bounds = CGRectMake(0, 0, 45, 45);
         
         
         //
@@ -439,45 +465,104 @@ NSFetchedResultsControllerDelegate
         [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
         
         return view;
+        
+        
+    }else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+        
+        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        if(!view)
+            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
+        view.bounds = CGRectMake(0, 0, 35, 35);
+        
+        
+        //
+        //Animate it like any UIView!
+        //
+        
+        CABasicAnimation *theAnimation;
+        
+        //within the animation we will adjust the "opacity"
+        //value of the layer
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        //animation lasts 1 second
+        theAnimation.duration=1.0;
+        //and it repeats forever
+        theAnimation.repeatCount= HUGE_VALF;
+        //we want a reverse animation
+        theAnimation.autoreverses=YES;
+        //justify the opacity as you like (1=fully visible, 0=unvisible)
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+        
+        //Assign the animation to your UIImage layer and the
+        //animation will start immediately
+        [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        
+        view.canShowCallout = YES;
+        
+        return view;
+        
+        
     }
     
-    //        else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
-    //
-    //            DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-    //            if(!view)
-    //                view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-    //            view.bounds = CGRectMake(0, 0, 45, 45);
-    //
-    //
-    //            //
-    //            //Animate it like any UIView!
-    //            //
-    //
-    //            CABasicAnimation *theAnimation;
-    //
-    //            //within the animation we will adjust the "opacity"
-    //            //value of the layer
-    //            theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
-    //            //animation lasts 1 second
-    //            theAnimation.duration=1.0;
-    //            //and it repeats forever
-    //            theAnimation.repeatCount= HUGE_VALF;
-    //            //we want a reverse animation
-    //            theAnimation.autoreverses=YES;
-    //            //justify the opacity as you like (1=fully visible, 0=unvisible)
-    //            theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
-    //            theAnimation.toValue=[NSNumber numberWithFloat:1.0];
-    //
-    //            //Assign the animation to your UIImage layer and the
-    //            //animation will start immediately
-    //            [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
-    //            
-    //            return view;
-    //    
-    //            
-    //        }
-    
     return nil;
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    MKAnnotationView *annotationView;
+    
+    for (annotationView in views) {
+        
+        // Don't pin drop if annotation is user location
+        //        if ([aV.annotation isKindOfClass:[MKUserLocation class]]) {
+        //            continue;
+        //        }
+        
+        // Check if current annotation is inside visible map rect
+        MKMapPoint point =  MKMapPointForCoordinate(annotationView.annotation.coordinate);
+        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+            
+            continue;
+        }
+        
+        CGRect endFrame = annotationView.frame;
+        
+        // Move annotation out of view
+        annotationView.frame = CGRectMake(annotationView.frame.origin.x,
+                                          annotationView.frame.origin.y - self.view.frame.size.height,
+                                          annotationView.frame.size.width,
+                                          annotationView.frame.size.height);
+        
+        // Animate drop
+        [UIView animateWithDuration:0.5
+                              delay:0.04*[views indexOfObject:annotationView]
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             
+                             annotationView.frame = endFrame;
+                             
+                             // Animate squash
+                         }completion:^(BOOL finished){
+                             if (finished) {
+                                 [UIView animateWithDuration:0.05 animations:^{
+                                     annotationView.transform = CGAffineTransformMakeScale(1.0, 0.8);
+                                     
+                                 }completion:^(BOOL finished){
+                                     if (finished) {
+                                         [UIView animateWithDuration:0.1 animations:^{
+                                             annotationView.transform = CGAffineTransformIdentity;
+                                         }];
+                                     }
+                                 }];
+                             }
+                         }];
+    }
+    
 }
 
 
@@ -578,7 +663,7 @@ NSFetchedResultsControllerDelegate
              NSLog(@"Geocode failed with error %@", error); // Error handling must required
          }
      }];
-
+    
 }
 
 -(void)verifyZipCode: (NSString *)userLocationZipCode {
@@ -590,27 +675,27 @@ NSFetchedResultsControllerDelegate
             
             NSLog(@"User is in NYC, %@", zip.borough);
             self.isNYC = YES;
-
+            
             return;
             
         }
         
     }
-
+    
     NSLog(@"User is not in NYC");
     self.isNYC = NO;
-
+    
     NSLog(@"self.zipCodeData.allZipcodes: %@", self.zipCodeData.allZipCodes);
     
 }
 
 - (NSString *) getBorough: (NSString *)newLocationZipCode {
-
+    
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
-      if ([zip.number isEqualToString:newLocationZipCode]) {
-         
-        return zip.borough;
-      }
+        if ([zip.number isEqualToString:newLocationZipCode]) {
+            
+            return zip.borough;
+        }
     }
     
     return nil;
@@ -649,8 +734,8 @@ NSFetchedResultsControllerDelegate
     
     NSArray *images = @[
                         [UIImage imageNamed:@"percentage"],
-                        [UIImage imageNamed:@"seek"],
-                        [UIImage imageNamed:@"tint"]
+                        [UIImage imageNamed:@"tint"],
+                        [UIImage imageNamed:@"seek"]
                         ];
     
     NSArray *colors = @[
@@ -703,16 +788,7 @@ NSFetchedResultsControllerDelegate
         
         [sidebar dismissAnimated:YES];
         
-        
     } else if (index == 1) {
-        
-        //*** Alert for Suggested landmark/park ***
-        
-        [self suggestedPlacesAlertVC];
-        
-        [sidebar dismissAnimated:YES];
-        
-    } else if (index == 2) {
         
         //***TINT***
         //AlertVC for custom tint
@@ -720,6 +796,16 @@ NSFetchedResultsControllerDelegate
         [self setCustomTint];
         
         [sidebar dismissAnimated:YES];
+        
+        
+        
+    } else if (index == 2) {
+        
+        //*** Alert for Suggested landmark/park ***
+        
+        [self suggestedPlacesAlertVC];
+        
+        [sidebar dismissAnimated:YES];        
         
     };
 }
@@ -759,13 +845,13 @@ NSFetchedResultsControllerDelegate
 - (void)saveVisitedTile: (NSString *)columnRow WithBorough: (NSString *)borough AndCoordinates: (NSArray *)coords {
     
     VisitedTile *tile = [NSEntityDescription insertNewObjectForEntityForName:@"VisitedTile"
-                                               inManagedObjectContext:self.managedObjectContext];
+                                                      inManagedObjectContext:self.managedObjectContext];
     
     tile.timestamp = [NSDate date];
     tile.columnRow = columnRow;
     tile.borough = borough;
     tile.coordinatesArray = coords;
-
+    
     
     // Save the context.
     NSError *error = nil;
@@ -846,7 +932,7 @@ NSFetchedResultsControllerDelegate
             NSArray *visitedTileCoordinates = tile.coordinatesArray;
             
             [self.mapView addOverlay:[self polygonWithLocations:visitedTileCoordinates]];
-        
+            
         }
         
     }
@@ -948,7 +1034,7 @@ NSFetchedResultsControllerDelegate
         
         
         ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
-
+        
         renderer.fillColor = [UIColor blackColor];
         renderer.strokeColor = [UIColor blackColor];
         renderer.lineWidth   = 3;
@@ -1158,12 +1244,19 @@ NSFetchedResultsControllerDelegate
     if (motion == UIEventSubtypeMotionShake)
     {
         [self showAlert];
+        
+        
+        //        //CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.6617, -73.9708);
+        //        CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.7538, -73.9836);
+        //
+        //        [self addAnnotationToMapWith:test];
+        
     }
 }
 
 -(IBAction)showAlert {
     
- //  NSLog(@"%@", self.venueResults);
+    //  NSLog(@"%@", self.venueResults);
     int random = arc4random_uniform((int)self.venueResults.count);
     
     SeekNYCParks *suggestedVenue = [self.venueResults objectAtIndex:random];
@@ -1193,11 +1286,30 @@ NSFetchedResultsControllerDelegate
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
                                                             
+                                                            NSMutableArray *annotationsToRemove = [self.mapView.annotations mutableCopy];
+                                                            [self.mapView removeAnnotations:annotationsToRemove];
+                                                            
                                                             MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
+                                                            
+                                                            MKMapPoint point =  MKMapPointForCoordinate(myAnnotation.coordinate);
+                                                            if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+                                                                
+                                                                MKCoordinateRegion NYRegion = MKCoordinateRegionMake(self.gridCenterCoord, self.gridSpan);
+                                                                [self.mapView setRegion: NYRegion animated: YES];
+                                                            }
+                                                            
                                                             [self.mapView addAnnotation:myAnnotation];
-                                                        
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
                                                             [self dismissViewControllerAnimated:YES completion:nil];
                                                         }]];
     
@@ -1210,6 +1322,7 @@ NSFetchedResultsControllerDelegate
     // Present the alert view controller
     [self presentViewController:alertShakeGesture animated:YES completion:nil];
 }
+
 
 #pragma  mark - Testing Grid
 
@@ -1276,4 +1389,5 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView addAnnotation:annotation];
 }
+
 @end
