@@ -16,9 +16,9 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
-    imageView.animationImages = @[[UIImage imageNamed:@"sunglasses_1"],
-                                  [UIImage imageNamed:@"sunglasses_2"],
-                                  [UIImage imageNamed:@"sunglasses_3"]
+    imageView.animationImages = @[[UIImage imageNamed:@"sunglasses_backdrop_1"],
+                                  [UIImage imageNamed:@"sunglasses_backdrop_2"],
+                                  [UIImage imageNamed:@"sunglasses_backdrop_3"]
                                   ];
     
     imageView.animationDuration = 1.0;

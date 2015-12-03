@@ -201,9 +201,9 @@ NSFetchedResultsControllerDelegate
     
     self.visitedTiles = [[NSMutableArray alloc] init];
     
-    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
-    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
-    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
+//    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
+//    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
+//    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
     
 }
 
@@ -271,12 +271,12 @@ NSFetchedResultsControllerDelegate
 //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
 //    //*********************************************************************************************
     
-//    //*****Testing in Simulator*********CALIFORNIA, San Fran
-//    CLLocationCoordinate2D testCenterCoord = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
-//    MKCoordinateSpan testSpan = MKCoordinateSpanMake(1.0, 1.0);
-//    
-//    [self setGridWith:testCenterCoord And:testSpan];
-//    //**************************
+    //*****Testing in Simulator*********CALIFORNIA, San Fran
+    CLLocationCoordinate2D testCenterCoord = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+    MKCoordinateSpan testSpan = MKCoordinateSpanMake(1.0, 1.0);
+    
+    [self setGridWith:testCenterCoord And:testSpan];
+    //**************************
 
 }
 
@@ -331,13 +331,13 @@ NSFetchedResultsControllerDelegate
 
 -(NSString *)locationInGrid:(CLLocation *)location {
     
-//    //TESTING in Simulator**********************
-//    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:37.71641768 longitude:location.coordinate.longitude];
-//    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:-122.44537354];
-//    //*****************************
+    //TESTING in Simulator**********************
+    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:37.71641768 longitude:location.coordinate.longitude];
+    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:-122.44537354];
+    //*****************************
     
-    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:location.coordinate.longitude];
-    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
+//    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:location.coordinate.longitude];
+//    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
     
     CLLocationDistance latitudinalDistance = [location distanceFromLocation:latDiff];
     CLLocationDistance longitudinalDistance = [location distanceFromLocation:lngDiff];
@@ -361,10 +361,10 @@ NSFetchedResultsControllerDelegate
     double lngDiff = columnNumber * tileSizeInMeters;
     double latDiff = rowNumber * tileSizeInMeters;
     
-//    //TESTING in Simulator********
-//    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
-//    //****************
-    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
+    //TESTING in Simulator********
+    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+    //****************
+//    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
     
     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(gridOriginPoint, latDiff, lngDiff);
     MKCoordinateSpan tempSpan = tempRegion.span;
@@ -413,6 +413,28 @@ NSFetchedResultsControllerDelegate
     return visitedTileCoordinates;
 }
 
+-(void)surroundingVisitedTileCoordinatesWithLocation: (CLLocation *)newLocation {
+    
+    CLLocationCoordinate2D newLoc = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    MKCoordinateSpan newLocSpan = MKCoordinateSpanMake(80, 80);
+    
+    double latDegreesFromCenter = newLocSpan.latitudeDelta * 0.5;
+    double lngDegreesFromCenter = newLocSpan.longitudeDelta * 0.5;
+    
+    //Create outer corners of newLocationRegion
+    CLLocationCoordinate2D topLeftNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude + latDegreesFromCenter, newLoc.longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D topRightNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude + latDegreesFromCenter, newLoc.longitude + lngDegreesFromCenter);
+    CLLocationCoordinate2D bottomLeftNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude - latDegreesFromCenter, newLoc.longitude - lngDegreesFromCenter);
+    CLLocationCoordinate2D bottomRightNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude - latDegreesFromCenter, newLoc.longitude + lngDegreesFromCenter);
+    CLLocationCoordinate2D topNewLocationRegion = CLLocationCoordinate2DMake(topLeftNewLocationRegion.latitude, newLoc.longitude);
+    CLLocationCoordinate2D rightNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude, topRightNewLocationRegion.longitude);
+    CLLocationCoordinate2D bottomNewLocationRegion  = CLLocationCoordinate2DMake(bottomLeftNewLocationRegion.latitude, newLoc.longitude);
+    CLLocationCoordinate2D leftNewLocationRegion = CLLocationCoordinate2DMake(newLoc.latitude, topLeftNewLocationRegion.longitude);
+    
+    
+
+}
+
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -428,7 +450,8 @@ NSFetchedResultsControllerDelegate
         SunglassesAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
         if (!view) {
             view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-            view.bounds = CGRectMake(0, 0, 113, 58);
+            //view.bounds = CGRectMake(0, 0, 113, 58);
+            view.bounds = CGRectMake(0, 0, 100, 100);
         }
         
         //        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
@@ -575,45 +598,55 @@ NSFetchedResultsControllerDelegate
         [self getZipCode:newLocation];
         
         //***REMOVE (&& self.isNYC) to test in simulator *************
-        if (isAccurate && isRecent && self.isNYC) {
+        if (isAccurate && isRecent) {
             
-            BOOL matchingTileFound = NO;
+            [self visitedLocation:newLocation];
             
-            NSString *newTile = [self locationInGrid:newLocation];
+            //get locations from new locations
+            //repeat the above
             
-            for (int i = 0; i < self.visitedTiles.count; i++) {
-                
-                if ([newTile isEqualToString:self.visitedTiles[i]]) {
-                    
-                    matchingTileFound = YES;
-                    NSLog(@"Matching Tile Found");
-                    
-                    break;
-                }
-                
-            }
-            
-            if (matchingTileFound == NO) {
-                
-                NSLog(@"No matching tile found");
-                
-                //Use these coords to draw the tile
-                NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
-                
-                //get borough to save to visitedTile
-                NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
-                
-                [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
-                
-                [self.visitedTiles addObject:newTile];
-                [self addNewTileBoroughToVisitedTilesBoroughArray:newLocationBorough];
-                
-                [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
-            }
             
         }
         
     }
+}
+
+-(void)visitedLocation: (CLLocation *)newLocation{
+    
+    BOOL matchingTileFound = NO;
+    
+    NSString *newTile = [self locationInGrid:newLocation];
+    
+    for (int i = 0; i < self.visitedTiles.count; i++) {
+        
+        if ([newTile isEqualToString:self.visitedTiles[i]]) {
+            
+            matchingTileFound = YES;
+            NSLog(@"Matching Tile Found");
+            
+            break;
+        }
+        
+    }
+    
+    if (matchingTileFound == NO) {
+        
+        NSLog(@"No matching tile found");
+        
+        //Use these coords to draw the tile
+        NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
+        
+        //get borough to save to visitedTile
+        NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
+        
+        [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
+        
+        [self.visitedTiles addObject:newTile];
+        [self addNewTileBoroughToVisitedTilesBoroughArray:newLocationBorough];
+        
+        [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
+    }
+
 }
 
 
@@ -1281,13 +1314,16 @@ NSFetchedResultsControllerDelegate
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
                                                             
+                                                            //Remove any previous annotations
                                                             NSMutableArray *annotationsToRemove = [self.mapView.annotations mutableCopy];
                                                             [self.mapView removeAnnotations:annotationsToRemove];
                                                             
+                                                            //create an annotation
                                                             MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
                                                             
+                                                            //Check to see if it's in the current map view, if not zoom out to NY region view
                                                             MKMapPoint point =  MKMapPointForCoordinate(myAnnotation.coordinate);
                                                             if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
                                                                 
@@ -1295,6 +1331,7 @@ NSFetchedResultsControllerDelegate
                                                                 [self.mapView setRegion: NYRegion animated: YES];
                                                             }
                                                             
+                                                            //drop pin
                                                             [self.mapView addAnnotation:myAnnotation];
                                                         
                                                             [self dismissViewControllerAnimated:YES completion:nil];
