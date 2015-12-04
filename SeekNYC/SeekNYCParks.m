@@ -19,13 +19,13 @@
         
         // Name
         self.name = venue[@"name"];
-        NSLog(@"%@", self.name);
+//        NSLog(@"%@", self.name);
       
        // Address
        NSDictionary *address = venue[@"location"];
        self.address = [[address objectForKey:@"formattedAddress"]componentsJoinedByString:@" "];
        self.landmarkLat = [[address objectForKey:@"lat"]floatValue];
-        self.landmarkLng = [[address objectForKey:@"lng"]floatValue];
+       self.landmarkLng = [[address objectForKey:@"lng"]floatValue];
 //        NSLog(@"%2lf %2lf", self.landmarkLat, self.landmarkLng);
         
         //NSLog(@"%@", self.address);
@@ -47,6 +47,17 @@
         }
         
         NSLog(@"%@", self.detail);
+        
+        //the venue photo
+        NSDictionary *getPhoto = [tips objectAtIndex:0];
+        NSDictionary *user = getPhoto[@"user"][@"photo"];
+        NSString *prefix = user[@"prefix"];
+        NSString *suffix = user[@"suffix"];
+        
+        NSLog(@"%@ %@",prefix,suffix);
+        
+        
+        
         
         
         
