@@ -61,23 +61,11 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) float distance;
 @property (nonatomic) int seconds;
 
-@property (nonatomic) NSMutableArray *visitedTiles;
-@property (nonatomic) NSMutableArray *visitedTilesBK;
-@property (nonatomic) NSMutableArray *visitedTilesMAN;
-@property (nonatomic) NSMutableArray *visitedTilesBRX;
-@property (nonatomic) NSMutableArray *visitedTilesQNS;
-@property (nonatomic) NSMutableArray *visitedTilesSI;
+@property (nonatomic) NSMutableArray *visitedTilesColumnRow;
 
 @property (nonatomic) CLLocation *gridOriginPoint;
 @property (nonatomic) CLLocationCoordinate2D gridCenterCoord;
 @property (nonatomic) MKCoordinateSpan gridSpan;
-
-@property (nonatomic) CGFloat percentageOfNYC;
-@property (nonatomic) CGFloat percentageOfBK;
-@property (nonatomic) CGFloat percentageOfMAN;
-@property (nonatomic) CGFloat percentageOfBRX;
-@property (nonatomic) CGFloat percentageOfQNS;
-@property (nonatomic) CGFloat percentageOfSI;
 
 
 @property (nonatomic) NSTimer *timer;
@@ -210,8 +198,6 @@ NSFetchedResultsControllerDelegate
     }
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
-    
-    self.visitedTiles = [[NSMutableArray alloc] init];
     
     self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
     self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
@@ -657,9 +643,9 @@ NSFetchedResultsControllerDelegate
     
     NSString *newTile = [self locationInGrid:newLocation];
     
-    for (int i = 0; i < self.visitedTiles.count; i++) {
+    for (int i = 0; i < self.visitedTilesColumnRow.count; i++) {
         
-        if ([newTile isEqualToString:self.visitedTiles[i]]) {
+        if ([newTile isEqualToString:self.visitedTilesColumnRow[i]]) {
             
             matchingTileFound = YES;
             NSLog(@"Matching Tile Found");
@@ -681,8 +667,7 @@ NSFetchedResultsControllerDelegate
         
         [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
         
-        [self.visitedTiles addObject:newTile];
-        [self addNewTileBoroughToVisitedTilesBoroughArray:newLocationBorough];
+        [self.visitedTilesColumnRow addObject:newTile];
         
         [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
     }
@@ -768,31 +753,6 @@ NSFetchedResultsControllerDelegate
     return nil;
 }
 
--(void) addNewTileBoroughToVisitedTilesBoroughArray: (NSString *)newTileBorough {
-    
-    if ([newTileBorough isEqualToString:@"Brooklyn"]) {
-        
-        [self.visitedTilesBK addObject:newTileBorough];
-        
-    }else if ([newTileBorough isEqualToString:@"Manhattan"]){
-        
-        [self.visitedTilesMAN addObject:newTileBorough];
-        
-    }else if ([newTileBorough isEqualToString:@"Queens"]) {
-        
-        [self.visitedTilesQNS addObject:newTileBorough];
-        
-    }else if ([newTileBorough isEqualToString:@"Bronx"]) {
-        
-        [self.visitedTilesBRX addObject:newTileBorough];
-        
-    }else {
-        
-        [self.visitedTilesSI addObject:newTileBorough];
-    }
-}
-
-
 #pragma mark - Action Buttons
 
 
@@ -828,30 +788,11 @@ NSFetchedResultsControllerDelegate
         
         //***SEGUE TO PROFILE***
         
-        [self percentageOfNYCUncovered];
-        [self percentageOfBKUncovered];
-        [self percentageOfBRXUncovered];
-        [self percentageOfMANUncovered];
-        [self percentageOfQNSUncovered];
-        [self percentageOfSIUncovered];
-        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
         UserProfileViewController *userProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"UserProfileViewController"];
         
-        userProfileVC.progressNYC = self.percentageOfNYC;
-        userProfileVC.progressBK = self.percentageOfBK;
-        userProfileVC.progressMAN = self.percentageOfMAN;
-        userProfileVC.progressQNS = self.percentageOfQNS;
-        userProfileVC.progressBRX = self.percentageOfBRX;
-        userProfileVC.progressSI = self.percentageOfSI;
-        
         [self presentViewController:userProfileVC animated:YES completion:nil];
-        
-        NSLog(@"percentageNYC %2f", userProfileVC.progressNYC);
-        NSLog(@"percentageBK %2f", userProfileVC.progressBK);
-        NSLog(@"percentageMAN %2f", userProfileVC.progressMAN);
-        NSLog(@"percentageNYC %2f", userProfileVC.progressQNS);
         
         [sidebar dismissAnimated:YES];
         
@@ -932,7 +873,7 @@ NSFetchedResultsControllerDelegate
 
 -(void)loadVisitedTiles {
     
-    self.visitedTiles = [[NSMutableArray alloc] init];
+    self.visitedTilesColumnRow = [[NSMutableArray alloc] init];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"VisitedTile"];
     
@@ -954,44 +895,7 @@ NSFetchedResultsControllerDelegate
             
             //Get tile's columnRow string
             
-            [self.visitedTiles addObject: tile.columnRow];
-            
-            NSLog(@"tile.borough: %@",tile.borough);
-            
-            
-            //Check tile borough, add to borough array
-            
-            if ([tile.borough isEqualToString:@"Brooklyn"]) {
-                
-                self.visitedTilesBK = [[NSMutableArray alloc] init];
-                
-                [self.visitedTilesBK addObject:tile.borough];
-                
-            }else if ([tile.borough isEqualToString:@"Manhattan"]) {
-                
-                self.visitedTilesMAN = [[NSMutableArray alloc] init];
-                
-                [self.visitedTilesMAN addObject:tile.borough];
-                
-            }else if ([tile.borough isEqualToString:@"Bronx"]) {
-                
-                self.visitedTilesBRX = [[NSMutableArray alloc] init];
-                
-                [self.visitedTilesBRX addObject:tile.borough];
-                
-            }else if ([tile.borough isEqualToString:@"Queens"]) {
-                
-                self.visitedTilesQNS = [[NSMutableArray alloc] init];
-                
-                [self.visitedTilesQNS addObject: tile.borough];
-                
-            }else if ([tile.borough isEqualToString:@"Staten Island"]) {
-                
-                self.visitedTilesSI = [[NSMutableArray alloc] init];
-                
-                [self.visitedTilesSI addObject:tile.borough];
-                
-            }
+            [self.visitedTilesColumnRow addObject: tile.columnRow];
             
             
             //Draw tile with tile coordinates
@@ -1004,91 +908,6 @@ NSFetchedResultsControllerDelegate
         
     }
 }
-
-
-#pragma mark - Distance Calculations
-
-- (CGFloat)distanceInMiles:(CGFloat)meters
-{
-    CGFloat unitDivider;
-    NSString *unitName;
-    
-    unitName = @"mi";
-    // to get from meters to miles divide by this
-    unitDivider = metersInMile;
-    
-    CGFloat distanceInMiles = meters/unitDivider;
-    
-    return distanceInMiles;
-}
-
-
--(void)percentageOfNYCUncovered{
-    
-    CGFloat userMeters = self.visitedTiles.count * 40;
-    CGFloat nycMeters = 785000;
-    CGFloat percentageOfNYCUncovered = userMeters / nycMeters;
-    
-    self.percentageOfNYC = percentageOfNYCUncovered;
-    
-    NSLog(@"percentage of NYC travelled: %f", self.percentageOfNYC);
-}
-
--(void)percentageOfBKUncovered{
-    
-    CGFloat userMeters = self.visitedTilesBK.count * 40;
-    CGFloat bkMeters = 183000;
-    CGFloat percentageOfBKUncovered = userMeters / bkMeters;
-    
-    self.percentageOfBK = percentageOfBKUncovered;
-    
-    NSLog(@"percentage of BK travelled: %f", self.percentageOfBK);
-}
-
--(void)percentageOfMANUncovered{
-    
-    CGFloat userMeters = self.visitedTilesMAN.count * 40;
-    CGFloat manMeters = 59000;
-    CGFloat percentageOfMANUncovered = userMeters / manMeters;
-    
-    self.percentageOfMAN = percentageOfMANUncovered;
-    
-    NSLog(@"percentage of MAN travelled: %f", self.percentageOfMAN);
-}
-
--(void)percentageOfBRXUncovered{
-    
-    CGFloat userMeters = self.visitedTilesBRX.count * 40;
-    CGFloat brxMeters = 109000;
-    CGFloat percentageOfBRXUncovered = userMeters / brxMeters;
-    
-    self.percentageOfBRX = percentageOfBRXUncovered;
-    
-    NSLog(@"percentage of BRX travelled: %f", self.percentageOfBRX);
-}
-
--(void)percentageOfQNSUncovered{
-    
-    CGFloat userMeters = self.visitedTilesQNS.count * 40;
-    CGFloat qnsMeters = 283000;
-    CGFloat percentageOfQNSUncovered = userMeters / qnsMeters;
-    
-    self.percentageOfQNS = percentageOfQNSUncovered;
-    
-    NSLog(@"percentage of QNS travelled: %f", self.percentageOfQNS);
-}
-
--(void)percentageOfSIUncovered{
-    
-    CGFloat userMeters = self.visitedTilesSI.count * 40;
-    CGFloat siMeters = 151000;
-    CGFloat percentageOfSIUncovered = userMeters / siMeters;
-    
-    self.percentageOfSI = percentageOfSIUncovered;
-    
-    NSLog(@"percentage of SI travelled: %f", self.percentageOfSI);
-}
-
 
 
 #pragma mark - Overlay Renderer
@@ -1393,24 +1212,6 @@ NSFetchedResultsControllerDelegate
 
 
 #pragma  mark - Testing Grid
-
--(void)gridTest{
-    
-    //Testing Grid
-    
-    //    CLLocation *location1 = [self topLeftLocationOfGrid:centerCoord And:spanOfNY];
-    //    self.gridOriginPoint = location1;
-    //
-    //    CLLocation *userLocationTest = [[CLLocation alloc] initWithLatitude:40.71419829 longitude:-74.0062145];
-    //    CLLocation *userLocationTest2 = [[CLLocation alloc] initWithLatitude:40.71482853 longitude:-74.0062896];
-    //
-    //    NSString *visitedTile1 = [self userLocationInGrid:userLocationTest];
-    //    NSString *visitedTile2 = [self userLocationInGrid:userLocationTest2];
-    //
-    //    NSLog(@"column, row 1: %@, column, row 2: %@", visitedTile1, visitedTile2);
-    
-}
-
 
 
 -(void)setGridWith:(CLLocationCoordinate2D)centerCoord And:(MKCoordinateSpan)span {

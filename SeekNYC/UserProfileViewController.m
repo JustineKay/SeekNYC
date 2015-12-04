@@ -47,6 +47,14 @@ NSFetchedResultsControllerDelegate
     return delegate.managedObjectContext;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    [self setVisitedTiles];
+    [self setUserProgress];
+    
+}
+
 - (void)loadView {
     self.view = [[[NSBundle mainBundle] loadNibNamed:@"UserProfileView" owner:self options:nil] firstObject];
 }
@@ -74,12 +82,6 @@ NSFetchedResultsControllerDelegate
     [view.SICircleProgressBar setProgress:view.percentageSI animated:YES];
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    
-    [self setVisitedTiles];
-    
-}
 
 - (void)dismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -110,13 +112,13 @@ NSFetchedResultsControllerDelegate
     }
 }
 
--(void)setUserProgress: (NSArray *)fetchedTiles {
+-(void)setUserProgress {
     
-    if (fetchedTiles != nil) {
+    if (self.fetchedTiles != nil) {
         
-        self.progressNYC = [self percentageOfAreaUncovered:fetchedTiles.count With:NYCMeters];
+        self.progressNYC = [self percentageOfAreaUncovered:self.fetchedTiles.count With:NYCMeters];
         
-        for (VisitedTile *tile in fetchedTiles) {
+        for (VisitedTile *tile in self.fetchedTiles) {
             
             [self getNumberOfBoroughsWith:tile.borough];
             
