@@ -110,7 +110,7 @@ NSFetchedResultsControllerDelegate
 - (void)fetchFourSquareData {
     
     //     create an url
-//    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    //    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
     NSArray *nycBorough = @[@"nyc", @"brooklyn", @"queens", @"bronx", @"staten_island"];
     int random = arc4random_uniform((int)nycBorough.count);
@@ -119,9 +119,8 @@ NSFetchedResultsControllerDelegate
     
     NSLog(@"%@",url);
     
+    NSURL *foursquaredURL = [NSURL URLWithString:url];
     
-    
-        NSURL *foursquaredURL = [NSURL URLWithString:url];
     
     // fetch data from the endpoint and print json response
     [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -162,6 +161,7 @@ NSFetchedResultsControllerDelegate
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         NSArray *venues = json[@"response"][@"venues"];
+        //NSLog(@"venues: %@", venues);
         
         //        // reset my array
         //        self.venueResults = [[NSMutableArray alloc] init];
@@ -180,8 +180,6 @@ NSFetchedResultsControllerDelegate
     }];
     
 }
-
-
 
 
 
@@ -484,7 +482,7 @@ NSFetchedResultsControllerDelegate
         if (!view) {
             view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"animated"];
             //view.bounds = CGRectMake(0, 0, 113, 58);
-            view.bounds = CGRectMake(0, 0, 100, 100);
+            view.bounds = CGRectMake(0, 0, 60, 60);
         }
         
         //        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
@@ -524,7 +522,7 @@ NSFetchedResultsControllerDelegate
         DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
         if(!view)
             view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-        view.bounds = CGRectMake(0, 0, 35, 35);
+        view.bounds = CGRectMake(0, 0, 25, 25);
         
         
         //
@@ -1312,13 +1310,8 @@ NSFetchedResultsControllerDelegate
 {
     if (motion == UIEventSubtypeMotionShake)
     {
+        
         [self showAlert];
-        
-        
-        //        //CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.6617, -73.9708);
-        //        CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.7538, -73.9836);
-        //
-        //        [self addAnnotationToMapWith:test];
         
     }
 }
@@ -1366,6 +1359,11 @@ NSFetchedResultsControllerDelegate
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
                                                             
+//                                                            //TEST ANNOTATION
+//                                                            MKPointAnnotation *testAnnotation = [[MKPointAnnotation alloc] init];
+//                                                            testAnnotation.coordinate = CLLocationCoordinate2DMake(40.7538, -73.9836);
+//                                                            testAnnotation.title = @"Testing 1, 2, 3...";
+                                                            
                                                             //Check to see if it's in the current map view, if not zoom out to NY region view
                                                             MKMapPoint point =  MKMapPointForCoordinate(myAnnotation.coordinate);
                                                             if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
@@ -1377,14 +1375,9 @@ NSFetchedResultsControllerDelegate
                                                             //drop pin
                                                             [self.mapView addAnnotation:myAnnotation];
                                                             
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
+//                                                            //testAnnotation
+//                                                            [self.mapView addAnnotation:testAnnotation];
+                                                         
                                                             [self dismissViewControllerAnimated:YES completion:nil];
                                                         }]];
     
