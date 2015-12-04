@@ -42,6 +42,8 @@
         if (tips) {
             NSDictionary *theTip = [tips objectAtIndex:0];
             self.detail = [theTip objectForKey:@"text"];
+        } else {
+            self.detail = @"No tip available";
         }
         
         NSLog(@"%@", self.detail);

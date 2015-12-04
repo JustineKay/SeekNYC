@@ -112,7 +112,16 @@ NSFetchedResultsControllerDelegate
     //     create an url
 //    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
     
-        NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/explore?near=nyc&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+    NSArray *nycBorough = @[@"nyc", @"brooklyn", @"queens", @"bronx", @"staten_island", @"long_island"];
+    int random = arc4random_uniform((int)nycBorough.count);
+    
+    NSString *url = [NSString stringWithFormat: @"https://api.foursquare.com/v2/venues/explore?near=%@&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV", nycBorough[random]];
+    
+    NSLog(@"%@",url);
+    
+    
+    
+        NSURL *foursquaredURL = [NSURL URLWithString:url];
     
     // fetch data from the endpoint and print json response
     [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
