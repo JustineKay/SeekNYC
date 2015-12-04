@@ -18,6 +18,9 @@
 @property (nonatomic) float landmarkLat;
 @property (nonatomic) float landmarkLng;
 
+@property (nonatomic) NSString *imageURL;
+
+
 - (instancetype)initWithJSON:(NSDictionary *)item;
 
 @end
