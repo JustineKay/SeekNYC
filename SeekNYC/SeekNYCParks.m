@@ -18,7 +18,7 @@
         NSDictionary *items = [venue[@"items"]objectAtIndex:0];
        // NSLog(@"%@", items);
         self.name = items[@"venue"][@"name"];
-        // NSLog(@"%@", self.name);
+        NSLog(@"%@", self.name);
       
        // Address
        NSDictionary *address = items[@"venue"][@"location"];
@@ -40,9 +40,9 @@
         //the detail
         NSArray *tips = items[@"tips"];
         NSDictionary *theTip = [tips objectAtIndex:0];
-        NSString *detail = [theTip objectForKey:@"text"];
+        self.detail = [theTip objectForKey:@"text"];
         
-        NSLog(@"%@", detail);
+        NSLog(@"%@", self.detail);
         
         
         

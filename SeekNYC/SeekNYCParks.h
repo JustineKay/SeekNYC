@@ -13,6 +13,7 @@
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *categoryName;
+@property (nonatomic) NSString *detail;
 
 @property (nonatomic) float landmarkLat;
 @property (nonatomic) float landmarkLng;
