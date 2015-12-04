@@ -18,6 +18,6 @@
 @property (nonatomic) float landmarkLat;
 @property (nonatomic) float landmarkLng;
 
-- (instancetype)initWithJSON:(NSDictionary *)json;
+- (instancetype)initWithJSON:(NSDictionary *)item;
 
 @end

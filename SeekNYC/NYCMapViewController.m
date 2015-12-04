@@ -119,18 +119,19 @@ NSFetchedResultsControllerDelegate
         
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
-        NSArray *venues = json[@"response"][@"groups"];
-        
+        NSDictionary *res = json[@"response"];
+        NSArray *groups = res[@"groups"];
+        NSArray *items = groups[0][@"items"];
         
         
         // reset my array
         self.venueResults = [[NSMutableArray alloc] init];
         
         // loop through all json posts
-        for (NSDictionary *venue in venues) {
+        for (NSDictionary *item in items) {
             
             // create new post from json
-            SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
+            SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:item];
             
             // add post to array
             [self.venueResults addObject:suggestedParkVenue];

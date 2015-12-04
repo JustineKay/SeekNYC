@@ -10,18 +10,19 @@
 
 @implementation SeekNYCParks
 
-- (instancetype)initWithJSON:(NSDictionary *)venue {
+- (instancetype)initWithJSON:(NSDictionary *)item {
     
     if (self = [super init]) {
         
+        NSDictionary *venue = item[@"venue"];
+        NSArray *tips = item[@"tips"];
+        
         // Name
-        NSDictionary *items = [venue[@"items"]objectAtIndex:0];
-       // NSLog(@"%@", items);
-        self.name = items[@"venue"][@"name"];
+        self.name = venue[@"name"];
         NSLog(@"%@", self.name);
       
        // Address
-       NSDictionary *address = items[@"venue"][@"location"];
+       NSDictionary *address = venue[@"location"];
        self.address = [[address objectForKey:@"formattedAddress"]componentsJoinedByString:@" "];
        self.landmarkLat = [[address objectForKey:@"lat"]floatValue];
         self.landmarkLng = [[address objectForKey:@"lng"]floatValue];
@@ -31,16 +32,17 @@
        // NSLog(@"%@", address);
         
         //Category
-        NSArray *venueType = items[@"venue"][@"categories"];
+        NSArray *venueType = venue[@"categories"];
         NSDictionary *category = [venueType objectAtIndex:0];
         self.categoryName = [category objectForKey:@"name"];
         //NSLog(@"%@", self.categoryName);
 
         
         //the detail
-        NSArray *tips = items[@"tips"];
-        NSDictionary *theTip = [tips objectAtIndex:0];
-        self.detail = [theTip objectForKey:@"text"];
+        if (tips) {
+            NSDictionary *theTip = [tips objectAtIndex:0];
+            self.detail = [theTip objectForKey:@"text"];
+        }
         
         NSLog(@"%@", self.detail);
         
