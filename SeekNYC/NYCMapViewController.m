@@ -568,10 +568,10 @@ NSFetchedResultsControllerDelegate
     
     for (annotationView in views) {
         
-        // Don't pin drop if annotation is user location
-        //        if ([aV.annotation isKindOfClass:[MKUserLocation class]]) {
-        //            continue;
-        //        }
+        //Don't pin drop if annotation is user location
+        if ([annotationView.annotation isKindOfClass:[MKUserLocation class]]) {
+            continue;
+        }
         
         // Check if current annotation is inside visible map rect
         MKMapPoint point =  MKMapPointForCoordinate(annotationView.annotation.coordinate);
