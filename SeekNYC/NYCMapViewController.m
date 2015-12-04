@@ -152,7 +152,7 @@ NSFetchedResultsControllerDelegate
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         NSArray *venues = json[@"response"][@"venues"];
-        NSLog(@"venues: %@", venues);
+        //NSLog(@"venues: %@", venues);
         
         //        // reset my array
         //        self.venueResults = [[NSMutableArray alloc] init];
@@ -1301,13 +1301,8 @@ NSFetchedResultsControllerDelegate
 {
     if (motion == UIEventSubtypeMotionShake)
     {
+        
         [self showAlert];
-        
-        
-        //        //CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.6617, -73.9708);
-        //        CLLocationCoordinate2D test = CLLocationCoordinate2DMake(40.7538, -73.9836);
-        //
-        //        [self addAnnotationToMapWith:test];
         
     }
 }
@@ -1353,13 +1348,13 @@ NSFetchedResultsControllerDelegate
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
                                                             
-                                                            //TEST ANNOTATION
-                                                            MKPointAnnotation *testAnnotation = [[MKPointAnnotation alloc] init];
-                                                            testAnnotation.coordinate = CLLocationCoordinate2DMake(40.7538, -73.9836);
-                                                            testAnnotation.title = @"Testing 1, 2, 3...";
+//                                                            //TEST ANNOTATION
+//                                                            MKPointAnnotation *testAnnotation = [[MKPointAnnotation alloc] init];
+//                                                            testAnnotation.coordinate = CLLocationCoordinate2DMake(40.7538, -73.9836);
+//                                                            testAnnotation.title = @"Testing 1, 2, 3...";
                                                             
                                                             //Check to see if it's in the current map view, if not zoom out to NY region view
-                                                            MKMapPoint point =  MKMapPointForCoordinate(testAnnotation.coordinate);
+                                                            MKMapPoint point =  MKMapPointForCoordinate(myAnnotation.coordinate);
                                                             if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
                                                                 
                                                                 MKCoordinateRegion NYRegion = MKCoordinateRegionMake(self.gridCenterCoord, self.gridSpan);
@@ -1369,8 +1364,8 @@ NSFetchedResultsControllerDelegate
                                                             //drop pin
                                                             [self.mapView addAnnotation:myAnnotation];
                                                             
-                                                            //testAnnotation
-                                                            [self.mapView addAnnotation:testAnnotation];
+//                                                            //testAnnotation
+//                                                            [self.mapView addAnnotation:testAnnotation];
                                                          
                                                             [self dismissViewControllerAnimated:YES completion:nil];
                                                         }]];
