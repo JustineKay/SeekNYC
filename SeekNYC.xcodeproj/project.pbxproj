@@ -44,6 +44,7 @@
 		F79D2E0D1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E0C1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m */; };
 		F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E0F1C02204300A5F7CA /* SeekNYCParks.m */; };
 		F7ACEA991C04F82600316323 /* Viafont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7ACEA981C04F82600316323 /* Viafont.ttf */; };
+		F7E470771C13366400A35637 /* VenueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E470761C13366400A35637 /* VenueDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,8 @@
 		F79D2E0F1C02204300A5F7CA /* SeekNYCParks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekNYCParks.m; sourceTree = "<group>"; };
 		F7ACEA981C04F82600316323 /* Viafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Viafont.ttf; sourceTree = "<group>"; };
 		F7DB25FEF09FD3D81CB565DF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E470751C13366400A35637 /* VenueDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueDetailViewController.h; sourceTree = "<group>"; };
+		F7E470761C13366400A35637 /* VenueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +218,8 @@
 				6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */,
 				6BB08B941C0111C20098C805 /* UserProfileView.h */,
 				6BB08B951C0111C20098C805 /* UserProfileView.m */,
+				F7E470751C13366400A35637 /* VenueDetailViewController.h */,
+				F7E470761C13366400A35637 /* VenueDetailViewController.m */,
 				001961C41BF7A33C00E08B91 /* UserProfileView.xib */,
 				6B9B79651BF68D05004A7756 /* Main.storyboard */,
 				6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */,
@@ -384,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E470771C13366400A35637 /* VenueDetailViewController.m in Sources */,
 				6B28AA3C1C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m in Sources */,
 				F79D2E0A1C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m in Sources */,
 				F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */,

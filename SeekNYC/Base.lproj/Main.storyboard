@@ -220,10 +220,10 @@
             </objects>
             <point key="canvasLocation" x="1496" y="1269"/>
         </scene>
-        <!--View Controller-->
+        <!--Venue Detail View Controller-->
         <scene sceneID="zY1-71-zKI">
             <objects>
-                <viewController id="v90-FV-xMG" sceneMemberID="viewController">
+                <viewController id="v90-FV-xMG" customClass="VenueDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pjO-BD-AFD"/>
                         <viewControllerLayoutGuide type="bottom" id="rsh-SZ-Hfr"/>
@@ -248,6 +248,9 @@
                             <constraint firstAttribute="trailing" secondItem="qUi-Gx-P5c" secondAttribute="trailing" id="opH-ds-pvW"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webview" destination="qUi-Gx-P5c" id="az2-Ey-F6E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzn-M5-n3r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
