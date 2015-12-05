@@ -7,6 +7,7 @@
 //
 
 #import "NYHiddenLocations.h"
+#import "SeekNYCParks.h"
 
 @implementation NYHiddenLocations
 
@@ -463,7 +464,74 @@ NSDictionary *vipRecsJames = @{
                                @"address" : @"Boerum Pl & Schermerhorn Street, Brooklyn, NY 11201",
                                @"description" : @"Displays historical artifacts of the New York City Subway, bus, commuter rail, and bridge and tunnel systems"
                                };
-    return 0;
+    
+    NSArray *stuffz = @[
+                        atlasObs1,
+                        atlasObs2,
+                        atlasObs3,
+                        atlasObs4,
+                        atlasObs5,
+                        atlasObs6,
+                        atlasObs7,
+                        atlasObs8,
+                        atlasObs9,
+                        atlasObs11,
+                        atlasObs12,
+                        atlasObs13,
+                        atlasObs14,
+                        atlasObs15,
+                        atlasObs16,
+                        atlasObs17,
+                        atlasObs18,
+                        atlasObs19,
+                        atlasObs20,
+                        atlasObs21,
+                        atlasObs22,
+                        atlasObs23,
+                        atlasObs24,
+                        atlasObs25,
+                        atlasObs26,
+                        atlasObs27,
+                        atlasObs28,
+                        atlasObs29,
+                        atlasObs30,
+                        atlasObs31,
+                        atlasObs32,
+                        atlasObs33,
+                        atlasObs34,
+                        atlasObs35,
+                        atlasObs36,
+                        atlasObs37,
+                        atlasObs38,
+                        atlasObs39,
+                        atlasObs40,
+                        atlasObs41,
+                        atlasObs42,
+                        atlasObs43,
+                        atlasObs44,
+                        atlasObs45,
+                        atlasObs46,
+                        vipRecsBen,
+                        vipRecsCory,
+                        vipRecsJames,
+                        vipRecsTanner
+                
+                        ];
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in stuffz) {
+        SeekNYCParks *park = [[SeekNYCParks alloc] init];
+        
+        park.name = dict[@"name"];
+        park.address = dict[@"address"];
+        park.detail = dict[@"description"];
+        park.landmarkLat = [dict[@"lat"] floatValue];
+        park.landmarkLng = [dict[@"lng"] floatValue];
+        
+        [arr addObject:park];
+    }
+    
+    return arr;
 }
 
 @end

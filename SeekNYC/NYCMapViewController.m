@@ -34,6 +34,7 @@
 #import "APIManager.h"
 #import "SeekNYCParks.h"
 #import "VenueDetailViewController.h"
+#import "NYHiddenLocations.h"
 
 static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
@@ -72,8 +73,9 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
-@property (nonatomic) NSMutableArray *venueResults;
 @property (nonatomic) NSMutableArray *allSuggestions;
+
+@property (nonatomic) NSMutableArray *venueResults;
 
 @end
 
@@ -128,6 +130,10 @@ NSFetchedResultsControllerDelegate
             //  NSLog(@"%@", self.venueResults);
             
         }
+        
+        // add hidden locations
+        
+        self.venueResults = [self.venueResults arrayByAddingObjectsFromArray:[NYHiddenLocations hiddenLocations]];
     }];
     
 }
