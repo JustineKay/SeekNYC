@@ -153,9 +153,10 @@ NSFetchedResultsControllerDelegate
             // create new post from json
             SeekNYCParks *suggestedLandmarkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
             
-            // add post to array
-            [self.venueResults addObject:suggestedLandmarkVenue];
-            //  NSLog(@"%@", self.venueResults);
+            // filter results by zipcode and user's uncovered area
+            //add post to array
+            
+            [self filterAPIResult:suggestedLandmarkVenue];
             
         }
     }];
@@ -230,20 +231,10 @@ NSFetchedResultsControllerDelegate
     gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to\n generate places to visit", nil);
     
     // Customize appearance as desired
-    
     gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
+    [self alertViewControllerUI:gestureAlertInfo];
     
-    gestureAlertInfo.buttonCornerRadius = 20.0f;
-    gestureAlertInfo.view.tintColor = self.view.tintColor;
-    
-    gestureAlertInfo.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
-    gestureAlertInfo.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
-    gestureAlertInfo.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.buttonTitleFont.pointSize];
-    gestureAlertInfo.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.cancelButtonTitleFont.pointSize];
-    
-    gestureAlertInfo.swipeDismissalGestureEnabled = YES;
-    gestureAlertInfo.backgroundTapDismissalGestureEnabled = YES;
-    
+    //add action
     [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
                                                          style:UIAlertActionStyleCancel
                                                        handler:^(NYAlertAction *action) {
@@ -1173,6 +1164,7 @@ NSFetchedResultsControllerDelegate
                                                             MKPointAnnotation *myAnnotation = [[MKPointAnnotation alloc] init];
                                                             myAnnotation.coordinate = CLLocationCoordinate2DMake(suggestedVenue.landmarkLat, suggestedVenue.landmarkLng);
                                                             myAnnotation.title = suggestedVenue.name;
+                                                            myAnnotation.subtitle = suggestedVenue.address;
                                                             
 //                                                            //TEST ANNOTATION
 //                                                            MKPointAnnotation *testAnnotation = [[MKPointAnnotation alloc] init];
