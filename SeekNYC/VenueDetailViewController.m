@@ -8,6 +8,9 @@
 
 #import "VenueDetailViewController.h"
 
+#import "SeekNYCParks.h"
+#import "NYCMapViewController.h"
+
 @interface VenueDetailViewController ()
 
 @end
@@ -17,6 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSURL *url = [NSURL URLWithString:@"https://en.wikipedia.org/wiki/New_York_City"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.webview loadRequest:request];
+    
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    
+    [self.backButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+
+
+}
+
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
