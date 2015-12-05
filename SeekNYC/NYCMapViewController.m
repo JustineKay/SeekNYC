@@ -470,6 +470,8 @@ NSFetchedResultsControllerDelegate
             view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"animated"];
             //view.bounds = CGRectMake(0, 0, 113, 58);
             view.bounds = CGRectMake(0, 0, 60, 60);
+            
+            
         }
         
         //        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
@@ -481,6 +483,10 @@ NSFetchedResultsControllerDelegate
         //
         //Animate it like any UIView!
         //
+        
+        
+        
+
         
         CABasicAnimation *theAnimation;
         
@@ -511,6 +517,12 @@ NSFetchedResultsControllerDelegate
             view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
         view.bounds = CGRectMake(0, 0, 25, 25);
         
+        UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        view.rightCalloutAccessoryView = rightButton;
+        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
+        view.leftCalloutAccessoryView = iconView;
+        
+        
         
         //
         //Animate it like any UIView!
@@ -536,6 +548,9 @@ NSFetchedResultsControllerDelegate
         [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
         
         view.canShowCallout = YES;
+        
+       
+
         
         return view;
         
