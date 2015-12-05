@@ -33,6 +33,7 @@
 #import "ZipCode.h"
 #import "APIManager.h"
 #import "SeekNYCParks.h"
+#import "VenueDetailViewController.h"
 
 static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
@@ -454,6 +455,7 @@ NSFetchedResultsControllerDelegate
 }
 
 
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     //tried (annotation == mapView.userLocation) to no avail
@@ -489,8 +491,8 @@ NSFetchedResultsControllerDelegate
             view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"diamondAnimated"];
         view.bounds = CGRectMake(0, 0, 30, 30);
         
-        UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        view.rightCalloutAccessoryView = rightButton;
+        UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        view.rightCalloutAccessoryView = infoButton;
         UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
         view.leftCalloutAccessoryView = iconView;
        
@@ -508,6 +510,13 @@ NSFetchedResultsControllerDelegate
     
     return nil;
 }
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    [self performSegueWithIdentifier:@"Details" sender:view];
+}
+
+
 
 -(CABasicAnimation *)animation{
     
@@ -1152,6 +1161,8 @@ NSFetchedResultsControllerDelegate
     // Present the alert view controller
     [self presentViewController:alertShakeGesture animated:YES completion:nil];
 }
+
+
 
 
 #pragma  mark - Testing Grid
