@@ -34,7 +34,6 @@
 #import "APIManager.h"
 #import "SeekNYCParks.h"
 
-static float const metersInMile = 1609.344;
 static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
 static float const centerCoordLng = -74.0059;
@@ -56,19 +55,11 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) CLLocationManager *locationManager;
 
-@property (nonatomic) NSMutableArray *locations;
-@property (nonatomic) NSArray *userPaths;
-@property (nonatomic) float distance;
-@property (nonatomic) int seconds;
-
 @property (nonatomic) NSMutableArray *visitedTilesColumnRow;
 
 @property (nonatomic) CLLocation *gridOriginPoint;
 @property (nonatomic) CLLocationCoordinate2D gridCenterCoord;
 @property (nonatomic) MKCoordinateSpan gridSpan;
-
-
-@property (nonatomic) NSTimer *timer;
 
 @property (nonatomic) NSMutableArray *zipCodesOfNYC;
 @property (nonatomic) ZipCodeData *zipCodeData;
@@ -76,10 +67,12 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) NSString *userLocationZipCode;
 
 @property (nonatomic) BOOL isNYC;
+@property (nonatomic) BOOL matchingTileFound;
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @property (nonatomic) NSMutableArray *venueResults;
+@property (nonatomic) NSMutableArray *allSuggestions;
 
 @end
 
@@ -170,6 +163,23 @@ NSFetchedResultsControllerDelegate
 }
 
 
+-(void)filterAPIResult: (SeekNYCParks *)result {
+    
+    CLLocation *resultLocation = [[CLLocation alloc] initWithLatitude:result.landmarkLat longitude:result.landmarkLng];
+    
+    [self getZipCode:resultLocation];
+    
+    NSString *resultColumnRow = [self locationInGrid:resultLocation];
+    
+    [self checkForMatchingTile:resultColumnRow];
+    
+    if (self.isNYC && self.matchingTileFound == NO) {
+        
+        [self.venueResults addObject: result];
+        
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -221,7 +231,7 @@ NSFetchedResultsControllerDelegate
     
     // Customize appearance as desired
     
-    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
     
     gestureAlertInfo.buttonCornerRadius = 20.0f;
     gestureAlertInfo.view.tintColor = self.view.tintColor;
@@ -617,18 +627,16 @@ NSFetchedResultsControllerDelegate
         //***REMOVE (&& self.isNYC) to test in simulator *************
         if (isAccurate && isRecent && self.isNYC) {
             
-            [self visitedLocation:newLocation];
-            NSLog(@"newLocation: %@", newLocation);
+            [self createNewTile:newLocation];
             
             //get locations from new locations
             //repeat the above to calculate surrounding tiles
             
             NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
-            //NSLog(@"surroundingTileCoords: %@", surroundingTileCoords);
             
             for (CLLocation *loc in surroundingTileCoords) {
                 
-                [self visitedLocation:loc];
+                [self createNewTile:loc];
                 
             }
             
@@ -637,25 +645,31 @@ NSFetchedResultsControllerDelegate
     }
 }
 
--(void)visitedLocation: (CLLocation *)newLocation{
+-(void)checkForMatchingTile: (NSString *)newTile {
     
-    BOOL matchingTileFound = NO;
-    
-    NSString *newTile = [self locationInGrid:newLocation];
+    self.matchingTileFound = NO;
     
     for (int i = 0; i < self.visitedTilesColumnRow.count; i++) {
         
         if ([newTile isEqualToString:self.visitedTilesColumnRow[i]]) {
             
-            matchingTileFound = YES;
+            self.matchingTileFound = YES;
             NSLog(@"Matching Tile Found");
             
             break;
         }
         
     }
+
+}
+
+-(void)createNewTile: (CLLocation *)newLocation{
     
-    if (matchingTileFound == NO) {
+    NSString *newTile = [self locationInGrid:newLocation];
+    
+    [self checkForMatchingTile:newTile];
+    
+    if (self.matchingTileFound == NO) {
         
         NSLog(@"No matching tile found");
         
@@ -989,17 +1003,7 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - AlertViewController
 
--(void)setCustomTint {
-    
-    NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
-    
-    // Set a title and message
-    alertViewController.title = NSLocalizedString(@"Tint", nil);
-    alertViewController.message = NSLocalizedString(@"Pick a color, Set the vibe.", nil);
-    
-    // Customize appearance as desired
-    
-    alertViewController.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+-(void)alertViewControllerUI: (NYAlertViewController *)alertViewController {
     
     alertViewController.buttonCornerRadius = 20.0f;
     alertViewController.view.tintColor = self.view.tintColor;
@@ -1011,6 +1015,17 @@ NSFetchedResultsControllerDelegate
     
     alertViewController.swipeDismissalGestureEnabled = YES;
     alertViewController.backgroundTapDismissalGestureEnabled = YES;
+}
+
+-(void)setCustomTint {
+    
+    NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alertViewController.title = NSLocalizedString(@"Tint", nil);
+    alertViewController.message = NSLocalizedString(@"Pick a color, Set the vibe.", nil);
+    
+    [self alertViewControllerUI:alertViewController];
     
     // Add alert actions
     
@@ -1093,20 +1108,10 @@ NSFetchedResultsControllerDelegate
     gestureAlertInfo.message = NSLocalizedString(@"Shake Your Phone!", nil);
     
     // Customize appearance as desired
-    
     gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    [self alertViewControllerUI:gestureAlertInfo];
     
-    gestureAlertInfo.buttonCornerRadius = 20.0f;
-    gestureAlertInfo.view.tintColor = self.view.tintColor;
-    
-    gestureAlertInfo.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
-    gestureAlertInfo.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
-    gestureAlertInfo.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.buttonTitleFont.pointSize];
-    gestureAlertInfo.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:gestureAlertInfo.cancelButtonTitleFont.pointSize];
-    
-    gestureAlertInfo.swipeDismissalGestureEnabled = YES;
-    gestureAlertInfo.backgroundTapDismissalGestureEnabled = YES;
-    
+    //add action
     [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
                                                          style:UIAlertActionStyleCancel
                                                        handler:^(NYAlertAction *action) {
@@ -1130,12 +1135,12 @@ NSFetchedResultsControllerDelegate
     if (motion == UIEventSubtypeMotionShake)
     {
         
-        [self showAlert];
+        [self showSuggestedPlacesAlert];
         
     }
 }
 
--(IBAction)showAlert {
+-(IBAction)showSuggestedPlacesAlert {
     
     //  NSLog(@"%@", self.venueResults);
     int random = arc4random_uniform((int)self.venueResults.count);
@@ -1151,18 +1156,9 @@ NSFetchedResultsControllerDelegate
     // Customize appearance as desired
     
     alertShakeGesture.transitionStyle = NYAlertViewControllerTransitionStyleFade;
+    [self alertViewControllerUI:alertShakeGesture];
     
-    alertShakeGesture.buttonCornerRadius = 20.0f;
-    alertShakeGesture.view.tintColor = self.view.tintColor;
-    
-    alertShakeGesture.titleFont = [UIFont fontWithName:@"Viafont" size:19.0f];
-    alertShakeGesture.messageFont = [UIFont fontWithName:@"Viafont" size:16.0f];
-    alertShakeGesture.buttonTitleFont = [UIFont fontWithName:@"Viafont" size:alertShakeGesture.buttonTitleFont.pointSize];
-    alertShakeGesture.cancelButtonTitleFont = [UIFont fontWithName:@"Viafont" size:alertShakeGesture.cancelButtonTitleFont.pointSize];
-    
-    alertShakeGesture.swipeDismissalGestureEnabled = YES;
-    alertShakeGesture.backgroundTapDismissalGestureEnabled = YES;
-    
+    //add action
     [alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Go", nil)
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
