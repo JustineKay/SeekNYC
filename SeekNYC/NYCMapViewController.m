@@ -1130,6 +1130,16 @@ NSFetchedResultsControllerDelegate
                                                             myAnnotation.title = suggestedVenue.name;
                                                             myAnnotation.subtitle = suggestedVenue.address;
                                                             
+                                                            VenueDetailViewController *secondViewController = [[VenueDetailViewController alloc] init];
+                                                            secondViewController.placeName = myAnnotation.title; // Set the exposed property
+                                                            [self.navigationController pushViewController:secondViewController animated:YES];
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
 //                                                            //TEST ANNOTATION
 //                                                            MKPointAnnotation *testAnnotation = [[MKPointAnnotation alloc] init];
 //                                                            testAnnotation.coordinate = CLLocationCoordinate2DMake(40.7538, -73.9836);
@@ -1212,5 +1222,11 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView addAnnotation:annotation];
 }
+
+- (void)passDataForward
+{
+    
+}
+
 
 @end
