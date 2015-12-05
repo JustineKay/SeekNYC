@@ -456,6 +456,7 @@ NSFetchedResultsControllerDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
+    //tried (annotation == mapView.userLocation) to no avail
     if([annotation isKindOfClass:[MKUserLocation class]]) {
         
         
@@ -465,43 +466,14 @@ NSFetchedResultsControllerDelegate
         //            view = [[UberBlackAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"animated"];
         //        view.bounds = CGRectMake(0, 0, 45, 20);
         
-        SunglassesAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        SunglassesAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"sunglassesAnimated"];
         if (!view) {
-            view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-            //view.bounds = CGRectMake(0, 0, 113, 58);
-            view.bounds = CGRectMake(0, 0, 60, 60);
-            
+            view = [[SunglassesAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"sunglassesAnimated"];
+            view.bounds = CGRectMake(0, 0, 80, 80);
             
         }
-        
-        //        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
-        //        if(!view)
-        //            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-        //        view.bounds = CGRectMake(0, 0, 45, 45);
-        
-        
-        //
-        //Animate it like any UIView!
-        //
-        
-        
-        
 
-        
-        CABasicAnimation *theAnimation;
-        
-        //within the animation we will adjust the "opacity"
-        //value of the layer
-        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
-        //animation lasts 1 second
-        theAnimation.duration=1.0;
-        //and it repeats forever
-        theAnimation.repeatCount= HUGE_VALF;
-        //we want a reverse animation
-        theAnimation.autoreverses=YES;
-        //justify the opacity as you like (1=fully visible, 0=unvisible)
-        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
-        theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+        CABasicAnimation *theAnimation = [self animation];
         
         //Assign the animation to your UIImage layer and the
         //animation will start immediately
@@ -512,58 +484,48 @@ NSFetchedResultsControllerDelegate
         
     }else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
         
-        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"animated"];
+        DiamondAnnotationView *view = (id)[mapView dequeueReusableAnnotationViewWithIdentifier:@"diamondAnimated"];
         if(!view)
-            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"animated"];
-        view.bounds = CGRectMake(0, 0, 25, 25);
+            view =[[DiamondAnnotationView alloc ] initWithAnnotation:annotation reuseIdentifier:@"diamondAnimated"];
+        view.bounds = CGRectMake(0, 0, 30, 30);
         
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         view.rightCalloutAccessoryView = rightButton;
         UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
         view.leftCalloutAccessoryView = iconView;
-        
-        
-        
-        //
-        //Animate it like any UIView!
-        //
-        
-        CABasicAnimation *theAnimation;
-        
-        //within the animation we will adjust the "opacity"
-        //value of the layer
-        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
-        //animation lasts 1 second
-        theAnimation.duration=1.0;
-        //and it repeats forever
-        theAnimation.repeatCount= HUGE_VALF;
-        //we want a reverse animation
-        theAnimation.autoreverses=YES;
-        //justify the opacity as you like (1=fully visible, 0=unvisible)
-        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
-        theAnimation.toValue=[NSNumber numberWithFloat:1.0];
+       
+        CABasicAnimation *theAnimation = [self animation];
         
         //Assign the animation to your UIImage layer and the
         //animation will start immediately
         [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
         
         view.canShowCallout = YES;
-        
-       
-
-        
+      
         return view;
-        
-        
+       
     }
     
     return nil;
 }
 
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+-(CABasicAnimation *)animation{
     
+    CABasicAnimation *theAnimation;
     
+    //within the animation we will adjust the "opacity"
+    //value of the layer
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+    //animation lasts 1 second
+    theAnimation.duration=1.0;
+    //and it repeats forever
+    theAnimation.repeatCount= HUGE_VALF;
+    //we want a reverse animation
+    theAnimation.autoreverses=YES;
+    
+    return theAnimation;
 }
+
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     MKAnnotationView *annotationView;
@@ -571,16 +533,7 @@ NSFetchedResultsControllerDelegate
     for (annotationView in views) {
         
         //Don't pin drop if annotation is user location
-        if ([annotationView.annotation isKindOfClass:[MKUserLocation class]]) {
-            continue;
-        }
-        
-        // Check if current annotation is inside visible map rect
-        MKMapPoint point =  MKMapPointForCoordinate(annotationView.annotation.coordinate);
-        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
-            
-            continue;
-        }
+        if (![annotationView.annotation isKindOfClass:[MKUserLocation class]]) {
         
         CGRect endFrame = annotationView.frame;
         
@@ -613,6 +566,7 @@ NSFetchedResultsControllerDelegate
                                  }];
                              }
                          }];
+        }
     }
     
 }
@@ -849,20 +803,6 @@ NSFetchedResultsControllerDelegate
 
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
-    
-    if (self.locationManager == nil) {
-        self.locationManager = [[CLLocationManager alloc] init];
-    }
-    
-    [self.locationManager requestAlwaysAuthorization];
-    
-    if (self.mapView.userTrackingMode == MKUserTrackingModeFollow) {
-        CLLocationCoordinate2D location = self.mapView.userLocation.coordinate;
-        MKCoordinateSpan span = MKCoordinateSpanMake(0.005, 0.005);
-        MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
-        
-        [self.mapView setRegion:region animated:YES];
-    }
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }

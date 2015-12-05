@@ -16,12 +16,15 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
-    imageView.animationImages = @[[UIImage imageNamed:@"sunglasses_ringsWht1"],
-                                  [UIImage imageNamed:@"sunglasses_ringsWht2"],
-                                  [UIImage imageNamed:@"sunglasses_ringsWht3"]
+    imageView.animationImages = @[[UIImage imageNamed:@"sunglasses_ringsAnimated1"],
+                                  [UIImage imageNamed:@"sunglasses_ringsAnimated2"],
+                                  [UIImage imageNamed:@"sunglasses_ringsAnimated3"],
+                                  [UIImage imageNamed:@"sunglasses_ringsAnimated4"],
+                                  [UIImage imageNamed:@"sunglasses_ringsAnimated5"],
+                                  [UIImage imageNamed:@"sunglasses_ringsAnimated6"]
                                   ];
     
-    imageView.animationDuration = 1.0;
+    imageView.animationDuration = 2.0;
     [imageView startAnimating];
     [self addSubview:imageView];
     
