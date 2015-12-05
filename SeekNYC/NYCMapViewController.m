@@ -75,6 +75,10 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) NSMutableArray *venueResults;
 @property (nonatomic) NSMutableArray *allSuggestions;
 
+@property (nonatomic) NSString *venueResultLat;
+@property (nonatomic) NSString *venueResultLng;
+
+
 @end
 
 
@@ -1116,6 +1120,8 @@ NSFetchedResultsControllerDelegate
                                                             
                                                             [self fetchFourSquareData];
                                                             
+                                                
+                                                            
                                                             //Remove any previous annotations
                                                             NSMutableArray *annotationsToRemove = [self.mapView.annotations mutableCopy];
                                                             [self.mapView removeAnnotations:annotationsToRemove];
@@ -1127,8 +1133,9 @@ NSFetchedResultsControllerDelegate
                                                             myAnnotation.subtitle = suggestedVenue.address;
                                                             
                                                             
-                                                            
-                                                            
+                                                           
+                                                            self.venueResultLat = [NSString stringWithFormat:@"%lf", suggestedVenue.landmarkLat];
+                                                            self.venueResultLng = [NSString stringWithFormat:@"%lf", suggestedVenue.landmarkLng];
                                                             
                                                             
                                                             
@@ -1166,11 +1173,12 @@ NSFetchedResultsControllerDelegate
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    //    [self performSegueWithIdentifier:@"Details" sender:view];
+    //[self performSegueWithIdentifier:@"Details" sender:view];
     
-    SeekNYCParks *suggestedVenue = self.venueResults[2];
+//    SeekNYCParks *suggestedVenue = self.venueResults[6];
     
-    NSString *addressString = [NSString stringWithFormat:@"https://maps.google.com/?daddr=%lf,%lf",suggestedVenue.landmarkLat, suggestedVenue.landmarkLng];
+    NSString *addressString = [NSString stringWithFormat:@"https://maps.google.com/?daddr=%@,%@",self.venueResultLat, self.venueResultLng];
+    NSLog(@"%@", addressString);
         NSURL *url = [NSURL URLWithString:addressString];
         [[UIApplication sharedApplication] openURL:url];
     
