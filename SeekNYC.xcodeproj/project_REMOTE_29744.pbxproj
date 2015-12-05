@@ -298,11 +298,7 @@
 				TargetAttributes = {
 					6B9B79581BF68D05004A7756 = {
 						CreatedOnToolsVersion = 7.1;
-<<<<<<< HEAD
-						DevelopmentTeam = 9WQ49EN2U5;
-=======
 						DevelopmentTeam = 26RHXP32FH;
->>>>>>> 4c9afd32313d7729e2cc6b031bf595fb7192db99
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -542,7 +538,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ChristellaDolmo.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JustineKay.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -560,7 +556,7 @@
 				INFOPLIST_FILE = SeekNYC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ChristellaDolmo.SeekNYC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JustineKay.SeekNYC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

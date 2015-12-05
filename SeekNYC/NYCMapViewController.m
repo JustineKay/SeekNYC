@@ -511,10 +511,6 @@ NSFetchedResultsControllerDelegate
     return nil;
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
-{
-    [self performSegueWithIdentifier:@"Details" sender:view];
-}
 
 
 
@@ -1130,10 +1126,6 @@ NSFetchedResultsControllerDelegate
                                                             myAnnotation.title = suggestedVenue.name;
                                                             myAnnotation.subtitle = suggestedVenue.address;
                                                             
-                                                            VenueDetailViewController *secondViewController = [[VenueDetailViewController alloc] init];
-                                                            secondViewController.placeName = myAnnotation.title; // Set the exposed property
-                                                            [self.navigationController pushViewController:secondViewController animated:YES];
-                                                            
                                                             
                                                             
                                                             
@@ -1171,6 +1163,20 @@ NSFetchedResultsControllerDelegate
     // Present the alert view controller
     [self presentViewController:alertShakeGesture animated:YES completion:nil];
 }
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    //    [self performSegueWithIdentifier:@"Details" sender:view];
+    
+    SeekNYCParks *suggestedVenue = self.venueResults[2];
+    
+    NSString *addressString = [NSString stringWithFormat:@"https://maps.google.com/?daddr=%lf,%lf",suggestedVenue.landmarkLat, suggestedVenue.landmarkLng];
+        NSURL *url = [NSURL URLWithString:addressString];
+        [[UIApplication sharedApplication] openURL:url];
+    
+    
+  }
+
 
 
 
@@ -1223,10 +1229,6 @@ NSFetchedResultsControllerDelegate
     [self.mapView addAnnotation:annotation];
 }
 
-- (void)passDataForward
-{
-    
-}
 
 
 @end

@@ -25,7 +25,7 @@
     NSLog(@"It passes: %@", self.placeName);
     
     
-    NSURL *url = [NSURL URLWithString:@"https://foursquare.com/v/tilda-all-day/56005aaf498e1dfe26d58bb2"];
+    NSURL *url = [NSURL URLWithString:@"http://www.nycgovparks.org/parks/greeley-square-park"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webview loadRequest:request];
     
