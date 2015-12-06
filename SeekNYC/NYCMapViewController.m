@@ -35,6 +35,7 @@
 #import "SeekNYCParks.h"
 #import "VenueDetailViewController.h"
 #import "NYHiddenLocations.h"
+#import "BootstrapData.h"
 
 static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
@@ -68,7 +69,6 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSString *userLocationZipCode;
 
-@property (nonatomic) BOOL isNYC;
 @property (nonatomic) BOOL matchingTileFound;
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -77,10 +77,11 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSMutableArray *venueResults;
 
+@property (nonatomic) BOOL hasBootstrappedData;
+
 @property (nonatomic) NSString *venueResultLat;
 
 @property (nonatomic) NSString *venueResultLng;
-
 
 @end
 
@@ -180,25 +181,41 @@ NSFetchedResultsControllerDelegate
     
     CLLocation *resultLocation = [[CLLocation alloc] initWithLatitude:result.landmarkLat longitude:result.landmarkLng];
     
-    [self getZipCode:resultLocation];
-    
-    NSString *resultColumnRow = [self locationInGrid:resultLocation];
-    
-    [self checkForMatchingTile:resultColumnRow];
-    
-    if (self.isNYC && self.matchingTileFound == NO) {
+    [self getZipCode:resultLocation completion:^(BOOL isNYC) {
         
-        [self.venueResults addObject: result];
+        NSString *resultColumnRow = [self locationInGrid:resultLocation];
         
+        [self checkForMatchingTile:resultColumnRow];
+        
+        if (isNYC && self.matchingTileFound == NO) {
+            
+            [self.venueResults addObject: result];
+            
+        }
+    }];
+}
+
+
+-(void)loadBootstrapData {
+    
+    NSArray *arrs = [BootstrapData data];
+    
+    for (NSArray *arr in arrs) {
+        for (CLLocation *location in arr) {
+            [self processBootStrapLocation:location];
+        }
     }
+    
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-      [self fetchFourSquareData];
-//    [self fetchLandmarkFourSquareData];
+    self.hasBootstrappedData = NO;
+    
+    [self fetchFourSquareData];
+    //    [self fetchLandmarkFourSquareData];
     
     self.mapView.delegate = self;
     
@@ -255,6 +272,13 @@ NSFetchedResultsControllerDelegate
     
     // Present the alert view controller
     [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+    
+    //TESTING with BOOTSTRAP DATA*******************
+//    if (!self.hasBootstrappedData) {
+//        [self loadBootstrapData];
+//        self.hasBootstrappedData = YES;
+//    }
+//    //***********************************************
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -262,6 +286,7 @@ NSFetchedResultsControllerDelegate
     
     [self loadNYCMap];
     [self loadVisitedTiles];
+
     
     
     //UNCOMMENT THE FOLLOWING FOR TESTING
@@ -595,13 +620,20 @@ NSFetchedResultsControllerDelegate
     
     for (CLLocation *newLocation in locations) {
         
-        BOOL isAccurate = newLocation.horizontalAccuracy < 20;
-        BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 30.0;
+        [self processNewLocation:newLocation];
         
-        [self getZipCode:newLocation];
+    }
+}
+
+-(void) processNewLocation: (CLLocation *)newLocation {
+    
+    BOOL isAccurate = newLocation.horizontalAccuracy < 20;
+    BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 30.0;
+    
+    [self getZipCode:newLocation completion:^(BOOL isNYC) {
         
         //***REMOVE (&& self.isNYC) to test in simulator *************
-        if (isAccurate && isRecent && self.isNYC) {
+        if (isAccurate && isRecent && isNYC) {
             
             [self createNewTile:newLocation];
             
@@ -615,37 +647,53 @@ NSFetchedResultsControllerDelegate
                 [self createNewTile:loc];
                 
             }
-            
         }
-        
-    }
+    }];
+
 }
 
--(void)checkForMatchingTile: (NSString *)newTile {
+-(void) processBootStrapLocation: (CLLocation *)newLocation {
     
-    self.matchingTileFound = NO;
+    [self getZipCode:newLocation completion:^(BOOL isNYC) {
+        if (isNYC) {
+            [self createNewTile:newLocation];
+            
+            //get locations from new locations
+            //repeat the above to calculate surrounding tiles
+            
+            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+            
+            for (CLLocation *loc in surroundingTileCoords) {
+                
+                [self createNewTile:loc];
+                
+            }
+
+        }
+    }];
+    
+}
+
+
+
+-(BOOL)checkForMatchingTile: (NSString *)newTile {
     
     for (int i = 0; i < self.visitedTilesColumnRow.count; i++) {
         
         if ([newTile isEqualToString:self.visitedTilesColumnRow[i]]) {
-            
-            self.matchingTileFound = YES;
             NSLog(@"Matching Tile Found");
-            
-            break;
+            return YES;
         }
         
     }
-
+    return NO;
 }
 
 -(void)createNewTile: (CLLocation *)newLocation{
     
     NSString *newTile = [self locationInGrid:newLocation];
     
-    [self checkForMatchingTile:newTile];
-    
-    if (self.matchingTileFound == NO) {
+    if ([self checkForMatchingTile:newTile] == NO) {
         
         NSLog(@"No matching tile found");
         
@@ -686,7 +734,7 @@ NSFetchedResultsControllerDelegate
 }
 
 
--(void)getZipCode: (CLLocation *)newLocation {
+-(void)getZipCode: (CLLocation *)newLocation completion:(void(^)(BOOL isNYC))completion {
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
@@ -694,13 +742,14 @@ NSFetchedResultsControllerDelegate
          if (!(error))
          {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-             NSLog(@"\nCurrent Location Detected\n");
-             NSLog(@"placemark %@",placemark);
+//             NSLog(@"\nCurrent Location Detected\n");
+//             NSLog(@"placemark %@",placemark);
              
              NSString *zipNumber = [[NSString alloc]initWithString:placemark.postalCode];
              self.userLocationZipCode = zipNumber;
              
-             [self verifyZipCode:zipNumber];
+             completion([self verifyZipCode:zipNumber]);
+             
          }
          else
          {
@@ -710,7 +759,7 @@ NSFetchedResultsControllerDelegate
     
 }
 
--(void)verifyZipCode: (NSString *)userLocationZipCode {
+-(BOOL)verifyZipCode: (NSString *)userLocationZipCode {
     
     
     for (ZipCode *zip in self.zipCodeData.allZipCodes){
@@ -718,16 +767,16 @@ NSFetchedResultsControllerDelegate
         if ([zip.number isEqualToString:userLocationZipCode]) {
             
             NSLog(@"User is in NYC, %@", zip.borough);
-            self.isNYC = YES;
-            
-            return;
+
+            return YES;
             
         }
         
     }
     
     NSLog(@"User is not in NYC");
-    self.isNYC = NO;
+//    self.isNYC = NO;
+    return NO;
     
 }
 
@@ -771,7 +820,7 @@ NSFetchedResultsControllerDelegate
 #pragma mark - RNFrostedSidebarDelegate
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
-    NSLog(@"Tapped item at index %ld",index);
+    NSLog(@"Tapped item at index %ld",(unsigned long)index);
     
     
     if (index == 0) {

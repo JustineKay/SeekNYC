@@ -52,6 +52,7 @@ NSFetchedResultsControllerDelegate
     
     [self setVisitedTiles];
     [self setUserProgress];
+    [self loadProgressView];
     
 }
 
@@ -64,22 +65,8 @@ NSFetchedResultsControllerDelegate
     
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
-    UserProfileView *view = (UserProfileView *)self.view;
-    [view.backButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    [((UserProfileView *)self.view).backButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
  
-    view.percentageNYC = self.progressNYC;
-    view.percentageBK = self.progressBK;
-    view.percentageMAN = self.progressMAN;
-    view.percentageQNS = self.progressQNS;
-    view.percentageBRX = self.progressBRX;
-    view.percentageSI = self.progressSI;
-    
-    [view.nycCircleProgressBar setProgress:view.percentageNYC animated:YES];
-    [view.BKCircleProgressBar setProgress:view.percentageBK animated:YES];
-    [view.MANCircleProgressBar setProgress:view.percentageMAN animated:YES];
-    [view.QNSCircleProgressBar setProgress:view.percentageQNS animated:YES];
-    [view.BRXCircleProgressBar setProgress:view.percentageBRX animated:YES];
-    [view.SICircleProgressBar setProgress:view.percentageSI animated:YES];
 }
 
 
@@ -110,6 +97,25 @@ NSFetchedResultsControllerDelegate
         self.fetchedTiles = self.fetchedResultsController.fetchedObjects;
         
     }
+    
+    
+}
+
+- (void)loadProgressView {
+    UserProfileView *view = (UserProfileView *)self.view;
+    view.percentageNYC = self.progressNYC;
+    view.percentageBK = self.progressBK;
+    view.percentageMAN = self.progressMAN;
+    view.percentageQNS = self.progressQNS;
+    view.percentageBRX = self.progressBRX;
+    view.percentageSI = self.progressSI;
+    
+    [view.nycCircleProgressBar setProgress:view.percentageNYC animated:YES];
+    [view.BKCircleProgressBar setProgress:view.percentageBK animated:YES];
+    [view.MANCircleProgressBar setProgress:view.percentageMAN animated:YES];
+    [view.QNSCircleProgressBar setProgress:view.percentageQNS animated:YES];
+    [view.BRXCircleProgressBar setProgress:view.percentageBRX animated:YES];
+    [view.SICircleProgressBar setProgress:view.percentageSI animated:YES];
 }
 
 -(void)setUserProgress {
