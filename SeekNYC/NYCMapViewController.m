@@ -95,6 +95,35 @@ NSFetchedResultsControllerDelegate
 }
 
 
+-(void)passURL: (NSURL *)url {
+    
+    [APIManager GETRequestWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        NSDictionary *res = json[@"response"];
+        NSArray *groups = res[@"groups"];
+        NSArray *items = groups[0][@"items"];
+        
+        
+        // reset my array
+        self.venueResults = [[NSMutableArray alloc] init];
+        
+        // loop through all json posts
+        for (NSDictionary *item in items) {
+            
+            // create new post from json
+            SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:item];
+            
+            [self.venueResults addObject:suggestedParkVenue];
+            
+            [self filterAPIResult:suggestedParkVenue];
+            
+        }
+        
+    }];
+    
+}
 
 
 
@@ -108,7 +137,7 @@ NSFetchedResultsControllerDelegate
 //    NSString *url = [NSString stringWithFormat: @"https://api.foursquare.com/v2/venues/explore?near=%@&query=%@&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV", nycBorough[randomBorough],nycQuery[randomQuery]];
    
     //Bronx Venues
-    NSString *urlBronxPark = @"https://api.foursquare.com/v2/venues/explore?near=bronx&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+    NSString *urlBronxPark = @"https://api.foursquare.com/v2/venues/explore?near=bronx&query=parks&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
     NSString *urlBronxLandmark = @"https://api.foursquare.com/v2/venues/explore?near=bronx&query=landmark&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
     
     //Manhattan Venues
@@ -144,57 +173,25 @@ NSFetchedResultsControllerDelegate
     NSURL *foursquaredURLStatenIPark = [NSURL URLWithString:urlStatenIPark];
     NSURL *foursquaredURLStatenILandmark = [NSURL URLWithString:urlStatenILandmark];
 //    
-//    [self passURL:foursquaredURLBxPark];
+    [self passURL:foursquaredURLBxPark];
     [self passURL:foursquaredURLBxLandmark];
 //
 //    [self passURL:foursquaredURLManhattanPark];
 //    [self passURL:foursquaredURLManhattanLandmark];
-//    
-    [self passURL:foursquaredURLBrooklynPark];  
-//    [self passURL:foursquaredURLBrooklynLandmark];
+//
+//    [self passURL:foursquaredURLBrooklynPark];  
+    [self passURL:foursquaredURLBrooklynLandmark];
 //
 ////    [self passURL:foursquaredURLQueensPark];
-//    [self passURL:foursquaredURLQueensLandmark];
+    [self passURL:foursquaredURLQueensLandmark];
 //
 //    [self passURL:foursquaredURLStatenIPark]; 
 //    [self passURL:foursquaredURLStatenILandmark];
-//    
-//    
+//
+//
     
     
 }
-
-
--(void)passURL: (NSURL *)url {
-    
-    [APIManager GETRequestWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        NSDictionary *res = json[@"response"];
-        NSArray *groups = res[@"groups"];
-        NSArray *items = groups[0][@"items"];
-        
-        
-        // reset my array
-        self.venueResults = [[NSMutableArray alloc] init];
-        
-        // loop through all json posts
-        for (NSDictionary *item in items) {
-            
-            // create new post from json
-            SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:item];
-            
-            [self filterAPIResult:suggestedParkVenue];
-            
-        }
-        
-    }];
-    
-}
-
-
-
 
 -(void)filterAPIResult: (SeekNYCParks *)result {
     
@@ -272,14 +269,14 @@ NSFetchedResultsControllerDelegate
     //add to venueReults
     
     NSMutableArray *VIPRecommendations = [NYHiddenLocations hiddenLocations];
-    
+//
     for (SeekNYCParks *vipRec in VIPRecommendations) {
-        
+
         [self filterAPIResult:vipRec];
-        
+    
     }
 
-    
+//
     //TESTING with BOOTSTRAP DATA*******************
 //    if (!self.hasBootstrappedData) {
 //        [self loadBootstrapData];
@@ -1266,9 +1263,6 @@ NSFetchedResultsControllerDelegate
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    //[self performSegueWithIdentifier:@"Details" sender:view];
-    
-//    SeekNYCParks *suggestedVenue = self.venueResults[6];
     
     NSString *addressString = [NSString stringWithFormat:@"https://maps.google.com/?daddr=%@,%@",self.venueResultLat, self.venueResultLng];
     NSLog(@"%@", addressString);
