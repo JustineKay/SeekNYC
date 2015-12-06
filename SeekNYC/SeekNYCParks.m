@@ -55,15 +55,7 @@
         NSString *suffix = user[@"suffix"];
         
         NSLog(@"%@ %@",prefix,suffix);
-        
-        
-        
-        
-        
-        
-
-        
-        
+                
         return self;
     }
     return nil;
