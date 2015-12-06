@@ -131,15 +131,10 @@ NSFetchedResultsControllerDelegate
             // create new post from json
             SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:item];
             
-            // add post to array
-            [self.venueResults addObject:suggestedParkVenue];
-            //  NSLog(@"%@", self.venueResults);
+            [self filterAPIResult:suggestedParkVenue];
             
         }
         
-        // add hidden locations
-        
-        self.venueResults = [self.venueResults arrayByAddingObjectsFromArray:[NYHiddenLocations hiddenLocations]];
     }];
     
 }
@@ -185,9 +180,7 @@ NSFetchedResultsControllerDelegate
         
         NSString *resultColumnRow = [self locationInGrid:resultLocation];
         
-        [self checkForMatchingTile:resultColumnRow];
-        
-        if (isNYC && self.matchingTileFound == NO) {
+        if (isNYC && [self checkForMatchingTile:resultColumnRow] == NO) {
             
             [self.venueResults addObject: result];
             
@@ -272,6 +265,18 @@ NSFetchedResultsControllerDelegate
     
     // Present the alert view controller
     [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+    
+    // Filter hidden locations & VIPRecommendations by user's uncovered area
+    //add to venueReults
+    
+    NSMutableArray *VIPRecommendations = [NYHiddenLocations hiddenLocations];
+    
+    for (SeekNYCParks *vipRec in VIPRecommendations) {
+        
+        [self filterAPIResult:vipRec];
+        
+    }
+
     
     //TESTING with BOOTSTRAP DATA*******************
 //    if (!self.hasBootstrappedData) {

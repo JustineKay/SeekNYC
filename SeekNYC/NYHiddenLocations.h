@@ -10,6 +10,6 @@
 
 @interface NYHiddenLocations : NSObject
 
-+ (NSArray*)hiddenLocations;
++ (NSMutableArray *)hiddenLocations;
 
 @end

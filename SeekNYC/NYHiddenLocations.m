@@ -11,7 +11,7 @@
 
 @implementation NYHiddenLocations
 
-+ (NSArray *)hiddenLocations {
++ (NSMutableArray *)hiddenLocations {
     NSDictionary *atlasObs1 = @{
                                 @"name" : @"Bristol Basin",
                                 @"url" : @"http://www.atlasobscura.com/places/bristol-basin",
