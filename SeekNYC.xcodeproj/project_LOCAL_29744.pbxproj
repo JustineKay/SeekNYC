@@ -10,7 +10,7 @@
 		001961C51BF7A33C00E08B91 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001961C41BF7A33C00E08B91 /* UserProfileView.xib */; };
 		003EA1871C021BA200090E13 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003EA1861C021BA200090E13 /* QuartzCore.framework */; };
 		003EA1891C021BB200090E13 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003EA1881C021BB200090E13 /* Accelerate.framework */; };
-		008421B01C13574300E7D346 /* NYHiddenLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 008421AF1C13574300E7D346 /* NYHiddenLocations.m */; };
+		008421AD1C134B2F00E7D346 /* NYHiddenLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008421AC1C134B2F00E7D346 /* NYHiddenLocationsViewController.m */; };
 		6B28AA2D1C01310C001CFF08 /* Viafont.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B28AA2C1C01310C001CFF08 /* Viafont.otf */; };
 		6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA2F1C0220C1001CFF08 /* NYAlertView.m */; };
 		6B28AA331C0220C1001CFF08 /* NYAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA311C0220C1001CFF08 /* NYAlertViewController.m */; };
@@ -21,7 +21,6 @@
 		6B28AA431C02C2E3001CFF08 /* UberBlackAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */; };
 		6B3BF7F21C03DA4B00F72765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */; };
 		6B4CA97E1C0F8BFE00192FE1 /* SunglassesAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */; };
-		6B52056B1C13870000809D1B /* BootstrapData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B52056A1C13870000809D1B /* BootstrapData.m */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -53,8 +52,8 @@
 		001961C41BF7A33C00E08B91 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
 		003EA1861C021BA200090E13 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		003EA1881C021BB200090E13 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		008421AE1C13574300E7D346 /* NYHiddenLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYHiddenLocations.h; sourceTree = "<group>"; };
-		008421AF1C13574300E7D346 /* NYHiddenLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYHiddenLocations.m; sourceTree = "<group>"; };
+		008421AB1C134B2F00E7D346 /* NYHiddenLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYHiddenLocationsViewController.h; sourceTree = "<group>"; };
+		008421AC1C134B2F00E7D346 /* NYHiddenLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYHiddenLocationsViewController.m; sourceTree = "<group>"; };
 		244FD1D516831678CBE69EC9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6B28AA2C1C01310C001CFF08 /* Viafont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Viafont.otf; sourceTree = "<group>"; };
 		6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYAlertView.h; sourceTree = "<group>"; };
@@ -75,8 +74,6 @@
 		6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B4CA97C1C0F8BFE00192FE1 /* SunglassesAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunglassesAnnotationView.h; sourceTree = "<group>"; };
 		6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunglassesAnnotationView.m; sourceTree = "<group>"; };
-		6B5205691C13870000809D1B /* BootstrapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootstrapData.h; sourceTree = "<group>"; };
-		6B52056A1C13870000809D1B /* BootstrapData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootstrapData.m; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -200,8 +197,6 @@
 				6B28AA391C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m */,
 				6B28AA3A1C0271C5001CFF08 /* VisitedTile.h */,
 				6B28AA3B1C0271C5001CFF08 /* VisitedTile.m */,
-				6B5205691C13870000809D1B /* BootstrapData.h */,
-				6B52056A1C13870000809D1B /* BootstrapData.m */,
 				6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */,
 				6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */,
 				6BF12A7C1C0BEEDA00A21CF8 /* ZipCodeData.h */,
@@ -228,8 +223,8 @@
 				6BB08B951C0111C20098C805 /* UserProfileView.m */,
 				F7E470751C13366400A35637 /* VenueDetailViewController.h */,
 				F7E470761C13366400A35637 /* VenueDetailViewController.m */,
-				008421AE1C13574300E7D346 /* NYHiddenLocations.h */,
-				008421AF1C13574300E7D346 /* NYHiddenLocations.m */,
+				008421AB1C134B2F00E7D346 /* NYHiddenLocationsViewController.h */,
+				008421AC1C134B2F00E7D346 /* NYHiddenLocationsViewController.m */,
 				001961C41BF7A33C00E08B91 /* UserProfileView.xib */,
 				6B9B79651BF68D05004A7756 /* Main.storyboard */,
 				6B9B796D1BF68D05004A7756 /* LaunchScreen.storyboard */,
@@ -303,7 +298,7 @@
 				TargetAttributes = {
 					6B9B79581BF68D05004A7756 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 26RHXP32FH;
+						DevelopmentTeam = 9WQ49EN2U5;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -401,6 +396,7 @@
 			files = (
 				F7E470771C13366400A35637 /* VenueDetailViewController.m in Sources */,
 				6B28AA3C1C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m in Sources */,
+				008421AD1C134B2F00E7D346 /* NYHiddenLocationsViewController.m in Sources */,
 				F79D2E0A1C021FAD00A5F7CA /* SuggestedVenuesTableViewCell.m in Sources */,
 				F79D2E101C02204300A5F7CA /* SeekNYCParks.m in Sources */,
 				6B9B798A1BF68D6B004A7756 /* NYCMapViewController.m in Sources */,
@@ -409,7 +405,6 @@
 				F79D2E0D1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m in Sources */,
 				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
 				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
-				008421B01C13574300E7D346 /* NYHiddenLocations.m in Sources */,
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
 				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
 				6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */,
@@ -422,7 +417,6 @@
 				6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */,
-				6B52056B1C13870000809D1B /* BootstrapData.m in Sources */,
 				6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */,
 				F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */,
 				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,

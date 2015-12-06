@@ -21,7 +21,6 @@
 		6B28AA431C02C2E3001CFF08 /* UberBlackAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B28AA421C02C2E3001CFF08 /* UberBlackAnnotationView.m */; };
 		6B3BF7F21C03DA4B00F72765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */; };
 		6B4CA97E1C0F8BFE00192FE1 /* SunglassesAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */; };
-		6B52056B1C13870000809D1B /* BootstrapData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B52056A1C13870000809D1B /* BootstrapData.m */; };
 		6B9B795E1BF68D05004A7756 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B795D1BF68D05004A7756 /* main.m */; };
 		6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B79601BF68D05004A7756 /* AppDelegate.m */; };
 		6B9B79671BF68D05004A7756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B79651BF68D05004A7756 /* Main.storyboard */; };
@@ -75,8 +74,6 @@
 		6B3BF7F11C03DA4B00F72765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B4CA97C1C0F8BFE00192FE1 /* SunglassesAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunglassesAnnotationView.h; sourceTree = "<group>"; };
 		6B4CA97D1C0F8BFE00192FE1 /* SunglassesAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunglassesAnnotationView.m; sourceTree = "<group>"; };
-		6B5205691C13870000809D1B /* BootstrapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootstrapData.h; sourceTree = "<group>"; };
-		6B52056A1C13870000809D1B /* BootstrapData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootstrapData.m; sourceTree = "<group>"; };
 		6B9B79591BF68D05004A7756 /* SeekNYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeekNYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B795D1BF68D05004A7756 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B9B795F1BF68D05004A7756 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -200,8 +197,6 @@
 				6B28AA391C0271C5001CFF08 /* VisitedTile+CoreDataProperties.m */,
 				6B28AA3A1C0271C5001CFF08 /* VisitedTile.h */,
 				6B28AA3B1C0271C5001CFF08 /* VisitedTile.m */,
-				6B5205691C13870000809D1B /* BootstrapData.h */,
-				6B52056A1C13870000809D1B /* BootstrapData.m */,
 				6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */,
 				6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */,
 				6BF12A7C1C0BEEDA00A21CF8 /* ZipCodeData.h */,
@@ -303,7 +298,11 @@
 				TargetAttributes = {
 					6B9B79581BF68D05004A7756 = {
 						CreatedOnToolsVersion = 7.1;
+<<<<<<< HEAD
+						DevelopmentTeam = 9WQ49EN2U5;
+=======
 						DevelopmentTeam = 26RHXP32FH;
+>>>>>>> 4c9afd32313d7729e2cc6b031bf595fb7192db99
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -422,7 +421,6 @@
 				6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */,
-				6B52056B1C13870000809D1B /* BootstrapData.m in Sources */,
 				6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */,
 				F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */,
 				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,

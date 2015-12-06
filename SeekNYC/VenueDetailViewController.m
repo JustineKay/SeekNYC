@@ -21,7 +21,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSURL *url = [NSURL URLWithString:@"https://en.wikipedia.org/wiki/New_York_City"];
+    
+    NSLog(@"It passes: %@", self.placeName);
+    
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.nycgovparks.org/parks/greeley-square-park"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webview loadRequest:request];
     
