@@ -533,9 +533,10 @@ NSFetchedResultsControllerDelegate
         view.bounds = CGRectMake(0, 0, 30, 30);
         
         UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [infoButton setImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
         view.rightCalloutAccessoryView = infoButton;
-        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
-        view.leftCalloutAccessoryView = iconView;
+//        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
+//        view.leftCalloutAccessoryView = iconView;
        
         CABasicAnimation *theAnimation = [self animation];
         
@@ -544,6 +545,9 @@ NSFetchedResultsControllerDelegate
         view.canShowCallout = YES;
       
         return view;
+        
+        
+       
        
     }
     
