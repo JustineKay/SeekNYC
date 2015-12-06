@@ -110,6 +110,23 @@ NSFetchedResultsControllerDelegate
     view.percentageBRX = self.progressBRX;
     view.percentageSI = self.progressSI;
     
+    UIFont *boroughFont = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:18.0];
+    UIFont *nycFont = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:25.0];
+    
+    [view.nycCircleProgressBar setHintTextFont:nycFont];
+    [view.nycCircleProgressBar setProgressBarWidth:20];
+    
+    [view.BKCircleProgressBar setHintTextFont:boroughFont];
+    [view.BKCircleProgressBar setProgressBarWidth:12.0];
+    [view.MANCircleProgressBar setHintTextFont:boroughFont];
+    [view.MANCircleProgressBar setProgressBarWidth:12.0];
+    [view.QNSCircleProgressBar setHintTextFont:boroughFont];
+    [view.QNSCircleProgressBar setProgressBarWidth:12.0];
+    [view.BRXCircleProgressBar setHintTextFont:boroughFont];
+    [view.BRXCircleProgressBar setProgressBarWidth:12.0];
+    [view.SICircleProgressBar setHintTextFont:boroughFont];
+    [view.SICircleProgressBar setProgressBarWidth:12.0];
+    
     [view.nycCircleProgressBar setProgress:view.percentageNYC animated:YES];
     [view.BKCircleProgressBar setProgress:view.percentageBK animated:YES];
     [view.MANCircleProgressBar setProgress:view.percentageMAN animated:YES];
@@ -117,6 +134,7 @@ NSFetchedResultsControllerDelegate
     [view.BRXCircleProgressBar setProgress:view.percentageBRX animated:YES];
     [view.SICircleProgressBar setProgress:view.percentageSI animated:YES];
 }
+
 
 -(void)setUserProgress {
     
