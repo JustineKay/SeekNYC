@@ -33,7 +33,6 @@
 #import "ZipCode.h"
 #import "APIManager.h"
 #import "SeekNYCParks.h"
-#import "VenueDetailViewController.h"
 #import "NYHiddenLocations.h"
 #import "BootstrapData.h"
 

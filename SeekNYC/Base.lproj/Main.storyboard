@@ -119,7 +119,6 @@
                         <outlet property="mapView" destination="qkw-2I-T35" id="JQy-z2-v4H"/>
                         <outlet property="profileSettingsButton" destination="dPc-fc-Lr4" id="02n-GE-ZnH"/>
                         <outlet property="zoomToLocationButton" destination="fPC-3G-srQ" id="IiL-In-4Mg"/>
-                        <segue destination="v90-FV-xMG" kind="show" identifier="Details" id="JWJ-2c-l53"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bp0-l4-2wZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -146,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szX-9F-e2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2102" y="508"/>
+            <point key="canvasLocation" x="1426" y="508"/>
         </scene>
         <!--Suggested Venues Table View Controller-->
         <scene sceneID="Ptx-c5-dwS">
@@ -221,49 +220,6 @@
             </objects>
             <point key="canvasLocation" x="1496" y="1269"/>
         </scene>
-        <!--Venue Detail View Controller-->
-        <scene sceneID="zY1-71-zKI">
-            <objects>
-                <viewController id="v90-FV-xMG" customClass="VenueDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pjO-BD-AFD"/>
-                        <viewControllerLayoutGuide type="bottom" id="rsh-SZ-Hfr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ePj-pS-rzW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUi-Gx-P5c">
-                                <rect key="frame" x="0.0" y="69" width="600" height="531"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9U-SR-NEg">
-                                <rect key="frame" x="27" y="31" width="30" height="30"/>
-                                <animations/>
-                                <state key="normal" image="newBackButton"/>
-                            </button>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="rsh-SZ-Hfr" firstAttribute="top" secondItem="qUi-Gx-P5c" secondAttribute="bottom" id="5Nt-ty-LTW"/>
-                            <constraint firstItem="qUi-Gx-P5c" firstAttribute="leading" secondItem="ePj-pS-rzW" secondAttribute="leading" id="HpE-6H-8do"/>
-                            <constraint firstItem="qUi-Gx-P5c" firstAttribute="top" secondItem="pjO-BD-AFD" secondAttribute="bottom" constant="49" id="b9f-Ky-PSj"/>
-                            <constraint firstItem="qUi-Gx-P5c" firstAttribute="centerX" secondItem="ePj-pS-rzW" secondAttribute="centerX" id="o3S-Ua-Xw6"/>
-                            <constraint firstAttribute="trailing" secondItem="qUi-Gx-P5c" secondAttribute="trailing" id="opH-ds-pvW"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="CP8-8y-RVf"/>
-                    <connections>
-                        <outlet property="backButton" destination="d9U-SR-NEg" id="3zO-NF-L8c"/>
-                        <outlet property="webview" destination="qUi-Gx-P5c" id="az2-Ey-F6E"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fzn-M5-n3r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1449" y="508"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="IAL-Fm-YkR">
             <objects>
@@ -281,13 +237,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8PL-4B-pNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730" y="508"/>
+            <point key="canvasLocation" x="2102" y="508"/>
         </scene>
     </scenes>
     <resources>
         <image name="location" width="62" height="60"/>
         <image name="menuIconWhite" width="354" height="250"/>
-        <image name="newBackButton" width="584" height="570"/>
         <image name="share" width="48" height="66"/>
     </resources>
 </document>
