@@ -211,7 +211,6 @@ NSFetchedResultsControllerDelegate
     
     if (self.locationManager == nil) {
         self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.distanceFilter = 5.0;
     }
     
     [self.locationManager requestAlwaysAuthorization];
@@ -264,10 +263,12 @@ NSFetchedResultsControllerDelegate
     // Present the alert view controller
     [self presentViewController:gestureAlertInfo animated:YES completion:nil];
     
-    if (!self.hasBootstrappedData) {
-        [self loadBootstrapData];
-        self.hasBootstrappedData = YES;
-    }
+    //TESTING with BOOTSTRAP DATA*******************
+//    if (!self.hasBootstrappedData) {
+//        [self loadBootstrapData];
+//        self.hasBootstrappedData = YES;
+//    }
+//    //***********************************************
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -813,7 +814,7 @@ NSFetchedResultsControllerDelegate
 #pragma mark - RNFrostedSidebarDelegate
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
-    NSLog(@"Tapped item at index %ld",index);
+    NSLog(@"Tapped item at index %ld",(unsigned long)index);
     
     
     if (index == 0) {
