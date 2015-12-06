@@ -1185,7 +1185,7 @@ NSFetchedResultsControllerDelegate
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
                                                             
-                                                            [self fetchFourSquareData];
+//                                                            [self fetchFourSquareData];
                                                             
                                                 
                                                             
