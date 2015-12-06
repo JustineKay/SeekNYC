@@ -97,23 +97,79 @@ NSFetchedResultsControllerDelegate
 }
 
 
+
+
+
+
 - (void)fetchFourSquareData {
     
-    //     create an url
-    //    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
+//    NSArray *nycBorough = @[@"nyc", @"brooklyn", @"queens", @"bronx", @"staten_island"];
+//    int randomBorough = arc4random_uniform((int)nycBorough.count);
+//    NSArray *nycQuery = @[@"landmark",@"park"];
+//    int randomQuery = arc4random_uniform((int)nycQuery.count);
+//    NSString *url = [NSString stringWithFormat: @"https://api.foursquare.com/v2/venues/explore?near=%@&query=%@&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV", nycBorough[randomBorough],nycQuery[randomQuery]];
+   
+    //Bronx Venues
+    NSString *urlBronxPark = @"https://api.foursquare.com/v2/venues/explore?near=bronx&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+    NSString *urlBronxLandmark = @"https://api.foursquare.com/v2/venues/explore?near=bronx&query=landmark&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
     
-    NSArray *nycBorough = @[@"nyc", @"brooklyn", @"queens", @"bronx", @"staten_island"];
-    int random = arc4random_uniform((int)nycBorough.count);
+    //Manhattan Venues
+    NSString *urlManhattanPark = @"https://api.foursquare.com/v2/venues/explore?near=nyc&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+    NSString *urlManhattanLandmark = @"https://api.foursquare.com/v2/venues/explore?near=nyc&query=landmark&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
     
-    NSString *url = [NSString stringWithFormat: @"https://api.foursquare.com/v2/venues/explore?near=%@&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV", nycBorough[random]];
+    //Brooklyn Venues
+    NSString *urlBrooklynPark = @"https://api.foursquare.com/v2/venues/explore?near=brooklyn&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+    NSString *urlBrooklynLandmark = @"https://api.foursquare.com/v2/venues/explore?near=brooklyn&query=landmark&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
     
-    NSLog(@"%@",url);
+    //Queens Venues
+    NSString *urlQueensPark = @"https://api.foursquare.com/v2/venues/explore?near=queens&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+    NSString *urlQueensLandmark = @"https://api.foursquare.com/v2/venues/explore?near=queens&query=landmark&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
     
-    NSURL *foursquaredURL = [NSURL URLWithString:url];
+    //Queens Venues
+    NSString *urlStatenIPark = @"https://api.foursquare.com/v2/venues/explore?near=staten_island&query=park&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+    NSString *urlStatenILandmark = @"https://api.foursquare.com/v2/venues/explore?near=staten_island&query=landmark&venuePhotos=1&sortByDistance=1&v=20151121&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV";
+
+    
+//    NSURL *foursquaredURL = [NSURL URLWithString:url];
+    NSURL *foursquaredURLBxPark = [NSURL URLWithString:urlBronxPark];
+    NSURL *foursquaredURLBxLandmark = [NSURL URLWithString:urlBronxLandmark];
+    
+    NSURL *foursquaredURLManhattanPark = [NSURL URLWithString:urlManhattanPark];
+    NSURL *foursquaredURLManhattanLandmark = [NSURL URLWithString:urlManhattanLandmark];
+    
+    NSURL *foursquaredURLBrooklynPark = [NSURL URLWithString:urlBrooklynPark];
+    NSURL *foursquaredURLBrooklynLandmark = [NSURL URLWithString:urlBrooklynLandmark];
+    
+    NSURL *foursquaredURLQueensPark = [NSURL URLWithString:urlQueensPark];
+    NSURL *foursquaredURLQueensLandmark = [NSURL URLWithString:urlQueensLandmark];
+    
+    NSURL *foursquaredURLStatenIPark = [NSURL URLWithString:urlStatenIPark];
+    NSURL *foursquaredURLStatenILandmark = [NSURL URLWithString:urlStatenILandmark];
+//    
+//    [self passURL:foursquaredURLBxPark];
+    [self passURL:foursquaredURLBxLandmark];
+//
+//    [self passURL:foursquaredURLManhattanPark];
+//    [self passURL:foursquaredURLManhattanLandmark];
+//    
+    [self passURL:foursquaredURLBrooklynPark];  
+//    [self passURL:foursquaredURLBrooklynLandmark];
+//
+////    [self passURL:foursquaredURLQueensPark];
+//    [self passURL:foursquaredURLQueensLandmark];
+//
+//    [self passURL:foursquaredURLStatenIPark]; 
+//    [self passURL:foursquaredURLStatenILandmark];
+//    
+//    
     
     
-    // fetch data from the endpoint and print json response
-    [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+}
+
+
+-(void)passURL: (NSURL *)url {
+    
+    [APIManager GETRequestWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
@@ -139,37 +195,7 @@ NSFetchedResultsControllerDelegate
     
 }
 
-- (void)fetchLandmarkFourSquareData {
-    
-    //     create an url
-    NSURL *foursquaredURL = [NSURL URLWithString:@"https://api.foursquare.com/v2/venues/search?near=ny&categoryId=4bf58dd8d48988d12d941735&v=20150214&m=foursquare&client_secret=OHH5FNLYPFF4CIQ4FI1HVJJT4ERPW1MTVG5ZMU4CBNO0RPRV&client_id=E1D5IIQOKCJTC5RF5FTYJ3PTVLAWDZSXGOIINT3AWP3KNEVV"];
-    
-    // fetch data from the endpoint and print json response
-    [APIManager GETRequestWithURL:foursquaredURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        NSArray *venues = json[@"response"][@"venues"];
-        //NSLog(@"venues: %@", venues);
-        
-        //        // reset my array
-        //        self.venueResults = [[NSMutableArray alloc] init];
-        
-        // loop through all json posts
-        for (NSDictionary *venue in venues) {
-            
-            // create new post from json
-            SeekNYCParks *suggestedLandmarkVenue = [[SeekNYCParks alloc] initWithJSON:venue];
-            
-            // filter results by zipcode and user's uncovered area
-            //add post to array
-            
-            [self filterAPIResult:suggestedLandmarkVenue];
-            
-        }
-    }];
-    
-}
+
 
 
 -(void)filterAPIResult: (SeekNYCParks *)result {
@@ -235,6 +261,8 @@ NSFetchedResultsControllerDelegate
     self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
     self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
     self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
+    
+    
     
 }
 
@@ -1178,9 +1206,7 @@ NSFetchedResultsControllerDelegate
     [alertShakeGesture addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Go", nil)
                                                           style:UIAlertActionStyleCancel
                                                         handler:^(NYAlertAction *action) {
-                                                            
-//                                                            [self fetchFourSquareData];
-                                                            
+                                                                                                                        
                                                 
                                                             
                                                             //Remove any previous annotations

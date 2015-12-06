@@ -46,7 +46,7 @@
             self.detail = @"No tip available";
         }
         
-        NSLog(@"%@", self.detail);
+//        NSLog(@"%@", self.detail);
         
         //the venue photo
         NSDictionary *getPhoto = [tips objectAtIndex:0];
@@ -54,8 +54,8 @@
         NSString *prefix = user[@"prefix"];
         NSString *suffix = user[@"suffix"];
         
-        NSLog(@"%@ %@",prefix,suffix);
-                
+//        NSLog(@"%@ %@",prefix,suffix);
+        
         return self;
     }
     return nil;

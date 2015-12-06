@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+-(void)passURL: (NSURL *)url;
+
 @end
