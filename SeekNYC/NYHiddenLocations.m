@@ -16,7 +16,7 @@
                                 @"name" : @"Bristol Basin",
                                 @"url" : @"http://www.atlasobscura.com/places/bristol-basin",
                                 @"lat" : @40.667253,
-                                @"lng" : @73.911550,
+                                @"lng" : @-73.911550,
                                 @"address" : @"Bristol Basin, New York, New York, 10010, United States",
                                 @"description" : @"A small part of lower Manhattan is actually made from a bit of England"
                                 };
@@ -87,22 +87,11 @@
     NSDictionary *atlasObs9 = @{
                                 @"name" : @"City Hall Library",
                                 @"url" : @"http://www.atlasobscura.com/places/chinatown-s-bloody-angle",
-                                @"lat" : @40.714353,
-                                @"lng" : @-73.997976,
-                                @"address" : @"Doyers Street, New York, New York, 10013, United States",
+                                @"lat" : @40.713612,
+                                @"lng" : @-74.004459,
+                                @"address" : @"31 Chambers Street, Room 112, New York, New York, 10007, United States",
                                 @"description" : @"An accidentally hidden library containing the ephemeral history of New York"
                                 };
-    
-    /*
-     NSDictionary *atlasObs10 = @{
-     @"name" : @"City Hall Library",
-     @"url" : @"http://www.a/places/city-hall-librarytlasobscura.com",
-     @"lat" : @40.714353,
-     @"lng" : @-73.997976,
-     @"address" : @"31 Chambers Street, Room 112, New York,
-     New York, 10007, United States",
-     };
-     */
     
     NSDictionary *atlasObs11 = @{
                                  @"name" : @"The Mulberry Blend",
@@ -136,7 +125,7 @@
                                  @"name" : @"Chinatown Icecream Factory",
                                  @"url" : @"http://www.atlasobscura.com/places/chinatown-ice-cream-factory",
                                  @"lat" : @40.715324,
-                                 @"lng": @ -73.998174,
+                                 @"lng" : @-73.998174,
                                  @"address" : @"65 Bayard Street , B, New York, New York, 10013, United States",
                                  @"description" : @"China invented ice cream hundreds of years ago in the Tang Dynasty"
                                  };
@@ -172,7 +161,7 @@
                                  @"name" : @"Tunnel Number 3",
                                  @"url" : @"http://www.atlasobscura.com/places/tunnel-number-3",
                                  @"lat" : @40.713649,
-                                 @"lng" : @40.713649,
+                                 @"lng" : @-74.008713,
                                  @"address" : @"New York, New York, 10007, United States",
                                  @"description" : @"Deep under Manhattan is the largest construction project in city history"
                                  };
@@ -289,7 +278,7 @@
                                  @"name" : @"Delmonico's Pompeii Columns",
                                  @"url" : @"http://www.atlasobscura.com/places/delmonico-s-pompeii-columns",
                                  @"lat" : @40.705027,
-                                 @"lng": @-74.010358,
+                                 @"lng" : @-74.010358,
                                  @"address" : @"56 Beaver Street, New York, New York, 10004, United States",
                                  @"description" : @"The entrance is made of two marble columns taken from Pompeii"
                                  };
@@ -297,7 +286,7 @@
     NSDictionary *atlasObs32 = @{
                                  @"name" : @"Dream House",
                                  @"url" : @"http://www.atlasobscura.com/places/dream-house",
-                                 @"lat": @40.718477,
+                                 @"lat" : @40.718477,
                                  @"lng" : @-74.004802,
                                  @"address" : @"275 Church St, New York, New York, 10013, United States",
                                  @"description" : @"Lamonte Young and Mariane Zazeela's \"Dream House\" will immerse you in an ever changing world of sound and light"
@@ -442,7 +431,7 @@
                                  @"name" : @"The Uncommons",
                                  @"url" : @"https://www.uncommonsnyc.com/",
                                  @"lat" : @40.729286,
-                                 @"lng" : @73.998625,
+                                 @"lng" : @-73.998625,
                                  @"address" : @"230 Thompson Street NY, NY 10012",
                                  @"description" : @"Manhattan's only board game cafe.  For $5 ($10 on weekends) browse and play any game in their library"
                                  };
@@ -468,9 +457,9 @@
     NSDictionary *vipRecsOrta = @{
                                   @"name" : @"The Artsy Happy Hour",
                                   @"url" : @"http://parrishart.org/PCCArtsyTour",
-                                  @"lat" : @40.902339,
-                                  @"lng" : @-72.366183,
-                                  @"address" : @"279 Montauk Highway Water Mill, NY 11976",
+                                  @"lat" : @40.718961,
+                                  @"lng" : @-74.002794,
+                                  @"address" : @"401 Broadway, New York, NY 10013 (25th floor)",
                                   @"description" : @"Orta’s favourite Arts + Science drinking session, every friday  on the 25th floor"
                                   };
    

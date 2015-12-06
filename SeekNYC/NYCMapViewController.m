@@ -69,8 +69,6 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSString *userLocationZipCode;
 
-@property (nonatomic) BOOL matchingTileFound;
-
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @property (nonatomic) NSMutableArray *allSuggestions;
@@ -268,31 +266,7 @@ NSFetchedResultsControllerDelegate
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *infoAlert = @"infoAlert";
-    if ([prefs boolForKey:infoAlert])
-        return;
-    [prefs setBool:YES forKey:infoAlert];
-    
-    NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
-    
-    // Set a title and message
-    gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
-    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to\n generate places to visit", nil);
-    
-    // Customize appearance as desired
-    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
-    [self alertViewControllerUI:gestureAlertInfo];
-    
-    //add action
-    [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
-                                                         style:UIAlertActionStyleCancel
-                                                       handler:^(NYAlertAction *action) {
-                                                           [self dismissViewControllerAnimated:YES completion:nil];
-                                                       }]];
-    
-    // Present the alert view controller
-    [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+    [self presentGestureAlertVC];
     
     // Filter hidden locations & VIPRecommendations by user's uncovered area
     //add to venueReults
@@ -313,6 +287,8 @@ NSFetchedResultsControllerDelegate
 //    }
 //    //***********************************************
 }
+
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
@@ -567,8 +543,6 @@ NSFetchedResultsControllerDelegate
        
         CABasicAnimation *theAnimation = [self animation];
         
-        //Assign the animation to your UIImage layer and the
-        //animation will start immediately
         [view.layer addAnimation:theAnimation forKey:@"animateOpacity"];
         
         view.canShowCallout = YES;
@@ -587,7 +561,7 @@ NSFetchedResultsControllerDelegate
     
     CABasicAnimation *theAnimation;
     
-    //within the animation we will adjust the "opacity"
+    
     //value of the layer
     theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
     //animation lasts 1 second
@@ -774,6 +748,9 @@ NSFetchedResultsControllerDelegate
      {
          if (!(error))
          {
+             //Testing Location********************
+             CLLocation *testLocation = newLocation;
+             
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
 //             NSLog(@"\nCurrent Location Detected\n");
 //             NSLog(@"placemark %@",placemark);
@@ -786,7 +763,7 @@ NSFetchedResultsControllerDelegate
          }
          else
          {
-             NSLog(@"Geocode failed with error %@", error); // Error handling must required
+             NSLog(@"Geocode failed with error %@", error); // Error handling required
          }
      }];
     
@@ -1047,6 +1024,35 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - AlertViewController
 
+-(void)presentGestureAlertVC {
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *infoAlert = @"infoAlert";
+    if ([prefs boolForKey:infoAlert])
+        return;
+    [prefs setBool:YES forKey:infoAlert];
+    
+    NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    gestureAlertInfo.title = NSLocalizedString(@"Heads Up", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Shake your phone to\n generate places to visit", nil);
+    
+    // Customize appearance as desired
+    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
+    [self alertViewControllerUI:gestureAlertInfo];
+    
+    //add action
+    [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(NYAlertAction *action) {
+                                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                                       }]];
+    
+    // Present the alert view controller
+    [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+}
+
 -(void)alertViewControllerUI: (NYAlertViewController *)alertViewController {
     
     alertViewController.buttonCornerRadius = 20.0f;
@@ -1271,9 +1277,6 @@ NSFetchedResultsControllerDelegate
     
     
   }
-
-
-
 
 
 #pragma  mark - Testing Grid
