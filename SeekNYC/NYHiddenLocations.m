@@ -462,24 +462,296 @@
                                   @"address" : @"401 Broadway, New York, NY 10013 (25th floor)",
                                   @"description" : @"Orta’s favourite Arts + Science drinking session, every friday  on the 25th floor"
                                   };
-   
+    
     NSDictionary *vipRecsMatan = @{
-                                  @"name" : @"The Met",
-                                  @"url" : @"http://www.metmuseum.org/",
-                                  @"lat" : @40.779165,
-                                  @"lng" : @-73.962928,
-                                  @"address" : @"279 Montauk Highway Water Mill, NY 11976",
-                                  @"description" : @"Always something new to see.  Pick a different wing, browse a different floor. It’s suggested donation so you don’t have to break the bank every time you go."
-                                  };
+                                   @"name" : @"The Met",
+                                   @"url" : @"http://www.metmuseum.org/",
+                                   @"lat" : @40.779165,
+                                   @"lng" : @-73.962928,
+                                   @"address" : @"279 Montauk Highway Water Mill, NY 11976",
+                                   @"description" : @"Always something new to see.  Pick a different wing, browse a different floor. It’s suggested donation so you don’t have to break the bank every time you go."
+                                   };
     
     NSDictionary *vipRecsRachel = @{
-                                   @"name" : @"Snug Harbor Cultural Center and Botanic Gardens",
-                                   @"url" : @"http://snug-harbor.org",
-                                   @"lat" : @40.642631,
-                                   @"lng" : @-74.101917,
-                                   @"address" : @"1000 Richmond Terrace, Staten Island, NY 10301",
-                                   @"description" : @"Formly a retirement community for Naval officers, Snug Harbor's beautiful grounds, community classes and Chinese Scholar's Garden are certainly worth a visit!"
-                                   };
+                                    @"name" : @"Snug Harbor Cultural Center and Botanic Gardens",
+                                    @"url" : @"http://snug-harbor.org",
+                                    @"lat" : @40.642631,
+                                    @"lng" : @-74.101917,
+                                    @"address" : @"1000 Richmond Terrace, Staten Island, NY 10301",
+                                    @"description" : @"Formly a retirement community for Naval officers, Snug Harbor's beautiful grounds, community classes and Chinese Scholar's Garden are certainly worth a visit!"
+                                    };
+    
+    NSDictionary *vipRecsCameron = @{
+                                     @"name" : @"Governor's Island",
+                                     @"url" : @"https://govisland.com/",
+                                     @"lat" : @40.689450,
+                                     @"lng" : @-74.016792,
+                                     @"address" : @"10 South Street, Slip 7, New York, NY 10004, United States",
+                                     @"description" : @"Explore this secluded, vehicle-free island on foot or by bike any day during the summer."
+                                     };
+    
+    NSDictionary *statenIsland1 = @{
+                                    @"name" : @"The New York City Farm Colony",
+                                    @"url" : @"http://www.atlasobscura.com/places/satanic-insanity-the-new	-york-city-farm-colony",
+                                    @"lat" : @40.597023,
+                                    @"lng" : @-74.138685,
+                                    @"address" : @"150 Walcott Avenue, Staten Island, New York, 10314, United States",
+                                    @"description" : @"An aging set of antiquated buildings that have been used for everything from their intended purposes to satanic sacrifice and the burial of local children."
+                                    };
+    
+    NSDictionary *statenIsland2 = @{
+                                    @"name" : @"Fort Wadsworth",
+                                    @"url" : @"http://www.atlasobscura.com/places/fort-wadsworth",
+                                    @"lat" : @40.603592,
+                                    @"lng" : @-74.058809,
+                                    @"address" : @"210 New York Avenue, Staten Island, New York, 10305, United States",
+                                    @"description" : @"America's longest-manned military fort is now an just an abandoned hulk"
+                                    };
+    
+    NSDictionary *statenIsland3 = @{
+                                    @"name" : @"Willowbrook State School",
+                                    @"url" : @"http://www.atlasobscura.com/places/willowbrook-state-school",
+                                    @"lat" : @40.583438,
+                                    @"lng" : @-74.149587,
+                                    @"address" : @"Staten Island, Staten Island, New York, 10314, United States",
+                                    @"description" : @"Failed state-supported institution meant to rehabilitate students with mental retardation"
+                                    
+                                    };
+    
+    NSDictionary *statenIsland4 = @{
+                                    @"name" : @"Fresh Kills Landfill",
+                                    @"url" : @"http://www.atlasobscura.com/places/fresh-kills-landfill",
+                                    @"lat" : @40.572934,
+                                    @"lng" : @-74.129868,
+                                    @"address" : @"Fresh Kills Landfill, Staten Island, New York, 10306, United States",
+                                    @"description" : @"The garbage dump on Staten Island grew so large over the second half of the 21st century that it became the largest man-made structure in the world, rising eighty two feet higher than the Statue of Liberty. Over the next thirty years, the dump will be remade into one of New York's largest parks."
+                                    };
+    
+    NSDictionary *statenIsland5 = @{
+                                    @"name" : @"Hostoric Richmond Town",
+                                    @"url" : @"http://www.atlasobscura.com/places/historic-richmond-town",
+                                    @"lat" : @40.570232,
+                                    @"lng" : @-74.145296,
+                                    @"address" : @"441 Clarke Avenue, Staten Island, New York, 10306, United States",
+                                    @"description" : @"A town trapped in time - 1958 to be exact"
+                                    };
+    
+    NSDictionary *statenIsland6 = @{
+                                    @"name" : @"Arthur Kill Ship Graveyard",
+                                    @"url" : @"http://www.atlasobscura.com/places/tugboat-graveyard",
+                                    @"lat" : @40.554808,
+                                    @"lng" : @-74.217628,
+                                    @"address" : @"2453 Arthur Kill Road, Staten Island, New York, 10309, United States",
+                                    @"description" : @"Final resting place of two dozen New York City harbor ships"
+                                    };
+    
+    NSDictionary *bronx1 = @{
+                             @"name" : @"Banana Ripening Facility",
+                             @"url" : @"http://www.atlasobscura.com/places/banana-ripening-facility",
+                             @"lat" : @40.816314,
+                             @"lng" : @-73.882690,
+                             @"address" : @"750 Drake St. Bronx, Bronx, New York, 10474, United States",
+                             @"description" : @"Despite not growing anywhere near New York City, bananas are ripened in a pressurized room in the Bronx using precise banana science"
+                             };
+    
+    NSDictionary *bronx2 = @{
+                             @"name" : @"Edgar Allen Poe Cottage",
+                             @"url" : @"http://www.atlasobscura.com/places/edgar-allen-poe-cottage",
+                             @"lat" : @40.816314,
+                             @"lng" : @-73.882690,
+                             @"address" : @"2640 Grand Concourse, Bronx, New York, 10458, United States",
+                             @"description" : @"When Poe lived in this cottage, the Bronx was a country area. Poe used the cottage to write many of his poems. It now resides in a starkly different area but can still be visited by those interested in Poe and his work."
+                             };
+    
+    NSDictionary *bronx3 = @{
+                             @"name" : @"North Brother Island",
+                             @"url" : @"http://www.atlasobscura.com/places/north-brother-island",
+                             @"lat" : @40.800720,
+                             @"lng" : @-73.898137,
+                             @"address" : @"North Brother Island, Bronx, New York, 10455, United States",
+                             @"description" : @"Home to the worst loss of life in New York's history until September 11, 2001"
+                             };
+    
+    NSDictionary *bronx4 = @{
+                             @"name" : @"St. Raymond's Cemetery",
+                             @"url" : @"http://www.atlasobscura.com/places/st-raymonds-cemetery",
+                             @"lat" : @40.822766,
+                             @"lng" : @-73.834140,
+                             @"address" : @"2600 Lafayette Avenue, Bronx, New York, 10465, United States",
+                             @"description" : @"St. Raymond’s is the borough’s only Catholic cemetary. It also gets a staggering 4,000 new residents each year. It is home to the famous and infamous; everyone from, Typhoid Mary and Billie Holiday to an assortment of bishops and even mobsters."
+                             };
+    
+    NSDictionary *bronx5 = @{
+                             @"name" : @"Grand Central Monoliths",
+                             @"url" : @"http://www.atlasobscura.com/places/grand-central-monoliths",
+                             @"lat" : @40.894161,
+                             @"lng" : @-73.896757,
+                             @"address" : @"6089-6115 Broadway, Bronx, New York, 10471, United States",
+                             @"description" : @"On the side of a walking trail in a wooded Bronx park sits a row of small monoliths made up of a variety of stones, evenly spaced, with no markings except the familiar run of graffiti."
+                             };
+    
+    NSDictionary *queens1 = @{
+                              @"name" : @"Valencia Movie House",
+                              @"url" : @"http://www.atlasobscura.com/places/tabernacle-prayer-for-all-people-church",
+                              @"lat" : @40.728364,
+                              @"lng" : @-73.794878,
+                              @"address" : @"74-24 175th Street, Queens, New York, 11366, United States",
+                              @"description" : @"The Vatican of the movie industry turned into an actual church"
+                              };
+    
+    NSDictionary *queens2 = @{
+                              @"name" : @"A Panorama View Of New York City",
+                              @"url" : @"http://www.atlasobscura.com/places/a-panorama-view-of-new-york-city",
+                              @"lat" : @40.739714,
+                              @"lng" : @-73.840785,
+                              @"address" : @"New York City Building, Flushing Meadows Corona Park Queens, Queens, New York, 11375, United States",
+                              @"description" : @"An incredibly realistic model of all five boroughs in New York City. The model now contains over 895,000 individual structures, including every building in the city that was standing before 1992."
+                              };
+    
+    NSDictionary *queens3 = @{
+                              @"name" : @"Flushing Meadows Corona Park",
+                              @"url" : @"http://www.atlasobscura.com/places/flushing-meadows",
+                              @"lat" : @40.749272,
+                              @"lng" : @-73.848856,
+                              @"address" : @"Kennedy Circle, Queens, New York, 11368, United States",
+                              @"description" : @"The remnants of two World's Fairs are here, complete with a 12-story globe, a mini-Manhattan, and a UFO shaped pavilion"
+                              };
+    
+    NSDictionary *queens4 = @{
+                              @"name" : @"Louis Armstrong House",
+                              @"url" : @"http://www.atlasobscura.com/places/louis-armstrong-house",
+                              @"lat" : @40.754579,
+                              @"lng" : @-73.861519,
+                              @"address" : @"34-56 107th Street, Queens, New York, 11368, United States",
+                              @"description" : @"Despite his international fame and acclaim, jazz legend Louis Armstrong retired to an unpretentious home in a quiet Queens neighborhood, which is now a museum dedicated to the musician."
+                              };
+    
+    NSDictionary *queens5 = @{
+                              @"name" : @"The Underground Home",
+                              @"url" : @"http://www.atlasobscura.com/places/the-underground-home-2",
+                              @"lat" : @40.740310,
+                              @"lng" : @-73.848975,
+                              @"address" : @"Flushing Meadows-Corona Park, 11101 Corona Ave, Queens, New York, 11368, United States",
+                              @"description" : @"A hyper-luxurious, 12,000- square foot home might be buried beneath Queens, still waiting to protect you from nuclear missiles",
+                              };
+    
+    NSDictionary *queens6 = @{
+                              @"name" : @"Fort Totten",
+                              @"url" : @"http://www.atlasobscura.com/places/fort-totten",
+                              @"lat" : @40.792743,
+                              @"lng" : @-73.776613,
+                              @"address" : @"Weaver Road, Queens, New York, 11359, United States",
+                              @"description" : @"If you look at the MTA subway map, in the top right hand corner is a legend explaining what the different symbols on the map mean. But hidden underneath this legend is the location of an abandoned Civil War fort, now an obscure underfunded city park."
+                              };
+    
+    NSDictionary *queens7 = @{
+                              @"name" : @"The Abandoned Rockaway Beach Branch of the Railroad",
+                              @"url" : @"http://www.atlasobscura.com/places/the-abandoned-rockaway-beach-branch-of-the-long-island-railroad",
+                              @"lat" : @40.719171,
+                              @"lng" : @-73.861268,
+                              @"address" : @"66th Avenue, Rego Park, Queens, New York, 11374, United States",
+                              @"description" : @"A once crucial portion of the Long Island railroad still lays abandoned, waiting to be turned into an urban park"
+                              };
+    
+    NSDictionary *queens8 = @{
+                              @"name" : @"Houdini's Grave",
+                              @"url" : @"http://www.atlasobscura.com/places/houdinis-grave",
+                              @"lat" : @40.693814,
+                              @"lng" : @-73.886369,
+                              @"address" : @"Machpelah Cemetery, 82-30 Cypress Hills Street, Queens, New York, 11385, United States",
+                              @"description" : @"The final resting place of the great escape artist, where some still gather to wait for his escape from death"
+                              };
+    
+    NSDictionary *queens9 = @{
+                              @"name" : @"Surreal ELevator",
+                              @"url" : @"http://www.atlasobscura.com/places/surreal-elevator",
+                              @"lat" : @40.738729,
+                              @"lng" : @-73.918647,
+                              @"address" : @"4816 47th Street, Woodside, New York, 11377, United States",
+                              @"description" : @"Nondescript elevator doors open to reveal a stunning, surreal world"
+                              };
+    
+    NSDictionary *queens10 = @{
+                               @"name" : @"Flux Factory",
+                               @"url" : @"http://www.atlasobscura.com/places/flux-factory",
+                               @"lat" : @40.752666,
+                               @"lng" : @-73.934976,
+                               @"address" : @"39-31 29th Street, Queens, New York, 11101, United States",
+                               @"description" : @"Offbeat arts organization that hosts exhibitions, events, and explorations"
+                               };
+    
+    NSDictionary *queens11 = @{
+                               @"name" : @"RMS Titanic Memorial",
+                               @"url" : @"http://www.atlasobscura.com/places/rms-titanic-memorial",
+                               @"lat" : @40.744817,
+                               @"lng" : @-73.951197,
+                               @"address" : @"47-08 11th Street, Queens, New York, 11101, United States",
+                               @"description" : @"Over 1500 passengers and crew members lost their lives when the \"unsinkable\" RMS Titanic collided with an iceberg on the evening of April 14, 1912. It wasn't until seventy-two years later, however, that Joseph Colletti decided to erect his own memorial for the steamship, once considered the largest in the world"
+                               };
+    
+    NSDictionary *brooklyn1 = @{
+                                @"name" : @"The Lab (Electric Warehouse)",
+                                @"url" : @"http://www.atlasobscura.com/places/the-lab-electric-warehouse",
+                                @"lat" : @40.679802,
+                                @"lng" : @-73.943563,
+                                @"address" : @"1428 Fulton St, brooklyn, 11216",
+                                @"description" : @"The Lab—or as it’s known to the dance kids and hipsters, Electric Warehouse—is a massive, 10,000-square-foot underground party space deep in Bed-Stuy."
+                                };
+    
+    NSDictionary *brooklyn2 = @{
+                                @"name" : @"Grand Army Plaza",
+                                @"url" : @"http://www.atlasobscura.com/places/grand-army-plaza",
+                                @"lat" : @40.673559,
+                                @"lng" : @-73.968419,
+                                @"address" : @"1 Grand Army Plaza, Brooklyn, New York, 11238, United States",
+                                @"description" : @"Little do passers-by know, sitting just behind the entrance at the base of the arch is a storage and display space for the puppet lending library."
+                                };
+    
+    NSDictionary *brooklyn3 = @{
+                                @"name" : @"Brooklyn Botanic Garden",
+                                @"url" : @"http://www.atlasobscura.com/places/brooklyn-botanic-garden",
+                                @"lat" : @40.667716,
+                                @"lng" : @-73.961836,
+                                @"address" : @"900 Washington Avenue, Brooklyn, New York, 11238, United States",
+                                @"description" : @"As you enjoy a leisurely walk through the beautiful Brooklyn Botanic Gardens, you may notice the intoxicating smell. That is the Titan Arum, poisoning the air with its rare blooming smell."
+                                } ;
+    
+    NSDictionary *brooklyn4 = @{
+                                @"name" : @"Campderdown Elm",
+                                @"url" : @"http://www.atlasobscura.com/places/campderdown-elm",
+                                @"lat" : @40.660204,
+                                @"lng" : @-73.968956,
+                                @"address" : @"Prospect Park, Brooklyn, New York, 11225, United States",
+                                @"description" : @"The strangest tree in Brooklyn may be the gnarled branches of the Camperdown Elm near the Prospect Park boathouse. Its branches grow parallel to the ground instead of up, requiring extra support, so gazing up from beneath it is like standing beneath a giant bonsai."
+                                };
+    
+    NSDictionary *brooklyn5 = @{
+                                @"name" : @"Brooklyn Superhero Supply Store",
+                                @"url" : @"http://www.atlasobscura.com/places/brooklyn-superhero-supply-store",
+                                @"lat" : @40.671416,
+                                @"lng" : @-73.984742,
+                                @"address" : @"372 5th Avenue, Brooklyn, New York, 11215, United States",
+                                @"description" : @"The one-stop shop for all of your superhero (or evil arch-nemesis) needs. Behind a false bookcase there is a secret lair that plays host to an after-school student writing center co-founded by best-selling writer Dave Eggers."
+                                };
+    
+    NSDictionary *brooklyn6 = @{
+                                @"name" : @"Wyckoff Street Mosaic",
+                                @"url" : @"http://www.atlasobscura.com/places/mosaic-facade",
+                                @"lat" : @40.685436,
+                                @"lng" : @-73.989678,
+                                @"address" : @"108 Wyckoff Street, Brooklyn, New York, 11201, United States",
+                                @"description" : @"In 2001, Susan Gardner began attaching things to the facade of her three-story brownstone in Boerum Hill. Incorporating anything from shells and buttons to broken cups and old CDs, Gardner's growing mosaic became an icon of the neighborhood."
+                                };
+    
+    NSDictionary *brooklyn7 = @{
+                                @"name" : @"Morbid Anatomy Museum",
+                                @"url" : @"http://www.atlasobscura.com/places/the-morbid-anatomy-museum",
+                                @"lat" : @40.672872,
+                                @"lng" : @-73.990131,
+                                @"address" : @"424A Third Avenue, Brooklyn, New York, 11215, United States",
+                                @"description" : @"A museum devoted to bringing to light forgotten or neglected histories through exhibitions, education and public programming."
+                                };
+    
     
     NSArray *stuffz = @[
                         atlasObs1,
@@ -533,8 +805,37 @@
                         vipRecsTanner,
                         vipRecsOrta,
                         vipRecsMatan,
-                        vipRecsRachel
-                        
+                        vipRecsRachel,
+                        vipRecsCameron,
+                        statenIsland1,
+                        statenIsland2,
+                        statenIsland3,
+                        statenIsland4,
+                        statenIsland5,
+                        statenIsland6,
+                        queens1,
+                        queens2,
+                        queens3,
+                        queens4,
+                        queens5,
+                        queens6,
+                        queens7,
+                        queens8,
+                        queens9,
+                        queens10,
+                        queens11,
+                        bronx1,
+                        bronx2,
+                        bronx3,
+                        bronx4,
+                        bronx5,
+                        brooklyn1,
+                        brooklyn2,
+                        brooklyn3,
+                        brooklyn4,
+                        brooklyn5,
+                        brooklyn6,
+                        brooklyn7
                         ];
     
     NSMutableArray *arr = [[NSMutableArray alloc] init];
