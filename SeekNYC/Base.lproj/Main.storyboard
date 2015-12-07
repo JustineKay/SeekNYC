@@ -42,16 +42,6 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPC-3G-srQ">
-                                        <rect key="frame" x="400" y="0.0" width="200" height="60"/>
-                                        <animations/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="zoomToLocationButtonTapped:" destination="Blf-1U-uPe" eventType="touchUpInside" id="mS9-Nf-1Y9"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuIconWhite" translatesAutoresizingMaskIntoConstraints="NO" id="xbn-cS-dyN">
                                         <rect key="frame" x="39" y="13" width="122" height="34"/>
                                         <animations/>
@@ -77,6 +67,16 @@
                                             <constraint firstAttribute="width" secondItem="5jx-bp-nn8" secondAttribute="height" multiplier="137:44" id="vdG-iY-bEI"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPC-3G-srQ">
+                                        <rect key="frame" x="400" y="0.0" width="200" height="60"/>
+                                        <animations/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="zoomToLocationButtonTapped:" destination="Blf-1U-uPe" eventType="touchUpInside" id="mS9-Nf-1Y9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
