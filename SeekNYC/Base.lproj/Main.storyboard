@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rS-ea-nVE" userLabel="Top Bar View">
                                 <rect key="frame" x="0.0" y="50" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPc-fc-Lr4" userLabel="Menu Button">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPc-fc-Lr4" userLabel="Menu Button">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
                                         <animations/>
                                         <state key="normal">
