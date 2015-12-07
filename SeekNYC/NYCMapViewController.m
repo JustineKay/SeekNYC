@@ -196,22 +196,19 @@ NSFetchedResultsControllerDelegate
 -(void)filterAPIResult: (SeekNYCParks *)result {
     
     CLLocation *resultLocation = [[CLLocation alloc] initWithLatitude:result.landmarkLat longitude:result.landmarkLng];
+  
+    NSString *resultColumnRow = [self locationInGrid:resultLocation];
     
-    [self getZipCode:resultLocation completion:^(BOOL isNYC) {
+    if ([self checkForMatchingTile:resultColumnRow] == NO) {
         
-        NSString *resultColumnRow = [self locationInGrid:resultLocation];
-        
-        if (isNYC && [self checkForMatchingTile:resultColumnRow] == NO) {
+        if (self.venueResults == nil) {
             
-            if (self.venueResults == nil) {
-                
-                self.venueResults = [[NSMutableArray alloc] init];
-            }
-            
-            [self.venueResults addObject: result];
-            
+            self.venueResults = [[NSMutableArray alloc] init];
         }
-    }];
+        
+        [self.venueResults addObject: result];
+        
+    }
 }
 
 
