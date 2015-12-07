@@ -232,7 +232,7 @@ NSFetchedResultsControllerDelegate
     
     
     // Filter hidden locations & VIPRecommendations by user's uncovered area
-    //add to venueReults
+    //add to venueResults
     
     NSMutableArray *VIPRecommendations = [NYHiddenLocations hiddenLocations];
     
@@ -538,6 +538,8 @@ NSFetchedResultsControllerDelegate
         
         UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         [infoButton setImage:[UIImage imageNamed:@"directions.png"] forState:UIControlStateNormal];
+        
+        infoButton.tintColor = [UIColor hotPinkColor];
         view.rightCalloutAccessoryView = infoButton;
 //        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
 //        view.leftCalloutAccessoryView = iconView;
