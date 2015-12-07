@@ -230,6 +230,18 @@ NSFetchedResultsControllerDelegate
     [self fetchFourSquareData];
     //    [self fetchLandmarkFourSquareData];
     
+    // Filter hidden locations & VIPRecommendations by user's uncovered area
+    //add to venueReults
+    
+    NSMutableArray *VIPRecommendations = [NYHiddenLocations hiddenLocations];
+    
+    for (SeekNYCParks *vipRec in VIPRecommendations) {
+        
+        [self filterAPIResult:vipRec];
+        
+    }
+
+    
     self.mapView.delegate = self;
     
     if (self.locationManager == nil) {
@@ -264,17 +276,6 @@ NSFetchedResultsControllerDelegate
     
     [self presentGestureAlertVC];
     
-    // Filter hidden locations & VIPRecommendations by user's uncovered area
-    //add to venueReults
-    
-    NSMutableArray *VIPRecommendations = [NYHiddenLocations hiddenLocations];
-//
-    for (SeekNYCParks *vipRec in VIPRecommendations) {
-
-        [self filterAPIResult:vipRec];
-    
-    }
-
 //
     //TESTING with BOOTSTRAP DATA*******************
 //    if (!self.hasBootstrappedData) {
