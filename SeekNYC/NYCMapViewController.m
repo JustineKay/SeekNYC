@@ -202,6 +202,11 @@ NSFetchedResultsControllerDelegate
         
         if (isNYC && [self checkForMatchingTile:resultColumnRow] == NO) {
             
+            if (self.venueResults == nil) {
+                
+                self.venueResults = [[NSMutableArray alloc] init];
+            }
+            
             [self.venueResults addObject: result];
             
         }
