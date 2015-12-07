@@ -104,9 +104,11 @@ NSFetchedResultsControllerDelegate
         NSArray *groups = res[@"groups"];
         NSArray *items = groups[0][@"items"];
         
-        
-        // reset my array
-        self.venueResults = [[NSMutableArray alloc] init];
+        //We don't want to reset the array here because
+        //we're calling this method several times
+        //if we reset every time, we lose what was added to the array
+//        //reset my array
+//        self.venueResults = [[NSMutableArray alloc] init];
         
         // loop through all json posts
         for (NSDictionary *item in items) {
@@ -114,8 +116,10 @@ NSFetchedResultsControllerDelegate
             // create new post from json
             SeekNYCParks *suggestedParkVenue = [[SeekNYCParks alloc] initWithJSON:item];
             
-            [self.venueResults addObject:suggestedParkVenue];
+            //We don't want to add to the array before we filter the results
+            //[self.venueResults addObject:suggestedParkVenue];
             
+            //We're adding to self.venueResults inside this method below
             [self filterAPIResult:suggestedParkVenue];
             
         }
@@ -171,24 +175,21 @@ NSFetchedResultsControllerDelegate
     
     NSURL *foursquaredURLStatenIPark = [NSURL URLWithString:urlStatenIPark];
     NSURL *foursquaredURLStatenILandmark = [NSURL URLWithString:urlStatenILandmark];
-//    
+    
     [self passURL:foursquaredURLBxPark];
     [self passURL:foursquaredURLBxLandmark];
-//
-//    [self passURL:foursquaredURLManhattanPark];
-//    [self passURL:foursquaredURLManhattanLandmark];
-//
-//    [self passURL:foursquaredURLBrooklynPark];  
+
+    [self passURL:foursquaredURLManhattanPark];
+    [self passURL:foursquaredURLManhattanLandmark];
+
+    [self passURL:foursquaredURLBrooklynPark];  
     [self passURL:foursquaredURLBrooklynLandmark];
-//
-////    [self passURL:foursquaredURLQueensPark];
+
+    [self passURL:foursquaredURLQueensPark];
     [self passURL:foursquaredURLQueensLandmark];
-//
-//    [self passURL:foursquaredURLStatenIPark]; 
-//    [self passURL:foursquaredURLStatenILandmark];
-//
-//
-    
+
+    [self passURL:foursquaredURLStatenIPark];
+    [self passURL:foursquaredURLStatenILandmark];
     
 }
 
@@ -232,8 +233,6 @@ NSFetchedResultsControllerDelegate
     
     self.hasBootstrappedData = NO;
     
-    [self fetchFourSquareData];
-    //    [self fetchLandmarkFourSquareData];
     
     // Filter hidden locations & VIPRecommendations by user's uncovered area
     //add to venueReults
@@ -243,9 +242,11 @@ NSFetchedResultsControllerDelegate
     for (SeekNYCParks *vipRec in VIPRecommendations) {
         
         [self filterAPIResult:vipRec];
-        
     }
-
+    
+    
+    [self fetchFourSquareData];
+    //    [self fetchLandmarkFourSquareData];
     
     self.mapView.delegate = self;
     
@@ -791,7 +792,7 @@ NSFetchedResultsControllerDelegate
     }
     
     NSLog(@"User is not in NYC");
-//    self.isNYC = NO;
+
     return NO;
     
 }
@@ -884,6 +885,20 @@ NSFetchedResultsControllerDelegate
 
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
+    
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    
+    span.latitudeDelta = 0.05;
+    span.longitudeDelta = 0.05;
+    
+    CLLocationCoordinate2D location = self.mapView.userLocation.coordinate;
+    
+    region.span = span;
+    region.center = location;
+    
+    [self.mapView setRegion:region animated:TRUE];
+    [self.mapView regionThatFits:region];
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
