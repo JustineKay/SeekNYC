@@ -885,7 +885,54 @@ NSFetchedResultsControllerDelegate
 
 - (IBAction)zoomToLocationButtonTapped:(UIButton *)sender {
     
+    
+    
     MKCoordinateRegion region;
+    
+    //Testing alternatives for this action button
+    
+//    MKMapPoint userLocationPoint = MKMapPointForCoordinate(self.mapView.userLocation.coordinate);
+//    
+//    if ([self.mapView.annotations count] > 1) {
+//        
+//        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.mapView.userLocation.coordinate);
+//        MKMapRect zoomRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+//        
+//        for (id<MKAnnotation> annotation in self.mapView.annotations) {
+//            
+//            if (![annotation isKindOfClass:[MKUserLocation class]]) {
+//            
+//            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+//            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 1000.0, 1000.0);
+//            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+//                
+//            
+////            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+////                
+////                
+////            CLLocation *annotationLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
+////            CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:self.mapView.userLocation.coordinate.latitude longitude:self.mapView.userLocation.coordinate.longitude];
+////
+////            CLLocationDistance distanceBetweenAnnotationsAndUserLocation = [userLocation distanceFromLocation:annotationLocation];
+////            CLLocationCoordinate2D userLocation2D =CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+////            
+////            region.center = userLocation2D;
+////            region.span.latitudeDelta = distanceBetweenAnnotationsAndUserLocation;
+////            region.span.longitudeDelta = distanceBetweenAnnotationsAndUserLocation;
+//        }
+//        
+//        //[self.mapView setRegion:region animated:YES];
+//            [self.mapView setVisibleMapRect:zoomRect animated:YES];
+//            
+//            self.mapView.frame = self.view.bounds;
+//            
+//        }
+//        
+//    }else {
+//        
+//    }
+
+    
     MKCoordinateSpan span;
     
     span.latitudeDelta = 0.05;
@@ -898,6 +945,7 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView setRegion:region animated:TRUE];
     [self.mapView regionThatFits:region];
+    
     
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
