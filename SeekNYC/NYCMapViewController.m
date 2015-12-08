@@ -214,14 +214,17 @@ NSFetchedResultsControllerDelegate
 
 -(void)loadBootstrapData {
     
-    NSArray *arrs = [BootstrapData data];
-    
-    for (NSArray *arr in arrs) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSArray *arr = [BootstrapData data];
         for (CLLocation *location in arr) {
-            [self processBootStrapLocation:location];
+            __weak typeof(self) weakSelf = self;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf processBootStrapLocation:location];
+            });
         }
-    }
+    });
     
+
 }
 
 
@@ -281,10 +284,10 @@ NSFetchedResultsControllerDelegate
     
 //
     //TESTING with BOOTSTRAP DATA*******************
-    if (!self.hasBootstrappedData) {
-        [self loadBootstrapData];
-        self.hasBootstrappedData = YES;
-    }
+//    if (!self.hasBootstrappedData) {
+//        [self loadBootstrapData];
+//        self.hasBootstrappedData = YES;
+//    }
     //***********************************************
 }
 
@@ -674,13 +677,15 @@ NSFetchedResultsControllerDelegate
             //get locations from new locations
             //repeat the above to calculate surrounding tiles
             
-            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+                for (CLLocation *loc in surroundingTileCoords) {
+                    [self createNewTile:loc];
+                    
+                }
+            });
             
-            for (CLLocation *loc in surroundingTileCoords) {
-                
-                [self createNewTile:loc];
-                
-            }
+
 
         }
     }];
@@ -761,10 +766,12 @@ NSFetchedResultsControllerDelegate
 //             NSLog(@"\nCurrent Location Detected\n");
 //             NSLog(@"placemark %@",placemark);
              
-             NSString *zipNumber = [[NSString alloc]initWithString:placemark.postalCode];
-             self.userLocationZipCode = zipNumber;
+             if (placemark.postalCode) {
+                 NSString *zipNumber = [[NSString alloc]initWithString:placemark.postalCode];
+                 self.userLocationZipCode = zipNumber;
              
-             completion([self verifyZipCode:zipNumber]);
+                 completion([self verifyZipCode:zipNumber]);
+             }
              
          }
          else
