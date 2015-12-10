@@ -32,7 +32,7 @@ You can choose between 4 different skins for the opaque overlay on the map.
 * Recommendations are pulled from the Foursquare API and Atlas Obscura's Hidden spots of NYC.  
 * User can obtain directions to recommended places by tapping on the "directions" icon in the map annotation callout view.
 
-#### Features We Wish We Had Time To Implement:  
+#### Features On Our Wishlist To Implement In Future Versions:  
 * User can acheive awards and obtain certain levels for visiting specific places, traveling new routes, and avoiding well-known tourist traps.
 * User can view a Subway count of al the stations the've been to.  
 * User can recieve notifications of places to visit just outside of routes they travel frequently.
