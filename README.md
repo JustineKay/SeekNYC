@@ -78,6 +78,7 @@ http://en.fogofworld.com/
 - Presentation slides for final release
 - Logo Design
 - User Interface Design
+- Custom skin (map overlay color) alertVC implementation
 - Custom mapview animated annotations
 
 **Felicia:**
