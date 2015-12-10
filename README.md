@@ -26,13 +26,17 @@ The app tracks your movement as you trek through the city and reveals an underly
 The user can choose between 4 different colors for the opaque overlay on the map.  Everywhere the user has been uncovers the map below.
 
 #### Baseline Features:
+* User's map is saved in Core Data.  
+* User can view percentage of uncovered area in each borough.  
+* User can shake device for recommendations of landmarks, parks, and hidden spots outside of their uncovered area.  
+* Recommendations are pulled from the Foursquare API and Atlas Obscura's Hidden spots of NYC.  
+* User can obtain directions to recommended places by tapping on the "directions" icon in the map annotation callout view.
+
+#### Bonus Features
 * User can acheive awards and obtain certain levels for visiting specific places, traveling new routes, and avoiding well-known tourist traps.
-* User's map is saved in Parse.
 * User's tracks appear different when they've taken the same route multiple times.
 * User can share maps on twitter and facebook.
 * User chooses when to turn tracking on and off.
-
-#### Bonus Features
 * User can track walking, biking and driving seperately
 * User can view other user's maps in app
 * User can drop markers, with photos and notes (Peek & Pop)
