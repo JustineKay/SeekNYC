@@ -58,6 +58,7 @@ http://en.fogofworld.com/
 **Christella:**
 
 - Wireframing in Sketch
+- Presentation slides for first releases
 - Progress Bar Implementation
 - Foursquare API Implementation
 - Randomization of suggested places and webview to Google maps
@@ -67,8 +68,8 @@ http://en.fogofworld.com/
 - Backend and Core Data Management
 - Map grid implementation
 - Implementation of map overlays & path clearing
-- Product Management
 - Prep Demo Script and Pitch
+- Presentation slides for final release
 - Logo Design
 - User Interface Design
 - Custom mapview animated annotations
