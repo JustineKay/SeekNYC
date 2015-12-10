@@ -34,7 +34,7 @@ You can choose between 4 different skins for the opaque overlay on the map.
 
 #### Features On Our Wishlist To Implement In Future Versions:  
 * User can acheive awards and obtain certain levels for visiting specific places, traveling new routes, and avoiding well-known tourist traps.
-* User can view a Subway count of al the stations the've been to.  
+* User can view a Subway count of all the stations they've been to.  
 * User can recieve notifications of places to visit just outside of routes they travel frequently.
 * User's tracks appear different when they've taken the same route multiple times.
 * User can share maps on twitter and facebook.
