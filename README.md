@@ -58,31 +58,28 @@ http://en.fogofworld.com/
 **Christella:**
 
 - Wireframing in Sketch
-- Icon Development
-- Ideas for Achievements/Badges
-- Draft of Logo
-- Progress Bar
-- Prep Demo Script and Pitch
+- Progress Bar Implementation
+- Foursquare API Implementation
+- Randomization of suggested places and webview to Google maps
 
 **Justine:**
 
-- Set up Core Data
-- Set up Parse
-- Research and implementation of map tracking
-- Reserch and implementation of polyine path clearing
-- Ideas for Achievements/Badges
+- Backend and Core Data Management
+- Map grid implementation
+- Implementation of map overlays & path clearing
+- Product Management
 - Prep Demo Script and Pitch
-- Draft of Logo
-- UI
+- Logo Design
+- User Interface Design
+- Custom mapview animated annotations
 
 **Felicia:**
 
 - Implement shake gesture and one time alertView notification for shake gesture (NSUserDefault)
-- Editing ReadMe
-- Work on customizing map
-- Ideas for Achievements/Badges
-- Prep Demo Script and Pitch
-- Implement cutsomized menu button
+- Alert View Controllers
+- Research customizing map
+- Atlas Obscura Data
+- Menu Bar Implementation
 
 
 
