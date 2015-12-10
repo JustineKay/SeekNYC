@@ -284,8 +284,8 @@ NSFetchedResultsControllerDelegate
     
 
     //TESTING with BOOTSTRAP DATA*******************
-    //if (!self.hasBootstrappedData) {
-        [self loadBootstrapData];
+//    if (!self.hasBootstrappedData) {
+//        [self loadBootstrapData];
 //        self.hasBootstrappedData = YES;
 //    }
     //***********************************************
