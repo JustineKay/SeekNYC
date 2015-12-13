@@ -36,7 +36,7 @@
 #import "NYHiddenLocations.h"
 #import "BootstrapData.h"
 
-static double const tileSizeInMeters = 100.0;
+static double const tileSizeInMeters = 80.0;
 static float const centerCoordLat = 40.7127;
 static float const centerCoordLng = -74.0059;
 static float const NYRegionSpan = 0.525;
@@ -233,10 +233,8 @@ NSFetchedResultsControllerDelegate
     
     self.hasBootstrappedData = NO;
     
-    
     // Filter hidden locations & VIPRecommendations by user's uncovered area
     //add to venueResults
-    
     NSMutableArray *VIPRecommendations = [NYHiddenLocations hiddenLocations];
     
     for (SeekNYCParks *vipRec in VIPRecommendations) {
@@ -246,7 +244,7 @@ NSFetchedResultsControllerDelegate
     
     
     [self fetchFourSquareData];
-    //    [self fetchLandmarkFourSquareData];
+    
     
     self.mapView.delegate = self;
     
@@ -653,9 +651,6 @@ NSFetchedResultsControllerDelegate
             
             [self createNewTile:newLocation];
             
-            //get locations from new locations
-            //repeat the above to calculate surrounding tiles
-            
             NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
             
             for (CLLocation *loc in surroundingTileCoords) {
@@ -674,7 +669,7 @@ NSFetchedResultsControllerDelegate
         if (isNYC) {
             [self createNewTile:newLocation];
             
-            //get locations from new locations
+            //get surrounding locations from new location
             //repeat the above to calculate surrounding tiles
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -737,14 +732,12 @@ NSFetchedResultsControllerDelegate
         self.locationManager = [[CLLocationManager alloc] init];
     }
     
-    [self.locationManager requestAlwaysAuthorization];
-    
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
     
     // Movement threshold for new events.
-    self.locationManager.distanceFilter = 10; // meters
+    self.locationManager.distanceFilter = 15; // meters
     
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
@@ -761,10 +754,11 @@ NSFetchedResultsControllerDelegate
          {
              //Testing Location********************
              CLLocation *testLocation = newLocation;
+             NSLog(@"location: %@", testLocation);
              
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//             NSLog(@"\nCurrent Location Detected\n");
-//             NSLog(@"placemark %@",placemark);
+             NSLog(@"\nCurrent Location Detected\n");
+             //NSLog(@"placemark %@",placemark);
              
              if (placemark.postalCode) {
                  NSString *zipNumber = [[NSString alloc]initWithString:placemark.postalCode];
