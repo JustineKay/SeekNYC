@@ -737,7 +737,7 @@ NSFetchedResultsControllerDelegate
     self.locationManager.activityType = CLActivityTypeFitness;
     
     // Movement threshold for new events.
-    self.locationManager.distanceFilter = 15; // meters
+    self.locationManager.distanceFilter = kCLDistanceFilterNone; // meters
     
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
