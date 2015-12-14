@@ -12,7 +12,7 @@
 #import "VisitedTile+CoreDataProperties.h"
 #import "VisitedTile.h"
 
-static double const tileSizeInMeters = 80.0;
+static double const tileSizeInMeters = 100.0;
 static double const NYCMeters = 785000;
 static double const BKMeters = 183000;
 static double const BRXMeters = 109000;
