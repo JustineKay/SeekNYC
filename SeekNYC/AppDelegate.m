@@ -9,8 +9,11 @@
 
 
 #import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<CLLocationManagerDelegate>
+
+@property (nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -19,6 +22,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
+        
+        if (self.locationManager == nil) {
+            self.locationManager = [[CLLocationManager alloc] init];
+        }
+        
+        [self.locationManager startMonitoringSignificantLocationChanges];
+    }
     
     
     //To find font family name

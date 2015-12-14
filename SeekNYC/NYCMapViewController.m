@@ -258,9 +258,9 @@ NSFetchedResultsControllerDelegate
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
-//    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
-//    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
-//    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
+    self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
+    self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
+    self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
     
     
     
@@ -307,12 +307,12 @@ NSFetchedResultsControllerDelegate
     //    //[self.mapView addOverlay:[self polyLineWithLocations:testUserTileCoords]];
     //    //*********************************************************************************************
     
-        //*****Testing in Simulator*********CALIFORNIA, San Fran
-        CLLocationCoordinate2D testCenterCoord = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
-        MKCoordinateSpan testSpan = MKCoordinateSpanMake(1.0, 1.0);
-    
-        [self setGridWith:testCenterCoord And:testSpan];
-        //**************************
+//        //*****Testing in Simulator*********CALIFORNIA, San Fran
+//        CLLocationCoordinate2D testCenterCoord = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+//        MKCoordinateSpan testSpan = MKCoordinateSpanMake(1.0, 1.0);
+//    
+//        [self setGridWith:testCenterCoord And:testSpan];
+//        //**************************
     
 }
 
@@ -367,13 +367,13 @@ NSFetchedResultsControllerDelegate
 
 -(NSString *)locationInGrid:(CLLocation *)location {
     
-        //TESTING in Simulator**********************
-        CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:37.71641768 longitude:location.coordinate.longitude];
-        CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:-122.44537354];
-        //*****************************
+//        //TESTING in Simulator**********************
+//        CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:37.71641768 longitude:location.coordinate.longitude];
+//        CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:-122.44537354];
+//        //*****************************
     
-//    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:location.coordinate.longitude];
-//    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
+    CLLocation *latDiff = [[CLLocation alloc] initWithLatitude:self.gridOriginPoint.coordinate.latitude longitude:location.coordinate.longitude];
+    CLLocation *lngDiff = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:self.gridOriginPoint.coordinate.longitude];
     
     CLLocationDistance latitudinalDistance = [location distanceFromLocation:latDiff];
     CLLocationDistance longitudinalDistance = [location distanceFromLocation:lngDiff];
@@ -397,10 +397,10 @@ NSFetchedResultsControllerDelegate
     double lngDiff = columnNumber * tileSizeInMeters;
     double latDiff = rowNumber * tileSizeInMeters;
     
-        //TESTING in Simulator********
-        CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
-        //****************
-    //CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
+//        //TESTING in Simulator********
+//        CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(37.71641768, -122.44537354);
+//        //****************
+    CLLocationCoordinate2D gridOriginPoint = CLLocationCoordinate2DMake(self.gridOriginPoint.coordinate.latitude, self.gridOriginPoint.coordinate.longitude);
     
     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(gridOriginPoint, latDiff, lngDiff);
     MKCoordinateSpan tempSpan = tempRegion.span;
@@ -729,7 +729,7 @@ NSFetchedResultsControllerDelegate
     self.locationManager.activityType = CLActivityTypeFitness;
     
     // Movement threshold for new events.
-    self.locationManager.distanceFilter = 15.0; // meters
+    self.locationManager.distanceFilter = 5.0; // meters
     
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
