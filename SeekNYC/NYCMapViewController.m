@@ -636,10 +636,15 @@ NSFetchedResultsControllerDelegate
     BOOL isAccurate = newLocation.horizontalAccuracy < 20;
     BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 30.0;
     
+    if (!isAccurate || !isRecent) {
+        
+        return;
+    }
+    
     [self getZipCode:newLocation completion:^(BOOL isNYC) {
         
-        //***REMOVE (&& self.isNYC) to test in simulator *************
-        if (isAccurate && isRecent && isNYC) {
+        //***REMOVE (isNYC) to test in simulator *************
+        if (isNYC) {
             
             [self createNewTile:newLocation];
             
