@@ -80,6 +80,8 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSString *venueResultLng;
 
+@property (nonatomic) NSTimer *timer;
+
 @end
 
 
@@ -379,7 +381,7 @@ NSFetchedResultsControllerDelegate
     CLLocationDistance longitudinalDistance = [location distanceFromLocation:lngDiff];
     
     double rowNumber = latitudinalDistance / tileSizeInMeters;
-    double columnNumber = longitudinalDistance / tileSizeInMeters;
+    double columnNumber = (longitudinalDistance / tileSizeInMeters) - 1;
     
     NSString *columnRow = [NSString stringWithFormat:@"%.f, %.f", columnNumber, rowNumber];
     
@@ -391,7 +393,7 @@ NSFetchedResultsControllerDelegate
     NSArray *columnRowNumbers = [columnRow componentsSeparatedByString:@", "];
     NSString *column = columnRowNumbers[0];
     NSString *row = columnRowNumbers[1];
-    NSInteger columnNumber = column.integerValue - 1;
+    NSInteger columnNumber = column.integerValue;
     NSInteger rowNumber = row.integerValue;
     
     double lngDiff = columnNumber * tileSizeInMeters;
@@ -637,7 +639,7 @@ NSFetchedResultsControllerDelegate
     [self getZipCode:newLocation completion:^(BOOL isNYC) {
         
         //***REMOVE (&& self.isNYC) to test in simulator *************
-        if (isAccurate && isRecent) {
+        if (isAccurate && isRecent && isNYC) {
             
             [self createNewTile:newLocation];
             
@@ -648,6 +650,12 @@ NSFetchedResultsControllerDelegate
                 [self createNewTile:loc];
                 
             }
+            
+//            //TESTING TIMER FOR GEOCODER**************************
+//            // Schedule location manager to run again in 60 seconds
+//            [self.locationManager stopUpdatingLocation];
+//            self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
+//            //****************************************************
         }
     }];
 
@@ -729,11 +737,15 @@ NSFetchedResultsControllerDelegate
     self.locationManager.activityType = CLActivityTypeFitness;
     
     // Movement threshold for new events.
-    self.locationManager.distanceFilter = 5.0; // meters
+    self.locationManager.distanceFilter = 10.0; // meters
     
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
     
+}
+
+- (void)_turnOnLocationManager {
+    [self.locationManager startUpdatingLocation];
 }
 
 
