@@ -633,10 +633,11 @@ NSFetchedResultsControllerDelegate
 
 -(void) processNewLocation: (CLLocation *)newLocation {
     
-    BOOL isAccurate = newLocation.horizontalAccuracy < 20;
-    BOOL isRecent = fabs([newLocation.timestamp timeIntervalSinceNow]) < 30.0;
+    NSLog(@"newLocation: %@", newLocation);
     
-    if (!isAccurate || !isRecent) {
+    BOOL isAccurate = newLocation.horizontalAccuracy < 20;
+    
+    if (!isAccurate) {
         
         return;
     }
@@ -1075,17 +1076,6 @@ NSFetchedResultsControllerDelegate
     return nil;
 }
 
-- (MKPolyline *)polyLineWithLocations: (NSArray <CLLocation *> *)locations {
-    
-    CLLocationCoordinate2D coords[locations.count];
-    
-    for (int i = 0; i < locations.count; i++) {
-        CLLocation *location = [locations objectAtIndex:i];
-        coords[i] = location.coordinate;
-    }
-    
-    return [MKPolyline polylineWithCoordinates:coords count:locations.count];
-}
 
 - (MKPolygon *)polygonWithLocations: (NSArray <CLLocation *> *)locations {
     
