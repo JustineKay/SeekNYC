@@ -29,6 +29,7 @@
 #import "SunglassesAnnotationView.h"
 #import "UberBlackAnnotationView.h"
 #import "ClearOverlayPolygonRenderer.h"
+#import "CountyPolygonData.h"
 #import "ZipCodeData.h"
 #import "ZipCode.h"
 #import "APIManager.h"
@@ -65,6 +66,17 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) NSMutableArray *zipCodesOfNYC;
 @property (nonatomic) ZipCodeData *zipCodeData;
+
+@property (nonatomic) CountyPolygonData *countyPolygonData;
+@property (nonatomic) MKPolygon *BKPolygonOverlay;
+@property (nonatomic) MKPolygon *MANPolygonOverlay1;
+@property (nonatomic) MKPolygon *MANPolygonOverlay2;
+@property (nonatomic) MKPolygon *MANPolygonOverlay3;
+@property (nonatomic) MKPolygon *BRXPolygonOverlay;
+@property (nonatomic) MKPolygon *QNSPolygonOverlay;
+@property (nonatomic) MKPolygon *SIPolygonOverlay;
+@property (nonatomic) NSArray *countyPolygonOverlays;
+
 
 @property (nonatomic) NSString *userLocationZipCode;
 
@@ -286,6 +298,7 @@ NSFetchedResultsControllerDelegate
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+    [self loadCountyPolygonOverlays];
     [self loadNYCMap];
     [self loadVisitedTiles];
 
@@ -319,7 +332,7 @@ NSFetchedResultsControllerDelegate
 }
 
 
--(void)viewDidDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated{
     
     [super viewDidDisappear:YES];
     
@@ -328,7 +341,37 @@ NSFetchedResultsControllerDelegate
 }
 
 
-#pragma mark - UI
+#pragma mark - Overlays
+
+- (void)loadCountyPolygonOverlays {
+    
+    if (self.countyPolygonData == nil) {
+        
+        self.countyPolygonData = [[CountyPolygonData alloc] init];
+        
+        [self.countyPolygonData initializeData];
+        
+        self.BKPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.BKPolygon.coords];
+        self.MANPolygonOverlay1 = [self polygonWithLocations:self.countyPolygonData.MANPolygon1.coords];
+        self.MANPolygonOverlay2 = [self polygonWithLocations:self.countyPolygonData.MANPolygon2.coords];
+        self.MANPolygonOverlay3 = [self polygonWithLocations:self.countyPolygonData.MANPolygon3.coords];
+        self.BRXPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.BRXPolygon.coords];
+        self.QNSPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.QNSPolygon.coords];
+        self.SIPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.SIPolygon.coords];
+        
+        self.countyPolygonOverlays = @[self.BKPolygonOverlay,
+                                       self.MANPolygonOverlay1,
+                                       self.MANPolygonOverlay2,
+                                       self.MANPolygonOverlay3,
+                                       self.BRXPolygonOverlay,
+                                       self.QNSPolygonOverlay,
+                                       self.SIPolygonOverlay
+                                       ];
+    }
+   
+    [self.mapView addOverlays:self.countyPolygonOverlays];
+    
+}
 
 - (void)loadNYCMap {
     
@@ -631,6 +674,51 @@ NSFetchedResultsControllerDelegate
     }
 }
 
+-(BOOL)locationIsNYC: (CLLocation *)newLocation {
+    
+    CLLocationCoordinate2D mapCoordinate = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    
+    MKMapPoint mapPoint = MKMapPointForCoordinate(mapCoordinate);
+    
+    //loop through array of county polygons
+    
+    for (MKPolygon *countyOverlay in self.countyPolygonOverlays) {
+        
+        MKPolygonRenderer *countyOverlayRenderer = (MKPolygonRenderer *)[self.mapView rendererForOverlay: countyOverlay];
+        
+        CGPoint countyOverlayViewPoint = [countyOverlayRenderer pointForMapPoint:mapPoint];
+        
+        BOOL locationIsInCountyOverlay = CGPathContainsPoint(countyOverlayRenderer.path, NULL, countyOverlayViewPoint, NO);
+        
+        if (locationIsInCountyOverlay) {
+            
+            //get borough of newLocation
+            //NSString *newLocationBorough = countyOverlay.name
+            
+            //createNewtile
+            
+            return YES;
+            
+        }
+        
+    }
+    
+    return NO;
+}
+
+//- (NSString *) getLocationBorough: (MKPolygon *)countyPolygonOverlay {
+//    
+//    if (countyPolygonOverlay == self.BKPolygonOverlay) {
+//        
+//        return  @"Brooklyn";
+//        
+//    }else if (countyPolygonOverlay == self.MANPolygonOverlay1 || self.MANPolygonOverlay2 || self.MANPolygonOverlay3) {
+//        
+//        return  @"Manhattan";
+//    }
+//    
+//}
+
 -(void) processNewLocation: (CLLocation *)newLocation {
     
     NSLog(@"newLocation: %@", newLocation);
@@ -704,6 +792,26 @@ NSFetchedResultsControllerDelegate
         
     }
     return NO;
+}
+
+-(void)createNewTile: (CLLocation *)newLocation WithBorough: (NSString *)newLocationBorough {
+    
+    NSString *newTile = [self locationInGrid:newLocation];
+    
+    if ([self checkForMatchingTile:newTile] == NO) {
+        
+        NSLog(@"No matching tile found");
+        
+        //Use these coords to draw the tile
+        NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
+        
+        [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
+        
+        [self.visitedTilesColumnRow addObject:newTile];
+        
+        [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
+    }
+    
 }
 
 -(void)createNewTile: (CLLocation *)newLocation{
