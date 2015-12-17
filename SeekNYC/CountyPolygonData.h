@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CountyPolygon.h"
+#import "NYCPolygon.h"
 
 @interface CountyPolygonData : NSObject
 
-@property (nonatomic) CountyPolygon *BKPolygon;
-@property (nonatomic) CountyPolygon *MANPolygon1;
-@property (nonatomic) CountyPolygon *MANPolygon2;
-@property (nonatomic) CountyPolygon *MANPolygon3;
-@property (nonatomic) CountyPolygon *BRXPolygon;
-@property (nonatomic) CountyPolygon *QNSPolygon;
-@property (nonatomic) CountyPolygon *SIPolygon;
+@property (nonatomic) NYCPolygon *BKPolygon;
+@property (nonatomic) NYCPolygon *MANPolygon1;
+@property (nonatomic) NYCPolygon *MANPolygon2;
+@property (nonatomic) NYCPolygon *MANPolygon3;
+@property (nonatomic) NYCPolygon *BRXPolygon;
+@property (nonatomic) NYCPolygon *QNSPolygon;
+@property (nonatomic) NYCPolygon *SIPolygon;
 
 -(void) initializeData;
 

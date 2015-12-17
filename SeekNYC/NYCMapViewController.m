@@ -68,13 +68,6 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) ZipCodeData *zipCodeData;
 
 @property (nonatomic) CountyPolygonData *countyPolygonData;
-@property (nonatomic) MKPolygon *BKPolygonOverlay;
-@property (nonatomic) MKPolygon *MANPolygonOverlay1;
-@property (nonatomic) MKPolygon *MANPolygonOverlay2;
-@property (nonatomic) MKPolygon *MANPolygonOverlay3;
-@property (nonatomic) MKPolygon *BRXPolygonOverlay;
-@property (nonatomic) MKPolygon *QNSPolygonOverlay;
-@property (nonatomic) MKPolygon *SIPolygonOverlay;
 @property (nonatomic) NSArray *countyPolygonOverlays;
 
 
@@ -351,21 +344,13 @@ NSFetchedResultsControllerDelegate
         
         [self.countyPolygonData initializeData];
         
-        self.BKPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.BKPolygon.coords];
-        self.MANPolygonOverlay1 = [self polygonWithLocations:self.countyPolygonData.MANPolygon1.coords];
-        self.MANPolygonOverlay2 = [self polygonWithLocations:self.countyPolygonData.MANPolygon2.coords];
-        self.MANPolygonOverlay3 = [self polygonWithLocations:self.countyPolygonData.MANPolygon3.coords];
-        self.BRXPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.BRXPolygon.coords];
-        self.QNSPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.QNSPolygon.coords];
-        self.SIPolygonOverlay = [self polygonWithLocations:self.countyPolygonData.SIPolygon.coords];
-        
-        self.countyPolygonOverlays = @[self.BKPolygonOverlay,
-                                       self.MANPolygonOverlay1,
-                                       self.MANPolygonOverlay2,
-                                       self.MANPolygonOverlay3,
-                                       self.BRXPolygonOverlay,
-                                       self.QNSPolygonOverlay,
-                                       self.SIPolygonOverlay
+        self.countyPolygonOverlays = @[self.countyPolygonData.BKPolygon,
+                                       self.countyPolygonData.MANPolygon1,
+                                       self.countyPolygonData.MANPolygon2,
+                                       self.countyPolygonData.MANPolygon3,
+                                       self.countyPolygonData.BRXPolygon,
+                                       self.countyPolygonData.QNSPolygon,
+                                       self.countyPolygonData.SIPolygon
                                        ];
     }
    
@@ -680,22 +665,21 @@ NSFetchedResultsControllerDelegate
     
     MKMapPoint mapPoint = MKMapPointForCoordinate(mapCoordinate);
     
-    //loop through array of county polygons
-    
-    for (MKPolygon *countyOverlay in self.countyPolygonOverlays) {
+    for (NYCPolygon *boroughOverlay in self.countyPolygonOverlays) {
         
-        MKPolygonRenderer *countyOverlayRenderer = (MKPolygonRenderer *)[self.mapView rendererForOverlay: countyOverlay];
+        MKPolygonRenderer *boroughOverlayRenderer = (MKPolygonRenderer *)[self.mapView rendererForOverlay: boroughOverlay];
         
-        CGPoint countyOverlayViewPoint = [countyOverlayRenderer pointForMapPoint:mapPoint];
+        CGPoint countyOverlayViewPoint = [boroughOverlayRenderer pointForMapPoint:mapPoint];
         
-        BOOL locationIsInCountyOverlay = CGPathContainsPoint(countyOverlayRenderer.path, NULL, countyOverlayViewPoint, NO);
+        BOOL locationIsInCountyOverlay = CGPathContainsPoint(boroughOverlayRenderer.path, NULL, countyOverlayViewPoint, NO);
         
         if (locationIsInCountyOverlay) {
             
             //get borough of newLocation
-            //NSString *newLocationBorough = countyOverlay.name
+            NSString *newLocationBorough = boroughOverlay.name;
             
-            //createNewtile
+            //createNewtile with borough
+            
             
             return YES;
             
@@ -1136,12 +1120,12 @@ NSFetchedResultsControllerDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
-    if ([overlay isKindOfClass:[MKPolygon class]]) {
+    if ([overlay isKindOfClass:[NYCPolygon class]]) {
         
-        MKPolygon *tileOverlay = (MKPolygon *)overlay;
+        NYCPolygon *boroughOverlay = (NYCPolygon *)overlay;
         
         
-        ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
+        ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:boroughOverlay];
         
         renderer.fillColor = [UIColor blackColor];
         renderer.strokeColor = [UIColor blackColor];
@@ -1149,14 +1133,15 @@ NSFetchedResultsControllerDelegate
         
         return renderer;
         
-    }else if ([overlay isKindOfClass:[MKPolyline class]]) {
+    }else if ([overlay isKindOfClass:[MKPolygon class]]) {
         
-        MKPolyline *polyLine = (MKPolyline *)overlay;
+        MKPolygon *tileOverlay = (MKPolygon *)overlay;
+       
+        ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:tileOverlay];
         
-        ClearOverlayPathRenderer *renderer = [[ClearOverlayPathRenderer alloc] initWithPolyline:polyLine];
-        
+        renderer.fillColor = [UIColor blackColor];
         renderer.strokeColor = [UIColor blackColor];
-        renderer.lineWidth = 18;
+        renderer.lineWidth   = 3;
         
         return renderer;
         

@@ -32,13 +32,13 @@
     NSString *SIPolygonCoords = @"-74.1359,40.64333 -74.13391,40.64368 -74.13002,40.64381 -74.12557,40.64402 -74.12383,40.64453 -74.12211,40.64503 -74.11651,40.64645 -74.10998,40.64801 -74.10025,40.64815 -74.09418,40.64823 -74.09375,40.64824 -74.09058,40.64977 -74.08742,40.6513 -74.08681,40.6516 -74.07726,40.65173 -74.07441,40.65177 -74.07157,40.65181 -74.05574,40.65176 -74.05663,40.62729 -74.05532,40.6251 -74.05384,40.62262 -74.05235,40.62013 -74.04996,40.61626 -74.04962,40.61571 -74.04757,40.61241 -74.04751,40.61232 -74.04382,40.60682 -74.04204,40.60409 -74.04139,40.60311 -74.03788,40.5892 -74.03455,40.57625 -74.03505,40.57285 -74.03505,40.57275 -74.03515,40.571 -74.03598,40.55656 -74.03621,40.55252 -74.03622,40.5524 -74.03628,40.55118 -74.03629,40.55104 -74.0363,40.55097 -74.0363,40.55095 -74.0363,40.5509 -74.03655,40.54921 -74.03655,40.54919 -74.03667,40.54838 -74.03667,40.54837 -74.03749,40.54279 -74.03813,40.53829 -74.04211,40.5093 -74.05759,40.50653 -74.05787,40.50648 -74.07105,40.50391 -74.07818,40.5025 -74.0829,40.50167 -74.09149,40.50014 -74.09167,40.5001 -74.0923,40.49999 -74.09448,40.4996 -74.09858,40.4989 -74.10758,40.49742 -74.12455,40.49462 -74.13113,40.49353 -74.13716,40.49254 -74.14392,40.49139 -74.14994,40.49037 -74.15207,40.49002 -74.16039,40.48869 -74.16263,40.48829 -74.16386,40.48807 -74.20034,40.48202 -74.20039,40.48201 -74.20645,40.48101 -74.21704,40.47922 -74.22815,40.4774 -74.23793,40.48124 -74.24858,40.4855 -74.24993,40.48603 -74.25429,40.48901 -74.25909,40.49721 -74.25909,40.50013 -74.25909,40.50289 -74.25829,40.5079 -74.25634,40.51207 -74.25481,40.51534 -74.24607,40.52095 -74.24641,40.52436 -74.25061,40.54185 -74.23921,40.55376 -74.23215,40.55816 -74.23169,40.55846 -74.23029,40.55833 -74.22824,40.55813 -74.22451,40.5577 -74.21682,40.55864 -74.21603,40.55946 -74.21221,40.56818 -74.21075,40.57195 -74.2083,40.57905 -74.20824,40.57933 -74.2063,40.58854 -74.20369,40.59269 -74.19952,40.59754 -74.19949,40.59829 -74.19941,40.6002 -74.20376,40.6066 -74.20254,40.61617 -74.20316,40.62249 -74.20348,40.62506 -74.20225,40.6309 -74.201,40.63211 -74.19743,40.63543 -74.19699,40.63583 -74.19602,40.63716 -74.19571,40.63758 -74.19566,40.63765 -74.19348,40.63967 -74.19049,40.64244 -74.18922,40.64356 -74.18855,40.6441 -74.1878,40.6446 -74.18678,40.64524 -74.18139,40.64647 -74.17907,40.64621 -74.17759,40.64605 -74.16171,40.64432 -74.16156,40.64431 -74.16149,40.6443 -74.16137,40.64428 -74.15953,40.64405 -74.15825,40.64389 -74.15798,40.64386 -74.1577,40.64382 -74.15643,40.64367 -74.14938,40.64285 -74.14325,40.64215 -74.14208,40.64225 -74.1419,40.64228";
     
     
-    self.BKPolygon = [[CountyPolygon alloc] init];
-    self.MANPolygon1 = [[CountyPolygon alloc] init];
-    self.MANPolygon2 = [[CountyPolygon alloc] init];
-    self.MANPolygon3 = [[CountyPolygon alloc] init];
-    self.BRXPolygon = [[CountyPolygon alloc] init];
-    self.QNSPolygon = [[CountyPolygon alloc] init];
-    self.SIPolygon = [[CountyPolygon alloc] init];
+    self.BKPolygon = [self polygonWithLocations:[self polygonCoords:BKPolygonCoords]];
+    self.MANPolygon1 = [self polygonWithLocations:[self polygonCoords:MANPolygonCoords1]];
+    self.MANPolygon2 = [self polygonWithLocations:[self polygonCoords:MANPolygonCoords2]];
+    self.MANPolygon3 = [self polygonWithLocations:[self polygonCoords:MANPolygonCoords3]];
+    self.BRXPolygon = [self polygonWithLocations:[self polygonCoords:BRXPolygonCoords]];
+    self.QNSPolygon = [self polygonWithLocations:[self polygonCoords:QNSPolygonCoords]];
+    self.SIPolygon = [self polygonWithLocations:[self polygonCoords:SIPolygonCoords]];
     
     self.BKPolygon.name = @"Brooklyn";
     self.MANPolygon1.name = @"Manhattan";
@@ -48,20 +48,22 @@
     self.QNSPolygon.name = @"Queens";
     self.SIPolygon.name = @"Staten Island";
     
-    [self polygonCoords:BKPolygonCoords For:self.BKPolygon];
-    [self polygonCoords:MANPolygonCoords1 For:self.MANPolygon1];
-    [self polygonCoords:MANPolygonCoords2 For:self.MANPolygon2];
-    [self polygonCoords:MANPolygonCoords3 For:self.MANPolygon3];
-    [self polygonCoords:QNSPolygonCoords For:self.QNSPolygon];
-    [self polygonCoords:BRXPolygonCoords For:self.BRXPolygon];
-    [self polygonCoords:SIPolygonCoords For:self.SIPolygon];
+//    [self polygonCoords:BKPolygonCoords For:self.BKPolygon];
+//    [self polygonCoords:MANPolygonCoords1 For:self.MANPolygon1];
+//    [self polygonCoords:MANPolygonCoords2 For:self.MANPolygon2];
+//    [self polygonCoords:MANPolygonCoords3 For:self.MANPolygon3];
+//    [self polygonCoords:QNSPolygonCoords For:self.QNSPolygon];
+//    [self polygonCoords:BRXPolygonCoords For:self.BRXPolygon];
+//    [self polygonCoords:SIPolygonCoords For:self.SIPolygon];
     
 }
 
-- (void) polygonCoords: (NSString *)polygonCoords For: (CountyPolygon *)countyPolygon {
+- (NSMutableArray *) polygonCoords: (NSString *)polygonCoords {
+    
+    NSMutableArray *polygonCoordsArray;
     
     NSArray *lngLatCoords = [polygonCoords componentsSeparatedByString:@" "];
-        
+    
     for (NSString *lngLat in lngLatCoords) {
         
         NSArray *latLngComponents = [lngLat componentsSeparatedByString:@","];
@@ -72,14 +74,50 @@
         
         CLLocation *polygonCoord = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
         
-        if (countyPolygon.coords == nil) {
-            countyPolygon.coords = [[NSMutableArray alloc] init];
-        }
-        
-        [countyPolygon.coords addObject:polygonCoord];
+        [polygonCoordsArray addObject:polygonCoord];
         
     }
+    
+    NSLog(@"polygonCoordsArray: %@", polygonCoordsArray);
+    
+    return polygonCoordsArray;
 }
+
+//- (void) polygonCoords: (NSString *)polygonCoords For: (NYCPolygon *)countyPolygon {
+//    
+//    NSArray *lngLatCoords = [polygonCoords componentsSeparatedByString:@" "];
+//    
+//    for (NSString *lngLat in lngLatCoords) {
+//        
+//        NSArray *latLngComponents = [lngLat componentsSeparatedByString:@","];
+//        NSString *latStr = latLngComponents[1];
+//        NSString *lngStr = latLngComponents[0];
+//        double lat = latStr.doubleValue;
+//        double lng = lngStr.doubleValue;
+//        
+//        CLLocation *polygonCoord = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+//        
+//        if (countyPolygon.coords == nil) {
+//            countyPolygon.coords = [[NSMutableArray alloc] init];
+//        }
+//        
+//        [countyPolygon.coords addObject:polygonCoord];
+//        
+//    }
+//}
+
+- (NYCPolygon *)polygonWithLocations: (NSArray <CLLocation *> *)locations {
+    
+    CLLocationCoordinate2D coords[locations.count];
+    
+    for (int i = 0; i < locations.count; i++) {
+        CLLocation *location = [locations objectAtIndex:i];
+        coords[i] = location.coordinate;
+    }
+    
+    return [NYCPolygon polygonWithCoordinates:coords count:locations.count];
+}
+
 
 
 @end
