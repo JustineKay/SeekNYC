@@ -20,7 +20,7 @@
 - (void)fillPath:(CGPathRef)path inContext:(CGContextRef)context {
     
     CGContextAddPath(context, path);
-    //CGContextSetBlendMode(context, kCGBlendModeClear);
+    CGContextSetBlendMode(context, kCGBlendModeClear);
     CGContextDrawPath(context, kCGPathFillStroke);
 
 }

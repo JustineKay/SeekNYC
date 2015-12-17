@@ -36,8 +36,8 @@
 		6B9B79911BF68DC5004A7756 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B9B79901BF68DC5004A7756 /* CoreLocation.framework */; };
 		6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB08B951C0111C20098C805 /* UserProfileView.m */; };
 		6BCE1C111C0F950B00F0ABB0 /* DiamondPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE1C101C0F950B00F0ABB0 /* DiamondPinAnnotationView.m */; };
-		6BD4A9EC1C221B3D00775503 /* CountyPolygonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EA1C221B3D00775503 /* CountyPolygonData.m */; };
-		6BD4A9EF1C222F1200775503 /* NYCPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EE1C222F1200775503 /* NYCPolygon.m */; };
+		6BD4A9EC1C221B3D00775503 /* BoroughPolygonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */; };
+		6BD4A9EF1C222F1200775503 /* BoroughPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */; };
 		6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */; };
 		6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */; };
 		6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */; };
@@ -102,10 +102,10 @@
 		6BB08B951C0111C20098C805 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileView.m; sourceTree = "<group>"; };
 		6BCE1C0F1C0F950B00F0ABB0 /* DiamondPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiamondPinAnnotationView.h; sourceTree = "<group>"; };
 		6BCE1C101C0F950B00F0ABB0 /* DiamondPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiamondPinAnnotationView.m; sourceTree = "<group>"; };
-		6BD4A9E91C221B3D00775503 /* CountyPolygonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountyPolygonData.h; sourceTree = "<group>"; };
-		6BD4A9EA1C221B3D00775503 /* CountyPolygonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountyPolygonData.m; sourceTree = "<group>"; };
-		6BD4A9ED1C222F1200775503 /* NYCPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYCPolygon.h; sourceTree = "<group>"; };
-		6BD4A9EE1C222F1200775503 /* NYCPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYCPolygon.m; sourceTree = "<group>"; };
+		6BD4A9E91C221B3D00775503 /* BoroughPolygonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoroughPolygonData.h; sourceTree = "<group>"; };
+		6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoroughPolygonData.m; sourceTree = "<group>"; };
+		6BD4A9ED1C222F1200775503 /* BoroughPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoroughPolygon.h; sourceTree = "<group>"; };
+		6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoroughPolygon.m; sourceTree = "<group>"; };
 		6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPolygonRenderer.h; sourceTree = "<group>"; };
 		6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPolygonRenderer.m; sourceTree = "<group>"; };
 		6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipCode.h; sourceTree = "<group>"; };
@@ -205,10 +205,10 @@
 				6B28AA3B1C0271C5001CFF08 /* VisitedTile.m */,
 				6B5205691C13870000809D1B /* BootstrapData.h */,
 				6B52056A1C13870000809D1B /* BootstrapData.m */,
-				6BD4A9ED1C222F1200775503 /* NYCPolygon.h */,
-				6BD4A9EE1C222F1200775503 /* NYCPolygon.m */,
-				6BD4A9E91C221B3D00775503 /* CountyPolygonData.h */,
-				6BD4A9EA1C221B3D00775503 /* CountyPolygonData.m */,
+				6BD4A9ED1C222F1200775503 /* BoroughPolygon.h */,
+				6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */,
+				6BD4A9E91C221B3D00775503 /* BoroughPolygonData.h */,
+				6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */,
 				6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */,
 				6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */,
 				6BF12A7C1C0BEEDA00A21CF8 /* ZipCodeData.h */,
@@ -413,12 +413,12 @@
 				F79D2E0D1C021FCD00A5F7CA /* SuggestedVenuesTableViewController.m in Sources */,
 				6B9B79891BF68D6B004A7756 /* MKMapColorOverlayRenderer.m in Sources */,
 				6B9B79611BF68D05004A7756 /* AppDelegate.m in Sources */,
-				6BD4A9EC1C221B3D00775503 /* CountyPolygonData.m in Sources */,
+				6BD4A9EC1C221B3D00775503 /* BoroughPolygonData.m in Sources */,
 				008421B01C13574300E7D346 /* NYHiddenLocations.m in Sources */,
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
 				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
 				6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */,
-				6BD4A9EF1C222F1200775503 /* NYCPolygon.m in Sources */,
+				6BD4A9EF1C222F1200775503 /* BoroughPolygon.m in Sources */,
 				6BCE1C111C0F950B00F0ABB0 /* DiamondPinAnnotationView.m in Sources */,
 				6B28AA361C026650001CFF08 /* UIColor+Color.m in Sources */,
 				6B9B798D1BF68D6B004A7756 /* UserProfileViewController.m in Sources */,

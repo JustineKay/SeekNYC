@@ -6,10 +6,10 @@
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 
-#import "CountyPolygonData.h"
+#import "BoroughPolygonData.h"
 #import <CoreLocation/CoreLocation.h>
 
-@implementation CountyPolygonData
+@implementation BoroughPolygonData
 
 -(void) initializeData {
     
@@ -48,19 +48,11 @@
     self.QNSPolygon.name = @"Queens";
     self.SIPolygon.name = @"Staten Island";
     
-//    [self polygonCoords:BKPolygonCoords For:self.BKPolygon];
-//    [self polygonCoords:MANPolygonCoords1 For:self.MANPolygon1];
-//    [self polygonCoords:MANPolygonCoords2 For:self.MANPolygon2];
-//    [self polygonCoords:MANPolygonCoords3 For:self.MANPolygon3];
-//    [self polygonCoords:QNSPolygonCoords For:self.QNSPolygon];
-//    [self polygonCoords:BRXPolygonCoords For:self.BRXPolygon];
-//    [self polygonCoords:SIPolygonCoords For:self.SIPolygon];
-    
 }
 
 - (NSMutableArray *) polygonCoords: (NSString *)polygonCoords {
     
-    NSMutableArray *polygonCoordsArray;
+    NSMutableArray *polygonCoordsArray = [[NSMutableArray alloc] init];
     
     NSArray *lngLatCoords = [polygonCoords componentsSeparatedByString:@" "];
     
@@ -78,35 +70,11 @@
         
     }
     
-    NSLog(@"polygonCoordsArray: %@", polygonCoordsArray);
-    
     return polygonCoordsArray;
 }
 
-//- (void) polygonCoords: (NSString *)polygonCoords For: (NYCPolygon *)countyPolygon {
-//    
-//    NSArray *lngLatCoords = [polygonCoords componentsSeparatedByString:@" "];
-//    
-//    for (NSString *lngLat in lngLatCoords) {
-//        
-//        NSArray *latLngComponents = [lngLat componentsSeparatedByString:@","];
-//        NSString *latStr = latLngComponents[1];
-//        NSString *lngStr = latLngComponents[0];
-//        double lat = latStr.doubleValue;
-//        double lng = lngStr.doubleValue;
-//        
-//        CLLocation *polygonCoord = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-//        
-//        if (countyPolygon.coords == nil) {
-//            countyPolygon.coords = [[NSMutableArray alloc] init];
-//        }
-//        
-//        [countyPolygon.coords addObject:polygonCoord];
-//        
-//    }
-//}
 
-- (NYCPolygon *)polygonWithLocations: (NSArray <CLLocation *> *)locations {
+- (BoroughPolygon *)polygonWithLocations: (NSArray <CLLocation *> *)locations {
     
     CLLocationCoordinate2D coords[locations.count];
     
@@ -115,7 +83,7 @@
         coords[i] = location.coordinate;
     }
     
-    return [NYCPolygon polygonWithCoordinates:coords count:locations.count];
+    return [BoroughPolygon polygonWithCoordinates:coords count:locations.count];
 }
 
 

@@ -1,15 +1,13 @@
 //
-//  NYCPolygon.h
+//  NYCPolygon.m
 //  SeekNYC
 //
 //  Created by Justine Gartner on 12/16/15.
 //  Copyright © 2015 Justine Kay. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
+#import "BoroughPolygon.h"
 
-@interface NYCPolygon : MKPolygon
-
-@property (nonatomic) NSString *name;
+@implementation BoroughPolygon
 
 @end

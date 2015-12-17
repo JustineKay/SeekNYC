@@ -29,7 +29,7 @@
 #import "SunglassesAnnotationView.h"
 #import "UberBlackAnnotationView.h"
 #import "ClearOverlayPolygonRenderer.h"
-#import "CountyPolygonData.h"
+#import "BoroughPolygonData.h"
 #import "ZipCodeData.h"
 #import "ZipCode.h"
 #import "APIManager.h"
@@ -67,8 +67,8 @@ NSFetchedResultsControllerDelegate
 @property (nonatomic) NSMutableArray *zipCodesOfNYC;
 @property (nonatomic) ZipCodeData *zipCodeData;
 
-@property (nonatomic) CountyPolygonData *countyPolygonData;
-@property (nonatomic) NSArray *countyPolygonOverlays;
+@property (nonatomic) BoroughPolygonData *boroughPolygonData;
+@property (nonatomic) NSArray *boroughPolygonOverlays;
 
 
 @property (nonatomic) NSString *userLocationZipCode;
@@ -338,23 +338,24 @@ NSFetchedResultsControllerDelegate
 
 - (void)loadCountyPolygonOverlays {
     
-    if (self.countyPolygonData == nil) {
+    if (self.boroughPolygonData == nil) {
         
-        self.countyPolygonData = [[CountyPolygonData alloc] init];
+        self.boroughPolygonData = [[BoroughPolygonData alloc] init];
         
-        [self.countyPolygonData initializeData];
+        [self.boroughPolygonData initializeData];
         
-        self.countyPolygonOverlays = @[self.countyPolygonData.BKPolygon,
-                                       self.countyPolygonData.MANPolygon1,
-                                       self.countyPolygonData.MANPolygon2,
-                                       self.countyPolygonData.MANPolygon3,
-                                       self.countyPolygonData.BRXPolygon,
-                                       self.countyPolygonData.QNSPolygon,
-                                       self.countyPolygonData.SIPolygon
+        self.boroughPolygonOverlays= @[self.boroughPolygonData.BKPolygon,
+                                       self.boroughPolygonData.MANPolygon1,
+                                       self.boroughPolygonData.MANPolygon2,
+                                       self.boroughPolygonData.MANPolygon3,
+                                       self.boroughPolygonData.BRXPolygon,
+                                       self.boroughPolygonData.QNSPolygon,
+                                       self.boroughPolygonData.SIPolygon
                                        ];
+        
     }
    
-    [self.mapView addOverlays:self.countyPolygonOverlays];
+    [self.mapView addOverlays:self.boroughPolygonOverlays];
     
 }
 
@@ -665,7 +666,7 @@ NSFetchedResultsControllerDelegate
     
     MKMapPoint mapPoint = MKMapPointForCoordinate(mapCoordinate);
     
-    for (NYCPolygon *boroughOverlay in self.countyPolygonOverlays) {
+    for (BoroughPolygon *boroughOverlay in self.boroughPolygonOverlays) {
         
         MKPolygonRenderer *boroughOverlayRenderer = (MKPolygonRenderer *)[self.mapView rendererForOverlay: boroughOverlay];
         
@@ -1120,9 +1121,9 @@ NSFetchedResultsControllerDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
-    if ([overlay isKindOfClass:[NYCPolygon class]]) {
+    if ([overlay isKindOfClass:[BoroughPolygon class]]) {
         
-        NYCPolygon *boroughOverlay = (NYCPolygon *)overlay;
+        BoroughPolygon *boroughOverlay = (BoroughPolygon *)overlay;
         
         
         ClearOverlayPolygonRenderer *renderer = [[ClearOverlayPolygonRenderer alloc] initWithPolygon:boroughOverlay];
