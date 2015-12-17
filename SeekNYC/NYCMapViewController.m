@@ -69,6 +69,7 @@ NSFetchedResultsControllerDelegate
 
 @property (nonatomic) BoroughPolygonData *boroughPolygonData;
 @property (nonatomic) NSArray *boroughPolygonOverlays;
+@property (nonatomic) NSString *locationBorough;
 
 
 @property (nonatomic) NSString *userLocationZipCode;
@@ -655,7 +656,7 @@ NSFetchedResultsControllerDelegate
     
     for (CLLocation *newLocation in locations) {
         
-        [self processNewLocation:newLocation];
+        [self processLocation:newLocation];
         
     }
 }
@@ -668,43 +669,31 @@ NSFetchedResultsControllerDelegate
     
     for (BoroughPolygon *boroughOverlay in self.boroughPolygonOverlays) {
         
-        MKPolygonRenderer *boroughOverlayRenderer = (MKPolygonRenderer *)[self.mapView rendererForOverlay: boroughOverlay];
+        ClearOverlayPolygonRenderer *boroughOverlayRenderer = (ClearOverlayPolygonRenderer *)[self.mapView rendererForOverlay: boroughOverlay];
         
-        CGPoint countyOverlayViewPoint = [boroughOverlayRenderer pointForMapPoint:mapPoint];
+        CGPoint boroughOverlayViewPoint = [boroughOverlayRenderer pointForMapPoint:mapPoint];
         
-        BOOL locationIsInCountyOverlay = CGPathContainsPoint(boroughOverlayRenderer.path, NULL, countyOverlayViewPoint, NO);
+        BOOL locationIsInNYC = CGPathContainsPoint(boroughOverlayRenderer.path, NULL, boroughOverlayViewPoint, NO);
         
-        if (locationIsInCountyOverlay) {
+        if (locationIsInNYC) {
             
             //get borough of newLocation
-            NSString *newLocationBorough = boroughOverlay.name;
+            self.locationBorough = boroughOverlay.name;
             
-            //createNewtile with borough
-            
-            
+            NSLog(@"User is in NYC, %@", self.locationBorough);
+           
             return YES;
             
         }
         
     }
     
+    NSLog(@"User is not in NYC");
+    
     return NO;
 }
 
-//- (NSString *) getLocationBorough: (MKPolygon *)countyPolygonOverlay {
-//    
-//    if (countyPolygonOverlay == self.BKPolygonOverlay) {
-//        
-//        return  @"Brooklyn";
-//        
-//    }else if (countyPolygonOverlay == self.MANPolygonOverlay1 || self.MANPolygonOverlay2 || self.MANPolygonOverlay3) {
-//        
-//        return  @"Manhattan";
-//    }
-//    
-//}
-
--(void) processNewLocation: (CLLocation *)newLocation {
+-(void) processLocation: (CLLocation *)newLocation {
     
     NSLog(@"newLocation: %@", newLocation);
     
@@ -714,53 +703,89 @@ NSFetchedResultsControllerDelegate
         
         return;
     }
-    
-    [self getZipCode:newLocation completion:^(BOOL isNYC) {
+   
+    //***REMOVE (isNYC) to test in simulator *************
+    if ([self locationIsNYC:newLocation]) {
         
-        //***REMOVE (isNYC) to test in simulator *************
-        if (isNYC) {
+        [self createNewTile:newLocation WithBorough:self.locationBorough];
+        
+        NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+        
+        for (CLLocation *loc in surroundingTileCoords) {
             
-            [self createNewTile:newLocation];
-            
-            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
-            
-            for (CLLocation *loc in surroundingTileCoords) {
+            if ([self locationIsNYC:loc]) {
                 
-                [self createNewTile:loc];
-                
+                [self createNewTile:loc WithBorough:self.locationBorough];
             }
             
-//            //TESTING TIMER FOR GEOCODER**************************
-//            // Schedule location manager to run again in 60 seconds
-//            [self.locationManager stopUpdatingLocation];
-//            self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
-//            //****************************************************
         }
-    }];
-
+        
+    }
+    
 }
+
+
+
+//-(void) processNewLocation: (CLLocation *)newLocation {
+//    
+//    NSLog(@"newLocation: %@", newLocation);
+//    
+//    BOOL isAccurate = newLocation.horizontalAccuracy < 20;
+//    
+//    if (!isAccurate) {
+//        
+//        return;
+//    }
+//    
+//    [self getZipCode:newLocation completion:^(BOOL isNYC) {
+//        
+//        //***REMOVE (isNYC) to test in simulator *************
+//        if (isNYC) {
+//            
+//            [self createNewTile:newLocation];
+//            
+//            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+//            
+//            for (CLLocation *loc in surroundingTileCoords) {
+//                
+//                [self createNewTile:loc];
+//                
+//            }
+//            
+////            //TESTING TIMER FOR GEOCODER**************************
+////            // Schedule location manager to run again in 60 seconds
+////            [self.locationManager stopUpdatingLocation];
+////            self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
+////            //****************************************************
+//        }
+//    }];
+//
+//}
 
 -(void) processBootStrapLocation: (CLLocation *)newLocation {
     
-    [self getZipCode:newLocation completion:^(BOOL isNYC) {
-        if (isNYC) {
-            [self createNewTile:newLocation];
-            
-            //get surrounding locations from new location
-            //repeat the above to calculate surrounding tiles
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
-                for (CLLocation *loc in surroundingTileCoords) {
-                    [self createNewTile:loc];
+    if ([self locationIsNYC:newLocation]) {
+        
+        [self createNewTile:newLocation WithBorough:self.locationBorough];
+        
+        //get surrounding locations from new location
+        //repeat the above to calculate surrounding tiles
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
+            for (CLLocation *loc in surroundingTileCoords) {
+                
+                if ([self locationIsNYC:loc]) {
+                    
+                    [self createNewTile:loc WithBorough:self.locationBorough];
                     
                 }
-            });
+                
+            }
             
-
-
-        }
-    }];
+        });
+        
+    }
     
 }
 
@@ -799,28 +824,28 @@ NSFetchedResultsControllerDelegate
     
 }
 
--(void)createNewTile: (CLLocation *)newLocation{
-    
-    NSString *newTile = [self locationInGrid:newLocation];
-    
-    if ([self checkForMatchingTile:newTile] == NO) {
-        
-        NSLog(@"No matching tile found");
-        
-        //Use these coords to draw the tile
-        NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
-        
-        //get borough to save to visitedTile
-        NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
-        
-        [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
-        
-        [self.visitedTilesColumnRow addObject:newTile];
-        
-        [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
-    }
-
-}
+//-(void)createNewTile: (CLLocation *)newLocation{
+//    
+//    NSString *newTile = [self locationInGrid:newLocation];
+//    
+//    if ([self checkForMatchingTile:newTile] == NO) {
+//        
+//        NSLog(@"No matching tile found");
+//        
+//        //Use these coords to draw the tile
+//        NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
+//        
+//        //get borough to save to visitedTile
+//        NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
+//        
+//        [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
+//        
+//        [self.visitedTilesColumnRow addObject:newTile];
+//        
+//        [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
+//    }
+//
+//}
 
 
 - (void)startLocationUpdates {
