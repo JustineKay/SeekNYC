@@ -726,41 +726,6 @@ NSFetchedResultsControllerDelegate
 
 
 
-//-(void) processNewLocation: (CLLocation *)newLocation {
-//    
-//    NSLog(@"newLocation: %@", newLocation);
-//    
-//    BOOL isAccurate = newLocation.horizontalAccuracy < 20;
-//    
-//    if (!isAccurate) {
-//        
-//        return;
-//    }
-//    
-//    [self getZipCode:newLocation completion:^(BOOL isNYC) {
-//        
-//        //***REMOVE (isNYC) to test in simulator *************
-//        if (isNYC) {
-//            
-//            [self createNewTile:newLocation];
-//            
-//            NSArray *surroundingTileCoords = [self surroundingVisitedTileCoordinatesWithLocation:newLocation];
-//            
-//            for (CLLocation *loc in surroundingTileCoords) {
-//                
-//                [self createNewTile:loc];
-//                
-//            }
-//            
-////            //TESTING TIMER FOR GEOCODER**************************
-////            // Schedule location manager to run again in 60 seconds
-////            [self.locationManager stopUpdatingLocation];
-////            self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
-////            //****************************************************
-//        }
-//    }];
-//
-//}
 
 -(void) processBootStrapLocation: (CLLocation *)newLocation {
     
@@ -824,30 +789,6 @@ NSFetchedResultsControllerDelegate
     
 }
 
-//-(void)createNewTile: (CLLocation *)newLocation{
-//    
-//    NSString *newTile = [self locationInGrid:newLocation];
-//    
-//    if ([self checkForMatchingTile:newTile] == NO) {
-//        
-//        NSLog(@"No matching tile found");
-//        
-//        //Use these coords to draw the tile
-//        NSArray *tileCoords = [self visitedTileCoordinatesWith:newTile];
-//        
-//        //get borough to save to visitedTile
-//        NSString *newLocationBorough = [self getBorough:self.userLocationZipCode];
-//        
-//        [self saveVisitedTile:newTile WithBorough:newLocationBorough AndCoordinates:tileCoords];
-//        
-//        [self.visitedTilesColumnRow addObject:newTile];
-//        
-//        [self.mapView addOverlay:[self polygonWithLocations:tileCoords]];
-//    }
-//
-//}
-
-
 - (void)startLocationUpdates {
     
     if (self.locationManager == nil) {
@@ -866,10 +807,6 @@ NSFetchedResultsControllerDelegate
     self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
     
-}
-
-- (void)_turnOnLocationManager {
-    [self.locationManager startUpdatingLocation];
 }
 
 
