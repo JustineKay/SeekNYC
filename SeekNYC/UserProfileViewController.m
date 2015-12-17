@@ -13,12 +13,12 @@
 #import "VisitedTile.h"
 
 static double const tileSizeInMeters = 100.0;
-static double const NYCMeters = 785000;
-static double const BKMeters = 183000;
-static double const BRXMeters = 109000;
-static double const MANMeters = 59000;
-static double const QNSMeters = 283000;
-static double const SIMeters = 151000;
+static double const NYCMeters = 785000000;
+static double const BKMeters = 183000000;
+static double const BRXMeters = 109000000;
+static double const MANMeters = 59000000;
+static double const QNSMeters = 283000000;
+static double const SIMeters = 151000000;
 
 @interface UserProfileViewController ()
 <
