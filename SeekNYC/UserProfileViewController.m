@@ -188,7 +188,7 @@ NSFetchedResultsControllerDelegate
 
 -(CGFloat)percentageOfAreaUncovered: (NSInteger)numberOfTiles With: (NSInteger)areaMeters {
     
-    CGFloat userMeters = numberOfTiles * tileSizeInMeters;
+    CGFloat userMeters = numberOfTiles * (tileSizeInMeters * tileSizeInMeters);
     CGFloat percentageUncovered = userMeters / areaMeters;
     
     return percentageUncovered;
