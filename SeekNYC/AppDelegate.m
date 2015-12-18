@@ -11,9 +11,7 @@
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate ()<CLLocationManagerDelegate>
-
-@property (nonatomic) CLLocationManager *locationManager;
+@interface AppDelegate ()
 
 @end
 
@@ -22,32 +20,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-//    if (![CLLocationManager locationServicesEnabled]) {
-//        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Services Disabled", nil)
-//                                    message:NSLocalizedString(@"You currently have all location services for this device disabled. If you proceed, you will be asked to confirm whether location services should be reenabled.", nil)
-//                                   delegate:nil
-//                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
-//                          otherButtonTitles:nil] show];
-//    } else {
-//        self.locationManager = [[CLLocationManager alloc] init];
-//        self.locationManager.delegate = self;
-//        [self.locationManager startMonitoringSignificantLocationChanges];
-//    }
-//    
-//    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-//        [self.locationManager startUpdatingLocation];
-//    }
-    
-//    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-//        
-//        if (self.locationManager == nil) {
-//            self.locationManager = [[CLLocationManager alloc] init];
-//        }
-//        
-//        [self.locationManager startMonitoringSignificantLocationChanges];
-//    }
-    
     
     //To find font family name
 //    for (NSString* family in [UIFont familyNames])
