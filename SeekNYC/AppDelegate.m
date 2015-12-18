@@ -23,14 +23,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-        
-        if (self.locationManager == nil) {
-            self.locationManager = [[CLLocationManager alloc] init];
-        }
-        
-        [self.locationManager startMonitoringSignificantLocationChanges];
-    }
+//    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
+//        
+//        if (self.locationManager == nil) {
+//            self.locationManager = [[CLLocationManager alloc] init];
+//        }
+//        
+//        [self.locationManager startMonitoringSignificantLocationChanges];
+//    }
     
     
     //To find font family name

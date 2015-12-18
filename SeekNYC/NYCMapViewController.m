@@ -257,13 +257,6 @@ NSFetchedResultsControllerDelegate
     self.mapView.delegate = self;
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
-    if (self.zipCodeData == nil) {
-        
-        self.zipCodeData = [[ZipCodeData alloc] init];
-        [self.zipCodeData initializeData];
-        
-    }
-    
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
     self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
@@ -280,10 +273,10 @@ NSFetchedResultsControllerDelegate
     
 
     //TESTING with BOOTSTRAP DATA*******************
-//    if (!self.hasBootstrappedData) {
-//        [self loadBootstrapData];
-//        self.hasBootstrappedData = YES;
-//    }
+    if (!self.hasBootstrappedData) {
+        [self loadBootstrapData];
+        self.hasBootstrappedData = YES;
+    }
     //***********************************************
 }
 
@@ -810,69 +803,6 @@ NSFetchedResultsControllerDelegate
 }
 
 
--(void)getZipCode: (CLLocation *)newLocation completion:(void(^)(BOOL isNYC))completion {
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
-    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
-     {
-         if (!(error))
-         {
-             //Testing Location********************
-             CLLocation *testLocation = newLocation;
-             NSLog(@"location: %@", testLocation);
-             
-             CLPlacemark *placemark = [placemarks objectAtIndex:0];
-             NSLog(@"\nCurrent Location Detected\n");
-             //NSLog(@"placemark %@",placemark);
-             
-             if (placemark.postalCode) {
-                 NSString *zipNumber = [[NSString alloc]initWithString:placemark.postalCode];
-                 self.userLocationZipCode = zipNumber;
-             
-                 completion([self verifyZipCode:zipNumber]);
-             }
-             
-         }
-         else
-         {
-             NSLog(@"Geocode failed with error %@", error); // Error handling required
-         }
-     }];
-    
-}
-
--(BOOL)verifyZipCode: (NSString *)userLocationZipCode {
-    
-    
-    for (ZipCode *zip in self.zipCodeData.allZipCodes){
-        
-        if ([zip.number isEqualToString:userLocationZipCode]) {
-            
-            NSLog(@"User is in NYC, %@", zip.borough);
-
-            return YES;
-            
-        }
-        
-    }
-    
-    NSLog(@"User is not in NYC");
-
-    return NO;
-    
-}
-
-- (NSString *) getBorough: (NSString *)newLocationZipCode {
-    
-    for (ZipCode *zip in self.zipCodeData.allZipCodes){
-        if ([zip.number isEqualToString:newLocationZipCode]) {
-            
-            return zip.borough;
-        }
-    }
-    
-    return nil;
-}
 
 #pragma mark - Action Buttons
 

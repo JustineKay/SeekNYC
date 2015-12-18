@@ -39,8 +39,6 @@
 		6BD4A9EC1C221B3D00775503 /* BoroughPolygonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */; };
 		6BD4A9EF1C222F1200775503 /* BoroughPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */; };
 		6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */; };
-		6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */; };
-		6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */; };
 		6D2E837437078CAA4ED253D7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB25FEF09FD3D81CB565DF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F721F9F41BF7ED65007684EA /* CircleProgressBar.m */; };
 		F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F79D2E041C021CAD00A5F7CA /* APIManager.m */; };
@@ -108,10 +106,6 @@
 		6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoroughPolygon.m; sourceTree = "<group>"; };
 		6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPolygonRenderer.h; sourceTree = "<group>"; };
 		6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPolygonRenderer.m; sourceTree = "<group>"; };
-		6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipCode.h; sourceTree = "<group>"; };
-		6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipCode.m; sourceTree = "<group>"; };
-		6BF12A7C1C0BEEDA00A21CF8 /* ZipCodeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipCodeData.h; sourceTree = "<group>"; };
-		6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipCodeData.m; sourceTree = "<group>"; };
 		6BF12A801C0CEA0700A21CF8 /* SeekNYC 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 3.xcdatamodel"; sourceTree = "<group>"; };
 		6BF12A811C0D016C00A21CF8 /* SeekNYC 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 4.xcdatamodel"; sourceTree = "<group>"; };
 		6BF12A821C0D12C400A21CF8 /* SeekNYC 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -209,10 +203,6 @@
 				6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */,
 				6BD4A9E91C221B3D00775503 /* BoroughPolygonData.h */,
 				6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */,
-				6BF12A7A1C0BEEDA00A21CF8 /* ZipCode.h */,
-				6BF12A7B1C0BEEDA00A21CF8 /* ZipCode.m */,
-				6BF12A7C1C0BEEDA00A21CF8 /* ZipCodeData.h */,
-				6BF12A7D1C0BEEDA00A21CF8 /* ZipCodeData.m */,
 				6B28AA341C026650001CFF08 /* UIColor+Color.h */,
 				6B28AA351C026650001CFF08 /* UIColor+Color.m */,
 				6B28AA2E1C0220C1001CFF08 /* NYAlertView.h */,
@@ -417,7 +407,6 @@
 				008421B01C13574300E7D346 /* NYHiddenLocations.m in Sources */,
 				6B9B796A1BF68D05004A7756 /* SeekNYC.xcdatamodeld in Sources */,
 				6B9B79861BF68D6B004A7756 /* ClearOverlayPathRenderer.m in Sources */,
-				6BF12A7F1C0BEEDA00A21CF8 /* ZipCodeData.m in Sources */,
 				6BD4A9EF1C222F1200775503 /* BoroughPolygon.m in Sources */,
 				6BCE1C111C0F950B00F0ABB0 /* DiamondPinAnnotationView.m in Sources */,
 				6B28AA361C026650001CFF08 /* UIColor+Color.m in Sources */,
@@ -425,7 +414,6 @@
 				F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */,
 				6B9B795E1BF68D05004A7756 /* main.m in Sources */,
 				6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */,
-				6BF12A7E1C0BEEDA00A21CF8 /* ZipCode.m in Sources */,
 				6B9B79881BF68D6B004A7756 /* MKMapFullCoverageOverlay.m in Sources */,
 				6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */,
 				6B52056B1C13870000809D1B /* BootstrapData.m in Sources */,
