@@ -73,7 +73,7 @@ http://en.fogofworld.com/
 - Backend and Core Data Management
 - Map grid implementation
 - Map overlay implementation & path clearing
-- Zip code implementation
+- Borough tracking implementation
 - Demo script and pitch
 - Presentation slides for final release
 - Logo Design
