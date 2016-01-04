@@ -21,9 +21,9 @@ In NYC, how can we motivate people to discover other locations around the city o
 ## The Solution
 
 A real-life game that reveals how much of NYC you've actually explored and gives you suggestions for uncovering more of the map.  
-The app tracks your movement as you trek through the city and reveals an underlying map of NYC in full color and detail. It shows you what percentage of the 5 boroughs you've actually uncovered.  You can also shake your device to receive recommendations for exploring places outside of your uncovered area. 
+The app tracks your movement as you trek through the city and reveals an underlying map of NYC in full color and detail. It shows you what percentage of the 5 boroughs you've actually uncovered.  You can choose between 4 different skins for the opaque overlay on the map.
 
-You can choose between 4 different skins for the opaque overlay on the map.
+You can also shake your device to receive recommendations for exploring places outside of your uncovered area and then get directions. 
 
 #### Features:
 * User's map is saved in Core Data.  
@@ -73,7 +73,7 @@ http://en.fogofworld.com/
 - Backend and Core Data Management
 - Map grid implementation
 - Map overlay implementation & path clearing
-- Zip code implementation
+- Borough tracking implementation
 - Demo script and pitch
 - Presentation slides for final release
 - Logo Design
