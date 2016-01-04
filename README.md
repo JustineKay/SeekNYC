@@ -32,21 +32,14 @@ You can also shake your device to receive recommendations for exploring places o
 * Recommendations are pulled from the Foursquare API and Atlas Obscura's Hidden spots of NYC.  
 * User can obtain directions to recommended places by tapping on the "directions" icon in the map annotation callout view.
 
-#### Features On Our Wishlist To Implement In Future Versions:  
-* User can acheive awards and obtain certain levels for visiting specific places, traveling new routes, and avoiding well-known tourist traps.
-* User can view a Subway count of all the stations they've been to.  
-* User can recieve notifications of places to visit just outside of routes they travel frequently.
-* User's tracks appear different when they've taken the same route multiple times.
-* User can share maps on twitter and facebook.
-* User can track walking, biking and driving seperately
-* User can view other user's maps in app
-* User can drop markers, with photos and notes (Peek & Pop)
-* User includes where they live in the sign up process to determine whether they experience the app as a visitor or resident. 
-* User experience is slightly different depending on whether they are a visitor or resident.
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website1.jpg" width=220 />
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website2.jpg" width=220 />
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website3.jpg" width=220 />
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website4.jpg" width=220 />
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website5.jpg" width=220 />
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website6.jpg" width=220 />
+<img src="https://github.com/JustineKay/SeekNYC/blob/master/Images/SeekNYC-screenshot-website7.jpg" width=220 />
 
-With endless thanks to Orta Therox.  
-This idea was inspired by the app "Fog Of World"
-http://en.fogofworld.com/
 
 #### Timeline
 | Week | Date | Sprint |
@@ -89,5 +82,19 @@ http://en.fogofworld.com/
 - Atlas Obscura Data
 - Menu Bar Implementation
 
+#### Features On Our Wishlist To Implement In Future Versions:  
+* User can acheive awards and obtain certain levels for visiting specific places, traveling new routes, and avoiding well-known tourist traps.
+* User can view a Subway count of all the stations they've been to.  
+* User can recieve notifications of places to visit just outside of routes they travel frequently.
+* User's tracks appear different when they've taken the same route multiple times.
+* User can share maps on twitter and facebook.
+* User can track walking, biking and driving seperately
+* User can view other user's maps in app
+* User can drop markers, with photos and notes (Peek & Pop)
+* User includes where they live in the sign up process to determine whether they experience the app as a visitor or resident. 
+* User experience is slightly different depending on whether they are a visitor or resident.
 
-
+#### With endless thanks to Orta Therox
+#### :)
+This project was inspired by the app "Fog Of World"
+http://en.fogofworld.com/
