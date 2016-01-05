@@ -94,6 +94,7 @@ You can also shake your device to receive recommendations for exploring places o
 * User includes where they live in the sign up process to determine whether they experience the app as a visitor or resident. 
 * User experience is slightly different depending on whether they are a visitor or resident.
 
-#### With endless thanks to Orta Therox :)
+
+##### With endless thanks to Orta Therox :)
 This project was inspired by the app "Fog Of World"  
 http://en.fogofworld.com/
