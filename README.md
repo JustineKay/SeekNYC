@@ -1,12 +1,10 @@
-# Access Code 2.2 Final Project Proposal
-
-**Project Name: SeekNYC**  
-**Team Name: Seekers**  
-**Team Members: Christella Dolmo, Justine Kay, Felicia Weathers**  
+#SeekNYC - Uncover Your City
+####Team Members: Christella Dolmo, Justine Kay, Felicia Weathers####
 
 ## Description  
 
-SeekNYC is a fun way to discover places you haven’t visited in New York City’s five boroughs. Explore and uncover a map of NYC as you seek out new adventures.  
+How much do you really know New York City?  Don't get stuck in the same old routines!  SeekNYC is a fun way to discover places you haven’t visited in NYC’s five boroughs. Explore and uncover a map of NYC as you seek out new adventures.  
+***[Now available in the iTunes App store](https://itunes.apple.com/ky/app/seeknyc-uncover-your-city/id1060650721?mt=8)***
 
 ## The Problem
 
