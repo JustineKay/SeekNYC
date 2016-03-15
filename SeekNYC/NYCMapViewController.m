@@ -251,22 +251,8 @@ NSFetchedResultsControllerDelegate
         [self filterAPIResult:vipRec];
     }
     
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable)
-    {
-        //connection unavailable
-        [self showReachabilityAlertVC];
-    }
-    else
-    {
-        //connection available
-        [self fetchFourSquareData];
-        
-        [self startLocationUpdates];
-    }
-    
     
     self.mapView.delegate = self;
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
@@ -280,8 +266,21 @@ NSFetchedResultsControllerDelegate
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    [self presentGestureAlertVC];
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
+        
+        //connection unavailable
+        [self showReachabilityAlertVC];
     
+    } else {
+        
+        //connection available
+        [self fetchFourSquareData];
+        
+        [self startLocationUpdates];
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+        
+        [self presentGestureAlertVC];
+    }
 
     //TESTING with BOOTSTRAP DATA*******************
 //    if (!self.hasBootstrappedData) {
@@ -381,7 +380,7 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView setRegion: NYRegion animated: YES];
     
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
 
@@ -1091,31 +1090,35 @@ NSFetchedResultsControllerDelegate
 
 -(void)showReachabilityAlertVC {
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *infoAlert = @"infoAlert";
-    if ([prefs boolForKey:infoAlert])
-        return;
-    [prefs setBool:YES forKey:infoAlert];
-    
-    NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    NYAlertViewController *reachabilityAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
     // Set a title and message
-    gestureAlertInfo.title = NSLocalizedString(@"No Internet Connection Detected", nil);
-    gestureAlertInfo.message = NSLocalizedString(@"Please make sure you have an internet connection and try again.", nil);
+    reachabilityAlertInfo.title = NSLocalizedString(@"No Internet Connection Detected", nil);
+    reachabilityAlertInfo.message = NSLocalizedString(@"Please make sure you are connected and try again.", nil);
     
     // Customize appearance as desired
-    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
-    [self alertViewControllerUI:gestureAlertInfo];
+    reachabilityAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
+    [self alertViewControllerUI:reachabilityAlertInfo];
     
     //add action
-    [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+    [reachabilityAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
                                                          style:UIAlertActionStyleCancel
                                                        handler:^(NYAlertAction *action) {
-                                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                                           
+                                                           [self dismissViewControllerAnimated:YES completion:^{
+                                                               
+                                                               NSArray *windows = [UIApplication sharedApplication].windows;
+                                                               for (UIWindow *window in windows) {
+                                                                   for (UIView *view in window.subviews) {
+                                                                       [view removeFromSuperview];
+                                                                       [window addSubview:view];
+                                                                   }
+                                                               }
+                                                           }];
                                                        }]];
     
     // Present the alert view controller
-    [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+    [self presentViewController:reachabilityAlertInfo animated:YES completion:nil];
 }
 
 
