@@ -38,6 +38,7 @@
 		6BCE1C111C0F950B00F0ABB0 /* DiamondPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BCE1C101C0F950B00F0ABB0 /* DiamondPinAnnotationView.m */; };
 		6BD4A9EC1C221B3D00775503 /* BoroughPolygonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */; };
 		6BD4A9EF1C222F1200775503 /* BoroughPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */; };
+		6BD9F8651C97A3BB005E5A2F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9F8641C97A3BB005E5A2F /* Reachability.m */; };
 		6BF12A731C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */; };
 		6D2E837437078CAA4ED253D7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB25FEF09FD3D81CB565DF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F721F9F51BF7ED65007684EA /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F721F9F41BF7ED65007684EA /* CircleProgressBar.m */; };
@@ -104,6 +105,8 @@
 		6BD4A9EA1C221B3D00775503 /* BoroughPolygonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoroughPolygonData.m; sourceTree = "<group>"; };
 		6BD4A9ED1C222F1200775503 /* BoroughPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoroughPolygon.h; sourceTree = "<group>"; };
 		6BD4A9EE1C222F1200775503 /* BoroughPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoroughPolygon.m; sourceTree = "<group>"; };
+		6BD9F8631C97A3BB005E5A2F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6BD9F8641C97A3BB005E5A2F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6BF12A711C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOverlayPolygonRenderer.h; sourceTree = "<group>"; };
 		6BF12A721C0B6F5000A21CF8 /* ClearOverlayPolygonRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearOverlayPolygonRenderer.m; sourceTree = "<group>"; };
 		6BF12A801C0CEA0700A21CF8 /* SeekNYC 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SeekNYC 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				6B9B797D1BF68D6B004A7756 /* MKMapColorOverlayRenderer.m */,
 				6B9B797E1BF68D6B004A7756 /* NYCMapViewController.h */,
 				6B9B797F1BF68D6B004A7756 /* NYCMapViewController.m */,
+				6BD9F8631C97A3BB005E5A2F /* Reachability.h */,
+				6BD9F8641C97A3BB005E5A2F /* Reachability.m */,
 				6B9B79841BF68D6B004A7756 /* UserProfileViewController.h */,
 				6B9B79851BF68D6B004A7756 /* UserProfileViewController.m */,
 				6BB08B941C0111C20098C805 /* UserProfileView.h */,
@@ -418,6 +423,7 @@
 				6B28AA401C0274BD001CFF08 /* DiamondAnnotationView.m in Sources */,
 				6B52056B1C13870000809D1B /* BootstrapData.m in Sources */,
 				6B28AA321C0220C1001CFF08 /* NYAlertView.m in Sources */,
+				6BD9F8651C97A3BB005E5A2F /* Reachability.m in Sources */,
 				F79D2E051C021CAD00A5F7CA /* APIManager.m in Sources */,
 				6BB08B961C0111C20098C805 /* UserProfileView.m in Sources */,
 				6B28AA3D1C0271C5001CFF08 /* VisitedTile.m in Sources */,

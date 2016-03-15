@@ -36,6 +36,7 @@
 #import "SeekNYCParks.h"
 #import "NYHiddenLocations.h"
 #import "BootstrapData.h"
+#import "Reachability.h"
 
 static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
@@ -250,9 +251,19 @@ NSFetchedResultsControllerDelegate
         [self filterAPIResult:vipRec];
     }
     
-    [self fetchFourSquareData];
+    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable)
+    {
+        //connection unavailable
+        [self showReachabilityAlertVC];
+    }
+    else
+    {
+        //connection available
+        [self fetchFourSquareData];
+        
+        [self startLocationUpdates];
+    }
     
-    [self startLocationUpdates];
     
     self.mapView.delegate = self;
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
@@ -1077,6 +1088,36 @@ NSFetchedResultsControllerDelegate
 
 
 #pragma mark - AlertViewController
+
+-(void)showReachabilityAlertVC {
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *infoAlert = @"infoAlert";
+    if ([prefs boolForKey:infoAlert])
+        return;
+    [prefs setBool:YES forKey:infoAlert];
+    
+    NYAlertViewController *gestureAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    gestureAlertInfo.title = NSLocalizedString(@"No Internet Connection Detected", nil);
+    gestureAlertInfo.message = NSLocalizedString(@"Please make sure you have an internet connection and try again.", nil);
+    
+    // Customize appearance as desired
+    gestureAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
+    [self alertViewControllerUI:gestureAlertInfo];
+    
+    //add action
+    [gestureAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(NYAlertAction *action) {
+                                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                                       }]];
+    
+    // Present the alert view controller
+    [self presentViewController:gestureAlertInfo animated:YES completion:nil];
+}
+
 
 -(void)presentGestureAlertVC {
     
