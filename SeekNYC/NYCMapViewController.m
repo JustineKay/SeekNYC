@@ -36,7 +36,7 @@
 #import "SeekNYCParks.h"
 #import "NYHiddenLocations.h"
 #import "BootstrapData.h"
-#import "Reachability.h"
+#import "Connectivity.h"
 
 static double const tileSizeInMeters = 100.0;
 static float const centerCoordLat = 40.7127;
@@ -259,14 +259,11 @@ NSFetchedResultsControllerDelegate
     self.gridCenterCoord = CLLocationCoordinate2DMake(centerCoordLat, centerCoordLng);
     self.gridSpan = MKCoordinateSpanMake(NYRegionSpan, NYRegionSpan);
     self.gridOriginPoint = [self topLeftLocationOfGrid:self.gridCenterCoord And:self.gridSpan];
-    
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    if ([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
+    if ([[Connectivity reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
         
         //connection unavailable
         [self showReachabilityAlertVC];
@@ -277,7 +274,6 @@ NSFetchedResultsControllerDelegate
         [self fetchFourSquareData];
         
         [self startLocationUpdates];
-        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
         
         [self presentGestureAlertVC];
     }
@@ -380,7 +376,7 @@ NSFetchedResultsControllerDelegate
     
     [self.mapView setRegion: NYRegion animated: YES];
     
-    //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
 
