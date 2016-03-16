@@ -5,6 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Viafont.ttf">
+            <string>Viafont</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="4h4-cg-T3f">
@@ -21,6 +26,29 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qkw-2I-T35">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Osh-7a-sba">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Your City..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbJ-9t-jJW">
+                                        <rect key="frame" x="203" y="291" width="194" height="17"/>
+                                        <fontDescription key="fontDescription" name="Viafont" family="Viafont" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="gbJ-9t-jJW" firstAttribute="centerY" secondItem="Osh-7a-sba" secondAttribute="centerY" id="LJL-xq-IPv"/>
+                                    <constraint firstItem="gbJ-9t-jJW" firstAttribute="centerX" secondItem="Osh-7a-sba" secondAttribute="centerX" id="weR-Yg-BqH"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seekNYC-LOGO-LoadingScreen2" translatesAutoresizingMaskIntoConstraints="NO" id="hk5-UA-gRk">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZm-7B-5f7">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rS-ea-nVE" userLabel="Top Bar View">
                                 <rect key="frame" x="0.0" y="50" width="600" height="60"/>
                                 <subviews>
@@ -98,15 +126,31 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9rS-ea-nVE" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="0Bz-IF-cga"/>
+                            <constraint firstItem="yZm-7B-5f7" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="19r-ZW-vwU"/>
+                            <constraint firstItem="yZm-7B-5f7" firstAttribute="top" secondItem="QLD-xQ-21n" secondAttribute="top" id="4Ry-zQ-fyh"/>
                             <constraint firstItem="qkw-2I-T35" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="6M1-4L-au9"/>
+                            <constraint firstAttribute="bottom" secondItem="yZm-7B-5f7" secondAttribute="bottom" id="9FR-6H-c94"/>
+                            <constraint firstAttribute="trailing" secondItem="Osh-7a-sba" secondAttribute="trailing" id="Ap5-Zz-h4z"/>
+                            <constraint firstItem="Osh-7a-sba" firstAttribute="top" secondItem="QLD-xQ-21n" secondAttribute="top" id="IY7-rq-OUu"/>
+                            <constraint firstAttribute="trailing" secondItem="yZm-7B-5f7" secondAttribute="trailing" id="L8Q-QT-KCZ"/>
                             <constraint firstItem="qkw-2I-T35" firstAttribute="top" secondItem="QLD-xQ-21n" secondAttribute="top" id="ZXu-Wf-zRZ"/>
                             <constraint firstItem="9rS-ea-nVE" firstAttribute="top" secondItem="0KV-Qv-Yi6" secondAttribute="bottom" constant="30" id="Zik-u8-72e"/>
+                            <constraint firstItem="Osh-7a-sba" firstAttribute="leading" secondItem="QLD-xQ-21n" secondAttribute="leading" id="ajh-Ne-i4Q"/>
+                            <constraint firstAttribute="bottom" secondItem="Osh-7a-sba" secondAttribute="bottom" id="iZo-hs-2wZ"/>
                             <constraint firstAttribute="trailing" secondItem="qkw-2I-T35" secondAttribute="trailing" id="pFi-y0-rJI"/>
                             <constraint firstItem="Vaj-1Q-6Tl" firstAttribute="top" secondItem="qkw-2I-T35" secondAttribute="bottom" id="v4R-52-XBi"/>
                             <constraint firstAttribute="trailing" secondItem="9rS-ea-nVE" secondAttribute="trailing" id="zr2-ls-3Vp"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hk5-UA-gRk"/>
+                                <exclude reference="yZm-7B-5f7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="loadingScreenLabel" destination="gbJ-9t-jJW" id="dXX-XZ-TPv"/>
+                        <outlet property="loadingScreenView" destination="Osh-7a-sba" id="ijb-fU-vFW"/>
                         <outlet property="mapView" destination="qkw-2I-T35" id="JQy-z2-v4H"/>
                         <outlet property="profileSettingsButton" destination="dPc-fc-Lr4" id="02n-GE-ZnH"/>
                         <outlet property="zoomToLocationButton" destination="fPC-3G-srQ" id="IiL-In-4Mg"/>
@@ -225,6 +269,7 @@
     <resources>
         <image name="location" width="62" height="60"/>
         <image name="menuIconWhite" width="354" height="250"/>
+        <image name="seekNYC-LOGO-LoadingScreen2" width="1568" height="2203"/>
         <image name="share" width="48" height="66"/>
     </resources>
 </document>

@@ -54,6 +54,9 @@ NSFetchedResultsControllerDelegate
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+@property (weak, nonatomic) IBOutlet UIView *loadingScreenView;
+@property (weak, nonatomic) IBOutlet UILabel *loadingScreenLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *profileSettingsButton;
 @property (weak, nonatomic) IBOutlet UIButton *zoomToLocationButton;
 
@@ -252,6 +255,7 @@ NSFetchedResultsControllerDelegate
         [self filterAPIResult:vipRec];
     }
     
+    self.loadingScreenLabel.textColor = [UIColor hotPinkColor];
     
     self.mapView.delegate = self;
     
@@ -288,36 +292,26 @@ NSFetchedResultsControllerDelegate
 }
 
 
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
-//    UIView  *myview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
-//    [myview setBackgroundColor:[UIColor grayColor]];
-//    myview.tag = 1;
-//    [self.view addSubview:myview];
+    self.loadingScreenView.alpha = 1.0;
     
-    [self showIntroView:^(BOOL finished) {
+    //Animate loading label
+    CABasicAnimation *animation = [self animateLoadingLabelOpacity];
+    [self.loadingScreenLabel.layer addAnimation:animation forKey:@"animateOpacity"];
+    
+    if (![[Connectivity reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
         
-        if (finished && ![[Connectivity reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
-         
-            [self loadMap:^(BOOL finished) {
-                
-                if(finished){
-                    
-                    [self fadeOutIntroView];
-                }
-                
-            }];
-            
-        }
-    }];
+        
+        
+        [self loadCountyPolygonOverlays];
+        [self loadNYCMap];
+        [self loadVisitedTiles];
+        
+        [self fadeOutLoadingView];
+    }
     
-    
-//    [self loadCountyPolygonOverlays];
-//    [self loadNYCMap];
-//    [self loadVisitedTiles];
-
     
     
     //UNCOMMENT THE FOLLOWING FOR TESTING
@@ -356,60 +350,47 @@ NSFetchedResultsControllerDelegate
     [self.mapView removeOverlays:overlays];
 }
 
-typedef void(^completion)(BOOL finished);
 
--(void)showIntroView:(completion)completion
+#pragma mark - Loading Label Animations
+
+-(CABasicAnimation *)animateLoadingLabelOpacity
 {
-    UIView  *introView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+    CABasicAnimation *theAnimation;
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:TintKey]) {
-        
-        NSData *colourData = [[NSUserDefaults standardUserDefaults] objectForKey:TintKey];
-        
-        UIColor *userColour = [NSKeyedUnarchiver unarchiveObjectWithData:colourData];
-        
-        introView.backgroundColor = userColour;
-        
-    }else {
-        
-        [introView setBackgroundColor:[UIColor grayColor]];
-    }
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
     
-    introView.tag = 1;
-    [self.view addSubview:introView];
+    theAnimation.duration=1.0;
     
-    completion(YES);
+    //Repeat forever
+    theAnimation.repeatCount= HUGE_VALF;
+    
+    //Reverse animation
+    theAnimation.autoreverses=YES;
+    
+    theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+    theAnimation.toValue=[NSNumber numberWithFloat:0.1];
+    
+    return theAnimation;
+    
 }
 
-
-
-- (void)loadMap:(completion)completion
-{
-    [self loadCountyPolygonOverlays];
-    [self loadNYCMap];
-    [self loadVisitedTiles];
-    
-    completion(YES);
-}
-
-- (void)fadeOutIntroView
+- (void)fadeOutLoadingView
 {
     void (^fadeOut)(void);
     fadeOut = ^(void) {
         
-        [[self.view viewWithTag:1] setAlpha:0.0];
+        self.loadingScreenView.alpha = 0.0;
     };
     
-    void (^removeView)(BOOL finished);
-    removeView = ^(BOOL finished) {
+    void (^removeAnimations)(BOOL finished);
+    removeAnimations = ^(BOOL finished) {
         
-        [[self.view viewWithTag:1] removeFromSuperview];
+        [self.loadingScreenLabel.layer removeAllAnimations];
     };
     
-    // Hide controls
-    [UIView  animateWithDuration:5.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut animations:fadeOut completion:removeView];
+    // Hide loadingView
+    [UIView  animateWithDuration:4.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut animations:fadeOut completion:removeAnimations];
 }
-
 
 
 #pragma mark - Overlays
@@ -1181,37 +1162,26 @@ typedef void(^completion)(BOOL finished);
                                                                    //connection unavailable
                                                                    [self showReachabilityAlertVC];
                                                                    
-                                                               } else {
+                                                               }else {
                                                                    
                                                                    //connection available
+                                                                   
+                                                                   CABasicAnimation *animation = [self animateLoadingLabelOpacity];
+                                                                   [self.loadingScreenLabel.layer addAnimation:animation forKey:@"animateOpacity"];
+                                                                   
                                                                    [self fetchFourSquareData];
                                                                    
                                                                    [self startLocationUpdates];
                                                                    
                                                                    [self presentGestureAlertVC];
                                                                    
-                                                                   [self showIntroView:^(BOOL finished) {
-                                                                       
-                                                                           [self loadMap:^(BOOL finished) {
-                                                                               
-                                                                                   [self fadeOutIntroView];
-                                                                               
-                                                                           }];
-                                                                       
-                                                                   }];
+                                                                   [self loadCountyPolygonOverlays];
+                                                                   [self loadNYCMap];
+                                                                   [self loadVisitedTiles];
+                                                                   
+                                                                   [self fadeOutLoadingView];
+                                                            }
 
-                                                               }
-
-                                                               
-//                                                               NSArray *windows = [UIApplication sharedApplication].windows;
-//                                                               for (UIWindow *window in windows) {
-//                                                                   for (UIView *view in window.subviews) {
-//                                                                       [view removeFromSuperview];
-//                                                                       [window addSubview:view];
-//                                                                   }
-//                                                               }
-//                                                               
-//                                                               [self fadeOutIntroView];
                                                            }];
                                                        }]];
     
