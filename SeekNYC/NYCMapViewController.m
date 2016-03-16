@@ -737,6 +737,9 @@ NSFetchedResultsControllerDelegate
            
             return YES;
             
+        } else {
+            
+            [self showOutsideNYCAlertVC];
         }
         
     }
@@ -1138,20 +1141,46 @@ NSFetchedResultsControllerDelegate
 
 #pragma mark - AlertViewController
 
--(void)showReachabilityAlertVC {
+-(void)showOutsideNYCAlertVC {
     
-    NYAlertViewController *reachabilityAlertInfo = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    NYAlertViewController *outsideNYCAlertVC = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
     // Set a title and message
-    reachabilityAlertInfo.title = NSLocalizedString(@"No Internet Connection Detected", nil);
-    reachabilityAlertInfo.message = NSLocalizedString(@"Please make sure you are connected and try again.", nil);
+    outsideNYCAlertVC.title = NSLocalizedString(@"Not in NYC?", nil);
+    outsideNYCAlertVC.message = NSLocalizedString(@"Come back and try again.", nil);
     
     // Customize appearance as desired
-    reachabilityAlertInfo.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
-    [self alertViewControllerUI:reachabilityAlertInfo];
+    outsideNYCAlertVC.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
+    [self alertViewControllerUI:outsideNYCAlertVC];
     
     //add action
-    [reachabilityAlertInfo addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+    [outsideNYCAlertVC addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                              style:UIAlertActionStyleCancel
+                                                            handler:^(NYAlertAction *action) {
+                                                                
+                                                                [self dismissViewControllerAnimated:YES completion:nil];
+                                                                
+                                                            }]];
+    
+    // Present the alert view controller
+    [self presentViewController:outsideNYCAlertVC animated:YES completion:nil];
+}
+
+
+-(void)showReachabilityAlertVC {
+    
+    NYAlertViewController *reachabilityAlertVC = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    reachabilityAlertVC.title = NSLocalizedString(@"No Internet Connection Detected", nil);
+    reachabilityAlertVC.message = NSLocalizedString(@"Please make sure you are connected and try again.", nil);
+    
+    // Customize appearance as desired
+    reachabilityAlertVC.transitionStyle = NYAlertViewControllerTransitionStyleSlideFromBottom;
+    [self alertViewControllerUI:reachabilityAlertVC];
+    
+    //add action
+    [reachabilityAlertVC addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
                                                          style:UIAlertActionStyleCancel
                                                        handler:^(NYAlertAction *action) {
                                                            
@@ -1186,7 +1215,7 @@ NSFetchedResultsControllerDelegate
                                                        }]];
     
     // Present the alert view controller
-    [self presentViewController:reachabilityAlertInfo animated:YES completion:nil];
+    [self presentViewController:reachabilityAlertVC animated:YES completion:nil];
 }
 
 
