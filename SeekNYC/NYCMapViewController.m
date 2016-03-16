@@ -95,6 +95,7 @@ NSFetchedResultsControllerDelegate
 
 @implementation NYCMapViewController
 
+
 - (NSManagedObjectContext *)managedObjectContext {
     
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
@@ -291,9 +292,31 @@ NSFetchedResultsControllerDelegate
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
-    [self loadCountyPolygonOverlays];
-    [self loadNYCMap];
-    [self loadVisitedTiles];
+//    UIView  *myview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+//    [myview setBackgroundColor:[UIColor grayColor]];
+//    myview.tag = 1;
+//    [self.view addSubview:myview];
+    
+    [self showIntroView:^(BOOL finished) {
+        
+        if (finished && ![[Connectivity reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
+         
+            [self loadMap:^(BOOL finished) {
+                
+                if(finished){
+                    
+                    [self fadeOutIntroView];
+                }
+                
+            }];
+            
+        }
+    }];
+    
+    
+//    [self loadCountyPolygonOverlays];
+//    [self loadNYCMap];
+//    [self loadVisitedTiles];
 
     
     
@@ -332,6 +355,61 @@ NSFetchedResultsControllerDelegate
     NSArray *overlays = self.mapView.overlays;
     [self.mapView removeOverlays:overlays];
 }
+
+typedef void(^completion)(BOOL finished);
+
+-(void)showIntroView:(completion)completion
+{
+    UIView  *introView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:TintKey]) {
+        
+        NSData *colourData = [[NSUserDefaults standardUserDefaults] objectForKey:TintKey];
+        
+        UIColor *userColour = [NSKeyedUnarchiver unarchiveObjectWithData:colourData];
+        
+        introView.backgroundColor = userColour;
+        
+    }else {
+        
+        [introView setBackgroundColor:[UIColor grayColor]];
+    }
+    
+    introView.tag = 1;
+    [self.view addSubview:introView];
+    
+    completion(YES);
+}
+
+
+
+- (void)loadMap:(completion)completion
+{
+    [self loadCountyPolygonOverlays];
+    [self loadNYCMap];
+    [self loadVisitedTiles];
+    
+    completion(YES);
+}
+
+- (void)fadeOutIntroView
+{
+    void (^fadeOut)(void);
+    fadeOut = ^(void) {
+        
+        [[self.view viewWithTag:1] setAlpha:0.0];
+    };
+    
+    void (^removeView)(BOOL finished);
+    removeView = ^(BOOL finished) {
+        
+        [[self.view viewWithTag:1] removeFromSuperview];
+    };
+    
+    // Hide controls
+    [UIView  animateWithDuration:5.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut animations:fadeOut completion:removeView];
+}
+
 
 
 #pragma mark - Overlays
@@ -563,8 +641,6 @@ NSFetchedResultsControllerDelegate
         
         infoButton.tintColor = [UIColor hotPinkColor];
         view.rightCalloutAccessoryView = infoButton;
-//        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notepad_F.png"]];
-//        view.leftCalloutAccessoryView = iconView;
        
         CABasicAnimation *theAnimation = [self animation];
         
@@ -573,9 +649,6 @@ NSFetchedResultsControllerDelegate
         view.canShowCallout = YES;
       
         return view;
-        
-        
-       
        
     }
     
@@ -1103,13 +1176,42 @@ NSFetchedResultsControllerDelegate
                                                            
                                                            [self dismissViewControllerAnimated:YES completion:^{
                                                                
-                                                               NSArray *windows = [UIApplication sharedApplication].windows;
-                                                               for (UIWindow *window in windows) {
-                                                                   for (UIView *view in window.subviews) {
-                                                                       [view removeFromSuperview];
-                                                                       [window addSubview:view];
-                                                                   }
+                                                               if ([[Connectivity reachabilityForInternetConnection]currentReachabilityStatus]== NotReachable) {
+                                                                   
+                                                                   //connection unavailable
+                                                                   [self showReachabilityAlertVC];
+                                                                   
+                                                               } else {
+                                                                   
+                                                                   //connection available
+                                                                   [self fetchFourSquareData];
+                                                                   
+                                                                   [self startLocationUpdates];
+                                                                   
+                                                                   [self presentGestureAlertVC];
+                                                                   
+                                                                   [self showIntroView:^(BOOL finished) {
+                                                                       
+                                                                           [self loadMap:^(BOOL finished) {
+                                                                               
+                                                                                   [self fadeOutIntroView];
+                                                                               
+                                                                           }];
+                                                                       
+                                                                   }];
+
                                                                }
+
+                                                               
+//                                                               NSArray *windows = [UIApplication sharedApplication].windows;
+//                                                               for (UIWindow *window in windows) {
+//                                                                   for (UIView *view in window.subviews) {
+//                                                                       [view removeFromSuperview];
+//                                                                       [window addSubview:view];
+//                                                                   }
+//                                                               }
+//                                                               
+//                                                               [self fadeOutIntroView];
                                                            }];
                                                        }]];
     
